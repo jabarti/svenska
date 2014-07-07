@@ -31,10 +31,6 @@ echo "<form action='' method=post>
                         <option value='cz_mov'>części mowy</option>
                         <option value='alf'>alfabet</option>
         </select>";
-//        <input type=submit name=sort_sub value='sortuj'></input>
-//      </form><br>";
-
-//echo "<form action='' method=post>
 echo "
         <select name='wher'>
                         <option >część mowy</option>
@@ -48,6 +44,11 @@ echo "
                         <option value='wyrazenie'>wyrażenie</option>
         </select>
         <input type=submit name=wher_sub value='wybierz'></input>
+      </form><br>";
+
+echo "<form action='' method=post>
+        <input type=text name=sercz>
+        <input type=submit value='Szukaj'></input>
       </form><br>";
 
 //$sort = "";
@@ -102,7 +103,7 @@ $_SESSION['sort']=$sort;
             $wher = "WHERE typ='wyrazenie'";
             break;
         default:
-            ?><script>alert("DEFAULT wher");</script><?php
+            ?><script>//alert("DEFAULT wher");</script><?php
             $wher = "";
             if(isset($_SESSION['wher'])){
                 ?><script>//alert("isse sess wher");</script><?php
@@ -122,12 +123,29 @@ $_SESSION['wher']=$wher;
 //    $sort = $_SESSION['sort'];
 //}
 
+$sercz='';
+if (isset($_POST['sercz'])){
+    ?><script>//alert("isset post sercz");</script><?php
+    $sercz = "WHERE id_ord LIKE \"%".$_POST['sercz']."%\" OR trans LIKE \"%".$_POST['sercz']."%\"";
+    echo "<br>SERCZ: ".$sercz;
+}else{
+    $sercz = '';
+}
+$text = "SELECT * FROM `ord` ";
+$text .=$wher." ";
+$text .=$sercz." ";
+$text .=$sort." ";
+$text .=";";
 
-$SQL1 = sprintf("SELECT * FROM `ord` ".$wher." ".$sort.";");
-$SQL2 = sprintf("SELECT * FROM `ord` ".$wher." ".$sort.";");
-//$SQL2 = sprintf("SELECT * FROM `ord`;");
-echo "<br>SQL1:".$SQL1;
-echo "<br>SQL2:".$SQL2;
+
+//echo "<br>TEXT: ".$text;
+//$SQL1 = sprintf("SELECT * FROM `ord` ".$wher." ".$sercz." ".$sort.";");
+//$SQL2 = sprintf("SELECT * FROM `ord` ".$wher." ".$sercz." ".$sort.";");
+$SQL1 = $text;
+$SQL2 = $text;
+
+//echo "<br>SQL1:".$SQL1;
+//echo "<br>SQL2:".$SQL2;
 $mq = mysql_query($SQL2);
 $mq2 = mysql_query($SQL1);
 $i=0;
