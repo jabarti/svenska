@@ -158,7 +158,7 @@ switch($row['typ']){
                 $rand_an=5;
                 break;
             }
-        }
+        } 
 
         echo "<br>An nr(".$rand_an."):".$tab[$rand_an];
         $answ = $tab[$rand_an]; // nr kolumny w $row[]
