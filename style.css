@@ -10,6 +10,21 @@ table {
     vertical-align: center;
 }
 
+.tab_insert {
+    width: 90%;
+}
+
+.tab_insert td{
+    width: 12%; 
+    text-align: left;
+    /*border: 1px solid #003AD9;*/
+}
+.tab_insert td.label{
+ 
+    text-align: right;
+
+}
+
 .table2 td{
     border: 1px solid black;
     width: 20%;
@@ -23,6 +38,10 @@ table {
 .table2 a:hover{
     /*font-weight: bold;*/
     text-decoration: underline;
+}
+
+tbody {
+    border: 1px solid #003AD9;
 }
 
 div.cleaner {

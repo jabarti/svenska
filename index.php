@@ -61,6 +61,7 @@ $(document).ready(function(){
     $("#typ").change(function(){
         var val = $(this).val();
 //        alert(val);
+        $("#ang_cz_m").html(val);
         switch (val){
             case 'preposition':
             case 'noun':
@@ -90,7 +91,7 @@ $(document).ready(function(){
                 $("#rzeczownik").show();
                 $("#przymiotnik").show();
                 break
-    }
+        }
     });    
 });
 
@@ -98,19 +99,26 @@ $(document).ready(function(){
 
 <body onload='start();'>
     <form id='form1' action='index.php' method="POST">
-        <table>
+        <table class='tab_insert'>
         <tbody id='podstawowe'>
             <tr>
                 <td><b>Podstawowe</b></td>
                 <td colspan='7'></td>
+<!--                <td><p class=red id='ang_cz_m'></p></td>
+                <td colspan='4'></td>-->
+            </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='2'></td>
+                <td><p class=red id='ang_cz_m'></p></td>
+                <td colspan='4'></td>
             </tr>
             <tr>
             <tr>
-                <td>polski</td>
+                <td class='label'>polski</td>
                 <td><input id='in1' name='id_ord'></td>
-                <td>typ</td>
+                <td class='label'>typ</td>
                 <td>
-                    <!--<input id='in1' name='typ'>-->
                     <select id=typ name='typ'>
                         <option >część mowy</option>
                         <option value="noun">rzeczownik</option>
@@ -123,7 +131,7 @@ $(document).ready(function(){
                         <option value="wyrazenie">wyrażenie</option>
                     </select>
                 </td>
-                <td>rodzaj</td>
+                <td class='label'>rodzaj</td>
                 <td>
                     <select id=rodzaj name='rodzaj'>
                         <!--<trbody id='att'>-->
@@ -136,83 +144,116 @@ $(document).ready(function(){
                         <!--</trbody>-->
                     </select>
                 </td>
-                <td>szwedzki</td>
+                <td class='label'>szwedzki</td>
                 <td><input id='in1' name='trans'></td>
             </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
             </tbody>
+            
             <tbody id='czasownik' >
-<!--            <div id='czasownik'>-->
             <tr>
                 <td><b>Czasownik</b></td>
                 <td colspan='7'></td>
             </tr>
+            
             <tr>
-                <td>infinitive</td>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
+            <tr>
+                <td class='label'>infinitive</td>
                 <td><input id='in1' name='infinitive'></td>
-                <td>presens</td>
+                <td class='label'>presens</td>
                 <td><input id='in1' name='presens'></td>
-                <td>preterite</td>
+                <td class='label'>preterite</td>
                 <td><input id='in1' name='past'></td>
-                <td>supine</td>
+                <td class='label'>supine</td>
                 <td><input id='in1' name='supine'></td>
             </tr>
             <tr>
-                <td>imperative</td>
+                <td class='label'>imperative</td>
                 <td><input id='in1' name='imperative'></td>
-                <td>present_participle</td>
+                <td class='label'>present_participle</td>
                 <td><input id='in1' name='present_participle'></td>
-                <td>past_participle</td>
+                <td class='label'>past_participle</td>
                 <td><input id='in1' name='past_participle'></td>
                 <td colspan='2'></td>
             </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
             </div>
             </tbody>
             <tbody id='rzeczownik' >
-            <!--<div id='rzeczownik'>-->
             <tr>
                 <td><b>Rzeczownik</b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td>S_indefinite</td>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
+            <tr>
+                <td class='label'>S_indefinite</td>
                 <td><input id='in1' name='S_indefinite'></td>
-                <td>S_definite</td>
+                <td class='label'>S_definite</td>
                 <td><input id='in1' name='S_definite'></td>
-                <td>P_indefinite</td>
+                <td class='label'>P_indefinite</td>
                 <td><input id='in1' name='P_indefinite'></td>
-                <td>P_definite</td>
+                <td class='label'>P_definite</td>
                 <td><input id='in1' name='P_definite'></td>
             </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
             </tbody>
-            <tbody id='przymiotnik'>
+            <tbody id='przymiotnik'>               
             <tr>
                 <td><b>Przymiotnik</b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td>neuter</td>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
+            <tr>
+                <td class='label'>neuter</td>
                 <td><input id='in1' name='neuter'></td>
-                <td>masculin</td>
+                <td class='label'>masculin</td>
                 <td><input id='in1' name='masculin'></td>
-                <td>all</td>
+                <td class='label'>all</td>
                 <td><input id='in1' name='all'></td>
                 <td colspan='2'></td>
             </tr>
             <tr>
-                <td>st wyższy</td>
+                <td  class='label'>st wyższy</td>
                 <td><input id='in1' name='st_wyzszy'></td>
-                <td>st najwyższy</td>
+                <td  class='label'>st najwyższy</td>
                 <td><input id='in1' name='st_najwyzszy'></td>
                 <td colspan='4'></td>
             </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
             <tbody id='inne'>
 <!--            </div>-->
+
             <tr>
                 <td><b>inne</b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td>wymowa</td>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
+            <tr>
+                <td class='label'>wymowa</td>
                 <td><input id='in1' name='wymowa'></td>
                 <td colspan='6'></td>
             </tr>
