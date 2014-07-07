@@ -79,6 +79,15 @@ function t($var){
         case 'P_definite':
             return "l.mnoga, r.określony";
             break;
+        case 'neuter':
+            return "rodzaj neutralny";
+            break;
+        case 'masculin':
+            return "rodzaj męski";
+            break;
+        case 'all':
+            return "rodzaj ogólny, l.mnoga";
+            break;
         case 'st_wyzszy':
             return "stopień wyższy";
             break;
@@ -111,10 +120,10 @@ $row = $Word->getOrdById($rand);
 //print_r($row);
 echo "<br>TYP: ".$row['typ'];
 
-$x = array(2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18);
+$x = array(2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21);
 $noun = array(2,4,13,14,15,16);
 $verb = array(2,6,7,8,9,10,11,12);
-$adjective = array(2,5,17,18);
+$adjective = array(2,5,17,18,19,20,21);
 $adverb = array(2,5);
 
 switch($row['typ']){
@@ -124,8 +133,10 @@ switch($row['typ']){
 //    $infinitive,          $presens,           $past,              $supine,        $imperative,
 //    11                    12                  13                  14              15 
 //    $present_participle,  $past_participle,   $S_indefinite,      $S_definite,    $P_indefinite, 
-//    16                    17                  18                  19
-//    $P_definite,          $st_wyzszy,         $st_najwyzszy,      $wymowa'
+//    16                    17                  18                  19              20
+//    $P_definite,          $neuter,            $masculin,          $all,           $st_wyzszy,      
+//    21                    22   
+//    $st_najwyzszy,        $wymowa'
 
     
     case 'noun':
@@ -296,7 +307,7 @@ switch($row['typ']){
 $method = 'post';
 
 echo "<table>"
-//   . "<form id=testForm action=test.php method=".$method.">";
+   . "<form id=testForm action=test.php method=".$method.">";
 //   . "<form id=testForm action='' method=".$method.">";
    ;
 $rowId=1;
@@ -339,11 +350,11 @@ foreach($row as $k=>$v){
 
 //echo "<tr><td>Twoja odpowiedź:</td><td><textarea rows=2 cols=30 name=try>Podaj odpowiedź</textarea></td></tr>";
 
-//echo "<tr><td colspan=3></td><td><input type=submit name=test value=Sprawdź></td>"
-echo "<tr><td colspan=3></td><td><button id=btn_submit >Sprawdź</button></td>"
-//    ."</form>"
+echo "<tr><td colspan=3></td><td><input type=submit name=test value=Sprawdź></td>"
+//echo "<tr><td colspan=3></td><td><button id=btn_submit >Sprawdź</button></td>"
+    ."</form>"
     ."</table>";
-echo "<button id=btn_end name=btn_end form=testForm >Zakończ</button>";
+//echo "<button id=btn_end name=btn_end form=testForm >Zakończ</button>";
 ?><script>
     var good=0;
     var bad=0;
@@ -394,36 +405,36 @@ echo "<button id=btn_end name=btn_end form=testForm >Zakończ</button>";
         });
     });
 </script><?php
-//if(isset($_POST['test'])){
-////    echo "<br> JEST POST?GET";
-//    
-//    foreach ($_POST as $k => $v){
-////        echo "<br>k=".$k.", v=".$v;
-//    }
-//    
-//    if($_POST['try'] == $_POST['check']){
-//        echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
-//    }else{
-//        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: ".$_POST['check'].", a Twoja odpowiedź: \"".$_POST['try']."\"";
-//    }
-//        
-//    
-//    unset($_POST['test']);
+if(isset($_POST['test'])){
+//    echo "<br> JEST POST?GET";
+    
+    foreach ($_POST as $k => $v){
+//        echo "<br>k=".$k.", v=".$v;
+    }
+    
+    if($_POST['try'] == $_POST['check']){
+        echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
+    }else{
+        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: ".$_POST['check'].", a Twoja odpowiedź: \"".$_POST['try']."\"";
+    }
+}      
+    
+    unset($_POST['test']);
 //    unset($_POST['test']);
 //}else{
 ////    echo "<br>NIE JEST POST?GET";
 //}
 //$temp = $_SESSION['good']+$_SESSION['bad'];
-echo "<br>Dobrych odpowiedzi: <span id=good>"."</span>".
-     "<br>Złych odpowiedzi: <span id=bad>"."</span>".
-     "<br>Wszystkich odpowiedzi: <span id=all>"."</span>";
+//echo "<br>Dobrych odpowiedzi: <span id=good>"."</span>".
+//     "<br>Złych odpowiedzi: <span id=bad>"."</span>".
+//     "<br>Wszystkich odpowiedzi: <span id=all>"."</span>";
 
-if(isset($_POST)){
-    echo "<br>Z post:";
-    var_dump($_POST);
-    $ending = $_POST['ending'];
-    echo $ending;
-}
+//if(isset($_POST)){
+//    echo "<br>Z post:";
+//    var_dump($_POST);
+//    $ending = $_POST['ending'];
+//    echo $ending;
+//}
 
 //while (!$_POST['ending']){
 //    echo "1, ";

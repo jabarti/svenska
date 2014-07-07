@@ -31,6 +31,9 @@ class Ord {
     private $S_definite;
     private $P_indefinite;
     private $P_definite;
+    private $neuter;
+    private $masculin;
+    private $all;
     private $st_wyzszy;
     private $st_najwyzszy;
     
@@ -41,8 +44,9 @@ class Ord {
 
     public function setData($id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
                             $supine, $imperative, $present_participle, $past_participle, 
-                            $S_indefinite, $S_definite, $P_indefinite, $P_definite, $st_wyzszy, 
-                            $st_najwyzszy, $wymowa){
+                            $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
+                            $neuter, $masculin, $all, $st_wyzszy, $st_najwyzszy, 
+                            $wymowa){
         
         if(!$this->getId($id_ord)){
             
@@ -50,13 +54,13 @@ class Ord {
                 . "(`id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `presens`, `past`, "
                 . "`supine`, `imperative`, `present_participle`, `past_participle`, "
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
-                . "`st_wyzszy`, `st_najwyzszy`, "
+                . "`neuter`, `masculin`, `all`,`st_wyzszy`, `st_najwyzszy`, "
                 . "`wymowa`) "
                 . "VALUES "
                 . "('".$id_ord."','".$typ."','".$rodzaj."','".$trans."','".$infinitive."','".$presens."','".$past."',"
                 . "'".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
-                . "'".$st_wyzszy."','".$st_najwyzszy."',"
+                . "'".$neuter."','".$masculin."','".$all."','".$st_wyzszy."','".$st_najwyzszy."',"
                 . "'".$wymowa."');");
 //            echo "<br>INSERT: ".$SQL;
         

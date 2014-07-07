@@ -186,8 +186,17 @@ $(document).ready(function(){
             </tbody>
             <tbody id='przymiotnik'>
             <tr>
-                <td><b>przymiotnik</b></td>
+                <td><b>Przymiotnik</b></td>
                 <td colspan='7'></td>
+            </tr>
+            <tr>
+                <td>neuter</td>
+                <td><input id='in1' name='neuter'></td>
+                <td>masculin</td>
+                <td><input id='in1' name='masculin'></td>
+                <td>all</td>
+                <td><input id='in1' name='all'></td>
+                <td colspan='2'></td>
             </tr>
             <tr>
                 <td>st wyższy</td>

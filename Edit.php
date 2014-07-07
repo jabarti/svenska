@@ -24,20 +24,122 @@ function Menu(){
 </script>    
     
 <?php
+echo "<form action='' method=post>
+        <select name='sort'>
+                        <option >sortuj</option>
+                        <option value='id'>id</option>
+                        <option value='cz_mov'>części mowy</option>
+                        <option value='alf'>alfabet</option>
+        </select>";
+//        <input type=submit name=sort_sub value='sortuj'></input>
+//      </form><br>";
 
-$SQL = sprintf("SELECT * FROM `ord`;");
-$mq = mysql_query($SQL);
-$mq2 = mysql_query($SQL);
+//echo "<form action='' method=post>
+echo "
+        <select name='wher'>
+                        <option >część mowy</option>
+                        <option value='noun'>rzeczownik</option>
+                        <option value='verb'>czasownik</option>
+                        <option value='adjective'>przymiotnik</option>
+                        <option value='adverb'>przysłówek</option>
+                        <option value='preposition'>przyimek</option>
+                        <option value='pronoun'>zaimek</option>
+                        <option value='conjunction'>spójnik</option>
+                        <option value='wyrazenie'>wyrażenie</option>
+        </select>
+        <input type=submit name=wher_sub value='wybierz'></input>
+      </form><br>";
+
+//$sort = "";
+//if(isset($_POST['sort_sub'])){
+if(isset($_POST)){
+    switch($_POST['sort']){
+        case 'id':
+            $sort = "ORDER BY id";
+            break;
+        case 'cz_mov':
+            $sort= "ORDER BY typ";
+            break;
+        case 'alf':
+            $sort= "ORDER BY id_ord";
+            break;
+        default:
+            ?><script>//alert("DEFAULT sort");</script><?php
+            $sort= "";
+            if(isset($_SESSION['sort'])){
+                ?><script>//alert("isse sess sort");</script><?php
+                $sort = $_SESSION['sort'];
+            }
+            break;
+    }
+$_SESSION['sort']=$sort;
+
+//$wher = '';
+//if(isset($_POST['wher_sub'])){
+    switch($_POST['wher']){
+        case 'noun':
+            $wher = "WHERE typ='noun'";
+            break;
+        case 'verb':
+            $wher = "WHERE typ='verb'";
+            break;
+        case 'adjective':
+            $wher = "WHERE typ='adjective'";
+            break;
+        case 'adverb':
+            $wher = "WHERE typ='adverb'";
+            break;
+        case 'preposition':
+            $wher = "WHERE typ='preposition'";
+            break;
+        case 'pronoun':
+            $wher = "WHERE typ='pronoun'";
+            break;
+        case 'conjunction':
+            $wher = "WHERE typ='conjunction'";
+            break;
+        case 'wyrazenie':
+            $wher = "WHERE typ='wyrazenie'";
+            break;
+        default:
+            ?><script>alert("DEFAULT wher");</script><?php
+            $wher = "";
+            if(isset($_SESSION['wher'])){
+                ?><script>//alert("isse sess wher");</script><?php
+                $wher = $_SESSION['wher'];
+            }
+            break;
+    }
+    
+$_SESSION['wher']=$wher;
+}
+
+//if(isset($_SESSION['wher'])){
+//    $wher = $_SESSION['wher'];
+//    ?><script>//alert("Jest sessia wher");</script><?php
+//}
+//if(isset($_SESSION['sort'])){
+//    $sort = $_SESSION['sort'];
+//}
+
+
+$SQL1 = sprintf("SELECT * FROM `ord` ".$wher." ".$sort.";");
+$SQL2 = sprintf("SELECT * FROM `ord` ".$wher." ".$sort.";");
+//$SQL2 = sprintf("SELECT * FROM `ord`;");
+echo "<br>SQL1:".$SQL1;
+echo "<br>SQL2:".$SQL2;
+$mq = mysql_query($SQL2);
+$mq2 = mysql_query($SQL1);
 $i=0;
 $li=0;
 
 echo "<div id=menu>";
-echo "<table>";
+echo "<table class='table2'>";
 while($row2 = mysql_fetch_assoc($mq2)){
     if($li%5==0){
             echo "<tr>";
     }
-    echo "<td><a href='#ord_".$li."'>".$row2['id_ord']."=>".$row2['trans']."</a></td>";
+    echo "<td><a href='#ord_".$li."'>".$row2['id'].": ".$row2['id_ord']." => ".$row2['trans']."</a></td>";
 //    if ($li == 40) break;
     if($li%5==4){
             echo "</tr>";
@@ -45,9 +147,9 @@ while($row2 = mysql_fetch_assoc($mq2)){
     $li++;
 }
 echo "</table>";
-echo "</div>";
+echo "</div><br>";
 
-echo "<br>DUPA<br>";
+//echo "<br>DUPA<br>";
 $method='post';
 $id = 0;
 
@@ -85,7 +187,7 @@ while($row = mysql_fetch_assoc($mq)){
 if(isset($_POST)){
     ?><script>//alert("w isset $_POST");</script><?php
     if(isset($_POST['edit'])){
-//        ?><script>alert("w $_POST['edit']!=null");</script><?php
+//        ?><script>//alert("w $_POST['edit']!=null");</script><?php
         $serial = serialize($_POST);
         print_r($serial);
         $serial=  unserialize($serial);
@@ -129,7 +231,7 @@ if(isset($_POST)){
     
     }
     elseif(isset($_POST['delete'])){
-//        ?><script>alert("w $_POST['delete']!=null");</script><?php
+//        ?><script>//alert("w $_POST['delete']!=null");</script><?php
         $serial = serialize($_POST);
         print_r($serial);
         $serial=  unserialize($serial);

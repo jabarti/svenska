@@ -6,7 +6,25 @@ allign: center;
 }
 table {
     border: #003AD9 thin solid;
+    border-collapse: collapse;
+    vertical-align: center;
 }
+
+.table2 td{
+    border: 1px solid black;
+    width: 20%;
+    height: 50px;
+}
+.table2 a{
+    /*font-weight: bold;*/
+    text-decoration: none;
+}
+
+.table2 a:hover{
+    /*font-weight: bold;*/
+    text-decoration: underline;
+}
+
 div.cleaner {
 clear: both;
 
