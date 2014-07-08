@@ -137,7 +137,6 @@ $text .=$sercz." ";
 $text .=$sort." ";
 $text .=";";
 
-
 //echo "<br>TEXT: ".$text;
 //$SQL1 = sprintf("SELECT * FROM `ord` ".$wher." ".$sercz." ".$sort.";");
 //$SQL2 = sprintf("SELECT * FROM `ord` ".$wher." ".$sercz." ".$sort.";");

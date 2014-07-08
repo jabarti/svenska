@@ -24,21 +24,16 @@ if($Word = new Ord()){
 }else{
     echo "<br>NOT OK";
 }
-//    $Word = new Ord();
-//    echo "Word:".$Word;
 
-//echo "<br>id of a: ".$Word->getId($id_ord);
-//echo "<br>Last index: ".$Word->getLastId();
 $max = $Word->getLastId();
-//echo "<br>MAX: ".$max;
-?><script>//alert("Ala");</script><?php
-//$noun = array('$id_ord, $typ, $rodzaj, $trans, $S_indefinite, $S_definite, $P_indefinite, $P_definite');
-//$verb = array('$id_ord, $typ, $trans, $infinitive, $presens,$past, $supine, $imperative, $present_participle, $past_participle');
-//
+
 function t($var){
     switch($var){
         case 'id_ord':
             return "słowo PL";
+            break;
+        case 'typ':
+            return "typ";
             break;
         case 'trans':
             return "słowo SE";
@@ -85,8 +80,11 @@ function t($var){
         case 'masculin':
             return "rodzaj męski";
             break;
-        case 'all':
+        case 'plural':
             return "rodzaj ogólny, l.mnoga";
+            break;
+        case 'st_rowny':
+            return "stopień rowny";
             break;
         case 'st_wyzszy':
             return "stopień wyższy";
@@ -100,253 +98,38 @@ function t($var){
             break;
     }
 }
-//$ord = array('$id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
-//                            $supine, $imperative, $present_participle, $past_participle, 
-//                            $S_indefinite, $S_definite, $P_indefinite, $P_definite, $st_wyzszy, 
-//                            $st_najwyzszy, $wymowa');
 
 $rand =  mt_rand(1, $max); // wybór słowa
-$rand3 =  mt_rand(1, 2); // pl or sw
 
+//echo "<br>ID: ".$rand;
 
-echo "<br>ID: ".$rand;
+//echo "<br>"; 
+//$row = $Word->getOrdById($rand);
 
-echo "<br>"; 
-$row = $Word->getOrdById($rand);
+//echo "<br>WORD: ".$Word->getTypeById($rand);
+//$tt = $Word->getFullAttrById($rand);
+//
+//echo "<br>getAttrById: ".$tt;
 
-//$rand4 = array_rand($row,1);
-//echo "<br>arr rand: ".$rand4;
+//$Word->getNoEmptyAttrById($rand);
 
-//print_r($row);
-echo "<br>TYP: ".$row['typ'];
-
-$x = array(2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21);
-$noun = array(2,4,13,14,15,16);
-$verb = array(2,6,7,8,9,10,11,12);
-$adjective = array(2,5,17,18,19,20,21);
-$adverb = array(2,5);
-
-switch($row['typ']){
-//    1                     2                   3                   4               5
-//    '$id.                 $id_ord,            $typ,               $rodzaj,        $trans, 
-//    6                     7                   8                   9               10
-//    $infinitive,          $presens,           $past,              $supine,        $imperative,
-//    11                    12                  13                  14              15 
-//    $present_participle,  $past_participle,   $S_indefinite,      $S_definite,    $P_indefinite, 
-//    16                    17                  18                  19              20
-//    $P_definite,          $neuter,            $masculin,          $all,           $st_wyzszy,      
-//    21                    22   
-//    $st_najwyzszy,        $wymowa'
-
-    
-    case 'noun':
-        $tab = $noun;
-        $rand_qu = 0;
-        $rand_an = 0;
-//        print_r($tab);
-        
-        $i=0;
-        while($rand_qu == 0 || $rand_qu==1 || $tab[$rand_qu] == ''){
-//            echo "<br>1)rand_qu=".$rand_qu;
-            $rand_qu = array_rand($tab, 1);
-//            echo "<br>2)rand_qu=".$rand_qu;
-            $i++;
-            if($i==10){
-                $rand_qu=2;
-                break;
-            }
-        }
-//        echo "<br>Qu nr(".$rand_qu."):".$tab[$rand_qu];
-
-        $quest = $tab[$rand_qu]; // nr kolumny w $row[]
-        
-        $i=0;
-        while($rand_an == 0 || $rand_an==$rand_qu || $tab[$rand_an] == ''){
-//            echo "<br>rand_an=".$rand_an;
-            $rand_an = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_an=5;
-                break;
-            }
-        } 
-
-        echo "<br>An nr(".$rand_an."):".$tab[$rand_an];
-        $answ = $tab[$rand_an]; // nr kolumny w $row[]
-
-        break;
-        
-    case 'verb':
-        $tab = $verb;
-        $rand_qu = 0;
-        $rand_an = 0;
-//        print_r($tab);
-        
-        $i=0;
-        while($rand_qu == 0 || $rand_qu==1 || $tab[$rand_qu] == ''){
-//            echo "<br>rand_qu=".$rand_qu;
-//            echo "<br>tab[rand_qu]=".$tab[$rand_qu];
-            $rand_qu = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_qu=2;
-                break;
-            }
-        }
-        echo "<br>Qu nr(".$rand_qu."):".$tab[$rand_qu];
-        $quest = $tab[$rand_qu]; // nr kolumny w $row[]
-        
-        $i=0;
-        while($rand_an == 0 || $rand_an==$rand_qu || $tab[$rand_an] == ''){
-//            echo "<br>rand_an=".$rand_an;
-            $rand_an = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_an=5;
-                break;
-            }
-        }
-
-        echo "<br>An nr(".$rand_an."):".$tab[$rand_an];
-        $answ = $tab[$rand_an]; // nr kolumny w $row[]
-
-        break;
-        
-    case 'adjective':
-        $tab = $adjective;
-        $rand_qu = 0;
-        $rand_an = 0;
-//        print_r($tab);
-        
-        $i=0;
-        while($rand_qu == 0 || $rand_qu==1 || $tab[$rand_qu] == ''){
-//            echo "<br>rand_qu=".$rand_qu;
-            $rand_qu = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_qu=2;
-                break;
-            }
-        }
-        echo "<br>Qu nr(".$rand_qu."):".$tab[$rand_qu];
-        $quest = $tab[$rand_qu]; // nr kolumny w $row[]
-        
-        $i=0;
-        while($rand_an == 0 || $rand_an==$rand_qu || $tab[$rand_an] == ''){
-//            echo "<br>rand_an=".$rand_an;
-            $rand_an = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_an=5;
-                break;
-            }
-        }
-
-        echo "<br>An nr(".$rand_an."):".$tab[$rand_an];
-        $answ = $tab[$rand_an]; // nr kolumny w $row[]
-
-        break;
-        
-    case 'conjunction':
-    case 'adverb':
-        $tab = $adverb;
-        $rand_qu = 0;
-        $rand_an = 0;
-        print_r($tab);
-
-//        echo "<br>rand_qu=".$rand_qu;
-        $rand_qu = array_rand($tab, 1);
-
-        echo "<br>Qu nr(".$rand_qu."):".$tab[$rand_qu];
-        $quest = $tab[$rand_qu]; // nr kolumny w $row[]
-        
-//        echo "<br>rand_an=".$rand_an;
-        $rand_an = array_rand($tab, 1);
-
-        echo "<br>An nr(".$rand_an."):".$tab[$rand_an];
-        $answ = $tab[$rand_an]; // nr kolumny w $row[]
-
-        break;
-
-    default:
-        $tab = $x;
-        $rand_qu = 0;
-        $rand_an = 0;
-//        print_r($tab);
-        
-        $i=0;
-        while($rand_qu == 0 || $rand_qu==4 || $tab[$rand_qu] == ''){
-//            echo "<br>rand_qu=".$rand_qu;
-            $rand_qu = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_qu=2;
-                break;
-            }
-        }
-        echo "<br>Qu nr(".$rand_qu."):".$tab[$rand_qu];
-        $quest = $tab[$rand_qu]; // nr kolumny w $row[]
-        
-        $i=0;
-        while($rand_an == 0 || $rand_an==$rand_qu || $tab[$rand_an] == ''){
-            echo "<br>rand_an=".$rand_an;
-            $rand_an = array_rand($tab, 1);
-            $i++;
-            if($i==10){
-                $rand_an=5;
-                break;
-            }
-        }
-
-        echo "<br>An nr(".$rand_an."):".$tab[$rand_an];
-        $answ = $tab[$rand_an]; // nr kolumny w $row[]
-        break;
-}
-
+//$Word->getQuestionById($rand);
+$testTab = $Word->getQuestAndAnswerById($rand);
 
 $method = 'post';
 
-echo "<table>"
-   . "<form id=testForm action=test.php method=".$method.">";
-//   . "<form id=testForm action='' method=".$method.">";
-   ;
-$rowId=1;
-foreach($row as $k=>$v){
-    if($rowId == $quest){
-//        echo "<h1>$v</h1>";
-        if($v == ''){
-//            echo "<h1>PUSTY</h1>";
-//            session_regenerate_id(true);
-            session_write_close();
-            header('Location: '.$_SERVER['PHP_SELF']); 
-//            exit();
-        }
-        echo "<tr id='".$rowId."' >"
-                ."<td>To jest ".t($k)."</td>"
-                ."<td><textarea rows=1 cols=20 name='".$k."'>".$v."</textarea></td>";
-    }
-    $rowId++;
-}
-$rowId=1;
 
-foreach($row as $k=>$v){    
-    if($rowId == $answ){
-        if($v == ''){
-//            echo "<h1>PUSTY</h1>";
-//            session_regenerate_id(true);
-            session_write_close();
-            header('Location: '.$_SERVER['PHP_SELF']); 
-//            exit();
-        }
-        echo    "<td>Podaj ".t($k)."</td>"
+echo "<table>"
+   . "<form id=testForm1 action=test.php method=".$method.">";
+echo "<tr>"
+                ."<td>To jest ".t($testTab[0])."</td>"
+                ."<td><textarea rows=1 cols=20 name='".$testTab[0]."'>".$testTab[1]."</textarea></td>";
+        echo    "<td>Podaj ".t($testTab[2])."</td>"
                 ."<td>"
                 . "<textarea id=try rows=1 cols=20 name=try></textarea>"
-                . "<input id=check type=hidden name=check value='".$v."'>"
+                . "<input id=check type=hidden name=check value='".$testTab[3]."'>"
                 ."</td>"
             ."</tr>";
-    }
-    $rowId++;
-}
 
 //echo "<tr><td>Twoja odpowiedź:</td><td><textarea rows=2 cols=30 name=try>Podaj odpowiedź</textarea></td></tr>";
 
@@ -354,7 +137,7 @@ echo "<tr><td colspan=3></td><td><input type=submit name=test value=Sprawdź></t
 //echo "<tr><td colspan=3></td><td><button id=btn_submit >Sprawdź</button></td>"
     ."</form>"
     ."</table>";
-//echo "<button id=btn_end name=btn_end form=testForm >Zakończ</button>";
+
 ?><script>
     var good=0;
     var bad=0;
@@ -412,10 +195,32 @@ if(isset($_POST['test'])){
 //        echo "<br>k=".$k.", v=".$v;
     }
     
-    if($_POST['try'] == $_POST['check']){
+    $arr = explode(', ',$_POST['check']);
+    $try = $_POST['try'];
+    
+    $wordInArr = false;
+    
+    for($i=0; $i<count($arr); $i++){
+//        echo "<br>try   : ".$try;
+//        echo "<br>arr[i]: ".$arr[$i];
+        
+        $try2 = (string)$arr[$i];
+        
+//        echo "<br>Czy jest?:".strcmp($try, $try2);
+
+        if(strcmp($try, $try2) == 0){
+//            echo "<br>Pasuje!";
+            $wordInArr = true;
+        }else{
+//            echo "<br>Nie pasuje!";
+        }
+    }
+    
+//    if($_POST['try'] == $_POST['check']){
+    if($wordInArr){
         echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
     }else{
-        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: ".$_POST['check'].", a Twoja odpowiedź: \"".$_POST['try']."\"";
+        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: <span class=red><b>".$_POST['check']."</b></span>, a Twoja odpowiedź: \"".$_POST['try']."\"";
     }
 }      
     

@@ -54,6 +54,7 @@ function start(){
     $("#czasownik").hide();
     $("#rzeczownik").hide();
     $("#przymiotnik").hide();
+    $("#stopniowanie").hide();
 }
 
 $(document).ready(function(){
@@ -64,32 +65,49 @@ $(document).ready(function(){
         $("#ang_cz_m").html(val);
         switch (val){
             case 'preposition':
+            case 'pronoun':
             case 'noun':
                 $("#czasownik").hide();
                 $("#rzeczownik").show();
                 $("#przymiotnik").hide();
+                $("#stopniowanie").hide();
                 break;
+  
             case 'verb':
                 $("#czasownik").show();
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
+                $("#stopniowanie").hide();
                 break;
+                
             case 'adjective':
                 $("#czasownik").hide();
                 $("#rzeczownik").hide();
                 $("#przymiotnik").show();
+                $("#stopniowanie").show();
                 break;
+                
+            case 'wyrazenie':    
             case 'conjunction':
+                $("#czasownik").hide();
+                $("#rzeczownik").hide();
+                $("#przymiotnik").hide();
+                $("#stopniowanie").hide();
+                break
+                
             case 'adverb':
                 $("#czasownik").hide();
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
+                $("#stopniowanie").show();
+                $("#podstawowe").addClass("nobordbottom");
                 break;
                 
             default:
                 $("#czasownik").show();
                 $("#rzeczownik").show();
                 $("#przymiotnik").show();
+                $("#stopniowanie").show();
                 break
         }
     });    
@@ -212,7 +230,7 @@ $(document).ready(function(){
                 <td colspan='7'></td>
             </tr>            
             </tbody>
-            <tbody id='przymiotnik'>               
+            <tbody id='przymiotnik' class='nobordbottom'>               
             <tr>
                 <td><b>Przymiotnik</b></td>
                 <td colspan='7'></td>
@@ -226,21 +244,26 @@ $(document).ready(function(){
                 <td><input id='in1' name='neuter'></td>
                 <td class='label'>masculin</td>
                 <td><input id='in1' name='masculin'></td>
-                <td class='label'>all</td>
-                <td><input id='in1' name='all'></td>
+                <td class='label'>plural</td>
+                <td><input id='in1' name='plural'></td>
                 <td colspan='2'></td>
             </tr>
+            <tbody id='stopniowanie' class='nobordtop'>
             <tr>
+                <td  class='label'>st równy</td>
+                <td><input id='in1' name='st_rowny'></td>
                 <td  class='label'>st wyższy</td>
                 <td><input id='in1' name='st_wyzszy'></td>
                 <td  class='label'>st najwyższy</td>
                 <td><input id='in1' name='st_najwyzszy'></td>
-                <td colspan='4'></td>
+                <td colspan='2'></td>
             </tr>
             <tr>
                 <td><br></td>
                 <td colspan='7'></td>
-            </tr>            
+            </tr> 
+            </tbody>
+            </tbody>
             <tbody id='inne'>
 <!--            </div>-->
 
@@ -287,6 +310,10 @@ if(isset($_POST['submit'])){
         $S_definite =           $_POST['S_definite'];
         $P_indefinite =         $_POST['P_indefinite'];
         $P_definite =           $_POST['P_definite'];
+        $neuter =               $_POST['neuter'];
+        $masculin =             $_POST['masculin'];
+        $plural =               $_POST['plural'];
+        $st_rowny =            $_POST['st_rowny'];
         $st_wyzszy =            $_POST['st_wyzszy'];
         $st_najwyzszy =         $_POST['st_najwyzszy'];
         $wymowa =               $_POST['wymowa'];
@@ -297,11 +324,13 @@ if(isset($_POST['submit'])){
         $Word = new Ord();
 //        echo "<br>id of a: ".$Word->getId($id_ord);
 //        echo "<br>Last index: ".$Word->getLastId();
-        $Word->setData($id_ord, $typ, $rodzaj, $trans, $infinitive,$presens, 
-                            $past, $supine, $imperative, $present_participle, 
-                            $past_participle, $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
-                            $st_wyzszy, $st_najwyzszy,
-                            $wymowa);
+       
+        
+        $Word->setData( $id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
+                        $supine, $imperative, $present_participle, $past_participle, 
+                        $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
+                        $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
+                        $wymowa);
     } 
 
 }else{

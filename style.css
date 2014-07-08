@@ -44,6 +44,15 @@ tbody {
     border: 1px solid #003AD9;
 }
 
+.nobordtop {
+    border-top: 0px solid #003AD9 ;
+    /*border: 3px solid #003AD9;*/
+}
+.nobordbottom {
+    border-bottom: 0px solid #003AD9 ;
+    /*border: 3px solid #003AD9;*/
+}
+
 div.cleaner {
 clear: both;
 
@@ -56,6 +65,15 @@ p.blue {
 color:blue;
 }
 p.green {
+color:green;
+}
+span.red {
+color:red;
+}
+span.blue {
+color:blue;
+}
+span.green {
 color:green;
 }
 
