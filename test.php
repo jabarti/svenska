@@ -15,6 +15,19 @@ include 'header.php';
 //include '../Translations/flag.php';
 include 'buttons.php';
 
+$user = new User("ala", "ala");
+
+ if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
+ $_SESSION['good']=0;
+ $_SESSION['bad']=0;
+ }else{
+     if(isset($_POST['clear'])){
+         echo "<br>isset clear";
+          $_SESSION['good']=0;
+          $_SESSION['bad']=0;
+     }
+ }
+ 
 $score_good = 0;
 $score_bad = 0;
 $score_err = 0;
@@ -101,19 +114,6 @@ function t($var){
 
 $rand =  mt_rand(1, $max); // wybór słowa
 
-//echo "<br>ID: ".$rand;
-
-//echo "<br>"; 
-//$row = $Word->getOrdById($rand);
-
-//echo "<br>WORD: ".$Word->getTypeById($rand);
-//$tt = $Word->getFullAttrById($rand);
-//
-//echo "<br>getAttrById: ".$tt;
-
-//$Word->getNoEmptyAttrById($rand);
-
-//$Word->getQuestionById($rand);
 $testTab = $Word->getQuestAndAnswerById($rand);
 
 $method = 'post';
@@ -123,9 +123,11 @@ echo "<table>"
    . "<form id=testForm1 action=test.php method=".$method.">";
 echo "<tr>"
                 ."<td>To jest ".t($testTab[0])."</td>"
-                ."<td><textarea rows=1 cols=20 name='".$testTab[0]."'>".$testTab[1]."</textarea></td>";
+                .'<td><textarea disabled rows=1 cols=20 name="'.$testTab[0].' disabled">'.$testTab[1].'</textarea></td>';
         echo    "<td>Podaj ".t($testTab[2])."</td>"
                 ."<td>"
+                . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"
+                . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"
                 . "<textarea id=try rows=1 cols=20 name=try></textarea>"
                 . "<input id=check type=hidden name=check value='".$testTab[3]."'>"
                 ."</td>"
@@ -191,9 +193,9 @@ echo "<tr><td colspan=3></td><td><input type=submit name=test value=Sprawdź></t
 if(isset($_POST['test'])){
 //    echo "<br> JEST POST?GET";
     
-    foreach ($_POST as $k => $v){
+//    foreach ($_POST as $k => $v){
 //        echo "<br>k=".$k.", v=".$v;
-    }
+//    }
     
     $arr = explode(', ',$_POST['check']);
     $try = $_POST['try'];
@@ -211,28 +213,40 @@ if(isset($_POST['test'])){
         if(strcmp($try, $try2) == 0){
 //            echo "<br>Pasuje!";
             $wordInArr = true;
+            
         }else{
 //            echo "<br>Nie pasuje!";
+           
         }
     }
     
 //    if($_POST['try'] == $_POST['check']){
+    
+//    foreach ($_POST as $k => $v){
+//        echo "<br>Oto klucz: ".$k." => ". $v;
+//    }
+    
     if($wordInArr){
         echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
+        $_SESSION['good']++;
     }else{
-        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: <span class=red><b>".$_POST['check']."</b></span>, a Twoja odpowiedź: \"".$_POST['try']."\"";
+        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: na pytanie:<br>Podaj ".t($_POST['quest_p1']). " do \"<span class=red>".$_POST['quest_p2']."</span>\". Odpowiedź to:"
+        . " <span class=red><b>".$_POST['check']."</b></span><br>, a Twoja odpowiedź: \"".$_POST['try']."\"";
+         $_SESSION['bad']++;
     }
-}      
     
     unset($_POST['test']);
-//    unset($_POST['test']);
-//}else{
-////    echo "<br>NIE JEST POST?GET";
-//}
-//$temp = $_SESSION['good']+$_SESSION['bad'];
-//echo "<br>Dobrych odpowiedzi: <span id=good>"."</span>".
-//     "<br>Złych odpowiedzi: <span id=bad>"."</span>".
-//     "<br>Wszystkich odpowiedzi: <span id=all>"."</span>";
+}      
+    
+    
+
+else{
+//    echo "<br>NIE JEST POST?GET";
+}
+$temp = $_SESSION['good']+$_SESSION['bad'];
+echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span>".
+     "<br>Złych odpowiedzi: <span id=bad>".$_SESSION['bad']."</span>".
+     "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
 
 //if(isset($_POST)){
 //    echo "<br>Z post:";
@@ -249,4 +263,9 @@ if(isset($_POST['test'])){
 //$_SESSION['test'] +=1;
 
 //echo "<br>_SESSION['test']".$_SESSION['test'];
+
+?>
+<form action="" method="post">
+    <input name="clear" type="submit" value="Clear score">
+</form>
 

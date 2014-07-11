@@ -125,9 +125,25 @@ $_SESSION['wher']=$wher;
 
 $sercz='';
 if (isset($_POST['sercz'])){
+    
+    $szukane = $_POST['sercz'];
+    
+    $Word = new Ord();
+    $tabAttr = $Word->getTabOfAttr();
+    
     ?><script>//alert("isset post sercz");</script><?php
-    $sercz = "WHERE id_ord LIKE \"%".$_POST['sercz']."%\" OR trans LIKE \"%".$_POST['sercz']."%\"";
-    echo "<br>SERCZ: ".$sercz;
+    $sercz .= "WHERE ";
+    $licz=0;
+    foreach ($tabAttr as $value) {
+        if ($licz == 0){
+            $sercz .= $value." LIKE \"%".$szukane."%\"";
+        } else {
+            $sercz .= " OR ". $value." LIKE \"%".$szukane."%\"";
+        }
+        $licz++;
+    }     
+    $sercz .=";";
+//    echo "<br>SERCZ: ".$sercz;
 }else{
     $sercz = '';
 }

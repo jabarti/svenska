@@ -55,6 +55,7 @@ function start(){
     $("#rzeczownik").hide();
     $("#przymiotnik").hide();
     $("#stopniowanie").hide();
+    $("#zaimek").hide();
 }
 
 $(document).ready(function(){
@@ -65,12 +66,12 @@ $(document).ready(function(){
         $("#ang_cz_m").html(val);
         switch (val){
             case 'preposition':
-            case 'pronoun':
             case 'noun':
                 $("#czasownik").hide();
                 $("#rzeczownik").show();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
+                $("#zaimek").hide();
                 break;
   
             case 'verb':
@@ -78,6 +79,7 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
+                $("#zaimek").hide();
                 break;
                 
             case 'adjective':
@@ -85,6 +87,7 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").show();
                 $("#stopniowanie").show();
+                $("#zaimek").hide();
                 break;
                 
             case 'wyrazenie':    
@@ -93,6 +96,7 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
+                $("#zaimek").hide();
                 break
                 
             case 'adverb':
@@ -101,6 +105,15 @@ $(document).ready(function(){
                 $("#przymiotnik").hide();
                 $("#stopniowanie").show();
                 $("#podstawowe").addClass("nobordbottom");
+                $("#zaimek").hide();
+                break;
+                
+            case 'pronoun':
+                $("#czasownik").hide();
+                $("#rzeczownik").hide();
+                $("#przymiotnik").hide();
+                $("#stopniowanie").hide();
+                $("#zaimek").show();
                 break;
                 
             default:
@@ -108,6 +121,7 @@ $(document).ready(function(){
                 $("#rzeczownik").show();
                 $("#przymiotnik").show();
                 $("#stopniowanie").show();
+                $("#zaimek").show();
                 break
         }
     });    
@@ -264,9 +278,30 @@ $(document).ready(function(){
             </tr> 
             </tbody>
             </tbody>
+            
+<!--            <tbody id="zaimek">
+            <tr>
+                <td><b>Zaimek</b></td>
+                <td colspan='7'></td>
+            </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
+            <tr>
+                <td class='label'>common</td>
+                <td><input id='in1' name='common'></td>
+                <td class='label'>plural</td>
+                <td><input id='in1' name='plural'></td>
+                 <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>    
+            </tbody>-->
+            
             <tbody id='inne'>
-<!--            </div>-->
-
             <tr>
                 <td><b>inne</b></td>
                 <td colspan='7'></td>

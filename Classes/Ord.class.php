@@ -1,6 +1,6 @@
 <?php
 /* * **************************************************
- * Project:     ZZZProba
+ * Project:     Svenska
  * Filename:    Ord.class.php
  * Encoding:    UTF-8
  * Created:     2014-06-24, 23:19
@@ -136,6 +136,17 @@ class Ord {
             $res = mysql_result($mq,0);
 //            print_r($res);
             return $res;            
+        }
+        
+        public function getTabOfAttr(){
+            $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                                    'infinitive', 'presens', 'past', 'supine', 'imperative', 
+                                    'present_participle', 'past_participle', 
+                                    'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
+                                    'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
+                                    'wymowa');
+            
+            return $tab;
         }
         
         public function getPropTabById($id){

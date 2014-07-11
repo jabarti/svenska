@@ -1,5 +1,5 @@
 ﻿<?php
-
+//session_start();
 /**
  * common.inc.php
  *
@@ -10,12 +10,17 @@
  */
 
 if(!isset($_SESSION)){
-    ob_start();
+//    ob_start();
     session_start();
 //    var_dump($_SESSION);
+    $_SESSION['try'] = 3;
 }else{
-    echo "SESJA NIE USTANOWIONA";
+    echo "SESJA JEST USTANOWIONA";
+    $_SESSION['try']++;
 }
+
+
+
 
 header('Content-Type: text/html; charset=utf-8'); 
  // LOAD CUSTOM SETTINGS
@@ -98,13 +103,14 @@ function db_query($sql)
 
 //require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'identifyImage.php');
 
-if (!defined('DO_NOT_CLOSE_SESSION')) {
-	session_write_close();
-}
+//if (!defined('DO_NOT_CLOSE_SESSION')) {
+//	session_write_close();
+//}
 try{
 //    require_once 'Classes/Ord.class.php';
 //    include CLASSES_PATH.DIRECTORY_SEPARATOR.'Person.class.php';
     require_once CLASSES_PATH.DIRECTORY_SEPARATOR.'Ord.class.php';
+    require_once CLASSES_PATH.DIRECTORY_SEPARATOR.'User.class.php';
 //    echo CLASSES_PATH.DIRECTORY_SEPARATOR.'Ord.class.php';
 }
 catch(Exception $ex){
