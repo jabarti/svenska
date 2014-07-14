@@ -15,7 +15,18 @@ include 'header.php';
 //include '../Translations/flag.php';
 include 'buttons.php';
 
+if(isset($_SESSION['log'])){
+    if($_SESSION['log'] == true){
+        echo "<br>Zalogowany jako: ".$_SESSION['user'];//." z hasłem: ". $_SESSION['password'];
+    }else{
+        echo "<br>NIE ZALOGOWANY";
+    }
+}
+
 $user = new User("ala", "ala");
+
+//if(true){
+if($_SESSION['log'] == true ){
 
  if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
  $_SESSION['good']=0;
@@ -135,7 +146,7 @@ echo "<tr>"
 
 //echo "<tr><td>Twoja odpowiedź:</td><td><textarea rows=2 cols=30 name=try>Podaj odpowiedź</textarea></td></tr>";
 
-echo "<tr><td colspan=3></td><td><input type=submit name=test value=Sprawdź></td>"
+echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test value=Sprawdź></td>"
 //echo "<tr><td colspan=3></td><td><button id=btn_submit >Sprawdź</button></td>"
     ."</form>"
     ."</table>";
@@ -143,6 +154,12 @@ echo "<tr><td colspan=3></td><td><input type=submit name=test value=Sprawdź></t
 ?><script>
     var good=0;
     var bad=0;
+    
+//    $(document).ready(function(){
+//        $('#btn_sub_01').click(function(){
+//            $('#tr_scor').append("<tr id='tr'><td>Ala</td><td>Vala</td></tr>");
+//        })
+//    });
     
     $(document).ready(function(){
         $("#btn_submit").click(function(){
@@ -244,7 +261,7 @@ else{
 //    echo "<br>NIE JEST POST?GET";
 }
 $temp = $_SESSION['good']+$_SESSION['bad'];
-echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span>".
+echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn. ".round($_SESSION['good']/$temp*100,2)." %".
      "<br>Złych odpowiedzi: <span id=bad>".$_SESSION['bad']."</span>".
      "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
 
@@ -268,4 +285,23 @@ echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span>".
 <form action="" method="post">
     <input name="clear" type="submit" value="Clear score">
 </form>
+
+<br>
+<button onclick="window.location.href='loger.php'">Wyloguj</button>
+<!--
+<table>
+    <tr id = "tr_scor">
+        <th>Dobre</th>
+        <th>Złe</th>
+    </tr>
+    <tr id="tr">
+        <td>Ala</td>
+        <td>VAla</td>
+    </tr>
+</table>-->
+<?php
+
+} else {
+    require 'loger.php';
+}
 

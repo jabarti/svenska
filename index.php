@@ -128,7 +128,9 @@ $(document).ready(function(){
 });
 
     </script>
-
+<?php 
+if($_SESSION['log'] == true ){
+?>
 <body onload='start();'>
     <form id='form1' action='index.php' method="POST">
         <table class='tab_insert'>
@@ -375,5 +377,11 @@ if(isset($_POST['submit'])){
 }
 
 ?>
+    <br>
+<button onclick="window.location.href='loger.php'">Wyloguj</button>
 </body>
 </html>
+<?php
+} else {
+    require 'loger.php';
+}

@@ -24,6 +24,11 @@ function Menu(){
 </script>    
     
 <?php
+if($_SESSION['log'] == true ){
+    
+ echo "<br>
+<button onclick=\"window.location.href='loger.php'\">Wyloguj</button>   ";
+    
 echo "<form action='' method=post>
         <select name='sort'>
                         <option >sortuj</option>
@@ -309,3 +314,8 @@ if(isset($_POST)){
     }
 }
 ob_end_flush();  // żeby sie dało reloadeować
+
+
+} else {
+    require 'loger.php';
+}
