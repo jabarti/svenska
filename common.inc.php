@@ -19,10 +19,7 @@ if(!isset($_SESSION)){
     $_SESSION['try']++;
 }
 
-
-
-
-header('Content-Type: text/html; charset=utf-8'); 
+//header('Content-Type: text/html; charset=utf-8'); 
  // LOAD CUSTOM SETTINGS
 /*if (file_exists(dirname(__FILE__) . DIRECTORY_SEPARATOR . '../config.inc.php')) {
 	require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . '../config.inc.php');
@@ -41,8 +38,9 @@ if (!defined('MAX_MAIL_BATCH')) {
 define('BASE_PATH', dirname(__FILE__));
 define('ROOT', dirname(dirname(__FILE__))); 
 define('UPRODUCE_UPLOAD_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'uProduceUploads');
-define('INCLUDE_PATH', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'Includes');
+//define('INCLUDE_PATH', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'Includes');
 define('CLASSES_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'Classes');
+define('INCLUDE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'Includes');
 define('LOCALE_PATH', INCLUDE_PATH . DIRECTORY_SEPARATOR . 'locale');
 define('FILES_PATH', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'files');
 define('PICTURES_PATH', FILES_PATH . DIRECTORY_SEPARATOR . 'pictures');
@@ -107,11 +105,10 @@ function db_query($sql)
 //	session_write_close();
 //}
 try{
-//    require_once 'Classes/Ord.class.php';
-//    include CLASSES_PATH.DIRECTORY_SEPARATOR.'Person.class.php';
     require_once CLASSES_PATH.DIRECTORY_SEPARATOR.'Ord.class.php';
     require_once CLASSES_PATH.DIRECTORY_SEPARATOR.'User.class.php';
-//    echo CLASSES_PATH.DIRECTORY_SEPARATOR.'Ord.class.php';
+    require_once CLASSES_PATH.DIRECTORY_SEPARATOR.'Score.class.php';
+    require_once INCLUDE_PATH.DIRECTORY_SEPARATOR.'functions.php';
 }
 catch(Exception $ex){
     echo "Błędem jest :".$ex;

@@ -170,6 +170,7 @@ class Ord {
                                 );
                     break;
                 
+                case 'hjalp_verb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -244,6 +245,7 @@ class Ord {
                                 );
                     break;
                 
+                case 'hjalp_verb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -318,6 +320,7 @@ class Ord {
                                 );
                     break;
                 
+                case 'hjalp_verb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -444,7 +447,7 @@ class Ord {
             
             $rand = mt_rand(1, $len);
             
-//            echo "<br>Rand:".$rand;
+            echo "<br>".__LINE__." / Rand:".$rand;
             
             $i = 1;
             foreach ($row_NoEmFin as $key => $value) {
@@ -506,7 +509,7 @@ class Ord {
             
             $rand = mt_rand(1, $len);
             
-//            echo "<br>Rand:".$rand;
+            echo "<br>".__LINE__." / Rand:".$rand;
             
             $i = 1;
             foreach ($row_NoEmFin as $key => $value) {
@@ -535,6 +538,92 @@ class Ord {
 //            echo "<br>========================<br>";
             
             return $res;            
+        }
+        
+        
+        public function getDBAll(){
+            $SQL = sprintf("SELECT * FROM `".$this->table."`;");
+//            echo $SQL;
+            $mq = mysql_query($SQL);
+//            echo $mq;
+            return $mq;
+        }
+        
+        public function getAllArr(){ // robi to co show.php
+            $SQL = sprintf("SELECT * FROM `".$this->table."`;");
+//            echo $SQL;
+            $mq = mysql_query($SQL);
+//            $mnr = mysql_num_rows($mq);
+//            $arr = mysql_fetch_array($mq, MYSQL_ASSOC);
+
+//            echo "<br>Get All ($mnr) Array:"; var_dump($arr);
+//            return $mr;
+            
+            echo "<table class=print>";
+            echo "  <tr>
+                        <th>L.p.</th>
+                        <th>Słowo PL</th>
+                        <th>Część mowy</th>
+                        <th>rodzajnik</th>
+                        <th>słowo SE</th>
+                        <th>Formy</th>
+                   </tr>" ; 
+            
+              while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
+
+//                echo "<tr><td colspan=6>";var_dump($row);echo "</td></tr>";
+                    echo "<tr>";
+                    $attr = 0;
+                    foreach($row as $k => $v){
+                        if($attr < 5){
+                            echo "<td id=norm>".$v."</td>";
+                        }else{
+                        if($attr==5){
+                            echo "<td id=piec>";
+                        }
+                        elseif($attr==(count($row))){
+                            echo "</td>";
+                        }
+                        elseif($v!='' && $k !='wymowa'){
+                            echo substr($k,0,6)."<span class=red>: $v</span>,<br>";
+                        }
+                        else {
+                            continue;
+                        }
+                    }
+                    $attr++;  
+                    }
+                    echo "</tr>" ;
+              }
+              echo "</table>";
+
+
+            
+//            while ($row = mysql_fetch_row($mq)){
+//                echo "<tr><td colspan=6>";var_dump($row);echo "</td></tr>";
+//                echo "<tr>";
+//                for($i=0; $i<(count($row)-1); $i++){
+//                    if($i < 5){
+//                        echo "<td id=norm>".$row[$i]."</td>";
+//                    }else{
+//                        if($i==5){
+//                            echo "<td id=piec>";
+//                        }
+//                        elseif($i==(count($row)-1)){
+//                            echo "</td>";
+//                        }
+//                        elseif($row[$i]!=''){
+//                            echo $row[$i].", ";
+//                        }
+//                        else {
+//                            continue;
+//                        }
+//                    }
+//                }
+//                echo "</tr>" ;
+//            }
+            
+//            echo "</table>";
         }
 }
 

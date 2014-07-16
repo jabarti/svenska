@@ -10,7 +10,7 @@
  * ************************************************* */
 require_once "common.inc.php";
 include 'DB_Connection.php';
-$title = 'Test';
+$title = 'Svenska | Test';
 include 'header.php';
 //include '../Translations/flag.php';
 include 'buttons.php';
@@ -23,11 +23,26 @@ if(isset($_SESSION['log'])){
     }
 }
 
-$user = new User("ala", "ala");
+if (isset($_POST['clear'])){
+    $_SESSION['arrOfAnsw'] = array();
+    $_SESSION['good']=0;
+    $_SESSION['bad']=0;
+}
+
+//$user = new User();
+////echo "<br>User ID:".$user->getId("Anetka");
+////$user->setData("Lola", "haslo");
+//
+//echo "<br>set data user: ";var_dump($user->setData("Lolas", "haslo"));
+//echo "<br>get data user: ";var_dump($user->getUserByName("Lolas"));
 
 //if(true){
 if($_SESSION['log'] == true ){
 
+//    if (isset($_POST['clear'])){
+//    $_SESSION['arrOfAnsw'] = array();
+//    }
+    
  if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
  $_SESSION['good']=0;
  $_SESSION['bad']=0;
@@ -51,79 +66,8 @@ if($Word = new Ord()){
 
 $max = $Word->getLastId();
 
-function t($var){
-    switch($var){
-        case 'id_ord':
-            return "słowo PL";
-            break;
-        case 'typ':
-            return "typ";
-            break;
-        case 'trans':
-            return "słowo SE";
-            break;
-        case 'rodzaj':
-            return "rodzajnik";
-            break;
-        case 'infinitive':
-            return "bezokolicznik";
-            break;
-        case 'presens':
-            return "cz.teraźniejszy";
-            break;
-        case 'past':
-            return "cz.przeszły";
-            break;
-        case 'supine':
-            return "supine(perfect), dokonany";
-            break;
-        case 'imperative':
-            return "tryb rozkazujący";
-            break;
-        case 'present_participle':
-            return "imiesłów czynny(teraźniejszy)";
-            break;
-        case 'past_participle':
-            return "imiesłów bierny(przeszły)";
-            break;
-        case 'S_indefinite':
-            return "l.pojedyncza, r.nieokreślony";
-            break;
-        case 'S_definite':
-            return "l.pojedyncza, r.określony";
-            break;
-        case 'P_indefinite':
-            return "l.mnoga, r.nieokreślony";
-            break;
-        case 'P_definite':
-            return "l.mnoga, r.określony";
-            break;
-        case 'neuter':
-            return "rodzaj neutralny";
-            break;
-        case 'masculin':
-            return "rodzaj męski";
-            break;
-        case 'plural':
-            return "rodzaj ogólny, l.mnoga";
-            break;
-        case 'st_rowny':
-            return "stopień rowny";
-            break;
-        case 'st_wyzszy':
-            return "stopień wyższy";
-            break;
-        case 'st_najwyzszy':
-            return "stopień najwyższy";
-            break;
-        
-        default:
-            return "Brak słowa '".$var."' w słowniku!!!";
-            break;
-    }
-}
-
 $rand =  mt_rand(1, $max); // wybór słowa
+echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 
 $testTab = $Word->getQuestAndAnswerById($rand);
 
@@ -137,12 +81,37 @@ echo "<tr>"
                 .'<td><textarea disabled rows=1 cols=20 name="'.$testTab[0].' disabled">'.$testTab[1].'</textarea></td>';
         echo    "<td>Podaj ".t($testTab[2])."</td>"
                 ."<td>"
-                . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"
-                . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"
-                . "<textarea id=try rows=1 cols=20 name=try></textarea>"
-                . "<input id=check type=hidden name=check value='".$testTab[3]."'>"
-                ."</td>"
-            ."</tr>";
+                . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie
+                . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"       // słowo
+                . "<input type=hidden name=quest_p3 value='".$testTab[0]."'>";       // to jest.. 
+        if ($testTab[2] == "typ"){
+            echo "<select name='try'>
+                        <option value='noun'>rzeczownik</option>
+                        <option value='verb'>czasownik</option>
+                        <option value='hjalp_verb'>czas. posiłkowy</option>
+                        <option value='adjective'>przymiotnik</option>
+                        <option value='adverb'>przysłówek</option>
+                        <option value='preposition'>przyimek</option>
+                        <option value='pronoun'>zaimek</option>
+                        <option value='conjunction'>spójnik</option>
+                        <option value='wyrazenie'>wyrażenie</option>
+                </select>";
+        }else{
+            echo      "<textarea id=try rows=1 cols=20 name=try></textarea>";
+        }
+            echo      "<input id=check type=hidden name=check value='".$testTab[3]."'>"
+                    ."</td>"
+                ."</tr>";
+        
+
+
+//    echo "<br>ta tablica:";
+//    $tempArrOfAnsw = array($testTab[0], $testTab[1], $testTab[2], $testTab[3]);
+//    array_push($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
+//    var_dump($_SESSION['arrOfAnsw']);
+//    
+//    echo "<br>Po tablicy";
+
 
 //echo "<tr><td>Twoja odpowiedź:</td><td><textarea rows=2 cols=30 name=try>Podaj odpowiedź</textarea></td></tr>";
 
@@ -152,8 +121,8 @@ echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test valu
     ."</table>";
 
 ?><script>
-    var good=0;
-    var bad=0;
+//    var good=0;
+//    var bad=0;
     
 //    $(document).ready(function(){
 //        $('#btn_sub_01').click(function(){
@@ -161,51 +130,51 @@ echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test valu
 //        })
 //    });
     
-    $(document).ready(function(){
-        $("#btn_submit").click(function(){
-//            $("#testForm").submit(function(){
-                var check = $("#check").val();
-                var traj = $("#try").val();
-                alert(check+"/"+traj);
-                if(check == traj){
-                    good++;
-                }else{
-                    bad++;
-                };
-                 alert("good: "+good+"bad: "+bad);
-                all = good+bad;
-                $("#good").html(good);
-                $("#bad").html(bad);
-                $("#all").html(all);
+//    $(document).ready(function(){
+//        $("#btn_submit").click(function(){
+////            $("#testForm").submit(function(){
+//                var check = $("#check").val();
+//                var traj = $("#try").val();
+//                alert(check+"/"+traj);
+//                if(check == traj){
+//                    good++;
+//                }else{
+//                    bad++;
+//                };
+//                 alert("good: "+good+"bad: "+bad);
+//                all = good+bad;
+//                $("#good").html(good);
+//                $("#bad").html(bad);
+//                $("#all").html(all);
                 
-//                location.reload();
+////                location.reload();
+////            });
+//        });
+//        $("#btn_end").click(function(){
+//            alert("END");
+//            $.ajax({
+//                type     : "POST",
+//                url      : "test.php",
+//                data     : {
+//                            ending : 'Marcin'
+//                },
+//                success : function(msg) {
+//                        //ten fragment wykona się po POMYŚLNYM zakończeniu połączenia
+//                        //msg zawiera dane zwrócone z serwera
+////                        alert("success: "+msg);
+//                },
+//                complete : function(r) {
+//                        //ten fragment wykona się po ZAKONCZENIU połączenia
+//                        //"r" to przykładowa nazwa zmiennej, która zawiera dane zwrócone z serwera
+//                        alert("complete: "+r);
+//                },
+//                error:    function(error) {
+//                        //ten fragment wykona się w przypadku BŁĘDU
+//                        alert("ERROR: "+error);
+//                }
 //            });
-        });
-        $("#btn_end").click(function(){
-            alert("END");
-            $.ajax({
-                type     : "POST",
-                url      : "test.php",
-                data     : {
-                            ending : 'Marcin'
-                },
-                success : function(msg) {
-                        //ten fragment wykona się po POMYŚLNYM zakończeniu połączenia
-                        //msg zawiera dane zwrócone z serwera
-//                        alert("success: "+msg);
-                },
-                complete : function(r) {
-                        //ten fragment wykona się po ZAKONCZENIU połączenia
-                        //"r" to przykładowa nazwa zmiennej, która zawiera dane zwrócone z serwera
-                        alert("complete: "+r);
-                },
-                error:    function(error) {
-                        //ten fragment wykona się w przypadku BŁĘDU
-                        alert("ERROR: "+error);
-                }
-            });
-        });
-    });
+//        });
+//    });
 </script><?php
 if(isset($_POST['test'])){
 //    echo "<br> JEST POST?GET";
@@ -252,6 +221,14 @@ if(isset($_POST['test'])){
          $_SESSION['bad']++;
     }
     
+//    echo "<br>ta tablica:";
+    $tempArrOfAnsw = array($_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], $_POST['try'] );
+//    array_push($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
+    array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
+//    var_dump($_SESSION['arrOfAnsw']);
+    
+//    echo "<br>Po tablicy";
+    
     unset($_POST['test']);
 }      
     
@@ -260,11 +237,15 @@ if(isset($_POST['test'])){
 else{
 //    echo "<br>NIE JEST POST?GET";
 }
-$temp = $_SESSION['good']+$_SESSION['bad'];
-echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn. ".round($_SESSION['good']/$temp*100,2)." %".
-     "<br>Złych odpowiedzi: <span id=bad>".$_SESSION['bad']."</span>".
-     "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
 
+if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
+    $temp = $_SESSION['good']+$_SESSION['bad'];
+    echo    "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn. ".round($_SESSION['good']/$temp*100,2)." %".
+            "<br>Złych odpowiedzi: <span id=bad>".$_SESSION['bad']."</span>".
+            "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
+    
+
+}
 //if(isset($_POST)){
 //    echo "<br>Z post:";
 //    var_dump($_POST);
@@ -283,7 +264,7 @@ echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn
 
 ?>
 <form action="" method="post">
-    <input name="clear" type="submit" value="Clear score">
+    <input id=clear name="clear" type="submit" value="Clear score">
 </form>
 
 <br>
@@ -300,6 +281,14 @@ echo "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn
     </tr>
 </table>-->
 <?php
+    // Prezentacja wyników już osiągnietych!
+    echo "<h3> Twoje dotychczasowe odpowiedzi: </h3>";
+    foreach ($_SESSION['arrOfAnsw'] as $key) {
+        echo "<p>";     
+//        echo "Pytanie: Do ".t($key[0])." ( ".$key[1]." ) podaj ".t($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
+        echo "Pytanie: To jest ".t($key[0])." ( <span class=green>".$key[1]."</span> ) podaj ".t($key[2]).", Odp.: \"<span class=red>".$key[3]."</span>\" / Twoja odp: \"<span class=blue>".$key[4]."</span>\"";
+        echo "</p>";
+    }
 
 } else {
     require 'loger.php';

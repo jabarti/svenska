@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 11 Lip 2014, 01:23
+-- Generation Time: 16 Lip 2014, 09:04
 -- Server version: 5.5.37-cll
 -- PHP Version: 5.4.23
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `bartilev_APIPO`
+-- Database: `bartilev_Svenska`
 --
 
 -- --------------------------------------------------------
@@ -52,14 +52,14 @@ CREATE TABLE IF NOT EXISTS `ord` (
   `wymowa` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`id_ord`),
   UNIQUE KEY `id_ord_UNIQUE` (`id_ord`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=152 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=195 ;
 
 --
 -- Zrzut danych tabeli `ord`
 --
 
 INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `presens`, `past`, `supine`, `imperative`, `present_participle`, `past_participle`, `S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, `neuter`, `masculin`, `plural`, `st_rowny`, `st_wyzszy`, `st_najwyzszy`, `wymowa`) VALUES
-(1, 'rower', 'noun', 'en', 'cykel', '', '', '', '', '', '', '', 'en cykel', 'cykeln', 'cyklar', 'cyklarna', NULL, NULL, NULL, NULL, '', '', 'sykel'),
+(1, 'rower', 'noun', 'en', 'cykel', '', '', '', '', '', '', '', 'en cykel', 'cykeln', 'cyklar', 'cyklarna', '', '', '', '', '', '', 'sykel'),
 (2, 'list', 'noun', 'ett', 'brev', '', '', '', '', '', '', '', 'ett brev', 'brevet', 'brev', 'breven', NULL, NULL, NULL, NULL, '', '', ''),
 (3, 'iĹÄ', 'verb', 'att', 'gĂĽ', 'att gĂĽ', 'gĂĽr', 'gick', 'gĂĽtt', 'gĂĽ!', 'gĂĽende', 'gĂĽngen', '', '', '', '', '', '', '', '', '', '', 'goa'),
 (4, 'samochĂłd', 'noun', 'en', 'bil', '', '', '', '', '', '', '', 'en bil', 'bilen', 'bilar', 'bilarna', NULL, NULL, NULL, NULL, '', '', ''),
@@ -162,7 +162,7 @@ INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `pres
 (101, 'ksiÄĹźka', 'noun', 'en', 'bok', '', '', '', '', '', '', '', 'en bok', 'boken', 'bĂścker', 'bĂśckerna', '', '', '', '', '', '', ''),
 (102, 'zabawka', 'noun', 'en', 'leksak', '', '', '', '', '', '', '', 'en leksak', 'leksaken', 'leksaker', 'leksakerna', '', '', '', '', '', '', ''),
 (103, 'dziecko', 'noun', 'ett', 'barn', '', '', '', '', '', '', '', 'ett barn', 'barnet', 'barn', 'barnen', '', '', '', '', '', '', ''),
-(104, 'festyn, przyjÄcie, biesiada', 'noun', 'en', 'fest', '', '', '', '', '', '', '', 'en fest', 'festen', 'fester', 'festerna', '', '', '', '', '', '', ''),
+(104, 'przyjÄcie, impreza, prywatka', 'noun', 'en', 'fest', '', '', '', '', '', '', '', 'en fest', 'festen', 'fester', 'festerna', '', '', '', '', '', '', ''),
 (105, 'koĹczyÄ', 'verb', 'att', 'sluta', 'att sluta', 'slutar', 'slutade', 'slutat', 'sluta!', 'slutande', 'slutad', '', '', '', '', '', '', '', '', '', '', ''),
 (106, 'koniec', 'noun', 'ett', 'slut', '', '', '', '', '', '', '', 'ett slut', 'slutet', 'slut', 'sluten', '', '', '', '', '', '', ''),
 (107, 'jutro', 'adverb', '', 'i morgon', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'i moron'),
@@ -205,11 +205,54 @@ INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `pres
 (144, 'grudzieĹ', 'noun', '', 'december', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (145, 'lipiec', 'noun', '', 'juli', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (146, 'parasol, parasol przeciw deszczowy', 'noun', 'ett', 'paraply', '', '', '', '', '', '', '', 'ett paraply', 'paraplyet', 'paraplyer', 'paraplyerna', '', '', '', '', '', '', ''),
-(147, 'coĹ', 'pronoun', '', 'nĂĽgot', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nogot'),
+(147, 'coĹ', 'pronoun', '', 'nĂĽgot', '', '', '', '', '', '', '', '', '', '', '', 'nĂĽgon', '', 'nĂĽgra', '', '', '', 'nogot'),
 (148, 'chcieÄ', 'verb', 'att', 'vilja', 'att vilja', 'vill', 'ville', 'velat', 'vill!', 'viljande', '', '', '', '', '', '', '', '', '', '', '', ''),
 (149, 'przedstawienie', 'noun', 'en', 'fĂśrestĂ¤llning', '', '', '', '', '', '', '', 'fĂśrestĂ¤llning', 'fĂśrestĂ¤llningen', 'fĂśrestĂ¤llningar', 'fĂśrestĂ¤llningarna', '', '', '', '', '', '', 'forestelning'),
 (150, 'drabina', 'noun', 'en', 'stege', '', '', '', '', '', '', '', 'en stege', 'stegen', 'stegar', 'stegarna', '', '', '', '', '', '', ''),
-(151, 'wiosna', 'noun', 'en', 'vĂĽr', '', '', '', '', '', '', '', 'en vĂĽr', 'vĂĽren', 'vĂĽrar', 'vĂĽrarna', '', '', '', '', '', '', 'wor');
+(151, 'wiosna', 'noun', 'en', 'vĂĽr', '', '', '', '', '', '', '', 'en vĂĽr', 'vĂĽren', 'vĂĽrar', 'vĂĽrarna', '', '', '', '', '', '', 'wor'),
+(152, 'pomagaÄ', 'verb', 'att', 'hjĂ¤lpa', 'att hjĂ¤lpa', 'hjĂ¤lper', 'hjĂ¤lpte', 'hjĂ¤lpt', 'hjĂ¤lp!', 'hjĂ¤lpande', 'hjĂ¤lpt', '', '', '', '', '', '', '', '', '', '', 'jelpa'),
+(153, 'pies', 'noun', 'en', 'hund', '', '', '', '', '', '', '', 'en hund', 'hunden', 'hundar', 'hundarna', '', '', '', '', '', '', ''),
+(154, 'poznaÄ, spotkaÄ, ', 'verb', 'att', 'trĂ¤ffa', 'att trĂ¤ffa', 'trĂ¤ffar', 'trĂ¤ffade', 'trĂ¤ffat', 'trĂ¤ffa!', 'trĂ¤ffande', 'trĂ¤ffad', '', '', '', '', '', '', '', '', '', '', ''),
+(155, 'miĹo, przyjemnie', 'adjective', '', 'trevlig', '', '', '', '', '', '', '', '', '', '', '', 'trevligt', 'trevligt', 'trevliga', '', 'trevligare', 'trevligast', ''),
+(156, 'miĹo ciÄ poznaÄ', 'wyrazenie', '', 'trevlig att trĂ¤ffas', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(157, 'dzwoniÄ, telefonowaÄ', 'verb', 'att', 'ringa', 'att ringa', 'ringer', 'ringde', 'ringt', 'ring!', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(158, 'gadaÄ, mĂłwiÄ, powiedzieÄ, rozmawiaÄ', 'verb', 'att', 'prata', 'att prata', 'pratar', 'pratade', 'pratat', 'prata!', 'pratande', 'pratad', '', '', '', '', '', '', '', '', '', '', ''),
+(159, 'wczesny, wczeĹnie', 'adverb', '', 'tidig', '', '', '', '', '', '', '', '', '', '', '', 'tidigt', 'tidig', 'tidiga', '', '', '', ''),
+(160, 'pĂłĹşno', 'preposition', '', 'sent', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(161, 'pĂłĹşniej, potem, nastÄpnie', 'adjective', '', 'sen', '', '', '', '', '', '', '', '', '', '', '', 'sent', 'sene', 'sena', '', 'senare', 'senaste, senast', ''),
+(162, 'czas', 'noun', 'en', 'tid', '', '', '', '', '', '', '', 'en tid', 'tiden', 'tider', 'tiderna', '', '', '', '', '', '', ''),
+(163, 'przyjĹÄ na czas', 'wyrazenie', '', 'kommer i tid till', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(164, 'jesieĹ', 'noun', 'en', 'hĂśst', '', '', '', '', '', '', '', 'en hĂśst', 'hĂśsten', 'hĂśstar', 'hĂśstarna', '', '', '', '', '', '', ''),
+(165, 'zima', 'noun', 'en', 'vinter', '', '', '', '', '', '', '', 'en vinter', 'vintern', 'vintrar', 'vintrarna', '', '', '', '', '', '', ''),
+(166, 'drzewo', 'noun', 'ett', 'trĂ¤d', '', '', '', '', '', '', '', 'ett trĂ¤d', 'trĂ¤det', 'trĂ¤d', 'trĂ¤den', '', '', '', '', '', '', 'tred'),
+(167, 'na czas', 'wyrazenie', '', 'i tid', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(168, 'mydĹo', 'noun', 'en', 'tvĂĽl', '', '', '', '', '', '', '', 'en tvĂĽl', 'tvĂĽlen', 'tvĂĽlar', 'tvĂĽlarna', '', '', '', '', '', '', ''),
+(169, 'miÄso', 'noun', 'ett', 'kĂśtt', '', '', '', '', '', '', '', 'ett kĂśtt', 'kĂśttet', '', '', '', '', '', '', '', '', 'siot'),
+(170, 'okulary', 'noun', 'en', 'glasĂśgon', '', '', '', '', '', '', '', 'glasĂśgon', 'glasĂśgonen', '', '', '', '', '', '', '', '', ''),
+(171, 'kosztowaÄ', 'verb', 'att', '', 'att kosta', 'kostar', 'kostade', 'kostat', 'kosta!', 'kostande', '', '', '', '', '', '', '', '', '', '', '', ''),
+(172, 'garnitur', 'noun', 'en', 'kostym', '', '', '', '', '', '', '', 'en kostym', 'kostymen', 'kostymer', 'kostymerna', '', '', '', '', '', '', ''),
+(173, 'adres', 'noun', 'en', 'adress', '', '', '', '', '', '', '', 'en adress', 'adressen', 'adresser', 'adresserna', '', '', '', '', '', '', ''),
+(174, 'numer', 'noun', 'ett', 'nummer', '', '', '', '', '', '', '', 'ett nummer', 'numret', 'nummer', 'numren', '', '', '', '', '', '', ''),
+(175, 'data, randka', 'noun', 'ett', 'datum', '', '', '', '', '', '', '', 'ett datum', 'datumet', 'datum', 'datumen', '', '', '', '', '', '', ''),
+(176, 'adres e-mail', 'noun', 'en', 'e-postadress', '', '', '', '', '', '', '', 'en e-postadress', 'e-postadressen', 'e-postadresser', 'e-postadresserna', '', '', '', '', '', '', ''),
+(177, 'myÄ, czyĹciÄ, praÄ', 'verb', 'att', 'tvĂ¤tta', 'att tvĂ¤tta', 'tvĂ¤ttar', 'tvĂ¤ttade', 'tvĂ¤ttat', 'tvĂ¤tta!', '', '', '', '', '', '', '', '', '', '', '', '', 'twetta'),
+(178, 'na dĂłĹ, w dĂłĹ', 'adverb', '', 'ned', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(179, 'tam', 'pronoun', '', 'dĂ¤r', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(180, 'co, jaki', 'adverb', '', 'vad', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(181, 'jaka jest dzisiaj data?', 'wyrazenie', '', 'vad Ă¤r det fĂśr datum idag?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(182, 'dzisiaj jest czternasty lipca 2014', 'wyrazenie', '', 'idag Ă¤r det den fjortonde juli tjugohundrafjorton', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(183, 'urodziny, dzieĹ urodzin', 'noun', 'en', 'fĂśdelsedag', '', '', '', '', '', '', '', 'en fĂśdelsedag', 'fĂśdelsedagen', 'fĂśdelsedagar', 'fĂśdelsedagarna', '', '', '', '', '', '', ''),
+(184, 'moĹźe', 'adverb', '', 'fĂĽr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(185, 'Ĺźona', 'noun', 'en', 'fru', '', '', '', '', '', '', '', 'en fru', 'frun', 'fruar', 'fruarna', '', '', '', '', '', '', ''),
+(186, 'czĹowiek, mÄĹź, mÄĹźczyzna', 'noun', 'en', 'man', '', '', '', '', '', '', '', 'en man', 'mannen, manen', 'mĂ¤n, manar', 'mĂ¤nnen, manarna', '', '', '', '', '', '', ''),
+(187, 'siedzieÄ', 'verb', 'att', 'sitta', 'sitta', 'sitter', 'satt', 'suttit', 'sitt!', 'sittande', 'sutten', '', '', '', '', '', '', '', '', '', '', ''),
+(188, 'czyste', 'adjective', '', 'ren', '', '', '', '', '', '', '', '', '', '', '', 'rent', 'rene', 'rena', '', 'renare', 'renast', ''),
+(189, 'spĂłdnica', 'noun', 'en', 'kjol', '', '', '', '', '', '', '', 'en kjol', 'kjolen', 'kjolar', 'kjolarna', '', '', '', '', '', '', 'siol'),
+(190, 'sukienka', 'noun', 'en', 'klĂ¤nning', '', '', '', '', '', '', '', 'en klĂ¤nning', 'klĂ¤nningen', 'klĂ¤nningar', 'klĂ¤nningarna', '', '', '', '', '', '', ''),
+(191, 'mĂłwiÄ, powiedzieÄ, rozmawiaÄ', 'verb', 'att', 'tala', 'att tala', 'talar', 'talade', 'talat', 'tala!', 'talande', 'talad', '', '', '', '', '', '', '', '', '', '', ''),
+(192, 'nauczyciel', 'noun', 'en', 'lĂ¤rare', '', '', '', '', '', '', '', 'en lĂ¤rare', 'lĂ¤rarn, lĂ¤raren', 'lĂ¤rare', 'lĂ¤rarna', '', '', '', '', '', '', ''),
+(193, 'dziewczyna, dziewczynka', 'noun', 'en', 'flicka', '', '', '', '', '', '', '', 'en flicka', 'flickan', 'flickor', 'flickorna', '', '', '', '', '', '', ''),
+(194, 'biesiada, festyn', 'noun', 'ett', 'kalas', '', '', '', '', '', '', '', 'ett kalas', 'kalaset	', 'kalas', 'kalasen', '', '', '', '', '', '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

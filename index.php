@@ -9,7 +9,7 @@
  * ************************************************* */
 include 'common.inc.php';
 include 'DB_Connection.php';
-$title = 'Svenska';
+$title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
 ?>
@@ -74,6 +74,7 @@ $(document).ready(function(){
                 $("#zaimek").hide();
                 break;
   
+            case 'hjalp_verb':
             case 'verb':
                 $("#czasownik").show();
                 $("#rzeczownik").hide();
@@ -157,6 +158,7 @@ if($_SESSION['log'] == true ){
                         <option >część mowy</option>
                         <option value="noun">rzeczownik</option>
                         <option value="verb">czasownik</option>
+                        <option value="hjalp_verb">czas. posiłkowy</option>
                         <option value="adjective">przymiotnik</option>
                         <option value="adverb">przysłówek</option>
                         <option value="preposition">przyimek</option>
