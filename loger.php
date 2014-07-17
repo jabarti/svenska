@@ -48,10 +48,15 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['log'] = true;
         $_SESSION['user'] = $_POST['user'] ? $_POST['user'] : $_GET['user'];
         $_SESSION['password'] = $_POST['password'] ? $_POST['password'] : $_GET['password'];
-//        header("Location: test.php");
         $_SESSION['arrOfAnsw'] = array();
+        $_SESSION['good']=0;
+        $_SESSION['bad']=0;
+        $score = new Score();
+        $_SESSION['scoresOfUsr'] = $score->getScoresOfUser($_SESSION['user']);
+        echo "<p class=red><b>".$_SESSION['scoresOfUsr'][0]."/".$_SESSION['scoresOfUsr'][1]."</b></p>";
         header("Location: ".$_SESSION['ref']);
     }else{
+        unset($_SESSION);
         $_SESSION['log'] = false;
     }
 }

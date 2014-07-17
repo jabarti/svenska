@@ -128,6 +128,16 @@ class Ord {
             return $res;
         }
         
+        public function getOrdPLById($id){
+            $SQL = sprintf("SELECT `id_ord` FROM `".$this->table."` WHERE id = \"".$id."\";"); 
+//            echo "<br>SQL:".$SQL;
+            $mq = mysql_query($SQL);
+            
+            $res = mysql_result($mq,0);
+//            print_r($res);
+            return $res;
+        }
+        
         public function getTypeById($id) {
             $SQL = sprintf("SELECT typ FROM `".$this->table."` WHERE id = \"".$id."\";");
 //            echo "<br>SQL:".$SQL;
@@ -358,7 +368,8 @@ class Ord {
                     break;
                 
                 case 'wyrazenie':
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+//                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord',  'trans', 
                                  ); 
                     break;
                 
@@ -396,7 +407,7 @@ class Ord {
 //            echo "<br><br>vardump CUT $row: ";  var_dump($row);
             $NoEmpty = array();
             foreach ($row as $key => $value) {
-                if($value != ''){
+                if($value != '' && $value != '???'){
                    array_push($NoEmpty, $key);
                 }
             }
@@ -447,7 +458,7 @@ class Ord {
             
             $rand = mt_rand(1, $len);
             
-            echo "<br>".__LINE__." / Rand:".$rand;
+//            echo "<br>".__LINE__." / Rand:".$rand;
             
             $i = 1;
             foreach ($row_NoEmFin as $key => $value) {
@@ -509,7 +520,7 @@ class Ord {
             
             $rand = mt_rand(1, $len);
             
-            echo "<br>".__LINE__." / Rand:".$rand;
+//            echo "<br>".__LINE__." / Rand:".$rand;
             
             $i = 1;
             foreach ($row_NoEmFin as $key => $value) {
@@ -596,34 +607,6 @@ class Ord {
                     echo "</tr>" ;
               }
               echo "</table>";
-
-
-            
-//            while ($row = mysql_fetch_row($mq)){
-//                echo "<tr><td colspan=6>";var_dump($row);echo "</td></tr>";
-//                echo "<tr>";
-//                for($i=0; $i<(count($row)-1); $i++){
-//                    if($i < 5){
-//                        echo "<td id=norm>".$row[$i]."</td>";
-//                    }else{
-//                        if($i==5){
-//                            echo "<td id=piec>";
-//                        }
-//                        elseif($i==(count($row)-1)){
-//                            echo "</td>";
-//                        }
-//                        elseif($row[$i]!=''){
-//                            echo $row[$i].", ";
-//                        }
-//                        else {
-//                            continue;
-//                        }
-//                    }
-//                }
-//                echo "</tr>" ;
-//            }
-            
-//            echo "</table>";
         }
 }
 

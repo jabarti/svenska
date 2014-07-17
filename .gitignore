@@ -7,6 +7,7 @@
 *.rar
 *.zip
 *.z7
+#.sql
 nbproject
 DB_Connection.php
 ExternalResources/Oracle_modeler

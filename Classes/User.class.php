@@ -73,7 +73,6 @@ class User {
             echo "<br>ERROR: User \"<span class=blue>".$user."</span>\" NOT added.";
             return false;
         }
-    }
-    
+    }  
 
 }

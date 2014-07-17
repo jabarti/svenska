@@ -107,6 +107,9 @@ function t($var){
         case 'wyrazenie':
             return "wyrażenie";
             break;
+        case '???':
+            return "???";
+            break;
         
         default:
             return "Brak słowa '".$var."' w słowniku!!!";

@@ -165,6 +165,7 @@ if($_SESSION['log'] == true ){
                         <option value="pronoun">zaimek</option>
                         <option value="conjunction">spójnik</option>
                         <option value="wyrazenie">wyrażenie</option>
+                        <option value="???">???</option>
                     </select>
                 </td>
                 <td class='label'>rodzaj</td>

@@ -23,45 +23,40 @@ if(isset($_SESSION['log'])){
     }
 }
 
-if (isset($_POST['clear'])){
-    $_SESSION['arrOfAnsw'] = array();
-    $_SESSION['good']=0;
-    $_SESSION['bad']=0;
-}
+//if (isset($_POST['clear'])){
+//    echo "<br>".__LINE__."/ 1 ISSET POST Clear";
+//    $score = new Score();
+//    $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
+//    $score->saveScoreData();
+//    $_SESSION['arrOfAnsw'] = array();
+//    $_SESSION['good']=0;
+//    $_SESSION['bad']=0;
+//}
 
-//$user = new User();
-////echo "<br>User ID:".$user->getId("Anetka");
-////$user->setData("Lola", "haslo");
-//
-//echo "<br>set data user: ";var_dump($user->setData("Lolas", "haslo"));
-//echo "<br>get data user: ";var_dump($user->getUserByName("Lolas"));
 
 //if(true){
-if($_SESSION['log'] == true ){
-
-//    if (isset($_POST['clear'])){
-//    $_SESSION['arrOfAnsw'] = array();
-//    }
+if($_SESSION['log'] == true ){   
     
  if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
  $_SESSION['good']=0;
  $_SESSION['bad']=0;
  }else{
      if(isset($_POST['clear'])){
-         echo "<br>isset clear";
-          $_SESSION['good']=0;
-          $_SESSION['bad']=0;
+         echo "<br>".__LINE__."/ 2 ISSET POST Clear";
+         $score = new Score();
+         $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
+         $score->saveScoreData();
+//         $score->getScoresOfUser($_SESSION['user']);
+         $_SESSION['arrOfAnsw'] = array();
+         $_SESSION['good']=0;
+         $_SESSION['bad']=0;
      }
  }
- 
-$score_good = 0;
-$score_bad = 0;
-$score_err = 0;
 
 if($Word = new Ord()){
 //    echo "<br>OK";
 }else{
-    echo "<br>NOT OK";
+    echo "<br>NOT OK: Object of Ord class not created!";
 }
 
 $max = $Word->getLastId();
@@ -69,10 +64,13 @@ $max = $Word->getLastId();
 $rand =  mt_rand(1, $max); // wybór słowa
 echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 
+//$rand = 254;  // For test - fixed ID of word; 
+
 $testTab = $Word->getQuestAndAnswerById($rand);
+$wordPL = $Word->getOrdPLById($rand);
+//echo "<br>WordPL: ".$wordPL;
 
 $method = 'post';
-
 
 echo "<table>"
    . "<form id=testForm1 action=test.php method=".$method.">";
@@ -83,7 +81,8 @@ echo "<tr>"
                 ."<td>"
                 . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie
                 . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"       // słowo
-                . "<input type=hidden name=quest_p3 value='".$testTab[0]."'>";       // to jest.. 
+                . "<input type=hidden name=quest_p3 value='".$testTab[0]."'>"       // to jest.. 
+                . "<input type=hidden name=quest_p4 value='".$wordPL."'>";          // słowo PL
         if ($testTab[2] == "typ"){
             echo "<select name='try'>
                         <option value='noun'>rzeczownik</option>
@@ -95,6 +94,7 @@ echo "<tr>"
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
                         <option value='wyrazenie'>wyrażenie</option>
+                        <option value='???'>???</option>
                 </select>";
         }else{
             echo      "<textarea id=try rows=1 cols=20 name=try></textarea>";
@@ -175,14 +175,11 @@ echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test valu
 //            });
 //        });
 //    });
-</script><?php
+</script>
+<?php
+
 if(isset($_POST['test'])){
-//    echo "<br> JEST POST?GET";
-    
-//    foreach ($_POST as $k => $v){
-//        echo "<br>k=".$k.", v=".$v;
-//    }
-    
+   
     $arr = explode(', ',$_POST['check']);
     $try = $_POST['try'];
     
@@ -211,18 +208,20 @@ if(isset($_POST['test'])){
 //    foreach ($_POST as $k => $v){
 //        echo "<br>Oto klucz: ".$k." => ". $v;
 //    }
-    
+    $temp_scor = '';
     if($wordInArr){
         echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
         $_SESSION['good']++;
+        $temp_scor = "OK";
     }else{
         echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: na pytanie:<br>Podaj ".t($_POST['quest_p1']). " do \"<span class=red>".$_POST['quest_p2']."</span>\". Odpowiedź to:"
         . " <span class=red><b>".$_POST['check']."</b></span><br>, a Twoja odpowiedź: \"".$_POST['try']."\"";
          $_SESSION['bad']++;
+         $temp_scor = "błąd";
     }
     
 //    echo "<br>ta tablica:";
-    $tempArrOfAnsw = array($_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], $_POST['try'] );
+    $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], $_POST['try'], $temp_scor );
 //    array_push($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
     array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
 //    var_dump($_SESSION['arrOfAnsw']);
@@ -243,9 +242,17 @@ if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
     echo    "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn. ".round($_SESSION['good']/$temp*100,2)." %".
             "<br>Złych odpowiedzi: <span id=bad>".$_SESSION['bad']."</span>".
             "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
-    
-
 }
+ if(isset($_SESSION['scoresOfUsr'])){
+     echo "<br><b>Dotychczasowe wyniki:</b><br>";
+     echo "<span class=red>Good: <b>".$_SESSION['scoresOfUsr'][0]."</b></span>/<span class=red>Bad: <b>".$_SESSION['scoresOfUsr'][1]."</b></span>";
+ }else{
+     echo "<br> NIE MA SESJA SCORE";
+ }
+
+$score = new Score();
+$score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
+
 //if(isset($_POST)){
 //    echo "<br>Z post:";
 //    var_dump($_POST);
@@ -286,7 +293,10 @@ if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
     foreach ($_SESSION['arrOfAnsw'] as $key) {
         echo "<p>";     
 //        echo "Pytanie: Do ".t($key[0])." ( ".$key[1]." ) podaj ".t($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
-        echo "Pytanie: To jest ".t($key[0])." ( <span class=green>".$key[1]."</span> ) podaj ".t($key[2]).", Odp.: \"<span class=red>".$key[3]."</span>\" / Twoja odp: \"<span class=blue>".$key[4]."</span>\"";
+        if(t($key[1])!= 'słowo PL')
+            echo "Pytanie: To jest ".t($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) podaj ".t($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
+        else
+            echo "Pytanie: To jest ".t($key[1])." ( <span class=green>".$key[2]."</span> ) podaj ".t($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
         echo "</p>";
     }
 

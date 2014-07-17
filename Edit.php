@@ -48,6 +48,7 @@ echo "
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
                         <option value='wyrazenie'>wyrażenie</option>
+                        <option value='empty'>puste</option>
         </select>
         <input type=submit name=wher_sub value='wybierz'></input>
       </form><br>";
@@ -114,6 +115,12 @@ if(isset($_POST)){
                 break;
             case 'wyrazenie':
                 $wher = "WHERE typ='wyrazenie'";
+                break;
+            case '???':
+                $wher = "WHERE typ='???'";
+                break;
+            case 'empty':
+                $wher = "WHERE typ=''";
                 break;
             default:
                 ?><script>//alert("DEFAULT wher");</script><?php
@@ -226,6 +233,7 @@ while($row = mysql_fetch_assoc($mq)){
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
                         <option value='wyrazenie'>wyrażenie</option>
+                        <option value='???'>???</option>
                 </select>";        
              echo "</td>";
         }
