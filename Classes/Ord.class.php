@@ -608,5 +608,25 @@ class Ord {
               }
               echo "</table>";
         }
+        
+        public function findEmptyOrdId(){
+            $SQL = sprintf("SELECT `id` FROM ".$this->table." ORDER BY `id` ASC;");
+            echo $SQL;
+            $mq = mysql_query($SQL);
+            
+            $licz = 1;
+            echo "<br>ID's: ";
+            
+            while($row = mysql_fetch_row($mq)){
+                echo $row[0]."/$licz, ";
+//                var_dump($row);
+                if($row[0] != $licz){
+                    echo "<span class=red>BRAK $licz!!!!</span>";
+                    $licz++;
+                }
+                
+                $licz++;
+            }
+        }
 }
 

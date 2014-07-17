@@ -15,13 +15,13 @@ include 'header.php';
 //include '../Translations/flag.php';
 include 'buttons.php';
 
-if(isset($_SESSION['log'])){
-    if($_SESSION['log'] == true){
-        echo "<br>Zalogowany jako: ".$_SESSION['user'];//." z hasłem: ". $_SESSION['password'];
-    }else{
-        echo "<br>NIE ZALOGOWANY";
-    }
-}
+//if(isset($_SESSION['log'])){
+//    if($_SESSION['log'] == true){
+//        echo "<br>Zalogowany jako: ".$_SESSION['user'];//." z hasłem: ". $_SESSION['password'];
+//    }else{
+//        echo "<br>NIE ZALOGOWANY";
+//    }
+//}
 
 //if (isset($_POST['clear'])){
 //    echo "<br>".__LINE__."/ 1 ISSET POST Clear";
@@ -33,8 +33,6 @@ if(isset($_SESSION['log'])){
 //    $_SESSION['bad']=0;
 //}
 
-
-//if(true){
 if($_SESSION['log'] == true ){   
     
  if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
@@ -46,7 +44,7 @@ if($_SESSION['log'] == true ){
          $score = new Score();
          $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
          $score->saveScoreData();
-//         $score->getScoresOfUser($_SESSION['user']);
+
          $_SESSION['arrOfAnsw'] = array();
          $_SESSION['good']=0;
          $_SESSION['bad']=0;
@@ -62,7 +60,7 @@ if($Word = new Ord()){
 $max = $Word->getLastId();
 
 $rand =  mt_rand(1, $max); // wybór słowa
-echo "<br>".__LINE__." / Słowo(Rand):".$rand;
+//echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 
 //$rand = 254;  // For test - fixed ID of word; 
 
@@ -101,85 +99,25 @@ echo "<tr>"
         }
             echo      "<input id=check type=hidden name=check value='".$testTab[3]."'>"
                     ."</td>"
+                    ."<td></td>"
                 ."</tr>";
         
-
-
-//    echo "<br>ta tablica:";
-//    $tempArrOfAnsw = array($testTab[0], $testTab[1], $testTab[2], $testTab[3]);
-//    array_push($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
-//    var_dump($_SESSION['arrOfAnsw']);
-//    
-//    echo "<br>Po tablicy";
-
-
-//echo "<tr><td>Twoja odpowiedź:</td><td><textarea rows=2 cols=30 name=try>Podaj odpowiedź</textarea></td></tr>";
-
-echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test value=Sprawdź></td>"
+echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test value=Odpowiedz></td>";
+echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
 //echo "<tr><td colspan=3></td><td><button id=btn_submit >Sprawdź</button></td>"
     ."</form>"
     ."</table>";
 
-?><script>
-//    var good=0;
-//    var bad=0;
-    
-//    $(document).ready(function(){
-//        $('#btn_sub_01').click(function(){
-//            $('#tr_scor').append("<tr id='tr'><td>Ala</td><td>Vala</td></tr>");
-//        })
-//    });
-    
-//    $(document).ready(function(){
-//        $("#btn_submit").click(function(){
-////            $("#testForm").submit(function(){
-//                var check = $("#check").val();
-//                var traj = $("#try").val();
-//                alert(check+"/"+traj);
-//                if(check == traj){
-//                    good++;
-//                }else{
-//                    bad++;
-//                };
-//                 alert("good: "+good+"bad: "+bad);
-//                all = good+bad;
-//                $("#good").html(good);
-//                $("#bad").html(bad);
-//                $("#all").html(all);
-                
-////                location.reload();
-////            });
-//        });
-//        $("#btn_end").click(function(){
-//            alert("END");
-//            $.ajax({
-//                type     : "POST",
-//                url      : "test.php",
-//                data     : {
-//                            ending : 'Marcin'
-//                },
-//                success : function(msg) {
-//                        //ten fragment wykona się po POMYŚLNYM zakończeniu połączenia
-//                        //msg zawiera dane zwrócone z serwera
-////                        alert("success: "+msg);
-//                },
-//                complete : function(r) {
-//                        //ten fragment wykona się po ZAKONCZENIU połączenia
-//                        //"r" to przykładowa nazwa zmiennej, która zawiera dane zwrócone z serwera
-//                        alert("complete: "+r);
-//                },
-//                error:    function(error) {
-//                        //ten fragment wykona się w przypadku BŁĘDU
-//                        alert("ERROR: "+error);
-//                }
-//            });
-//        });
-//    });
-</script>
-<?php
+//if(isset($_POST['test']))
+//    echo $_POST['test'];
+//
+//if(isset($_POST['avoid']))
+//    echo $_POST['avoid'];
+//
+//
 
-if(isset($_POST['test'])){
-   
+if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
+
     $arr = explode(', ',$_POST['check']);
     $try = $_POST['try'];
     
@@ -198,8 +136,7 @@ if(isset($_POST['test'])){
             $wordInArr = true;
             
         }else{
-//            echo "<br>Nie pasuje!";
-           
+//            echo "<br>Nie pasuje!";       
         }
     }
     
@@ -230,11 +167,11 @@ if(isset($_POST['test'])){
     
     unset($_POST['test']);
 }      
-    
-    
-
-else{
-//    echo "<br>NIE JEST POST?GET";
+else if(isset($_POST['avoid'])){
+//    echo "<br>JEST AVOID!!!";
+    $temp_scor = "BRAK ODPOWIEDZI!!!";
+    $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], "-", $temp_scor );
+    array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
 }
 
 if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
@@ -244,7 +181,7 @@ if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
             "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
 }
  if(isset($_SESSION['scoresOfUsr'])){
-     echo "<br><b>Dotychczasowe wyniki:</b><br>";
+     echo "<br><br><b>Wcześniejsze wyniki:</b><br>";
      echo "<span class=red>Good: <b>".$_SESSION['scoresOfUsr'][0]."</b></span>/<span class=red>Bad: <b>".$_SESSION['scoresOfUsr'][1]."</b></span>";
  }else{
      echo "<br> NIE MA SESJA SCORE";
@@ -253,22 +190,6 @@ if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
 $score = new Score();
 $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
 
-//if(isset($_POST)){
-//    echo "<br>Z post:";
-//    var_dump($_POST);
-//    $ending = $_POST['ending'];
-//    echo $ending;
-//}
-
-//while (!$_POST['ending']){
-//    echo "1, ";
-//}
-
-//echo "<br>SESS ala: ".$_SESSION['ala'];
-//$_SESSION['test'] +=1;
-
-//echo "<br>_SESSION['test']".$_SESSION['test'];
-
 ?>
 <form action="" method="post">
     <input id=clear name="clear" type="submit" value="Clear score">
@@ -276,20 +197,12 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
 
 <br>
 <button onclick="window.location.href='loger.php'">Wyloguj</button>
-<!--
-<table>
-    <tr id = "tr_scor">
-        <th>Dobre</th>
-        <th>Złe</th>
-    </tr>
-    <tr id="tr">
-        <td>Ala</td>
-        <td>VAla</td>
-    </tr>
-</table>-->
+
 <?php
+
     // Prezentacja wyników już osiągnietych!
     echo "<h3> Twoje dotychczasowe odpowiedzi: </h3>";
+
     foreach ($_SESSION['arrOfAnsw'] as $key) {
         echo "<p>";     
 //        echo "Pytanie: Do ".t($key[0])." ( ".$key[1]." ) podaj ".t($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
@@ -297,7 +210,7 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
             echo "Pytanie: To jest ".t($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) podaj ".t($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
         else
             echo "Pytanie: To jest ".t($key[1])." ( <span class=green>".$key[2]."</span> ) podaj ".t($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
-        echo "</p>";
+            echo "</p>";
     }
 
 } else {

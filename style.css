@@ -94,6 +94,14 @@ span.green {
 color:green;
 }
 
+div.divLog {
+    background: whitesmoke;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 5px;
+    border: 1px #516ca3 solid;
+}
 
 div.guziki {
 position:fixed;

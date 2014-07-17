@@ -12,6 +12,19 @@ include 'DB_Connection.php';
 $title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
+
+
+    if(isset($_SESSION['log'])){
+    if($_SESSION['log'] == true){
+        echo "<div class=divLog>  Zalogowany jako: ".$_SESSION['user']."</div>";//." z hasłem: ". $_SESSION['password'];
+    }else{
+        echo "<br>NIE ZALOGOWANY";
+    }
+}else{
+    echo "KUPA";
+}
+
+
 ?>
     <script>
 //        $(document).ready(function(){

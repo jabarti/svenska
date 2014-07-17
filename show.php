@@ -19,10 +19,6 @@ $word = new Ord();
 $mr = $word->getDBAll();
 //$mr = $word->getAllArr();
 
-
-
-
-
 $SQL = sprintf("SELECT * FROM `ord`;");
 //echo $SQL;
 $mq = mysql_query($SQL);
