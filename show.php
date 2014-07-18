@@ -15,6 +15,8 @@ include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
 
+if($_SESSION['log'] == true ){
+
 $word = new Ord();
 $mr = $word->getDBAll();
 //$mr = $word->getAllArr();
@@ -83,3 +85,7 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
        echo "</tr>" ;
 }
 echo "</table>";
+
+} else {
+    require 'loger.php';
+}

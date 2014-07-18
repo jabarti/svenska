@@ -142,4 +142,4 @@ catch(Exception $ex){
 //    $_SESSION['test']=8;
 
 
-echo "<br>_SESSION['log']:".$_SESSION['log'];
+//echo "<br>_SESSION['log']:".$_SESSION['log'];

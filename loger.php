@@ -52,7 +52,7 @@ if(isset($_POST) || isset($_GET)){
     if($_POST['user']==$Usr_name  && sha1($_POST['password'])==$Usr_pass){
 //    if(($_POST['user']=='Anetka' || $_POST['user']=='Barti') && $_POST['password']=='svenska'){
 //    if($_GET['user']=='Anetka' && $_GET['password']=='svenska'){
-        echo "<br>Jest w TRU: ".$_POST['user']." / ".$_POST['password'];
+//        echo "<br>Jest w TRU: ".$_POST['user']." / ".$_POST['password'];
         $_SESSION['log'] = true;
         $_SESSION['user'] = $_POST['user'] ? $_POST['user'] : $_GET['user'];
         $_SESSION['password'] = $_POST['password'] ? $_POST['password'] : $_GET['password'];
@@ -61,7 +61,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['bad']=0;
         $score = new Score();
         $_SESSION['scoresOfUsr'] = $score->getScoresOfUser($_SESSION['user']);
-        echo "<p class=red><b>".$_SESSION['scoresOfUsr'][0]."/".$_SESSION['scoresOfUsr'][1]."</b></p>";
+//        echo "<p class=red><b>".$_SESSION['scoresOfUsr'][0]."/".$_SESSION['scoresOfUsr'][1]."</b></p>";
         header("Location: ".$_SESSION['ref']);
     }else{
 //        echo "<br>// faktyczne wylogowanie!!!!!!!!!!!!";
