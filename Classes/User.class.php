@@ -56,7 +56,13 @@ class User {
         $SQL = sprintf("SELECT id FROM `".$this->table."` WHERE user=\"".$user."\";");
 //        echo "<br>SQL".$SQL;
         $mq = mysql_query($SQL);
-        $mr = mysql_result($mq,0);
+        if(mysql_affected_rows()){
+            echo '<br>mysql_affected_rows == true';
+            $mr = mysql_result($mq,0);
+        }else{
+            echo '<br>mysql_affected_rows == true';
+            $mr = false;
+        }
 //        echo "<br>User ID:".$mr;
         return $mr;
     }
