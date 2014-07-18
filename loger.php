@@ -14,18 +14,23 @@ $title = 'Logger';
 include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
-if ($_SERVER[HTTP_REFERER] != "http://www.bartilevi.pl/Svenska/loger.php"){
-    $_SESSION['ref'] = $_SERVER[HTTP_REFERER];
+if ($_SERVER['HTTP_REFERER'] != "http://www.bartilevi.pl/Svenska/loger.php"){
+    $_SESSION['ref'] = $_SERVER['HTTP_REFERER'];
 }
 echo "Przybywasz z: ".$_SESSION['ref'];
 
 //$user_try = new User();
 //    echo "<br>set data user: "; var_dump($user_try->setData("Lolas", "svenska"));
 //    echo "<br>get data user: "; var_dump($user_try->getUserByName("Lolas"));
-    
+ 
+$Usr_name ='';
+$Usr_pass ='';
+
+
 if(isset($_POST) || isset($_GET)){
 //    echo "<br>POST1: ";var_dump($_POST);
 //    echo "<br>SESS1: ";var_dump($_SESSION);
+    
     
    if(isset($_POST['user'])){
         $user = new User();
@@ -39,8 +44,7 @@ if(isset($_POST) || isset($_GET)){
 //            echo "<br>DB user pass: ".$Usr_pass;
         }   
    } 
-
-    
+   
     if($_POST['user']==$Usr_name  && sha1($_POST['password'])==$Usr_pass){
 //    if(($_POST['user']=='Anetka' || $_POST['user']=='Barti') && $_POST['password']=='svenska'){
 //    if($_GET['user']=='Anetka' && $_GET['password']=='svenska'){

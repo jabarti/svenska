@@ -217,6 +217,11 @@ class Ord {
                                     'wymowa'); 
                     break;
                 
+                case 'interjection':    // wykrzyknik
+                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans',  
+                                    'wymowa'); 
+                    break;
+                
                 case 'wyrazenie':
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'wymowa'); 
@@ -288,6 +293,11 @@ class Ord {
                     break;
                 
                 case 'conjunction':    // spójnik
+                    $tab = Array(   'id_ord', 'trans',  
+                                    ); 
+                    break;
+                
+                case 'interjection':    // wykrzyknik
                     $tab = Array(   'id_ord', 'trans',  
                                     ); 
                     break;
@@ -364,6 +374,11 @@ class Ord {
                 
                 case 'conjunction':    // spójnik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans',  
+                                ); 
+                    break;
+                
+                case 'interjection':    // wykrzyknik
+                    $tab = Array(   'id_ord', 'typ', 'trans',  
                                 ); 
                     break;
                 
@@ -626,6 +641,17 @@ class Ord {
                 }
                 
                 $licz++;
+            }
+        }
+        
+        public function getOrdArrByType($typ){
+            $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE `typ` = '".$typ."';");
+            echo "<br>SQL: $SQL";
+            $mq = mysql_query($SQL);
+            
+            while($row = mysql_fetch_assoc($mq)){
+                echo "<br>======================================<br>";
+                var_dump($row);
             }
         }
 }

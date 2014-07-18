@@ -105,6 +105,7 @@ $(document).ready(function(){
                 break;
                 
             case 'wyrazenie':    
+            case 'interjection':
             case 'conjunction':
                 $("#czasownik").hide();
                 $("#rzeczownik").hide();
@@ -177,6 +178,7 @@ if($_SESSION['log'] == true ){
                         <option value="preposition">przyimek</option>
                         <option value="pronoun">zaimek</option>
                         <option value="conjunction">spójnik</option>
+                        <option value="interjection">wykrzyknik</option>
                         <option value="wyrazenie">wyrażenie</option>
                         <option value="???">???</option>
                     </select>

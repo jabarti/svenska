@@ -80,9 +80,9 @@ require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'localization.inc.php');
 if (!AUTO_LOGIN) { 
 	require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'auth.inc.php');
 }/**/
-mysql_query('SET NAMES utf8');
+//mysql_query('SET NAMES utf8');
 
-mb_internal_encoding('UTF-8');
+//mb_internal_encoding('UTF-8');
 
 /*** Ed stuff: ***/
 define('DATA_DIR', BASE_PATH);

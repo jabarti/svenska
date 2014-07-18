@@ -47,6 +47,7 @@ echo "
                         <option value='preposition'>przyimek</option>
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
+                        <option value='interjection'>wykrzyknik</option>
                         <option value='wyrazenie'>wyrażenie</option>
                         <option value='empty'>puste</option>
         </select>
@@ -232,6 +233,7 @@ while($row = mysql_fetch_assoc($mq)){
                         <option value='preposition'>przyimek</option>
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
+                        <option value='interjection'>wykrzyknik</option>
                         <option value='wyrazenie'>wyrażenie</option>
                         <option value='???'>???</option>
                 </select>";        

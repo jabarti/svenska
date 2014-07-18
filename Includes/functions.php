@@ -104,6 +104,9 @@ function t($var){
         case 'conjunction':
             return "spójnik";
             break;
+        case 'interjection':
+            return "wykrzyknik";
+            break;
         case 'wyrazenie':
             return "wyrażenie";
             break;

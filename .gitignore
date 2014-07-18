@@ -8,6 +8,7 @@
 *.zip
 *.z7
 #.sql
+errors/error_log*
 nbproject
 DB_Connection.php
 ExternalResources/Oracle_modeler

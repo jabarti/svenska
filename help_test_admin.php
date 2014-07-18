@@ -10,7 +10,7 @@
  ***************************************************/
 require_once "common.inc.php";
 include 'DB_Connection.php';
-$title = 'Svenska | Show/printer';
+$title = 'Svenska | Help_Adm';
 include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
@@ -40,6 +40,9 @@ $max = $Word->getLastId();
 
 
 $Word->findEmptyOrdId();
+
+
+$Word->getOrdArrByType("pronoun");
 
 } else {
     require 'loger.php';
