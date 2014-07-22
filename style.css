@@ -96,16 +96,18 @@ color:green;
 
 div.divLog {
     background: whitesmoke;
-    position: absolute;
-    top: 5px;
+    position: fixed;
+    bottom: 5px;
     right: 5px;
     border-radius: 5px;
     border: 1px #516ca3 solid;
+    padding: 5px;
+    width:180px;
 }
 
 div.guziki {
 position:fixed;
-top:30px;
+top:5;
 right:5px;
 background: red;
 width:180px;

@@ -33,7 +33,7 @@ include 'buttons.php';
 //    $_SESSION['bad']=0;
 //}
 
-if($_SESSION['log'] == true ){   
+if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     
  if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
  $_SESSION['good']=0;
@@ -197,7 +197,7 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
 </form>
 
 <br>
-<button onclick="window.location.href='loger.php'">Wyloguj</button>
+<!--<button onclick="window.location.href='loger.php'">Wyloguj</button>-->
 
 <?php
 

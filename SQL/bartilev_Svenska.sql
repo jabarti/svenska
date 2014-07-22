@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 18 Lip 2014, 12:38
+-- Generation Time: 18 Lip 2014, 17:11
 -- Server version: 5.5.37-cll
 -- PHP Version: 5.4.23
 
@@ -52,7 +52,7 @@ INSERT INTO `login` (`id`, `user`, `password`, `data`) VALUES
 CREATE TABLE IF NOT EXISTS `ord` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_ord` varchar(145) NOT NULL,
-  `typ` enum('noun','verb','hjalp_verb','adjective','adverb','preposition','pronoun','conjunction','wyrazenie','???') NOT NULL,
+  `typ` enum('noun','verb','hjalp_verb','adjective','adverb','preposition','pronoun','conjunction','interjection','wyrazenie','???') NOT NULL,
   `rodzaj` enum('ett','en','att') DEFAULT NULL,
   `trans` varchar(145) NOT NULL,
   `infinitive` varchar(45) DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `ord` (
   `wymowa` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`id_ord`),
   UNIQUE KEY `id_ord_UNIQUE` (`id_ord`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=264 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=283 ;
 
 --
 -- Zrzut danych tabeli `ord`
@@ -344,7 +344,26 @@ INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `pres
 (260, 'autobus', 'noun', 'en', 'buss', '', '', '', '', '', '', '', 'en buss', 'bussen', 'bussar', 'bussarna', '', '', '', '', '', '', ''),
 (261, 'lotnisko', 'noun', 'en', 'flygplats', '', '', '', '', '', '', '', 'en flygplats', 'flygplatsen', 'flygplatser', 'flygplatserna', '', '', '', '', '', '', ''),
 (262, 'Czy mogÄ dostaÄ coĹ do picia?', 'wyrazenie', '', 'kan jag fĂĽ nĂĽgot att dricka?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(263, 'klejnot, ozdoba', 'noun', 'ett', 'smycke', '', '', '', '', '', '', '', 'ett smycke', 'smycket', 'smycken', 'smyckena', '', '', '', '', '', '', '');
+(263, 'klejnot, ozdoba', 'noun', 'ett', 'smycke', '', '', '', '', '', '', '', 'ett smycke', 'smycket', 'smycken', 'smyckena', '', '', '', '', '', '', ''),
+(264, 'co wziÄĹeĹ?, co wziÄĹaĹ?', 'wyrazenie', '', 'vad tog du med?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(265, 'piosenkarka, piosenkarz, Ĺpiewaczka, Ĺpiewak', 'noun', 'en', 'sĂĽngerska', '', '', '', '', '', '', '', 'en sĂĽngerska, en sĂĽngare', 'sĂĽngerskan, sĂĽngaren, sĂĽngarn', 'sĂĽngerskor, sĂĽngare', 'sĂĽngerskorna, sĂĽngarna', '', '', '', '', '', '', 'songerszka'),
+(266, 'tancerka, tancerz', 'noun', 'en', 'dansare', '', '', '', '', '', '', '', 'en dansare', 'dansaren', 'dansare', 'dansarna', '', '', '', '', '', '', ''),
+(267, 'muzyk', 'noun', 'en', 'musiker', '', '', '', '', '', '', '', 'en musiker', 'musikern', 'musiker', 'musikerna', '', '', '', '', '', '', ''),
+(268, 'pianino, fortepian', 'noun', 'ett', 'piano', '', '', '', '', '', '', '', 'ett piano', 'pianot', 'pianon', 'pianona', '', '', '', '', '', '', ''),
+(269, 'zy, niedobry,, kiepski', 'adjective', '', 'dĂĽlig', '', '', '', '', '', '', '', '', '', '', '', 'dĂĽligt', 'dĂĽlig', 'dĂĽliga', 'dĂĽlig', 'sĂ¤mre, vĂ¤rre', 'sĂ¤mst, vĂ¤rst', 'dolig'),
+(270, 'dobry', 'adjective', '', 'bra', '', '', '', '', '', '', '', '', '', '', '', 'bra', 'bra', 'bra', 'bra', 'bĂ¤ttre', 'bĂ¤st', 'bro'),
+(271, 'pogoda', 'noun', 'ett', 'vĂ¤der', '', '', '', '', '', '', '', 'ett vĂ¤der', 'vĂ¤dret;', '', '', '', '', '', '', '', '', 'weder'),
+(272, 'zajÄty', 'adjective', '', 'upptagen', '', '', '', '', '', '', '', '', '', '', '', 'upptaget', 'upptagen', 'upptagna', 'upptagen', 'upptagnare', 'upptagnast', ''),
+(273, 'wolny, swobodny, niezajÄty', 'adjective', '', 'ledig', '', '', '', '', '', '', '', '', '', '', '', 'ledigt', 'ledige', 'lediga', 'ledig', '', '', ''),
+(274, 'przepraszam', 'interjection', '', 'fĂśrlĂ¤t, ursĂ¤kta', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'ferlot, urszekta'),
+(275, 'wybaczaÄ, uniewinniaÄ', 'verb', 'att', 'ursĂ¤kta', 'att ursĂ¤kta', 'ursĂ¤ktar', 'ursĂ¤ktade', 'ursĂ¤ktat', 'ursĂ¤kta!', 'ursĂ¤ktande', 'ursĂ¤ktad', '', '', '', '', '', '', '', '', '', '', 'urszekta'),
+(276, 'przebaczenie, usprawiedliwienie', 'noun', 'en', 'ursĂ¤kt', 'en ursĂ¤kt', '', 'ursĂ¤kten', 'ursĂ¤kter', 'ursĂ¤kterna', '', '', 'en ursĂ¤kt', 'ursĂ¤kten', 'ursĂ¤kter', 'ursĂ¤kterna', '', '', '', '', '', '', 'urszakt'),
+(277, 'nic siÄ nie staĹo', 'wyrazenie', '', 'det gĂśr inget', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(278, 'niestety', 'adverb', '', 'tyvĂ¤rr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(279, 'nie, nie wolno, nikt, Ĺźaden', 'adjective', '', 'ingen', '', '', '', '', '', '', '', '', '', '', '', 'inget', 'ingen', 'inga', '', '', '', ''),
+(280, 'MoĹźecie przyjĹÄ do naszego domu na kolacjÄ w piÄtek?', 'wyrazenie', '', 'Kan ni komma hem till oss pĂĽ middag pĂĽ fredag?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(281, 'Czy wiesz, co to oznacza?', 'wyrazenie', '', 'Vet du vad det hĂ¤r betyder?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(282, 'Niestety nie wiem co to znaczy', 'wyrazenie', '', 'TyvĂ¤rr vet jag inte vad det hĂ¤r betyder', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 

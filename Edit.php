@@ -24,10 +24,10 @@ function Menu(){
 </script>    
     
 <?php
-if($_SESSION['log'] == true ){
+if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     
- echo "<br>
-<button onclick=\"window.location.href='loger.php'\">Wyloguj</button>   ";
+// echo "<br>
+//<button onclick=\"window.location.href='loger.php'\">Wyloguj</button>   ";
     
 echo "<form action='' method=post>
         <select name='sort'>

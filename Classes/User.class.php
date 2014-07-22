@@ -39,7 +39,7 @@ class User {
 //            echo "<br>SQL INSERT user: ".$SQL;
             $mq = mysql_query($SQL);
             if(mysql_affected_rows()){
-                echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" added.";
+//                echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" added.";
                 return true;
             }else{
                 echo "<br>ERROR";
@@ -57,10 +57,10 @@ class User {
 //        echo "<br>SQL".$SQL;
         $mq = mysql_query($SQL);
         if(mysql_affected_rows()){
-            echo '<br>mysql_affected_rows == true';
+//            echo '<br>mysql_affected_rows == true';
             $mr = mysql_result($mq,0);
         }else{
-            echo '<br>mysql_affected_rows == true';
+//            echo '<br>mysql_affected_rows == true';
             $mr = false;
         }
 //        echo "<br>User ID:".$mr;
@@ -73,12 +73,30 @@ class User {
         
         if(mysql_affected_rows()){
             $row = mysql_fetch_row($mq);
-            echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" loaded.";
+//            echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" loaded.";
             return $row;
         }else{
             echo "<br>ERROR: User \"<span class=blue>".$user."</span>\" NOT added.";
             return false;
         }
     }  
+    
+    public function getUsersNames(){
+        $SQL = sprintf("SELECT `user` FROM `".$this->table."`;");
+//        echo "<br>===================USERs================<br>";
+//        echo "<br>SQL getUsersNames: ".$SQL;
+        $mq = mysql_query($SQL);
+        $arr = array();
+        while($us = mysql_fetch_row($mq)){
+            array_push($arr, $us['0']);
+        }
+                
+//        echo "<br>arr:";
+        var_dump($arr);
+        
+//        echo "<br>Users:".$arr[0]."/".$arr[1];
+        
+        return $arr;
+    }
 
 }

@@ -654,5 +654,75 @@ class Ord {
                 var_dump($row);
             }
         }
+        
+        public function setSQLstringToCode($string){
+            
+            $str = str_replace('ą','?01?', $string);
+            $str = str_replace('ć','?02?', $str);
+            $str = str_replace('ę','?03?', $str);
+            $str = str_replace('ł','?04?', $str);
+            $str = str_replace('ń','?05?', $str);
+            $str = str_replace('ó','?06?', $str);
+            $str = str_replace('ś','?07?', $str);
+            $str = str_replace('ź','?08?', $str);
+            $str = str_replace('ż','?09?', $str);
+            
+            $str = str_replace('Ą','?10?', $str);
+            $str = str_replace('Ć','?12?', $str);
+            $str = str_replace('Ę','?13?', $str);
+            $str = str_replace('Ł','?14?', $str);
+            $str = str_replace('Ń','?15?', $str);
+            $str = str_replace('Ó','?16?', $str);
+            $str = str_replace('Ś','?17?', $str);
+            $str = str_replace('Ź','?18?', $str);
+            $str = str_replace('Ż','?19?', $str); 
+            
+            $str = str_replace('å','?20?', $str);
+            $str = str_replace('ö','?22?', $str);
+            $str = str_replace('ä','?23?', $str);
+           
+            $str = str_replace('Å','?24?', $str);
+            $str = str_replace('Ö','?25?', $str);
+            $str = str_replace('Ä','?26?', $str);
+            
+            echo '<br>String to Code:'.$string;
+            echo '<br>Str Aftr Code:'.$str;
+            return $str;
+        }
+        
+        public function setSQLstringDeCode($string){
+            
+            $str = str_replace('?01?', 'ą', $string);
+            $str = str_replace('?02?', 'ć', $str);
+            $str = str_replace('?03?', 'ę', $str);
+            $str = str_replace('?04?', 'ł', $str);
+            $str = str_replace('?05?', 'ń', $str);
+            $str = str_replace('?06?', 'ó', $str);
+            $str = str_replace('?07?', 'ś', $str);
+            $str = str_replace('?08?', 'ź', $str);
+            $str = str_replace('?09?', 'ż', $str);
+                                       
+            $str = str_replace('?10?', 'Ą', $str);
+            $str = str_replace('?12?', 'Ć', $str);
+            $str = str_replace('?13?', 'Ę', $str);
+            $str = str_replace('?14?', 'Ł', $str);
+            $str = str_replace('?15?', 'Ń', $str);
+            $str = str_replace('?16?', 'Ó', $str);
+            $str = str_replace('?17?', 'Ś', $str);
+            $str = str_replace('?18?', 'Ź', $str);
+            $str = str_replace('?19?', 'Ż', $str); 
+                                       
+            $str = str_replace('?20?', 'å', $str);
+            $str = str_replace('?22?', 'ö', $str);
+            $str = str_replace('?23?', 'ä', $str);
+                                       
+            $str = str_replace('?24?', 'Å', $str);
+            $str = str_replace('?25?', 'Ö', $str);
+            $str = str_replace('?26?', 'Ä', $str);
+            
+            echo '<br>String to Decode:'.$string;
+            echo '<br>Str Aftr Deode:'.$str;
+            return $str;
+        }
 }
 

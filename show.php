@@ -15,7 +15,7 @@ include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
 
-if($_SESSION['log'] == true ){
+if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 
 $word = new Ord();
 $mr = $word->getDBAll();

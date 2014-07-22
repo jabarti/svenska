@@ -14,15 +14,15 @@ include 'header.php';
 include 'buttons.php';
 
 
-    if(isset($_SESSION['log'])){
-    if($_SESSION['log'] == true){
-        echo "<div class=divLog>  Zalogowany jako: ".$_SESSION['user']."</div>";//." z hasłem: ". $_SESSION['password'];
-    }else{
-        echo "<br>NIE ZALOGOWANY";
-    }
-}else{
-    echo "KUPA";
-}
+//    if(isset($_SESSION['log'])){
+//    if($_SESSION['log'] == true){
+//        echo "<div class=divLog>  Zalogowany jako: ".$_SESSION['user']."</div>";//." z hasłem: ". $_SESSION['password'];
+//    }else{
+//        echo "<br>NIE ZALOGOWANY";
+//    }
+//}else{
+//    echo "KUPA";
+//}
 
 
 ?>
@@ -144,7 +144,7 @@ $(document).ready(function(){
 
     </script>
 <?php 
-if($_SESSION['log'] == true ){
+if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 ?>
 <body onload='start();'>
     <form id='form1' action='index.php' method="POST">
@@ -396,7 +396,7 @@ if(isset($_POST['submit'])){
 
 ?>
     <br>
-<button onclick="window.location.href='loger.php'">Wyloguj</button>
+<!--<button onclick="window.location.href='loger.php'">Wyloguj</button>-->
 </body>
 </html>
 <?php

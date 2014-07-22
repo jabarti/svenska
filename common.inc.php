@@ -120,26 +120,118 @@ catch(Exception $ex){
 //    echo "<br>Translation ERROR";
 //}
 
-//if(!isset($_SESSION['good'])){
-//    $_SESSION['good'] =0;
-//    $_SESSION['bad'] =0;
+if(isset($_SESSION['log'])){
 
-//$_SESSION['ala']  = 'ala';
+    if($_SESSION['log'] == true){
+        echo "<div class=divLog>  Zalogowany jako: ".$_SESSION['user']."";//." z hasłem: ". $_SESSION['password'];
+        echo "<span id=zegar></span><br>";
+        echo "<span id=zegar_log style='visibility: block'></span>";
+        echo "<br><button onclick=\"window.location.href='loger.php'\">Wyloguj</button>";
+        $tim = $_COOKIE['log'];
+        echo "<div id=log_time style='visibility: hidden;'>".$tim."</div>";
+//        echo "<input id=log_time type=hidden value='".$tim."'>";
+        echo "</div>";
+    }else{
+        echo "<div class=divLog> NIE ZALOGOWANY</div>";
+    }
+}else{
+    echo "KUPA";
+}
+?>
+<script>
+var licz = true;
+
+function getTime() 
+{
+    return (new Date()).toLocaleTimeString();
+}
+
+function logTime(){
+    var log_tim_took = document.getElementById("log_time").innerHTML;
+    a = parseInt(log_tim_took *1000);
+    var log_tim = new Date(a);
+    var log_tim2 = new Date(log_tim) ;
+    log_tim2.setHours(log_tim.getHours()-1);
+    log_tim2.setSeconds(log_tim.getSeconds()-8);
+    
+    pres = new Date();
+    
+    rozn_dat = log_tim2 - pres;
+    
+    rozn = new Date(rozn_dat);
+    rozn_str = new Date(rozn).toLocaleTimeString();
+    
+    hou = rozn.getHours();
+    min = rozn.getMinutes();
+    sec = rozn.getSeconds();
+    
+    if (hou>22 || (hou==0 && min == 0 && sec==0)){
+        window.location.href = "loger.php"
+    }    
+    
+    if (hou==0 && min == 0 && sec<10){
+        return("<br>Zostało     <span class=red><b>"+ rozn_str+"</b></span>");
+    }else{
+        return("<br>Zostało     "+ rozn_str);
+    }
+}
+ 
+//wywołanie ma na celu eliminację opóźnienia sekundowego
+document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
+document.getElementById('zegar_log').innerHTML = "do wylogowania: "+logTime();
+ 
+setInterval(function() {
+// logTime();
+    document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
+    document.getElementById('zegar_log').innerHTML = "do wylogowania : "+logTime();
+     
+}, 1000);
+
+</script>    
+<?php
+//if(isset($_COOKIE["test"])){
+//    echo "<br>W isset COOKIE";    
+//    echo "<br>W COOKIE removal:<br>";
+//    foreach ($_COOKIE as $name => $value){
+//       echo "Name: $name => Value: $value <br />";
+//    }
+//
+//    unset($_COOKIE['test']);
+//    unset($_COOKIE['user']);
+//    unset($_COOKIE['time']);
+//    unset($_COOKIE['log']);
+//    
+//    if(isset($_COOKIE['test'])){
+//        echo "<br>1) cookie dalej siedzi";
+//        
+//    }else{
+//        echo "<br>1) cookie wycięte";
+//    }
+//    setcookie('test','',  time()-7200);
+//    setcookie('user','',  time()-7200);
+//    setcookie('time','',  time()-7200);
+//    setcookie('log','',  time()-7200);
+//    if(isset($_COOKIE['test'])){
+//        echo "<br>2) cookie dalej siedzi";
+//    }else{
+//        echo "<br>2) cookie wycięte";
+//    }
+//}else{
+//    echo "<br>W ELSE isset COOKIE";
+//    try{
+//        $usr_name = $_SESSION['user']?$_SESSION['user']:"Noname!";
+////        $czas = date("y-m-d; H:i:s");
+////        echo "Czas: $czas";
+//        setcookie("test", $usr_name, time()+60*10);
+//        setcookie("log", $usr_name, time()+60*10);
+//        try{
+//            setcookie("time", date("y-m-d; H:i:s"), time()+60*10);
+//        }catch(Exception $ex){
+//            echo "<br>ERROR $ex";
+//        }
+////        setcookie("user", "Barti Levi", time()+7200);
+//        echo "<br>COOKIES SET!!";
+//    }catch(Exception $ex){
+//        echo "ERROR:$ex";
+//    }
 //}
-////$_SESSION['views']=0;
-//if(isset($_SESSION['views']))
-//    $_SESSION['views'] = $_SESSION['views']+ 1;
-//else
-//    $_SESSION['views'] = 1;
-
-//echo "views = ". $_SESSION['views']; 
-//echo "<br>_SESSION['good'] = ". $_SESSION['good']; 
-//echo "<br>_SESSION['bad'] = ". $_SESSION['bad']; 
-
-//if(!isset($_SESSION['test']))
-//    $_SESSION['test'] = 0;
-//else
-//    $_SESSION['test']=8;
-
-
-//echo "<br>_SESSION['log']:".$_SESSION['log'];
