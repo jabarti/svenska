@@ -15,9 +15,9 @@ include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
 
-echo "<br>1Przybywasz z: ".$_SESSION['ref'];
+//echo "<br>1Przybywasz z: ".$_SESSION['ref'];
 $match = strpos($_SERVER['HTTP_REFERER'], "loger.php");
-echo "<br>Macz: ".$match."<br>";
+//echo "<br>Macz: ".$match."<br>";
 //if (
 //    $_SERVER['HTTP_REFERER'] != "http://www.bartilevi.pl/Svenska/loger.php" &&
 //    $_SERVER['HTTP_REFERER'] != "http://localhost/svenska_local/loger.php" && 
@@ -26,7 +26,7 @@ echo "<br>Macz: ".$match."<br>";
 if(!$match){
         $_SESSION['ref'] = $_SERVER['HTTP_REFERER'];
     }
-echo "<br>2Przybywasz z: ".$_SESSION['ref'];
+echo "<br>Przybywasz z: ".$_SESSION['ref'];
 
 //$user_try = new User();
 //    echo "<br>set data user: "; var_dump($user_try->setData("Lolas", "svenska"));

@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Struktura tabeli dla tabeli `login`
 --
-
+ 
 CREATE TABLE IF NOT EXISTS `login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(45) NOT NULL,

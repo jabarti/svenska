@@ -7,8 +7,8 @@
 *.rar
 *.zip
 *.z7
-sql/
 *.sql
+SQL
 errors/error_log*
 nbproject
 DB_Connection.php
