@@ -63,19 +63,43 @@ class Ord {
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
                 . "'".$wymowa."');");
-//            echo "<br>INSERT: ".$SQL;
-        
+                   
 //            try{mysql_query($SQL);}
 //                catch(Exception $ex){
 //                echo "ERROE wsadu";
 //            }
         
             if (mysql_query($SQL)){
-                echo "<br>WSADZONE!!!";
+                echo "<br>WSADZONE do ord!!!";
+                
+                $id_LH = $this->getLastId()+1;
+                $id_LH = $this->getId($id_ord);
+//                echo "<br>ID:".$id_LH;
+            
+                $SQL_PLLH = sprintf("INSERT INTO `".$this->table."LH` "
+                    . "(`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `presens`, `past`, "
+                    . "`supine`, `imperative`, `present_participle`, `past_participle`, "
+                    . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
+                    . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
+                    . "`wymowa`) "
+                    . "VALUES "
+                    . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$this->setSQLstringToCode($trans)."','".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."',"
+                    . "'".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
+                    . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
+                    . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
+                    . "'".$this->setSQLstringToCode($wymowa)."');");
+//                 echo "<br>INSERT: ".$SQL_PLLH;
+                if (mysql_query($SQL_PLLH)){
+                    echo "<br>WSADZONE do ordLH!!!";
+                }else{
+                    echo "<br>ERROR wsadu";
+                }
+                
+                
             }else{
                 echo "<br>ERROR wsadu";
             }
-        
+                    
             return true;
         }else{
             echo "<br>ERROR W bazie jest!!";
@@ -685,8 +709,8 @@ class Ord {
             $str = str_replace('Ö','?25?', $str);
             $str = str_replace('Ä','?26?', $str);
             
-            echo '<br>String to Code:'.$string;
-            echo '<br>Str Aftr Code:'.$str;
+//            echo '<br>String to Code:'.$string;
+//            echo '<br>Str Aftr Code:'.$str;
             return $str;
         }
         
@@ -720,8 +744,8 @@ class Ord {
             $str = str_replace('?25?', 'Ö', $str);
             $str = str_replace('?26?', 'Ä', $str);
             
-            echo '<br>String to Decode:'.$string;
-            echo '<br>Str Aftr Deode:'.$str;
+//            echo '<br>String to Decode:'.$string;
+//            echo '<br>Str Aftr Deode:'.$str;
             return $str;
         }
 }

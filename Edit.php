@@ -217,7 +217,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
 //                    . "<input name=".$k." value='".$v."'>"
             echo "<select name='".$k."'>
-                        <option value=".$v.">".t($v)."</option>
+                        <option value=".$v.">".trans($v)."</option>
                         <option value='noun'>rzeczownik</option>
                         <option value='verb'>czasownik</option>
                         <option value='hjalp_verb'>czas. posiłkowy</option>
@@ -260,6 +260,7 @@ if(isset($_POST)){
         print_r($serial);
     
         $sql_text = "UPDATE `ord` SET ";
+        $sql_textPLLH = "UPDATE `ordLH` SET ";
         $id = '';
         $id_ord = '';
 //        echo  '<br>1) '.$sql_text;
@@ -276,17 +277,28 @@ if(isset($_POST)){
 //                    break;
                 case 'wymowa':
                     $sql_text .= "`".$k."`='".$v."'";
+                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
                     break;
                 default:
                     $sql_text .= "`".$k."`='".$v."',";
+                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
                     break;
             }
         }
         $sql_text .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
-//        echo '<br>SQL: '.$sql_text;
+        $sql_textPLLH .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
+//        $sql_textPLLH = str_replace($this->table."LH", $this->table, $sql_text);
+        
+        echo '<br>SQL: '.$sql_text;
+        echo '<br>SQL_PLLH: '.$sql_textPLLH;
 
         if( mysql_query($sql_text)){
             ?><script>//alert("WESZŁO");</script><?php
+            if( mysql_query($sql_textPLLH)){
+                ?><script>alert("WESZŁO do PLLH");</script><?php
+            }else{
+                ?><script>alert("NIE WESZŁO do PLLH");</script><?php
+            }
             header("Location: Edit.php");
         }else{
             ?><script>//alert("NIE WESZŁO");</script><?php

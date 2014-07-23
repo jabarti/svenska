@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 19 Lip 2014, 10:49
+-- Generation Time: 23 Lip 2014, 12:20
 -- Server version: 5.5.37-cll
 -- PHP Version: 5.4.23
 
@@ -25,6 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Struktura tabeli dla tabeli `ord`
 --
+DROP table `ord`;
 
 CREATE TABLE IF NOT EXISTS `ord` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `ord` (
   `wymowa` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`id_ord`),
   UNIQUE KEY `id_ord_UNIQUE` (`id_ord`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=284 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Zrzut danych tabeli `ord`
@@ -129,7 +130,7 @@ INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `pres
 (68, 'zamarzaÄ', 'verb', 'att', 'frysa', 'att frysa', 'fryser', 'frĂśs', 'frusit', 'frys!', 'frysande', 'frusen', '', '', '', '', '', '', '', '', '', '', ''),
 (69, 'caĹowaÄ', 'verb', 'att', 'pussa', 'att pussa', 'pussar', 'pussade', 'pussat', 'pussa!', 'pussande', 'pussad', '', '', '', '', '', '', '', '', '', '', ''),
 (70, 'kiedy, gdy', 'conjunction', '', 'nĂĽr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nar'),
-(71, 'kupowaÄ', 'verb', 'att', 'kĂśpa', 'att kĂśpa', 'kĂśper', 'kĂśpte', 'kĂśpt', 'kĂśpa!', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(71, 'kupowaÄ, kupiÄ', 'verb', 'att', 'kĂśpa', 'att kĂśpa', 'kĂśper', 'kĂśpte', 'kĂśpt', 'kĂśpa!', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (72, 'dla, przed, zanim', 'preposition', '', 'fĂśr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (73, 'szpital', 'noun', 'ett', 'sjukhus', '', '', '', '', '', '', '', 'ett sjukhus', 'sjukhuset', 'sjukhus', 'sjukhusen', '', '', '', '', '', '', 'szjukhus'),
 (74, 'pĹaciÄ, zapĹaciÄ', 'verb', 'att', 'betala', 'att betala', 'betalar', 'betalade', 'betalat, betalt', 'betala!', 'betalande', 'betalad', '', '', '', '', '', '', '', '', '', '', ''),
@@ -341,7 +342,65 @@ INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `pres
 (280, 'MoĹźecie przyjĹÄ do naszego domu na kolacjÄ w piÄtek?', 'wyrazenie', '', 'Kan ni komma hem till oss pĂĽ middag pĂĽ fredag?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (281, 'Czy wiesz, co to oznacza?', 'wyrazenie', '', 'Vet du vad det hĂ¤r betyder?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (282, 'Niestety nie wiem co to znaczy', 'wyrazenie', '', 'TyvĂ¤rr vet jag inte vad det hĂ¤r betyder', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(283, 'Ä, Ä, Ä, Ĺ, Ĺ, Ăł, Ĺ,', '', '', 'ĂĽ, Ăś, Ă¤, Ă, Ă, Ă', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Ä,Ä,Ä,Ĺ,Ĺ,Ă,Ĺ');
+(283, 'zÄb, zÄby', 'noun', 'en', 'tand', '', '', '', '', '', '', '', 'en tand', 'tanden', 'tĂ¤nder', 'tĂ¤nderna', '', '', '', '', '', '', ''),
+(284, 'szczotka', 'noun', 'en', 'borste', '', '', '', '', '', '', '', 'en borste', 'borsten', 'borstar', 'borstarna', '', '', '', '', '', '', 'borszte'),
+(285, 'szczoteczka do zÄbĂłw', 'noun', 'en', 'tandborste', '', '', '', '', '', '', '', 'en tandborste', 'tandborsten', 'tandborstar', 'tandborstarna', '', '', '', '', '', '', 'tandborszte'),
+(286, 'pasta do zÄbĂłw', 'noun', 'en', 'tandkrĂ¤m', '', '', '', '', '', '', '', 'en tandkrĂ¤m', 'tandkrĂ¤men', 'tandkrĂ¤mer	', 'tandkrĂ¤merna', '', '', '', '', '', '', 'tandkrem'),
+(287, 'budziÄ kogoĹ', 'verb', 'att', 'vĂ¤cka', 'att vĂ¤cka', 'vĂ¤cker', 'vĂ¤ckte', 'vĂ¤ckt', 'vĂ¤ck!', 'vĂ¤ckande', 'vĂ¤ckt', '', '', '', '', '', '', '', '', '', '', 'veka'),
+(288, 'budziÄ siÄ', 'verb', 'att', 'vakna', 'att vakna', 'vaknar', 'vaknade', 'vaknat', 'vakna!', 'vaknande', 'vaknad', '', '', '', '', '', '', '', '', '', '', 'vokna'),
+(289, 'zmywaÄ naczynia, zmywaÄ', 'verb', 'att', 'diska', 'att diska', 'diskar', 'diskade', 'diskat', 'diska!', 'diskande', 'diskad', '', '', '', '', '', '', '', '', '', '', ''),
+(290, 'mokre, mokry, mokra', 'adjective', '', 'blĂśt', '', '', '', '', '', '', '', '', '', '', '', 'blĂśtt', 'blĂśte', 'blĂśta', 'blĂśt', 'blĂśtare', 'blĂśtaste, blĂśtast', 'blot'),
+(291, 'suchy, suche, sucha', 'adjective', '', 'torr', '', '', '', '', '', '', '', '', '', '', '', 'torrt', 'torre', 'torra', 'torr', 'torrare', 'torraste', ''),
+(292, 'dlaczego', 'conjunction', '', 'varfĂśr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(293, 'dlatego', 'conjunction', '', 'dĂ¤rfĂśr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(294, 'przeĹcieradĹo', 'noun', 'ett', 'lakan', '', '', '', '', '', '', '', 'ett lakan', 'lakanet', 'lakan', 'lakanen', '', '', '', '', '', '', ''),
+(295, 'szczotkowaÄ', 'verb', 'att', 'borsta', 'att borsta', 'borstar', 'borstade', 'borstat', 'borsta!', '', '', '', '', '', '', '', '', '', '', '', '', 'borszta'),
+(296, 'wĹosy', 'noun', 'ett', 'hĂĽr', '', '', '', '', '', '', '', 'ett hĂĽr', 'hĂĽret', 'hĂĽr', 'hĂĽren', '', '', '', '', '', '', 'chor'),
+(297, 'poduszka', 'noun', 'en', 'kudde', '', '', '', '', '', '', '', 'en kudde', 'kudden', 'kuddar', 'kuddarna', '', '', '', '', '', '', ''),
+(298, 'mleko', 'noun', 'en', 'mjĂślk', '', '', '', '', '', '', '', 'en mjĂślk', 'mjĂślken', '', '', '', '', '', '', '', '', 'mjolk'),
+(299, 'duĹźo', 'adverb', '', 'mycket ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'mycket ', 'mer', 'mest', ''),
+(300, 'nastÄpny', 'adjective', '', 'nĂ¤sta', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(301, 'po, potem, pĂłĹşniej', 'preposition', '', 'efter', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(302, 'Pewnego dnia bÄdÄ pracowaĹ w banku', 'wyrazenie', '', 'En dag kommer jag att arbeta pĂĽ en bank ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(303, 'niemowlÄ, niemowlak', 'noun', 'en', 'bebis', '', '', '', '', '', '', '', 'en bebis', 'bebisen', 'bebisar', 'bebisarna', '', '', '', '', '', '', ''),
+(304, 'wysoki, wysokie, wysoka', 'adjective', '', 'hĂśg', '', '', '', '', '', '', '', '', '', '', '', 'hĂśgt', 'hĂśge', 'hĂśga', '', 'hĂśgre', 'hĂśgste', 'hog'),
+(305, 'wolny, powolny', 'adjective', '', 'lĂĽngsam', '', '', '', '', '', '', '', '', '', '', '', 'lĂĽngsamt', 'lĂĽngsamme', 'lĂĽngsamma', 'lĂĽngsam', 'lĂĽngsammare', 'lĂĽngsammaste, lĂĽngsammast', ''),
+(306, 'szybki, prÄdki', 'adjective', '', 'snabb', '', '', '', '', '', '', '', '', '', '', '', 'snabbt', 'snabbe', 'snabba', 'snabb', 'snabbare', 'snabbast', ''),
+(307, 'pytanie, zagadnienie', 'noun', 'en', 'frĂĽga', '', '', '', '', '', '', '', 'en frĂĽga', 'frĂĽgan', 'frĂĽgor', 'frĂĽgorna', '', '', '', '', '', '', 'froga'),
+(308, 'Czy macie jakieĹ pytania?', 'wyrazenie', '', 'Har ni nĂĽgra frĂĽgor?', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(309, 'odpowiedaÄ', 'verb', 'att', 'svara', 'att svara', 'svarar', 'svarade', 'svarat', 'svara!', 'svĂ¤rande', 'svuren', '', '', '', '', '', '', '', '', '', '', ''),
+(310, 'kelner', 'noun', 'en', 'servitĂśr', '', '', '', '', '', '', '', 'en servitĂśr', 'servitĂśren', 'servitĂśrer', 'servitĂśrerna', '', '', '', '', '', '', ''),
+(311, 'kelnerka', 'noun', 'en', 'servitris', '', '', '', '', '', '', '', 'en servitris', 'servitrisen', 'servitriser', 'servitriserna', '', '', '', '', '', '', ''),
+(312, 'nasz, nasze, nasza', 'pronoun', '', 'vĂĽr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'wor'),
+(313, 'woĹowina, miÄso woĹowe', 'noun', 'ett', 'nĂśtkĂśtt', '', '', '', '', '', '', '', 'ett nĂśtkĂśtt', 'nĂśtkĂśttet', '', '', '', '', '', '', '', '', 'notsziot'),
+(314, 'kurczak, kura, miÄso z kurczaka', 'noun', 'en', 'kyckling', '', '', '', '', '', '', '', 'en kyckling', 'kycklingen', 'kycklingar', 'kycklingarna', '', '', '', '', '', '', 'szikling'),
+(315, 'ryba', 'noun', 'en', 'fisk', '', '', '', '', '', '', '', 'en fisk', 'fisken', 'fiskar', 'fiskarna', '', '', '', '', '', '', ''),
+(316, 'ziemniak, kartofel', 'noun', 'en', 'potatis', '', '', '', '', '', '', '', 'en potatis', 'potatisen', 'potatisar', 'potatisarna', '', '', '', '', '', '', ''),
+(317, 'serwetka', 'noun', 'en', 'servett', '', '', '', '', '', '', '', 'servett', 'servetten', 'servetter', 'servetterna', '', '', '', '', '', '', ''),
+(318, 'widelec', 'noun', 'en', 'gaffel', '', '', '', '', '', '', '', 'en gaffel', 'gaffeln', 'gafflar', 'gafflarna', '', '', '', '', '', '', ''),
+(319, 'ĹyĹźka, ĹyĹźeczka', 'noun', 'en', 'sked', '', '', '', '', '', '', '', 'en sked', 'skeden', 'skedar', 'skedarna', '', '', '', '', '', '', 'chjew');
+INSERT INTO `ord` (`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `presens`, `past`, `supine`, `imperative`, `present_participle`, `past_participle`, `S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, `neuter`, `masculin`, `plural`, `st_rowny`, `st_wyzszy`, `st_najwyzszy`, `wymowa`) VALUES
+(320, 'chleb', 'noun', 'ett', 'brĂśd', '', '', '', '', '', '', '', 'ett brĂśd', 'brĂśdet', 'brĂśd', 'brĂśden', '', '', '', '', '', '', 'broed'),
+(321, 'nĂłĹź', 'noun', 'en', 'kniv', '', '', '', '', '', '', '', 'en kniv', 'kniven', 'knivar', 'knivarna', '', '', '', '', '', '', ''),
+(322, 'fasola', 'noun', 'en', 'bĂśna', '', '', '', '', '', '', '', 'en bĂśna', 'bĂśnan', 'bĂśnor', 'bĂśnorna', '', '', '', '', '', '', 'beanor'),
+(323, 'masĹo', 'noun', 'ett', 'smĂśr', '', '', '', '', '', '', '', 'ett smĂśr', 'smĂśret', '', '', '', '', '', '', '', '', 'smoer'),
+(324, 'pieprz', 'noun', 'en', 'peppar', '', '', '', '', '', '', '', 'en peppar', 'pepparn', '', '', '', '', '', '', '', '', ''),
+(325, 'cukier', 'noun', 'ett', 'socker,', '', '', '', '', '', '', '', 'ett socker', 'sockret', '', '', '', '', '', '', '', '', ''),
+(326, 'herbata', 'noun', 'ett', 'te', '', '', '', '', '', '', '', 'ett te', 'teet', 'teer', 'teerna', '', '', '', '', '', '', ''),
+(327, 'kawa', 'noun', 'ett', 'kaffe', '', '', '', '', '', '', '', 'ett kaffe', 'kaffet', '', '', '', '', '', '', '', '', ''),
+(328, 'sĂłl', 'noun', 'ett', 'salt', '', '', '', '', '', '', '', 'ett salt', 'saltet', 'salter', 'salterna', '', '', '', '', '', '', ''),
+(329, 'sĹony, sĹone, sĹona', 'adjective', '', 'salt', '', '', '', '', '', '', '', '', '', '', '', 'salt', 'salt', 'salta', '', 'saltare', 'saltast', ''),
+(330, 'cytryna', 'noun', 'en', 'citron', '', '', '', '', '', '', '', 'en citron', 'citronen', 'citroner', 'citronerna', '', '', '', '', '', '', ''),
+(331, 'kwaĹne, kwaĹna, kwaĹny', 'adjective', '', 'sur', '', '', '', '', '', '', '', '', '', '', '', 'surt', 'sure', 'sura', '', 'surare', 'suraste', ''),
+(332, 'ostry, pikantny', 'adjective', '', 'kryddstark', '', '', '', '', '', '', '', '', '', '', '', 'kryddstarkt', 'kryddstarke', 'kryddstarka', 'kryddstark', 'mer kryddstark', 'mest kryddstark', ''),
+(333, 'sĹodki, sĹodka, sĹodkie', 'adjective', '', 'sĂśt', '', '', '', '', '', '', '', '', '', '', '', 'sĂśtt', 'sĂśte', 'sĂśta', '', 'sĂśtare', 'sĂśtaste, sĂśtast', 'sot'),
+(334, 'przystanek autobusowy', 'noun', 'en', 'busshĂĽllplats', '', '', '', '', '', '', '', 'en busshĂĽllplats', 'busshĂĽllplatsen', 'busshĂĽllplatser', 'busshĂĽllplatserna', '', '', '', '', '', '', ''),
+(335, 'sprzedawaÄ, sprzedaÄ', 'verb', 'att', 'sĂ¤lja', 'att sĂ¤lja', 'sĂ¤ljer', 'sĂĽlde', 'sĂĽlt', 'sĂ¤lj!', 'sĂ¤ljande', 'sĂĽld', '', '', '', '', '', '', '', '', '', '', 'selja'),
+(336, 'bilet', 'noun', 'en', 'biljett', '', '', '', '', '', '', '', 'en biljett', 'biljetten', 'biljetter', 'biljetterna', '', '', '', '', '', '', ''),
+(337, 'kupowaÄ, robiÄ zakupy', 'verb', 'att', 'handla', 'att handla', 'handlar', 'handlade', 'handlat,', 'handla!', 'handlande', 'handlad', '', '', '', '', '', '', '', '', '', '', ''),
+(338, 'dworzec autobusowy', 'noun', 'en', 'busstation', '', '', '', '', '', '', '', 'en busstation', 'busstationen', '', '', '', '', '', '', '', '', 'busstachun'),
+(339, 'wracaÄ', 'verb', 'att', 'gĂĽ tillbaka', 'att gĂĽ tillbaka', 'gĂĽr tillbaka', 'gick tillbaka', 'gĂĽtt tillbaka', 'gĂĽ tillbaka!', 'gĂĽende tillbaka', 'gĂĽngen tillbaka', '', '', '', '', '', '', '', '', '', '', ''),
+(340, 'kochaÄ', 'verb', 'att', 'Ă¤lska', 'att Ă¤lska', 'Ă¤lskar', 'Ă¤lskade', 'Ă¤lskat', 'Ă¤lska!', 'Ă¤lskande', 'Ă¤lskad', '', '', '', '', '', '', '', '', '', '', 'elska');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

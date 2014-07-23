@@ -258,7 +258,7 @@ if(isset($_POST['submit'])){
         
         $Word = new Ord();
 //        echo "<br>id of a: ".$Word->getId($id_ord);
-//        echo "<br>Last index: ".$Word->getLastId();
+        echo "<br>Last index: ".$Word->getLastId();
        
         
         $Word->setData( $id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
@@ -267,6 +267,8 @@ if(isset($_POST['submit'])){
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $wymowa);
     } 
+    
+    echo "<br>"."krowa";
 
 }else{
     echo "<br>NO POST<br>";
@@ -276,7 +278,7 @@ if(isset($_POST['submit'])){
 
 ?>
     <br>
-<!--<button onclick="window.location.href='loger.php'">Wyloguj</button>-->
+<button onclick="window.location.href='loger.php'"><?php echo t("Wyloguuujj")?></button>
 </body>
 </html>
 <?php

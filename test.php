@@ -40,7 +40,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
  $_SESSION['bad']=0;
  }else{
      if(isset($_POST['clear'])){
-         echo "<br>".__LINE__."/ 2 ISSET POST Clear";
+//         echo "<br>".__LINE__."/ 2 ISSET POST Clear";
          $score = new Score();
          $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
          $score->saveScoreData();
@@ -73,9 +73,9 @@ $method = 'post';
 echo "<table>"
    . "<form id=testForm1 action=test.php method=".$method.">";
 echo "<tr>"
-                ."<td>To jest ".t($testTab[0])."</td>"
+                ."<td>To jest ".trans($testTab[0])."</td>"
                 .'<td><textarea disabled rows=1 cols=20 name="'.$testTab[0].' disabled">'.$testTab[1].'</textarea></td>';
-        echo    "<td>Podaj ".t($testTab[2])."</td>"
+        echo    "<td>Podaj ".trans($testTab[2])."</td>"
                 ."<td>"
                 . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie
                 . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"       // słowo
@@ -206,11 +206,11 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
 
     foreach ($_SESSION['arrOfAnsw'] as $key) {
         echo "<p>";     
-//        echo "Pytanie: Do ".t($key[0])." ( ".$key[1]." ) podaj ".t($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
-        if(t($key[1])!= 'słowo PL')
-            echo "Pytanie: To jest ".t($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) podaj ".t($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
+//        echo "Pytanie: Do ".trans($key[0])." ( ".$key[1]." ) podaj ".trans($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
+        if(trans($key[1])!= 'słowo PL')
+            echo "Pytanie: To jest ".trans($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) podaj ".trans($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
         else
-            echo "Pytanie: To jest ".t($key[1])." ( <span class=green>".$key[2]."</span> ) podaj ".t($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
+            echo "Pytanie: To jest ".trans($key[1])." ( <span class=green>".$key[2]."</span> ) podaj ".trans($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
             echo "</p>";
     }
 

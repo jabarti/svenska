@@ -15,6 +15,11 @@ include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
 
+//mysql_select_db($dbname2, $DBConn);
+//mysql_select_db($dbname, $DBConn);
+
+
+
 if(isset($_SESSION['log'])&& isset($_COOKIE['log'])){
     if($_SESSION['log'] == true){
         echo "<br>Zalogowany jako: ".$_SESSION['user'];//." z hasłem: ". $_SESSION['password'];
@@ -22,6 +27,25 @@ if(isset($_SESSION['log'])&& isset($_COOKIE['log'])){
         echo "<br>NIE ZALOGOWANY";
     }
 }
+
+echo '<br><br>linia: '.__LINE__.' ROOT: '.ROOT.'<br>';
+echo 'linia: '.__LINE__.' BASE_PATH: '.BASE_PATH.'<br>';
+echo 'linia: '.__LINE__.' INCLUDE_PATH: '.INCLUDE_PATH.'<br>';
+echo 'linia: '.__LINE__.' CLASSES_PATH: '.CLASSES_PATH.'<br>';
+echo 'linia: '.__LINE__.' FILES_PATH: '.FILES_PATH.'<br>';
+echo 'linia: '.__LINE__.' PICTURES_PATH: '.PICTURES_PATH.'<br>';
+echo 'linia: '.__LINE__.' STYLES_PATH: '.STYLES_PATH.'<br>';
+
+echo 'linia: '.__LINE__.' BL_WEB_ROOT_PATH: '.BL_WEB_ROOT_PATH.'<br>';
+echo 'linia: '.__LINE__.' BL_TRANSLATION_PATH: '.BL_TRANSLATION_PATH.'<br>';
+
+//echo 'linia: '.__LINE__.' LOCALE_PATH: '.LOCALE_PATH.'<br>';
+//echo 'linia: '.__LINE__.' UPRODUCE_UPLOAD_PATH: '.UPRODUCE_UPLOAD_PATH.'<br>';
+//echo 'linia: '.__LINE__.' INFO_IMG_FILE_PATH: '.INFO_IMG_FILE_PATH.'<br>';
+//echo 'linia: '.__LINE__.' XML_RESOURCES_DIR: '.XML_RESOURCES_DIR.'<br>';
+//echo 'linia: '.__LINE__.' PAGE_THUMBS_PATH: '.PAGE_THUMBS_PATH.'<br>';
+
+echo 'linia: '.__LINE__.' =============================================<br>';
 
 echo $_SESSION['user'];
 
@@ -36,10 +60,13 @@ if($Word = new Ord()){
     echo "<br>NOT OK: Object of Ord class not created!";
 }
 echo "<br>Cięcie stringa do bazy:";
-$str = $Word->setSQLstringToCode("<br>Alą mać kotę<br>Ącko źrebiŃ<br>öäå+ÖÄÅ");
+$str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
+$str = $Word->setSQLstringToCode($str_old);
 $str2 = $Word->setSQLstringDeCode($str);
 
-echo "<br>";
+echo "<br>".$str_old;
+echo "<br>".$str;
+echo "<br>".$str2;
 
 if($User = new User()){
     echo "<br>OK";
@@ -57,14 +84,21 @@ $Word->getOrdArrByType("pronoun");
 
 $User->getUsersNames();
 $str='try';
-echo "SHA: ".sha1($str);
+echo "<br>SHA: ".sha1($str);
 
 } else {
     require 'loger.php';
 }
 ?>
 <body>
+    <img src="http://www.bartilevi.pl/BartiLevi_WEB/Translations/flags/flag_pl.jpg">
+    <img src="../BartiLevi_WEB/Translations/flags/flag_pl.jpg">
+    <img src="../Translations/flags/flag_pl.jpg">
+    <img src="<?php echo BL_TRANSLATION_PATH ?>flags/flag_pl.jpg">
+    <a href="../Translations/flags/flag_pl.jpg">link</a>
+    <a href="<?php echo BL_TRANSLATION_PATH ?>flags/flag_pl.jpg">link</a>
     <div id="czas"></div>
+    
 </body>
 <script>
     function getTime() {

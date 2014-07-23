@@ -38,20 +38,20 @@ function logTime(){
     }    
     
     if (hou==0 && min == 0 && sec<10){
-        return("<br>Zostało     <span class=red><b>"+ rozn_str+"</b></span>");
+        return("<br>zostało:     <span class=red><b>"+ rozn_str+"</b></span>");
     }else{
-        return("<br>Zostało     "+ rozn_str);
+        return("<br>zostało:     "+ rozn_str);
     }
 }
  
 //wywołanie ma na celu eliminację opóźnienia sekundowego
 document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
-document.getElementById('zegar_log').innerHTML = "do wylogowania: "+logTime();
+document.getElementById('zegar_log').innerHTML = "do wylogowania "+logTime();
  
 setInterval(function() {
 // logTime();
     document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
-    document.getElementById('zegar_log').innerHTML = "do wylogowania : "+logTime();
+    document.getElementById('zegar_log').innerHTML = "do wylogowania  "+logTime();
      
 }, 1000);
 // INDEX.php

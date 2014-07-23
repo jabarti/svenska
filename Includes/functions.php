@@ -9,7 +9,7 @@
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
 
-function t($var){
+function trans($var){
     switch($var){
         case 'id_ord':
             return "słowo PL";
