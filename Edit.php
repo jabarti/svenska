@@ -79,62 +79,12 @@ if(isset($_POST)){
                 }
                 break;
         }
-    $_SESSION['sort']=$sort;
+//    $_SESSION['sort']=$sort;
     }
 //$wher = '';
     
     if(isset($_POST['wher'])){
-        switch($_POST['wher']){
-            case 'noun':
-                $wher = "WHERE typ='noun'";
-                break;
-            case 'verb':
-                $wher = "WHERE typ='verb'";
-                break;
-            case 'hjalp_verb':
-                $wher = "WHERE typ='hjalp_verb'";
-                break;
-            case 'adjective':
-                $wher = "WHERE typ='adjective'";
-                break;
-            case 'adverb':
-                $wher = "WHERE typ='adverb'";
-                break;
-            case 'preposition':
-                $wher = "WHERE typ='preposition'";
-                break;
-            case 'pronoun':
-                $wher = "WHERE typ='pronoun'";
-                break;
-            case 'conjunction':
-                $wher = "WHERE typ='conjunction'";
-                break;
-            case 'numeral':
-                $wher = "WHERE typ='numeral'";
-                break;
-            case 'particle':
-                $wher = "WHERE typ='particle'";
-                break;
-            case 'wyrazenie':
-                $wher = "WHERE typ='wyrazenie'";
-                break;
-            case '???':
-                $wher = "WHERE typ='???'";
-                break;
-            case 'empty':
-                $wher = "WHERE typ=''";
-                break;
-            default:
-                ?><script>//alert("DEFAULT wher");</script><?php
-                $wher = "";
-                if(isset($_SESSION['wher'])){
-                    ?><script>//alert("isse sess wher");</script><?php
-                    $wher = $_SESSION['wher'];
-                }
-                break;
-        }
-    
-    $_SESSION['wher']=$wher;
+        $wher = "WHERE typ='".$_POST['wher']."'";
     }
 }
 
@@ -271,6 +221,8 @@ if(isset($_POST)){
     
         $sql_text = "UPDATE `ord` SET ";
         $sql_textPLLH = "UPDATE `ordLH` SET ";
+        $sql_textErrINSPLLH = "INSERT INTO `ordLH` VALUES (";
+        
         $id = '';
         $id_ord = '';
         $Word = new Ord();
@@ -282,6 +234,7 @@ if(isset($_POST)){
                     break;
                 case 'id':
                     $id = $v;
+                    $sql_textErrINSPLLH .= "'".($v)."',";
                     break;
 //                case 'id_ord':
 //                    $id_ord = $v;
@@ -289,11 +242,13 @@ if(isset($_POST)){
                 case 'wymowa':
                     $sql_text .= "`".$k."`='".$v."'";
                     $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
+                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."');";
 //                    $sql_textPLLH .= "`".$k."`='".($v)."'";
                     break;
                 default:
                     $sql_text .= "`".$k."`='".$v."',";
                     $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."',";
+                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."',";
 //                    $sql_textPLLH .= "`".$k."`='".($v)."'";
                     break;
             }
@@ -302,19 +257,28 @@ if(isset($_POST)){
         $sql_textPLLH .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
 //        $sql_textPLLH = str_replace($this->table."LH", $this->table, $sql_text);
         
-        echo '<br>SQL: '.$sql_text;
-        echo '<br>SQL_PLLH: '.$sql_textPLLH;
-
-        if( mysql_query($sql_text)){
-            ?><script>//alert("WESZŁO");</script><?php
-            if( mysql_query($sql_textPLLH)){
-                ?><script>alert("WESZŁO do PLLH");</script><?php
+//        echo '<br>SQL: '.$sql_text;
+//        echo '<br>SQL_PLLH: '.$sql_textPLLH;
+//        echo '<br>$sql_textErrINSPLLH: '.$sql_textErrINSPLLH;
+        
+        mysql_query($sql_text);
+        if(mysql_affected_rows()){
+            ?><script>alert("WESZŁO do BD (Update)");</script><?php
+            mysql_query($sql_textPLLH);
+            if( mysql_affected_rows()){
+                ?><script>alert("WESZŁO do PLLH (update)");</script><?php
             }else{
-                ?><script>alert("NIE WESZŁO do PLLH");</script><?php
+                ?><script>alert("NIE WESZŁO do PLLH (update)");</script><?php
                 // TODO: czyli nie ma ord o taki mnumerze i trzeba insertować!!!
                 // Wpleść kolejny SQL????
+                mysql_query($sql_textErrINSPLLH);
+                if(mysql_affected_rows()){
+                    ?><script>alert("WESZŁO do PLLH (INSERTEM)");</script><?php
+                }else{
+                    ?><script>alert("NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
+                }
             }
-//            header("Location: Edit.php");
+            header("Location: Edit.php");
         }else{
             ?><script>alert("NIE WESZŁO do BD");</script><?php
         }
