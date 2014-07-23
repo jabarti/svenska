@@ -101,6 +101,12 @@ function trans($var){
         case 'interjection':
             return "wykrzyknik";
             break;
+        case 'numeral':
+            return "liczebnik";
+            break;
+        case 'particle':
+            return "partykuła";
+            break;
         case 'wyrazenie':
             return "wyrażenie";
             break;

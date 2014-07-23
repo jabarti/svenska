@@ -40,7 +40,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td><br></td>
                 <td colspan='2'></td>
                 <td><p class=red id='ang_cz_m'></p></td>
-                <td colspan='4'></td>
+                <td colspan='4'><p class=blue id='coto'></p></td>
             </tr>
             <tr>
             <tr>
@@ -59,6 +59,8 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         <option value="pronoun">zaimek</option>
                         <option value="conjunction">spójnik</option>
                         <option value="interjection">wykrzyknik</option>
+                        <option value="numeral">liczebnik</option>
+                        <option value="particle">partykuła</option>
                         <option value="wyrazenie">wyrażenie</option>
                         <option value="???">???</option>
                     </select>
@@ -268,7 +270,7 @@ if(isset($_POST['submit'])){
                         $wymowa);
     } 
     
-    echo "<br>"."krowa";
+    echo "<br>".t("krowa")." ".g( "krowa");
 
 }else{
     echo "<br>NO POST<br>";

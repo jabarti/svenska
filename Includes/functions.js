@@ -104,7 +104,9 @@ $(document).ready(function(){
     $("#typ").change(function(){
         var val = $(this).val();
 //        alert(val);
-        $("#ang_cz_m").html(val);
+        $("#ang_cz_m").html(val); // przypisanie tego czerwonego tlumaczenia nazwy części mowy
+        
+        // Wyświetlanie odpowiednich fragmentów tabeli
         switch (val){
             case 'preposition':
             case 'noun':
@@ -124,7 +126,7 @@ $(document).ready(function(){
                 $("#zaimek").hide();
                 break;
                 
-            case 'adjective':
+            case 'adjective':       // przymiotnik
                 $("#czasownik").hide();
                 $("#rzeczownik").hide();
                 $("#przymiotnik").show();
@@ -159,12 +161,81 @@ $(document).ready(function(){
                 $("#zaimek").show();
                 break;
                 
+            case'numeral':
+                $("#czasownik").show();
+                $("#rzeczownik").show();
+                $("#przymiotnik").show();
+                $("#stopniowanie").show();
+                $("#zaimek").show();
+                break;
+                
             default:
                 $("#czasownik").show();
                 $("#rzeczownik").show();
                 $("#przymiotnik").show();
                 $("#stopniowanie").show();
                 $("#zaimek").show();
+                break;
+        }
+        // Tu ustalamy tylko opisy do cz.mowy
+        switch(val){
+            case 'preposition':     // przyimki
+                $('#coto').empty();
+                $('#coto').append("informują o stosunkach między przedmiotami, łącząc części zdania o <u>niejednakowej</u> funkcji składniowej. (gdzie? kiedy?), <br>np: Jedziemy <span class=red><b>w</b></span> grudniu.");
+                break;
+                
+            case 'noun':            // rzeczownik
+                $('#coto').empty();
+                $('#coto').append("nazywają osoby i przedmioty (kto? co?)");
+                break;
+  
+            case 'hjalp_verb':
+                $('#coto').empty();
+                $('#coto').append("jest to cz.mowy mówiąca o...hjalp verb");
+                break;
+                
+            case 'verb':        // czasownik
+                $('#coto').empty();
+                $('#coto').append("informują o czynnościach, stanach i zjawiskach (co robi? co się z nim dzieje?)");
+                break;
+                
+            case 'adjective':       // przymiotnik
+                $('#coto').empty();
+                $('#coto').append("nazywają cechy jakościowe rzeczowników (jaki?), <br>np.: <span class=red><b>duży</b></span> dom");
+                break;
+                
+            case 'interjection':    // wykrzyknik
+                $('#coto').empty();
+                $('#coto').append("wyrażają uczucia lub pełnią funkcję apeli");
+                break;
+                
+            case 'conjunction':     // spójnik
+                $('#coto').empty();
+                $('#coto').append("informują o stosunkach między przedmiotami i czynnościami, łącząc części zdania o <u>tej samej</u> funkcji,");
+                break
+                
+            case 'particle':     // partykuła
+                $('#coto').empty();
+                $('#coto').append("(wyrazki) – wzmacniają lub modyfikują znaczenie innych wyrazów,");
+                break
+                
+            case 'adverb':      // przysłówek
+                $('#coto').empty();
+                $('#coto').append("nazywają cechy jakościowe czynności (jak? gdzie? kiedy?), <br>np. pies pracuje <span class=red><b>dużo</b></span>");
+                break;
+                
+            case 'pronoun':     // zaimek
+                $('#coto').empty();
+                $('#coto').append("nie mają treści znaczeniowej, pełnią funkcję różnych innych części mowy");
+                break;
+                
+            case 'numeral':     // liczebnik
+                $('#coto').empty();
+                $('#coto').append("określają liczbę lub kolejność przedmiotów (ile? który z kolei?)");
+                break;
+                
+            default:
+                $('#coto').empty();
                 break
         }
     });    

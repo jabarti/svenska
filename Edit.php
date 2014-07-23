@@ -41,6 +41,8 @@ echo "
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
                         <option value='interjection'>wykrzyknik</option>
+                        <option value='numeral'>liczebnik</option>
+                        <option value='particle'>partykuła</option>
                         <option value='wyrazenie'>wyrażenie</option>
                         <option value='empty'>puste</option>
         </select>
@@ -106,6 +108,12 @@ if(isset($_POST)){
                 break;
             case 'conjunction':
                 $wher = "WHERE typ='conjunction'";
+                break;
+            case 'numeral':
+                $wher = "WHERE typ='numeral'";
+                break;
+            case 'particle':
+                $wher = "WHERE typ='particle'";
                 break;
             case 'wyrazenie':
                 $wher = "WHERE typ='wyrazenie'";
@@ -227,6 +235,8 @@ while($row = mysql_fetch_assoc($mq)){
                         <option value='pronoun'>zaimek</option>
                         <option value='conjunction'>spójnik</option>
                         <option value='interjection'>wykrzyknik</option>
+                        <option value='numeral'>liczebnik</option>
+                        <option value='particle'>partykuła</option>
                         <option value='wyrazenie'>wyrażenie</option>
                         <option value='???'>???</option>
                 </select>";        
@@ -263,6 +273,7 @@ if(isset($_POST)){
         $sql_textPLLH = "UPDATE `ordLH` SET ";
         $id = '';
         $id_ord = '';
+        $Word = new Ord();
 //        echo  '<br>1) '.$sql_text;
         foreach ($serial as $k=>$v){
         echo "<br>".$k."=>".$v;
@@ -278,10 +289,12 @@ if(isset($_POST)){
                 case 'wymowa':
                     $sql_text .= "`".$k."`='".$v."'";
                     $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
+//                    $sql_textPLLH .= "`".$k."`='".($v)."'";
                     break;
                 default:
                     $sql_text .= "`".$k."`='".$v."',";
-                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
+                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."',";
+//                    $sql_textPLLH .= "`".$k."`='".($v)."'";
                     break;
             }
         }
@@ -298,10 +311,12 @@ if(isset($_POST)){
                 ?><script>alert("WESZŁO do PLLH");</script><?php
             }else{
                 ?><script>alert("NIE WESZŁO do PLLH");</script><?php
+                // TODO: czyli nie ma ord o taki mnumerze i trzeba insertować!!!
+                // Wpleść kolejny SQL????
             }
-            header("Location: Edit.php");
+//            header("Location: Edit.php");
         }else{
-            ?><script>//alert("NIE WESZŁO");</script><?php
+            ?><script>alert("NIE WESZŁO do BD");</script><?php
         }
     
 //    $Word = new Ord();
@@ -316,6 +331,7 @@ if(isset($_POST)){
 //        print_r($serial);
     
         $sql_text = "DELETE FROM `ord` ";
+        $sql_textPLLH = "DELETE FROM `ordLH` ";
         $id = '';
         $id_ord = '';
 //        echo  '<br>1) '.$sql_text;
@@ -339,13 +355,21 @@ if(isset($_POST)){
             }
         }
         $sql_text .= " WHERE `ord`.`id` ='".$id."' AND id_ord='".$id_ord."';";
+        $sql_textPLLH .= " WHERE `ordLH`.`id` ='".$id."' AND id_ord='".trans($id_ord)."';";
         echo '<br>SQL: '.$sql_text;
+        echo '<br>SQL: '.$sql_textPLLH;
 
         if( mysql_query($sql_text)){
             ?><script>//alert("Skasowało");</script><?php
+            if( mysql_query($sql_textPLLH)){
+                ?><script>//alert("WESZŁO do PLLH");</script><?php
+            }else{
+                ?><script>alert("NIE WESZŁO do PLLH");</script><?php
+
+            }
             header("Location: Edit.php");
         }else{
-            ?><script>//alert("NIE skasowało");</script><?php
+            ?><script>alert("NIE skasowało");</script><?php
         }
     
 //    $Word = new Ord();
