@@ -8,12 +8,6 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = '';
-//include 'header.php';
-//include 'flag.php';
-//include 'buttons.php';
 
 function t($var){
     switch($var){
@@ -118,4 +112,13 @@ function t($var){
             return "Brak słowa '".$var."' w słowniku!!!";
             break;
     }
+}
+
+function db_query($sql)
+{
+	$ret = @mysql_query($sql);
+	
+	if (!$ret)
+		die('MySQL query failed: '.$sql.' Error message: '.mysql_error());//,$sql,mysql_error());
+	return $ret;
 }

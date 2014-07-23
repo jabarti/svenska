@@ -29,25 +29,25 @@ if(!isset($_SESSION)){
 //$res = putenv('PATH=/opt/local/bin/:'.$tempPath);
 
 
-if (!defined('MAX_MAIL_BATCH')) {
-	define('MAX_MAIL_BATCH', 1); // Maximum number of emails to send while running the newsletter mailer job.
-}
+//if (!defined('MAX_MAIL_BATCH')) {
+//	define('MAX_MAIL_BATCH', 1); // Maximum number of emails to send while running the newsletter mailer job.
+//}
 
 
 // DEFINE DIRECTORIES
 define('BASE_PATH', dirname(__FILE__));
 define('ROOT', dirname(dirname(__FILE__))); 
-define('UPRODUCE_UPLOAD_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'uProduceUploads');
+//define('UPRODUCE_UPLOAD_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'uProduceUploads');
 //define('INCLUDE_PATH', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'Includes');
 define('CLASSES_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'Classes');
 define('INCLUDE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'Includes');
-define('LOCALE_PATH', INCLUDE_PATH . DIRECTORY_SEPARATOR . 'locale');
+//define('LOCALE_PATH', INCLUDE_PATH . DIRECTORY_SEPARATOR . 'locale');
 define('FILES_PATH', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'files');
-define('PICTURES_PATH', FILES_PATH . DIRECTORY_SEPARATOR . 'pictures');
-define('STYLES_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'Styles');
-define('INFO_IMG_FILE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'infoImages');
-define('XML_RESOURCES_DIR', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'xmlResources');
-define('PAGE_THUMBS_PATH', FILES_PATH . DIRECTORY_SEPARATOR . 'page_thumbs');
+define('PICTURES_PATH', FILES_PATH . DIRECTORY_SEPARATOR . 'img');
+define('STYLES_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'CSS');
+//define('INFO_IMG_FILE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'infoImages');
+//define('XML_RESOURCES_DIR', substr(BASE_PATH, 0, strrpos(BASE_PATH, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR . 'xmlResources');
+//define('PAGE_THUMBS_PATH', FILES_PATH . DIRECTORY_SEPARATOR . 'page_thumbs');
 /*
 echo '<br><br>linia: '.__LINE__.' ROOT: '.ROOT.'<br>';
 echo 'linia: '.__LINE__.' BASE_PATH: '.BASE_PATH.'<br>';
@@ -86,15 +86,6 @@ if (!AUTO_LOGIN) {
 
 /*** Ed stuff: ***/
 define('DATA_DIR', BASE_PATH);
-
-function db_query($sql)
-{
-	$ret = @mysql_query($sql);
-	
-	if (!$ret)
-		die('MySQL query failed: '.$sql.' Error message: '.mysql_error());//,$sql,mysql_error());
-	return $ret;
-}
 
 
 //initPage();
@@ -137,58 +128,7 @@ if(isset($_SESSION['log'])){
 }else{
     echo "KUPA";
 }
-?>
-<script>
-var licz = true;
 
-function getTime() 
-{
-    return (new Date()).toLocaleTimeString();
-}
-
-function logTime(){
-    var log_tim_took = document.getElementById("log_time").innerHTML;
-    a = parseInt(log_tim_took *1000);
-    var log_tim = new Date(a);
-    var log_tim2 = new Date(log_tim) ;
-    log_tim2.setHours(log_tim.getHours()-1);
-    log_tim2.setSeconds(log_tim.getSeconds()-8);
-    
-    pres = new Date();
-    
-    rozn_dat = log_tim2 - pres;
-    
-    rozn = new Date(rozn_dat);
-    rozn_str = new Date(rozn).toLocaleTimeString();
-    
-    hou = rozn.getHours();
-    min = rozn.getMinutes();
-    sec = rozn.getSeconds();
-    
-    if (hou>22 || (hou==0 && min == 0 && sec==0)){
-        window.location.href = "loger.php"
-    }    
-    
-    if (hou==0 && min == 0 && sec<10){
-        return("<br>Zostało     <span class=red><b>"+ rozn_str+"</b></span>");
-    }else{
-        return("<br>Zostało     "+ rozn_str);
-    }
-}
- 
-//wywołanie ma na celu eliminację opóźnienia sekundowego
-document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
-document.getElementById('zegar_log').innerHTML = "do wylogowania: "+logTime();
- 
-setInterval(function() {
-// logTime();
-    document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
-    document.getElementById('zegar_log').innerHTML = "do wylogowania : "+logTime();
-     
-}, 1000);
-
-</script>    
-<?php
 //if(isset($_COOKIE["test"])){
 //    echo "<br>W isset COOKIE";    
 //    echo "<br>W COOKIE removal:<br>";

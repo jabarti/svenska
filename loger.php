@@ -55,7 +55,8 @@ if(isset($_POST) || isset($_GET)){
             $Usr_pass = 'empty';
         }
    } 
-   
+//   echo "<br>Usr_pass: ".$Usr_pass;
+//   echo "<br>sha1(_POST['password']): ".sha1($_POST['password']);
    if(isset($_POST['user']) && isset($_POST['password'])){   
     if($_POST['user']==$Usr_name  && sha1($_POST['password'])==$Usr_pass){
 //    if(($_POST['user']=='Anetka' || $_POST['user']=='Barti') && $_POST['password']=='svenska'){
@@ -70,7 +71,7 @@ if(isset($_POST) || isset($_GET)){
         $score = new Score();
         $_SESSION['scoresOfUsr'] = $score->getScoresOfUser($_SESSION['user']);
 //        echo "<p class=red><b>".$_SESSION['scoresOfUsr'][0]."/".$_SESSION['scoresOfUsr'][1]."</b></p>";
-        $time = time()+60*60*8;
+        $time = time()+60*60*12;
 //        $time = time()+15;
         $time_str = date($time)? date($time) : $_SESSION['user'];
 //        setcookie("log", $_SESSION['user'], time()+60*60*24);       // ciastko ważne 24h

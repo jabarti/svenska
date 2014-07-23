@@ -56,6 +56,8 @@ $Word->findEmptyOrdId();
 $Word->getOrdArrByType("pronoun");
 
 $User->getUsersNames();
+$str='try';
+echo "SHA: ".sha1($str);
 
 } else {
     require 'loger.php';
@@ -77,3 +79,5 @@ setInterval(function() {
     
 }, 1000);
     </script>
+    
+    

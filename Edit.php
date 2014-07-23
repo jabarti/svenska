@@ -16,14 +16,7 @@ $title = 'Svenska | Edit';
 include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
-?>
-<script>
-function Menu(){
-    location.href="#menu";
-}
-</script>    
-    
-<?php
+
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     
 // echo "<br>
