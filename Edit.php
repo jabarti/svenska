@@ -44,6 +44,7 @@ echo "
                         <option value='numeral'>liczebnik</option>
                         <option value='particle'>partykuła</option>
                         <option value='wyrazenie'>wyrażenie</option>
+                        <option value='???'>???</option>
                         <option value='empty'>puste</option>
         </select>
         <input type=submit name=wher_sub value='wybierz'></input>

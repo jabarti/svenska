@@ -270,7 +270,7 @@ if(isset($_POST['submit'])){
                         $wymowa);
     } 
     
-    echo "<br>".t("krowa")." ".g( "krowa");
+    echo "<br>KROWA: t()".t("krowa")."/ g()".g( "krowa");
 
 }else{
     echo "<br>NO POST<br>";

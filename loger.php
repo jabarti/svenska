@@ -26,6 +26,7 @@ $match = strpos($_SERVER['HTTP_REFERER'], "loger.php");
 if(!$match){
         $_SESSION['ref'] = $_SERVER['HTTP_REFERER'];
     }
+    
 echo "<br>Przybywasz z: ".$_SESSION['ref'];
 
 //$user_try = new User();

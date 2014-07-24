@@ -709,6 +709,8 @@ class Ord {
             $str = str_replace('Ö','?25?', $str);
             $str = str_replace('Ä','?26?', $str);
             
+            $str = str_replace('é','?27?', $str);
+            
 //            echo '<br>String to Code:'.$string;
 //            echo '<br>Str Aftr Code:'.$str;
             return $str;
@@ -743,6 +745,8 @@ class Ord {
             $str = str_replace('?24?', 'Å', $str);
             $str = str_replace('?25?', 'Ö', $str);
             $str = str_replace('?26?', 'Ä', $str);
+            
+            $str = str_replace('?27?', 'é', $str);
             
 //            echo '<br>String to Decode:'.$string;
 //            echo '<br>Str Aftr Deode:'.$str;

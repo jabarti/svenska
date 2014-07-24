@@ -105,8 +105,11 @@ try{
     require_once CLASSES_PATH.'User.class.php';
     require_once CLASSES_PATH.'Score.class.php';
     require_once INCLUDE_PATH.'functions.php';
-    
-    include BL_TRANSLATION_PATH.'translacjon.php';
+    if(isset($_SESSION['server'])){
+        if($_SESSION['server']=='server'){
+            include BL_TRANSLATION_PATH.'translacjon.php';
+        }
+    }
 }
 catch(Exception $ex){
     echo "Błędem jest :".$ex;
