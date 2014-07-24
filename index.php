@@ -55,14 +55,10 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td class='label'>rodzaj</td>
                 <td>
                     <select id=rodzaj name='rodzaj'>
-                        <!--<trbody id='att'>-->
-                            <option id=att value=""></option>
-                            <option id=att value="att">att</option>
-                        <!--</trbody>-->
-                        <!--<trbody id='enett'>-->
+                            <option value=""></option>
+                            <option value="att">att</option>
                             <option value="ett">ett</option>
                             <option value="en">en</option>
-                        <!--</trbody>-->
                     </select>
                 </td>
                 <td class='label'>szwedzki</td>

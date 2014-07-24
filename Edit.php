@@ -86,12 +86,13 @@ if(isset($_POST)){
     }
     
     if(isset($_POST['wher'])){
-        $wher = "WHERE typ='".$_POST['wher']."'";
+        if ($_POST['wher'] != 'część mowy')
+            $wher = "WHERE typ='".$_POST['wher']."'";
     }
 }
 
 
-$sercz='';
+//$sercz='';
 if (isset($_POST['sercz'])){
     
     $szukane = $_POST['sercz'];
@@ -134,21 +135,22 @@ $mq2 = mysql_query($SQL1);
 $i=0;
 $li=0;
 
-echo "<div id=menu>";
-echo "<table class='table2'>";
-while($row2 = mysql_fetch_assoc($mq2)){
-    if($li%5==0){
-            echo "<tr>";
-    }
-    echo "<td><a href='#ord_".$li."'>".$row2['id'].": ".$row2['id_ord']." => ".$row2['trans']."</a></td>";
-//    if ($li == 40) break;
-    if($li%5==4){
-            echo "</tr>";
-    }
-    $li++;
-}
-echo "</table>";
-echo "</div><br>";
+// Tu sie wyswietla ta tabela z linkami do słówek - REMOVE????
+//echo "<div id=menu>";
+//echo "<table class='table2'>";
+//while($row2 = mysql_fetch_assoc($mq2)){
+//    if($li%5==0){
+//            echo "<tr>";
+//    }
+//    echo "<td><a href='#ord_".$li."'>".$row2['id'].": ".$row2['id_ord']." => ".$row2['trans']."</a></td>";
+////    if ($li == 40) break;
+//    if($li%5==4){
+//            echo "</tr>";
+//    }
+//    $li++;
+//}
+//echo "</table>";
+//echo "</div><br>";
 
 $method='post';
 $id = 0;
@@ -163,11 +165,9 @@ while($row = mysql_fetch_assoc($mq)){
         if($j%4==0){
             echo "<tr>";
         }
-        if($k != 'typ'){
-            echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
-        }else{
+        
+        if($k == 'typ'){
             echo "<td>".$k."</td><td>";
-//                    . "<input name=".$k." value='".$v."'>"
             echo "<select name='".$k."'>
                         <option value=".$v.">".trans($v)."</option>
                         <option value='noun'>rzeczownik</option>
@@ -185,14 +185,29 @@ while($row = mysql_fetch_assoc($mq)){
                         <option value='???'>???</option>
                 </select>";        
              echo "</td>";
+        }  else 
+        if($k == 'rodzaj'){
+            echo "<td>".$k."</td><td>";
+        
+            echo "      <select id=rodzaj name='rodzaj'>
+                            <option value='".$v."'>".$v."</option>
+                            <option value='att'>att</option>
+                            <option value='ett'>ett</option>
+                            <option value='en'>en</option>
+                        </select>";
+            echo "</td>";
+        
+        }else{
+            echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
         }
+        
         if($j%4==3){
             echo "</tr>";
         }     
     $j++;    
     }
         echo "<tr> <td colspan=6></td>
-                    <td>
+                    <td colspan=2>
                         <button onclick='Menu();'>Menu</button>
                         <input type=submit name=edit value=Edit>
                         <input type=submit name=delete value=DELETE>
