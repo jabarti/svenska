@@ -17,11 +17,15 @@ include 'header.php';
 //include 'flag.php';
 include 'buttons.php';
 
+//if(!isset($_POST)){
+$wher='';
+$sort='';
+$sercz='';
+//}
+
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     
-// echo "<br>
-//<button onclick=\"window.location.href='loger.php'\">Wyloguj</button>   ";
-    
+echo "<div id=movingsearch class=movingsearch>";     
 echo "<form action='' method=post>
         <select name='sort'>
                         <option >sortuj</option>
@@ -48,17 +52,16 @@ echo "
                         <option value='empty'>puste</option>
         </select>
         <input type=submit name=wher_sub value='wybierz'></input>
-      </form><br>";
+      </form>";
 
 echo "<form action='' method=post>
         <input type=text name=sercz>
         <input type=submit value='Szukaj'></input>
         <br><span> Tip: use '_' for unknown symbol/letter
         <br> Tip: use '%' for string of unknown symbols/letters</span>
-      </form><br>";
+      </form>";
+echo "</div>";
 
-//$sort = "";
-//if(isset($_POST['sort_sub'])){
 if(isset($_POST)){
     if(isset($_POST['sort'])){
         switch($_POST['sort']){
@@ -80,22 +83,13 @@ if(isset($_POST)){
                 }
                 break;
         }
-//    $_SESSION['sort']=$sort;
     }
-//$wher = '';
     
     if(isset($_POST['wher'])){
         $wher = "WHERE typ='".$_POST['wher']."'";
     }
 }
 
-//if(isset($_SESSION['wher'])){
-//    $wher = $_SESSION['wher'];
-//    ?><script>//alert("Jest sessia wher");</script><?php
-//}
-//if(isset($_SESSION['sort'])){
-//    $sort = $_SESSION['sort'];
-//}
 
 $sercz='';
 if (isset($_POST['sercz'])){
@@ -156,7 +150,6 @@ while($row2 = mysql_fetch_assoc($mq2)){
 echo "</table>";
 echo "</div><br>";
 
-//echo "<br>DUPA<br>";
 $method='post';
 $id = 0;
 
@@ -282,11 +275,7 @@ if(isset($_POST)){
             header("Location: Edit.php");
         }else{
             ?><script>alert("NIE WESZŁO do BD");</script><?php
-        }
-    
-//    $Word = new Ord();
-//    $Word->setData($id_ord, $typ, $rodzaj, $trans, $infinitive, $presens, $past, $supine, $imperative, $present_participle, $past_participle, $S_indefinite, $S_definite, $P_indefinite, $P_definite, $wymowa);
-    
+        }  
     }
     elseif(isset($_POST['delete'])){
 //        ?><script>//alert("w $_POST['delete']!=null");</script><?php
@@ -335,11 +324,7 @@ if(isset($_POST)){
             header("Location: Edit.php");
         }else{
             ?><script>alert("NIE skasowało");</script><?php
-        }
-    
-//    $Word = new Ord();
-//    $Word->setData($id_ord, $typ, $rodzaj, $trans, $infinitive, $presens, $past, $supine, $imperative, $present_participle, $past_participle, $S_indefinite, $S_definite, $P_indefinite, $P_definite, $wymowa);
-    
+        } 
     }
 }
 ob_end_flush();  // żeby sie dało reloadeować

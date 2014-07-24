@@ -108,6 +108,9 @@ try{
     if(isset($_SESSION['server'])){
         if($_SESSION['server']=='server'){
             include BL_TRANSLATION_PATH.'translacjon.php';
+        }else{  // poza serwerem bartilevi nie widoczna będzie zawartość /translation
+            function t($var){ return $var; }
+            function g($var){ return $var; }
         }
     }
 }
@@ -129,7 +132,7 @@ if(isset($_SESSION['log'])){
         echo "<span id=zegar_log style='visibility: block'></span>";
         echo "<br><button onclick=\"window.location.href='loger.php'\">Wyloguj</button>";
         $tim = $_COOKIE['log'];
-        echo "<div id=log_time style='visibility: hidden;'>".$tim."</div>";
+        echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
 //        echo "<input id=log_time type=hidden value='".$tim."'>";
         echo "</div>";
     }else{

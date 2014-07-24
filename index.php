@@ -13,17 +13,6 @@ $title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
 
-
-//    if(isset($_SESSION['log'])){
-//    if($_SESSION['log'] == true){
-//        echo "<div class=divLog>  Zalogowany jako: ".$_SESSION['user']."</div>";//." z hasłem: ". $_SESSION['password'];
-//    }else{
-//        echo "<br>NIE ZALOGOWANY";
-//    }
-//}else{
-//    echo "KUPA";
-//}
-
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 ?>
 <body onload='start();'>
@@ -33,8 +22,6 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             <tr>
                 <td><b>Podstawowe</b></td>
                 <td colspan='7'></td>
-<!--                <td><p class=red id='ang_cz_m'></p></td>
-                <td colspan='4'></td>-->
             </tr>
             <tr>
                 <td><br></td>
@@ -250,7 +237,7 @@ if(isset($_POST['submit'])){
         $neuter =               $_POST['neuter'];
         $masculin =             $_POST['masculin'];
         $plural =               $_POST['plural'];
-        $st_rowny =            $_POST['st_rowny'];
+        $st_rowny =             $_POST['st_rowny'];
         $st_wyzszy =            $_POST['st_wyzszy'];
         $st_najwyzszy =         $_POST['st_najwyzszy'];
         $wymowa =               $_POST['wymowa'];
@@ -270,7 +257,7 @@ if(isset($_POST['submit'])){
                         $wymowa);
     } 
     
-    echo "<br>KROWA: t()".t("krowa")."/ g()".g( "krowa");
+    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
 
 }else{
     echo "<br>NO POST<br>";
@@ -280,7 +267,7 @@ if(isset($_POST['submit'])){
 
 ?>
     <br>
-<button onclick="window.location.href='loger.php'"><?php echo t("Wyloguuujj")?></button>
+<!--<button onclick="window.location.href='loger.php'"><?php echo t("Wyloguuujj")?></button>-->
 </body>
 </html>
 <?php
