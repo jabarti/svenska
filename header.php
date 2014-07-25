@@ -6,6 +6,7 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="Includes/functions.js"></script>
         <link rel="shortcut icon" href="Resources/img/favicon_no_euro.ico" type="image/x-icon"/><!---->
+        <link rel="Stylesheet" type="text/css" href="../Translations/translation.css" />
         <link rel="Stylesheet" type="text/css" href="Resources/CSS/style.css" />
         <meta http-equiv="refresh" content="600"/>   <!-- Odświeżanie -->
         <meta charset="utf-8">

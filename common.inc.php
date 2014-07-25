@@ -108,6 +108,8 @@ try{
     if(isset($_SESSION['server'])){
         if($_SESSION['server']=='server'){
             include BL_TRANSLATION_PATH.'translacjon.php';
+            include BL_TRANSLATION_PATH.'flag.php';
+//            include BL_TRANSLATION_PATH.'translation.css';
         }else{  // poza serwerem bartilevi nie widoczna będzie zawartość /translation
             function t($var){ return $var; }
             function g($var){ return $var; }

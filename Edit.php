@@ -155,6 +155,7 @@ $li=0;
 $method='post';
 $id = 0;
 
+echo "<div class=edit_tab_contener>";
 while($row = mysql_fetch_assoc($mq)){
     
     echo "<table id ='ord_".$id."'>";
@@ -211,6 +212,7 @@ while($row = mysql_fetch_assoc($mq)){
                         <button onclick='Menu();'>Menu</button>
                         <input type=submit name=edit value=Edit>
                         <input type=submit name=delete value=DELETE>
+                        <input id=edit_".$id." type=checkbox name=edit_".$id." value=wartość />
                     </td>
               </tr>
         </form>
@@ -218,6 +220,7 @@ while($row = mysql_fetch_assoc($mq)){
         
     $i++; $id++;
 }
+echo "</div>";      // end of div: edit_tab_contener
 
 if(isset($_POST)){
     ?><script>//alert("w isset $_POST");</script><?php

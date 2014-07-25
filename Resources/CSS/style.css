@@ -44,6 +44,44 @@ tbody {
     border: 1px solid #003AD9;
 }
 
+.edit_tab_contener {
+    position: absolute;
+    background: deepskyblue;
+/*    text-align: center;
+    margin-right: auto; 
+    margin-left: auto; */
+    /*float: right;*/
+    /*margin-left: 10%;*/
+}
+
+div#translacje {
+    position: fixed;
+    bottom: -80px;
+    right: 0px;
+    width: 11.4%;
+    /*background-clip: red;*/     
+    /*border: 1px solid black;*/
+    margin-left: auto;
+    margin-left: auto;
+    text-align: left;
+    z-index: 999;
+}
+
+div.flag {
+    position: relative;
+    bottom: 5px;
+    right:5px;
+    /*background-color: silver;*/
+    /*padding: 2px;*/
+    /*border: 1px solid #263666;*/
+}
+
+div.flag a{
+    width: 100px;
+    /*height: 25px;*/
+    /*border: 1px solid black;*/
+}
+
 .print {
     background: white;
     width: 84%;
@@ -103,12 +141,13 @@ div.divLog {
     border: 1px #516ca3 solid;
     padding: 5px;
     width:180px;
+    height:120px;
     font-size: 11px;
 }
 
 div.DBConn{
     position: fixed;
-    bottom:100px;
+    bottom:140px;
     right: 5px;
     width: 180px;
     min-height: 50px;

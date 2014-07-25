@@ -16,6 +16,7 @@ include 'buttons.php';
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 ?>
 <body onload='start();'>
+<!--<div class=edit_tab_contener>-->
     <form id='form1' action='index.php' method="POST">
         <table class='tab_insert'>
         <tbody id='podstawowe'>
@@ -207,6 +208,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     
         </table>
     </form>
+<!--</div>    // end of div: edit_tab_contener-->
     <p id='p1'></p>
 
     
@@ -257,6 +259,7 @@ if(isset($_POST['submit'])){
 
 }else{
     echo "<br>NO POST<br>";
+    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
 
     ?><script>//two();</script><?php
 }
