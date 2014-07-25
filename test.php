@@ -8,11 +8,18 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
-require_once "common.inc.php";
+//require_once "common.inc.php";
+//include 'DB_Connection.php';
+//$title = 'Svenska | Test';
+//include 'header.php';
+////include '../Translations/flag.php';
+//include 'buttons.php';
+
+include 'common.inc.php';
 include 'DB_Connection.php';
+include 'divLog.php';
 $title = 'Svenska | Test';
 include 'header.php';
-//include '../Translations/flag.php';
 include 'buttons.php';
 
 //if(isset($_SESSION['log'])){
@@ -73,9 +80,9 @@ $method = 'post';
 echo "<table>"
    . "<form id=testForm1 action=test.php method=".$method.">";
 echo "<tr>"
-                ."<td>To jest ".trans($testTab[0])."</td>"
+                ."<td>".t("To jest")." ".trans($testTab[0])."</td>"
                 .'<td><textarea disabled rows=1 cols=20 name="'.$testTab[0].' disabled">'.$testTab[1].'</textarea></td>';
-        echo    "<td>Podaj ".trans($testTab[2])."</td>"
+        echo    "<td>".t("Podaj")." ".trans($testTab[2])."</td>"
                 ."<td>"
                 . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie
                 . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"       // słowo

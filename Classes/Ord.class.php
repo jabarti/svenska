@@ -70,7 +70,7 @@ class Ord {
 //            }
         
             if (mysql_query($SQL)){
-                echo "<br>WSADZONE do ord!!!";
+                echo "<br>".t("WSADZONE do ord!!!");
                 
                 $id_LH = $this->getLastId()+1;
                 $id_LH = $this->getId($id_ord);
@@ -90,14 +90,16 @@ class Ord {
                     . "'".$this->setSQLstringToCode($wymowa)."');");
 //                 echo "<br>INSERT: ".$SQL_PLLH;
                 if (mysql_query($SQL_PLLH)){
-                    echo "<br>WSADZONE do ordLH!!!";
+                    echo "<br>".t("WSADZONE do ordLH!!!");
                 }else{
-                    echo "<br>ERROR wsadu";
+//                    echo "<br>ERROR wsadu";
+                    echo "<br>".t("ERROR wsadu");
                 }
                 
                 
             }else{
-                echo "<br>ERROR wsadu";
+//                echo "<br>ERROR wsadu";
+                echo "<br>".t("ERROR wsadu");
             }
                     
             return true;

@@ -15,7 +15,7 @@ if(!isset($_SESSION)){
 //    var_dump($_SESSION);
     $_SESSION['try'] = 3;
 }else{
-    echo "SESJA JEST USTANOWIONA";
+    echo t("SESJA JEST USTANOWIONA");
     $_SESSION['try']++;
 }
 
@@ -68,7 +68,7 @@ if (isset($_GET['lang'])||isset($_SESSION['lang'])){
     if(isset($_GET['lang']))
         $_SESSION['lang'] = $_GET['lang'];
 } else {
-    $_SESSION['lang'] = "se";
+    $_SESSION['lang'] = "pl";
 }
 
 
@@ -109,7 +109,6 @@ try{
         if($_SESSION['server']=='server'){
             include BL_TRANSLATION_PATH.'translacjon.php';
             include BL_TRANSLATION_PATH.'flag.php';
-//            include BL_TRANSLATION_PATH.'translation.css';
         }else{  // poza serwerem bartilevi nie widoczna będzie zawartość /translation
             function t($var){ return $var; }
             function g($var){ return $var; }
@@ -117,7 +116,7 @@ try{
     }
 }
 catch(Exception $ex){
-    echo "Błędem jest :".$ex;
+    echo t("Błędem jest")." :".$ex;
 }
 
 //if(include '../Translations/translacjon.php'){
@@ -125,24 +124,24 @@ catch(Exception $ex){
 //}else{
 //    echo "<br>Translation ERROR";
 //}
-
-if(isset($_SESSION['log'])){
-
-    if($_SESSION['log'] == true){
-        echo "<div class=divLog>  Zalogowany jako: ".$_SESSION['user']."";//." z hasłem: ". $_SESSION['password'];
-        echo "<span id=zegar></span><br>";
-        echo "<span id=zegar_log style='visibility: block'></span>";
-        echo "<br><button onclick=\"window.location.href='loger.php'\">Wyloguj</button>";
-        $tim = $_COOKIE['log'];
-        echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
-//        echo "<input id=log_time type=hidden value='".$tim."'>";
-        echo "</div>";
-    }else{
-        echo "<div class=divLog> NIE ZALOGOWANY</div>";
-    }
-}else{
-    echo "KUPA";
-}
+//echo t('Zalogowany jako');
+//if(isset($_SESSION['log'])){
+//
+//    if($_SESSION['log'] == true){
+//    echo "<div class=divLog>  ".g('Zalogowany jako').": ".$_SESSION['user']."";//." z hasłem: ". $_SESSION['password'];
+//        echo "<span id=zegar></span><br>";
+//        echo "<span id=zegar_log style='visibility: block'></span>";
+//        echo "<br><button onclick=\"window.location.href='loger.php'\">".g("Wyloguj")."</button>";
+//        $tim = $_COOKIE['log'];
+//        echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
+////        echo "<input id=log_time type=hidden value='".$tim."'>";
+//        echo "</div>";
+//    }else{
+//        echo "<div class=divLog>".g("NIE ZALOGOWANY")."</div>";
+//    }
+//}else{
+//    echo "KUPA";
+//}
 
 //if(isset($_COOKIE["test"])){
 //    echo "<br>W isset COOKIE";    

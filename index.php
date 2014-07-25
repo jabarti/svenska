@@ -9,11 +9,13 @@
  * ************************************************* */
 include 'common.inc.php';
 include 'DB_Connection.php';
+include 'divLog.php';
 $title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+    include 'Search.php';
 ?>
 <body onload='start();'>
 <!--<div class=edit_tab_contener>-->
@@ -21,7 +23,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
         <table class='tab_insert'>
         <tbody id='podstawowe'>
             <tr>
-                <td><b>Podstawowe</b></td>
+                <td><b><?php echo t("Podstawowe"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
@@ -32,28 +34,28 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>
             <tr>
             <tr>
-                <td class='label'>polski</td>
+                <td class='label'><?php echo t("polski"); ?></td>
                 <td><input id='in1' name='id_ord'></td>
-                <td class='label'>typ</td>
+                <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
                     <select id=typ name='typ'>
-                        <option >część mowy</option>
-                        <option value="noun">rzeczownik</option>
-                        <option value="verb">czasownik</option>
-                        <option value="hjalp_verb">czas. posiłkowy</option>
-                        <option value="adjective">przymiotnik</option>
-                        <option value="adverb">przysłówek</option>
-                        <option value="preposition">przyimek</option>
-                        <option value="pronoun">zaimek</option>
-                        <option value="conjunction">spójnik</option>
-                        <option value="interjection">wykrzyknik</option>
-                        <option value="numeral">liczebnik</option>
-                        <option value="particle">partykuła</option>
-                        <option value="wyrazenie">wyrażenie</option>
+                        <option ><?php echo t("część mowy"); ?></option>
+                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo t("rzeczownik", "en"); ?> )</option>
+                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo t("czasownik", "en"); ?> )</option>
+                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo t("czas. posiłkowy", "en"); ?> )</option>
+                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo t("przymiotnik", "en"); ?> )</option>
+                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo t("przysłówek", "en"); ?> )</option>
+                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo t("przyimek", "en"); ?> )</option>
+                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo t("zaimek", "en"); ?> )</option>
+                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo t("spójnik", "en"); ?> )</option>
+                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo t("wykrzyknik", "en"); ?> )</option>
+                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo t("liczebnik", "en"); ?> )</option>
+                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo t("partykuła", "en"); ?> )</option>
+                        <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
                         <option value="???">???</option>
                     </select>
                 </td>
-                <td class='label'>rodzaj</td>
+                <td class='label'><?php echo t("rodzaj"); ?></td>
                 <td>
                     <select id=rodzaj name='rodzaj'>
                             <option value=""></option>
@@ -62,7 +64,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                             <option value="en">en</option>
                     </select>
                 </td>
-                <td class='label'>szwedzki</td>
+                <td class='label'><?php echo t("szwedzki"); ?></td>
                 <td><input id='in1' name='trans'></td>
             </tr>
             <tr>
@@ -73,7 +75,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
             <tbody id='czasownik' >
             <tr>
-                <td><b>Czasownik</b></td>
+                <td><b><?php echo t("Czasownik"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             
@@ -108,7 +110,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tbody>
             <tbody id='rzeczownik' >
             <tr>
-                <td><b>Rzeczownik</b></td>
+                <td><b><?php echo t("Rzeczownik"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
@@ -132,7 +134,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tbody>
             <tbody id='przymiotnik' class='nobordbottom'>               
             <tr>
-                <td><b>Przymiotnik</b></td>
+                <td><b><?php echo t("Przymiotnik"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
@@ -150,11 +152,11 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>
             <tbody id='stopniowanie' class='nobordtop'>
             <tr>
-                <td  class='label'>st równy</td>
+                <td  class='label'><?php echo t("st równy"); ?></td>
                 <td><input id='in1' name='st_rowny'></td>
-                <td  class='label'>st wyższy</td>
+                <td  class='label'><?php echo t("st wyższy"); ?></td>
                 <td><input id='in1' name='st_wyzszy'></td>
-                <td  class='label'>st najwyższy</td>
+                <td  class='label'><?php echo t("st najwyższy"); ?></td>
                 <td><input id='in1' name='st_najwyzszy'></td>
                 <td colspan='2'></td>
             </tr>
@@ -167,7 +169,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
 <!--            <tbody id="zaimek">
             <tr>
-                <td><b>Zaimek</b></td>
+                <td><b><?php echo t("Zaimek"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
@@ -189,7 +191,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
             <tbody id='inne'>
             <tr>
-                <td><b>inne</b></td>
+                <td><b><?php echo t("Inne"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
@@ -197,13 +199,13 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td colspan='7'></td>
             </tr>            
             <tr>
-                <td class='label'>wymowa</td>
+                <td class='label'><?php echo t("wymowa"); ?></td>
                 <td><input id='in1' name='wymowa'></td>
                 <td colspan='6'></td>
             </tr>
             <tr>
                 <td colspan='7'></td>
-                <td><input type='submit' name=submit id='but1' value='Zapisz do bazy'></input></td>
+                <td><input type='submit' name=submit id='but1' value='<?php echo t("Zapisz do Bazy"); ?>'></input></td>
             </tr>
     
         </table>
@@ -255,18 +257,18 @@ if(isset($_POST['submit'])){
                         $wymowa);
     } 
     
-    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
+//    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
 
 }else{
-    echo "<br>NO POST<br>";
-    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
+//    echo "<br>NO POST<br>";
+//    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
+//    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");
 
-    ?><script>//two();</script><?php
 }
 
 ?>
     <br>
-<!--<button onclick="window.location.href='loger.php'"><?php echo t("Wyloguuujj")?></button>-->
+
 </body>
 </html>
 <?php

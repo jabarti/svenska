@@ -8,11 +8,18 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
-require_once "common.inc.php";
+//require_once "common.inc.php";
+//include 'DB_Connection.php';
+//$title = 'Svenska | Show/printer';
+//include 'header.php';
+////include 'flag.php';
+//include 'buttons.php';
+
+include 'common.inc.php';
 include 'DB_Connection.php';
+include 'divLog.php';
 $title = 'Svenska | Show/printer';
 include 'header.php';
-//include 'flag.php';
 include 'buttons.php';
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
@@ -26,8 +33,8 @@ $SQL = sprintf("SELECT * FROM `ord`;");
 $mq = mysql_query($SQL);
 ?>
 <form action="" method="post">
-    <input type="checkbox" name="flat" value="flat">flat?
-    <input type="submit" name=sub_flat value="Flat?">
+    <input type="checkbox" name="flat" value="flat"><?php echo t("płaskie"); ?>?
+    <input type="submit" name=sub_flat value="<?php echo t("zobacz"); ?>">
 
 </form>    
 <?php
@@ -42,12 +49,12 @@ if(isset($_POST['sub_flat'])){
 
 echo "<table class=print>";
 echo "  <tr>
-            <th>L.p.</th>
-            <th>Słowo PL</th>
-            <th>Część mowy</th>
-            <th>rodzajnik</th>
-            <th>słowo SE</th>
-            <th>Formy</th>
+            <th>".t("L.p.")."</th>
+            <th>".t("Słowo PL")."</th>
+            <th>".t("Część mowy")."</th>
+            <th>".t("rodzajnik")."</th>
+            <th>".t("słowo SE")."</th>
+            <th>".t("Formy")."</th>
         </tr>" ; 
             
 while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){

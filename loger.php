@@ -8,11 +8,18 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-require_once "common.inc.php";
+//require_once "common.inc.php";
+//include 'DB_Connection.php';
+//$title = 'Logger';
+//include 'header.php';
+////include 'flag.php';
+//include 'buttons.php';
+
+include 'common.inc.php';
 include 'DB_Connection.php';
-$title = 'Logger';
+include 'divLog.php';
+$title = 'Svenska | Logger';
 include 'header.php';
-//include 'flag.php';
 include 'buttons.php';
 
 //echo "<br>1Przybywasz z: ".$_SESSION['ref'];
@@ -99,12 +106,12 @@ if(isset($_POST) || isset($_GET)){
 
 ?>
 <body>
-    <h1> Panel logowania </h1>
+    <h1> <?php echo t("Panel logowania"); ?> </h1>
     
     <form action="loger.php" method="post">
         <table>
             <tr>
-                <td><label for="user">Użytkownik:</td>
+                <td><label for="user"><?php echo t("Użytkownik"); ?>:</td>
                 <!--<td><input id=user type="text" name="user" value="Bartek"></td>-->
                 <td><select id=user name="user" >
                 <?php
@@ -119,13 +126,13 @@ if(isset($_POST) || isset($_GET)){
                 </td>
             </tr>
             <tr>
-                <td><label for="pass">Hasło:</td>
+                <td><label for="pass"><?php echo t("Hasło"); ?>:</td>
                 <td><input id=pass type="password" name="password" value="" ></td>
                 <!--<td><input id=pass type="hidden" name="password" value="svenska" ></td>-->
             </tr>
             <tr>
                 <td></td>
-                <td><input id=sub name=sub type="submit" value="Zaloguj"></td>
+                <td><input id=sub name=sub type="submit" value="<?php echo t("Zaloguj"); ?>"></td>
             </tr>
         </table>
     </form>

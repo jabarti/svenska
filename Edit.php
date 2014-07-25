@@ -10,11 +10,18 @@
  * ************************************************* */
 ob_start(); // żeby sie dało reloadeować
 
-require_once "common.inc.php";
+//require_once "common.inc.php";
+//include 'DB_Connection.php';
+//$title = 'Svenska | Edit';
+//include 'header.php';
+////include 'flag.php';
+//include 'buttons.php';
+
+include 'common.inc.php';
 include 'DB_Connection.php';
+include 'divLog.php';
 $title = 'Svenska | Edit';
 include 'header.php';
-//include 'flag.php';
 include 'buttons.php';
 
 //if(!isset($_POST)){
@@ -24,43 +31,7 @@ $sercz='';
 //}
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
-    
-echo "<div id=movingsearch class=movingsearch>";     
-echo "<form action='' method=post>
-        <select name='sort'>
-                        <option >sortuj</option>
-                        <option value='id'>id</option>
-                        <option value='cz_mov'>części mowy</option>
-                        <option value='alf'>alfabet</option>
-        </select>";
-echo "
-        <select name='wher'>
-                        <option >część mowy</option>
-                        <option value='noun'>rzeczownik</option>
-                        <option value='verb'>czasownik</option>
-                        <option value='hjalp_verb'>czas. posiłkowy</option>
-                        <option value='adjective'>przymiotnik</option>
-                        <option value='adverb'>przysłówek</option>
-                        <option value='preposition'>przyimek</option>
-                        <option value='pronoun'>zaimek</option>
-                        <option value='conjunction'>spójnik</option>
-                        <option value='interjection'>wykrzyknik</option>
-                        <option value='numeral'>liczebnik</option>
-                        <option value='particle'>partykuła</option>
-                        <option value='wyrazenie'>wyrażenie</option>
-                        <option value='???'>???</option>
-                        <option value='empty'>puste</option>
-        </select>
-        <input type=submit name=wher_sub value='wybierz'></input>
-      </form>";
-
-echo "<form action='' method=post>
-        <input type=text name=sercz>
-        <input type=submit value='Szukaj'></input>
-        <br><span> Tip: use '_' for unknown symbol/letter
-        <br> Tip: use '%' for string of unknown symbols/letters</span>
-      </form>";
-echo "</div>";
+    include 'Search.php';
 
 if(isset($_POST)){
     if(isset($_POST['sort'])){
@@ -209,10 +180,10 @@ while($row = mysql_fetch_assoc($mq)){
     }
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>
-                        <button onclick='Menu();'>Menu</button>
-                        <input type=submit name=edit value=Edit>
-                        <input type=submit name=delete value=DELETE>
-                        <input id=edit_".$id." type=checkbox name=edit_".$id." value=wartość />
+                        <button onclick='Menu();'>".t("Menu")."</button>
+                        <input type=submit name=edit value=".t('Edit').">
+                        <input type=submit name=delete value=".t('DELETE').">
+                        <input id=edit_".$id." type=checkbox name=edit_".$id." value=".t('wartość')." />
                     </td>
               </tr>
         </form>
