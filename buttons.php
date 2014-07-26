@@ -7,7 +7,16 @@
 	<a href="Edit.php" class="myButton">Do Edycji</a>
 	<a href="show.php" class="myButton">Do Show/Printer.php</a>-->
         <?php
-        switch ($_SESSION['user']){ 
+//        echo "test1";
+//        echo "<br>".t("jestem tu").": ".__LINE__;
+//        echo "test2";
+        if(isset($_SESSION['user'])){
+            $user = $_SESSION['user'];
+        }else{
+            $user = "nouser";
+        }
+        
+        switch ($user){
             case 'Bartek':
                 ?>
                     <a href="../../" class="myButton">localhost</a><br>
@@ -39,5 +48,6 @@
                 <?php
                 break;
         }
+//        echo "<br>guziki władowane!"
         ?>
 </div>

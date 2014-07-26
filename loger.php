@@ -15,9 +15,9 @@
 ////include 'flag.php';
 //include 'buttons.php';
 
-include 'common.inc.php';
+require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
+//include 'divLog.php';
 $title = 'Svenska | Logger';
 include 'header.php';
 include 'buttons.php';
@@ -31,7 +31,7 @@ $match = strpos($_SERVER['HTTP_REFERER'], "loger.php");
 //    $_SERVER['HTTP_REFERER'] != "http://bartilevi.pl/Svenska/loger.php"  
 //        ){
 if(!$match){
-        $_SESSION['ref'] = $_SERVER['HTTP_REFERER'];
+        $_SESSION['ref'] = $_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : "index.php";
     }
     
 echo "<br>Przybywasz z: ".$_SESSION['ref'];
@@ -71,6 +71,7 @@ if(isset($_POST) || isset($_GET)){
 //    if($_GET['user']=='Anetka' && $_GET['password']=='svenska'){
 //        echo "<br>Jest w TRU: ".$_POST['user']." / ".$_POST['password'];
         $_SESSION['log'] = true;
+//        echo "Ustanawiam SESS[log] na true:".$_SESSION['log'] ;
         $_SESSION['user'] = $_POST['user'] ? $_POST['user'] : $_GET['user'];
         $_SESSION['password'] = $_POST['password'] ? $_POST['password'] : $_GET['password'];
         $_SESSION['arrOfAnsw'] = array();
@@ -99,6 +100,8 @@ if(isset($_POST) || isset($_GET)){
         setcookie("log", '', time()-7200);
         $_SESSION['log'] = false;
   }
+}else{
+    echo "<br>Brak POST or GET!!!"."| File:".__FILE__.", line:".__LINE__;
 }
 
 //    echo "<br>POST2: ";var_dump($_POST);

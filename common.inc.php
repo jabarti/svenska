@@ -15,7 +15,7 @@ if(!isset($_SESSION)){
 //    var_dump($_SESSION);
     $_SESSION['try'] = 3;
 }else{
-    echo t("SESJA JEST USTANOWIONA");
+    echo t("SESJA JEST USTANOWIONA wcześniej");
     $_SESSION['try']++;
 }
 

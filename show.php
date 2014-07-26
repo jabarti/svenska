@@ -15,7 +15,7 @@
 ////include 'flag.php';
 //include 'buttons.php';
 
-include 'common.inc.php';
+require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Show/printer';

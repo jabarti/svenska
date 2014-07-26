@@ -7,7 +7,7 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
-include 'common.inc.php';
+require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Inserter';
@@ -40,6 +40,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td>
                     <select id=typ name='typ'>
                         <option ><?php echo t("część mowy"); ?></option>
+                        <!--<option ></option>-->
                         <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo t("rzeczownik", "en"); ?> )</option>
                         <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo t("czasownik", "en"); ?> )</option>
                         <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo t("czas. posiłkowy", "en"); ?> )</option>

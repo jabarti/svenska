@@ -15,9 +15,12 @@
 //include 'flag.php';
 //include 'buttons.php';
 
-//echo t('Zalogowany jako');
-if(isset($_SESSION['log'])){
+//foreach($_SESSION as $k => $v){
+//    echo "<br>SESSION $k => $v";
+//}
 
+if(isset($_SESSION['log'])){
+//    echo "<br>SESS[log] isset!!!";
     if($_SESSION['log'] == true){
     echo "<div class=divLog>  ".t('Zalogowany jako').": ".$_SESSION['user']."";//." z hasłem: ". $_SESSION['password'];
         echo "<span id=zegar></span><br>";
@@ -31,5 +34,5 @@ if(isset($_SESSION['log'])){
         echo "<div class=divLog>".g("NIE ZALOGOWANY")."</div>";
     }
 }else{
-    echo "KUPA";
+    echo "<br>Brak sesji log!!!"."| File:".__FILE__.", line:".__LINE__;
 }
