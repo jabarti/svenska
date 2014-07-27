@@ -58,7 +58,11 @@ if(isset($_POST)){
     
     if(isset($_POST['wher'])){
         if ($_POST['wher'] != 'część mowy')
-            $wher = "WHERE typ='".$_POST['wher']."'";
+            if ($_POST['wher'] != 'verb'){
+                $wher = "WHERE typ='".$_POST['wher']."'";
+            }else{
+                $wher = "WHERE typ ='hjalp_verb' or typ='".$_POST['wher']."'";
+            }
     }
 }
 
@@ -157,8 +161,7 @@ while($row = mysql_fetch_assoc($mq)){
                         <option value='???'>???</option>
                 </select>";        
              echo "</td>";
-        }  else 
-        if($k == 'rodzaj'){
+        }  elseif($k == 'rodzaj'){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=rodzaj name='rodzaj'>
@@ -168,7 +171,15 @@ while($row = mysql_fetch_assoc($mq)){
                             <option value='en'>en</option>
                         </select>";
             echo "</td>";
-        
+            
+        }elseif($k == 'uwagi'){
+            echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
+                echo "<td>".$k."</td>";
+                echo "<td colspan=7>";
+                    echo "<textarea d=uwagi_ta class=uwagi_ta name=".$k." >".$v."</textarea>";
+                echo "</td>";
+            echo "</tr>";
+            break;
         }else{
             echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
         }
@@ -222,7 +233,7 @@ if(isset($_POST)){
 //                case 'id_ord':
 //                    $id_ord = $v;
 //                    break;
-                case 'wymowa':
+                case 'uwagi':           // ostatni musi mieć zakończenie z ";"
                     $sql_text .= "`".$k."`='".$v."'";
                     $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
                     $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."');";

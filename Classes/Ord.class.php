@@ -39,6 +39,7 @@ class Ord {
     private $st_najwyzszy;
     
     private $wymowa;
+    private $uwagi;
     
     private $table = "ord";
     
@@ -47,7 +48,7 @@ class Ord {
                             $supine, $imperative, $present_participle, $past_participle, 
                             $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                             $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
-                            $wymowa){
+                            $wymowa, $uwagi){
         
         if(!$this->getId($id_ord)){
             
@@ -56,13 +57,13 @@ class Ord {
                 . "`supine`, `imperative`, `present_participle`, `past_participle`, "
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                 . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
-                . "`wymowa`) "
+                . "`wymowa`, `uwagi`) "
                 . "VALUES "
                 . "('".$id_ord."','".$typ."','".$rodzaj."','".$trans."','".$infinitive."','".$presens."','".$past."',"
                 . "'".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
-                . "'".$wymowa."');");
+                . "'".$wymowa."','".$uwagi."');");
                    
 //            try{mysql_query($SQL);}
 //                catch(Exception $ex){
@@ -81,13 +82,13 @@ class Ord {
                     . "`supine`, `imperative`, `present_participle`, `past_participle`, "
                     . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                     . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
-                    . "`wymowa`) "
+                    . "`wymowa`, `uwagi`) "
                     . "VALUES "
                     . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$this->setSQLstringToCode($trans)."','".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."',"
                     . "'".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
                     . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
                     . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
-                    . "'".$this->setSQLstringToCode($wymowa)."');");
+                    . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($uwagi)."');");
 //                 echo "<br>INSERT: ".$SQL_PLLH;
                 if (mysql_query($SQL_PLLH)){
                     echo "<br>".t("WSADZONE do ordLH!!!");
@@ -180,7 +181,7 @@ class Ord {
                                     'present_participle', 'past_participle', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'wymowa');
+                                    'wymowa', 'uwagi');
             
             return $tab;
         }
@@ -202,7 +203,7 @@ class Ord {
                 case 'noun':            // rzeczownik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'S_indefinite', 'S_definite','P_indefinite', 'P_definite', 
-                                    'wymowa'
+                                    'wymowa', 'uwagi'
                                 );
                     break;
                 
@@ -211,46 +212,46 @@ class Ord {
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 case 'adjective':       // przymiotnik   
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 case 'adverb':          // przysłówek
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 case 'preposition':     // przyimek
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 case 'pronoun':         // zaimek
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
-                                    'wymowa');  
+                                    'wymowa', 'uwagi');  
                     break;
                 
                 case 'conjunction':    // spójnik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans',  
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 case 'interjection':    // wykrzyknik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans',  
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 case 'wyrazenie':
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
                 
                 default:
@@ -259,7 +260,7 @@ class Ord {
                                     'present_participle', 'past_participle', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'wymowa'); 
+                                    'wymowa', 'uwagi'); 
                     break;
             }
             
@@ -613,12 +614,12 @@ class Ord {
             
             echo "<table class=print>";
             echo "  <tr>
-                        <th>L.p.</th>
-                        <th>Słowo PL</th>
-                        <th>Część mowy</th>
-                        <th>rodzajnik</th>
-                        <th>słowo SE</th>
-                        <th>Formy</th>
+                        <th>".t("L.p.")."</th>
+                        <th>".t("Słowo PL")."</th>
+                        <th>".t("Część mowy")."</th>
+                        <th>".t("rodzajnik")."</th>
+                        <th>".t("słowo SE")."</th>
+                        <th>".t("Formy")."</th>
                    </tr>" ; 
             
               while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
@@ -672,7 +673,7 @@ class Ord {
         
         public function getOrdArrByType($typ){
             $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE `typ` = '".$typ."';");
-            echo "<br>SQL: $SQL";
+//            echo "<br>SQL: $SQL";
             $mq = mysql_query($SQL);
             
             while($row = mysql_fetch_assoc($mq)){

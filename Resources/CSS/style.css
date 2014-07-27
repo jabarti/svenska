@@ -10,6 +10,15 @@ table {
     vertical-align: center;
 }
 
+.uwagi_ta{
+    background: lemonchiffon;
+    /*vertical-align: middle;*/
+    width: 450px;
+    height: 2em;
+/*    columns: 160;*/
+    
+}
+
 .tab_insert {
     width: 90%;
 }
@@ -180,6 +189,9 @@ div.movingsearch {
 div.movingsearch input {
     font-size: 7px;
 }
+div.movingsearch select {
+    font-size: 7px;
+}
 
 div.movingsearch:hover{
     opacity: 1;
@@ -189,6 +201,9 @@ div.movingsearch:hover{
     width:350px;
 }
 div.movingsearch:hover input {
+    font-size: 14px;
+}
+div.movingsearch:hover select {
     font-size: 14px;
 }
         

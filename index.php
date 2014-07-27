@@ -205,6 +205,11 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td colspan='6'></td>
             </tr>
             <tr>
+                <td class='label'><?php echo t("uwagi"); ?></td>
+                <td colspan="4"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"></textarea></td>
+                <td colspan='2'></td>
+            </tr>
+            <tr>
                 <td colspan='7'></td>
                 <td><input type='submit' name=submit id='but1' value='<?php echo t("Zapisz do Bazy"); ?>'></input></td>
             </tr>
@@ -242,6 +247,7 @@ if(isset($_POST['submit'])){
         $st_wyzszy =            $_POST['st_wyzszy'];
         $st_najwyzszy =         $_POST['st_najwyzszy'];
         $wymowa =               $_POST['wymowa'];
+        $uwagi =                $_POST['uwagi'];
 
         ?><script>//one();</script><?php
 //        echo "<br>OTO text: ".$id_ord;
@@ -255,7 +261,7 @@ if(isset($_POST['submit'])){
                         $supine, $imperative, $present_participle, $past_participle, 
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
-                        $wymowa);
+                        $wymowa, $uwagi);
     } 
     
 //    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");

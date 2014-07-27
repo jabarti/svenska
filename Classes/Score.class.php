@@ -40,7 +40,7 @@ class Score {
     
     public function saveScoreData(){
         $SQL = sprintf("INSERT INTO `".$this->table."`(`user_id`, `good`, `bad`) VALUES ('".$this->user_id."', '".$this->good."', '".$this->bad."');");
-        echo "<br>SQL: $SQL";
+//        echo "<br>SQL: $SQL";
         if(!mysql_query($SQL))
             echo '<p class=red><b>ERROR DURING INSERT SCORES!!!!</b></p>';
 //        else

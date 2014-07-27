@@ -181,57 +181,68 @@ $(document).ready(function(){
         switch(val){
             case 'preposition':     // przyimki
                 $('#coto').empty();
-                $('#coto').append("informują o stosunkach między przedmiotami, łącząc części zdania o <u>niejednakowej</u> funkcji składniowej. (gdzie? kiedy?), <br>np: Jedziemy <span class=red><b>w</b></span> grudniu.");
+                text1 = "informują o stosunkach między przedmiotami, łącząc części zdania o <u>niejednakowej</u> funkcji składniowej. (gdzie? kiedy?), <br>np: Jedziemy <span class=red><b>w</b></span> grudniu.";
+                getTr(text1);
                 break;
                 
             case 'noun':            // rzeczownik
                 $('#coto').empty();
-                $('#coto').append("nazywają osoby i przedmioty (kto? co?)");
+                text1 = "nazywają osoby i przedmioty (kto? co?)";
+                getTr(text1);
                 break;
   
             case 'hjalp_verb':
                 $('#coto').empty();
-                $('#coto').append("jest to cz.mowy mówiąca o...hjalp verb");
+                text1 = "jest to cz.mowy mówiąca o...hjalp verb";
+                getTr(text1);
                 break;
                 
             case 'verb':        // czasownik
                 $('#coto').empty();
-                $('#coto').append("informują o czynnościach, stanach i zjawiskach (co robi? co się z nim dzieje?)");
+                text1 = "informują o czynnościach, stanach i zjawiskach (co robi? co się z nim dzieje?)";
+                getTr(text1);
                 break;
                 
             case 'adjective':       // przymiotnik
                 $('#coto').empty();
-                $('#coto').append("nazywają cechy jakościowe rzeczowników (jaki?), <br>np.: <span class=red><b>duży</b></span> dom");
+                text1 = "nazywają cechy jakościowe rzeczowników (jaki?), <br>np.: <span class=red><b>duży</b></span> dom";
+                getTr(text1);
                 break;
                 
             case 'interjection':    // wykrzyknik
                 $('#coto').empty();
-                $('#coto').append("wyrażają uczucia lub pełnią funkcję apeli");
+                text1 = "wyrażają uczucia lub pełnią funkcję apeli";
+                getTr(text1);
                 break;
                 
             case 'conjunction':     // spójnik
                 $('#coto').empty();
-                $('#coto').append("informują o stosunkach między przedmiotami i czynnościami, łącząc części zdania o <u>tej samej</u> funkcji,");
+                text1 = "informują o stosunkach między przedmiotami i czynnościami, łącząc części zdania o <u>tej samej</u> funkcji,";
+                getTr(text1);
                 break
                 
             case 'particle':     // partykuła
                 $('#coto').empty();
-                $('#coto').append("(wyrazki) – wzmacniają lub modyfikują znaczenie innych wyrazów,");
+                text1 = "(wyrazki) – wzmacniają lub modyfikują znaczenie innych wyrazów,";
+                getTr(text1);
                 break
                 
             case 'adverb':      // przysłówek
                 $('#coto').empty();
-                $('#coto').append("nazywają cechy jakościowe czynności (jak? gdzie? kiedy?), <br>np. pies pracuje <span class=red><b>dużo</b></span>");
+                text1 = "nazywają cechy jakościowe czynności (jak? gdzie? kiedy?), <br>np. pies pracuje <span class=red><b>dużo</b></span>";
+                getTr(text1);
                 break;
                 
             case 'pronoun':     // zaimek
                 $('#coto').empty();
-                $('#coto').append("nie mają treści znaczeniowej, pełnią funkcję różnych innych części mowy");
+                text1 = "nie mają treści znaczeniowej, pełnią funkcję różnych innych części mowy";
+                getTr(text1);
                 break;
                 
             case 'numeral':     // liczebnik
                 $('#coto').empty();
-                $('#coto').append("określają liczbę lub kolejność przedmiotów (ile? który z kolei?)");
+                text1 = "określają liczbę lub kolejność przedmiotów (ile? który z kolei?)";
+                getTr(text1);
                 break;
                 
             default:
@@ -246,3 +257,47 @@ function Menu(){
     location.href="#menu";
 }
 
+//$(document).keypress(function(e){
+//    if (e.which == 13){
+//        $("#but1").click();             // accept w inserterze
+//        $("#btn_sub_01").click();       // accept w test
+//    }
+//});
+//
+//$(document).ready(function(){
+//  $("#btn1").click(function(){
+//    $.ajax({    url:"next2.php",
+//                type: 'post',
+//		data: {
+//                    action: 'dupa1',
+//                    var1:   'plesc'
+//		},
+//                success:function(result){
+//                    $("#div1").html(result);
+//    }});
+//  }),
+//  $("#btn2").click(function(){
+//    $.ajax({    url:"next2.php",
+//                type: 'post',
+//		data: {
+//                    action: 'dupa2'
+//		},
+//                success:function(result){
+//                    $("#div1").html(result);
+//    }});
+//  });
+//});
+
+function getTr(text){
+    $.ajax({    url:"ajax.admin.php",
+                            type: 'post',
+                            data: {
+                                action: 'trans',
+                                var1:   text
+                            },
+                            success:function(result){
+                                $('#coto').append(result);
+                                return data;
+                            }              
+           });
+}
