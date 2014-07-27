@@ -70,10 +70,16 @@ echo "<br>Cięcie stringa do bazy:";
 $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
 $str = $Word->setSQLstringToCode($str_old);
 $str2 = $Word->setSQLstringDeCode($str);
+$str3 = $Word->getCountSimOrdByIdOrd("ok");
 
 echo "<br>".$str_old;
 echo "<br>".$str;
 echo "<br>".$str2;
+echo "<br>ILE?: ".$str3;
+
+echo "<br> LISTA WYRAZÓW:";
+
+$Word->getSimOrdByIdOrd("ok");
 
 if($User = new User()){
     echo "<br>OK";

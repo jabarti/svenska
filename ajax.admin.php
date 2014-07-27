@@ -19,6 +19,11 @@ switch($_REQUEST['action']){
     case 'trans':
         echo t($_REQUEST['var1']);
         break;
+    case 'text_input':
+        $text = $_REQUEST['var1'];
+        echo "Jest: <span class=red>".$Word->getCountSimOrdByIdOrd($text)."</span> podobnych wyników:";
+        $Word->getSimOrdByIdOrd($text);
+        break;
     default:
         break;
 }

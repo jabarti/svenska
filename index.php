@@ -28,14 +28,15 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>
             <tr>
                 <td><br></td>
-                <td colspan='2'></td>
+                <!--<td></td>-->
+                <td id="resul" colspan="2"></td>
                 <td><p class=red id='ang_cz_m'></p></td>
                 <td colspan='4'><p class=blue id='coto'></p></td>
             </tr>
             <tr>
             <tr>
                 <td class='label'><?php echo t("polski"); ?></td>
-                <td><input id='in1' name='id_ord'></td>
+                <td><input id='id_ord' name='id_ord'></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
                     <select id=typ name='typ'>
@@ -218,6 +219,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     </form>
 <!--</div>    // end of div: edit_tab_contener-->
     <p id='p1'></p>
+    <p id='p2'></p>
 
     
 <?php

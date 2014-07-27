@@ -54,43 +54,8 @@ setInterval(function() {
     document.getElementById('zegar_log').innerHTML = "do wylogowania  "+logTime();
      
 }, 1000);
-// INDEX.php
-//        $(document).ready(function(){
-//            $("#but1").click(function(){
-//            var a = $("#in1").val();
-//            alert (a);
-//            $.ajax({
-//                'action':   'try',
-//                'type':     'GET',
-//                'url':      'next1.php',
-//                'data':     {
-//                                'text': "ala"
-//                            },
-//                success:    function(data){
-//                                if(data == 0) alert ("Error ajax");
-//                            
-//                            else{
-//                                alert("else"+data)
-//                            }
-//                        }
-//            });
-//  });
-//});
-//
-//function one() {
-//    $('#p1').html("OK");
-//}
-//function two() {
-//    $('#p1').html("NO POST");
-//}
-//function three() {
-//    $('#p1').html("NO text");
-//}
-//$(body).onload(function(){
-//    $("#czasownik").hide();
-//    $("#rzeczownik").hide();
-//});
 
+// Index.php = oczątkowy wygląd tabelki
 function start(){
     $("#czasownik").hide();
     $("#rzeczownik").hide();
@@ -100,10 +65,8 @@ function start(){
 }
 
 $(document).ready(function(){
-//    $("#typ").change(function(){
     $("#typ").change(function(){
         var val = $(this).val();
-//        alert(val);
         $("#ang_cz_m").html(val); // przypisanie tego czerwonego tlumaczenia nazwy części mowy
         
         // Wyświetlanie odpowiednich fragmentów tabeli
@@ -256,37 +219,18 @@ $(document).ready(function(){
 function Menu(){
     location.href="#menu";
 }
+// umożliwia wysłanie formularzy kliknięciem "enter" - bez myszki!!!
+$(document).keypress(function(e){
+    if (e.which == 13){
+        $("#but1").click();             // accept w inserterze
+        $("#btn_sub_01").click();       // accept w test
+    }
+});
 
-//$(document).keypress(function(e){
-//    if (e.which == 13){
-//        $("#but1").click();             // accept w inserterze
-//        $("#btn_sub_01").click();       // accept w test
-//    }
-//});
-//
-//$(document).ready(function(){
-//  $("#btn1").click(function(){
-//    $.ajax({    url:"next2.php",
-//                type: 'post',
-//		data: {
-//                    action: 'dupa1',
-//                    var1:   'plesc'
-//		},
-//                success:function(result){
-//                    $("#div1").html(result);
-//    }});
-//  }),
-//  $("#btn2").click(function(){
-//    $.ajax({    url:"next2.php",
-//                type: 'post',
-//		data: {
-//                    action: 'dupa2'
-//		},
-//                success:function(result){
-//                    $("#div1").html(result);
-//    }});
-//  });
-//});
+
+$(document).ready(function(){
+    $("#try").focus();      // Focusig cursor in test.php on answer field
+  });
 
 function getTr(text){
     $.ajax({    url:"ajax.admin.php",
@@ -297,7 +241,25 @@ function getTr(text){
                             },
                             success:function(result){
                                 $('#coto').append(result);
-                                return data;
+                                return result;
                             }              
            });
 }
+
+$(document).ready(function(){
+    $("#id_ord").keypress(function(){
+        var tekst = $("#id_ord").val();
+        $.ajax({    url:"ajax.admin.php",
+                            type: 'post',
+                            data: {
+                                action: 'text_input',
+                                var1:   tekst
+                            },
+                            success:function(result){
+                                $('#p2').html(result);
+                                $('#p2').clear();
+//                                return result;
+                            }              
+           });
+    });
+});

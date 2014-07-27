@@ -192,9 +192,9 @@ while($row = mysql_fetch_assoc($mq)){
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>
                         <button onclick='Menu();'>".t("Menu")."</button>
-                        <input type=submit name=edit value=".t('Edit').">
-                        <input type=submit name=delete value=".t('DELETE').">
-                        <input id=edit_".$id." type=checkbox name=edit_".$id." value=".t('wartość')." />
+                        <input id=Edit_".$id." type=submit name=edit value=".t('Edit').">
+                        <input id=Del_".$id." type=submit name=delete value=".t('DELETE').">
+                        <input id=CBedit_".$id." type=checkbox name=CBedit_".$id." value=".t('wartość')." />
                     </td>
               </tr>
         </form>

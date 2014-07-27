@@ -755,5 +755,43 @@ class Ord {
 //            echo '<br>Str Aftr Deode:'.$str;
             return $str;
         }
+        
+        public function getCountSimOrdByIdOrd($text){
+            $SQL = "SELECT count(*) FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
+//            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
+            $mq = mysql_query($SQL);
+            if(mysql_result($mq, 0)){
+                return mysql_result($mq, 0);
+            }else{
+                return 0;
+            }
+        }
+        
+        public function getSimOrdByIdOrd($text){
+            $SQL = "SELECT id, id_ord, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
+//            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
+            $mq = mysql_query($SQL);
+            echo "<table>";
+            while($row = mysql_fetch_assoc($mq)){
+                echo "<tr>";
+                foreach($row as $k => $v){
+                    switch($k){
+                        case 'rodzaj':
+                            echo "<td> => $v ";
+                            break;
+                        case 'trans':
+                            echo "$v</td>";
+                            break;
+                        default:
+                            echo "<td>$v</td>";
+                            break;
+                            
+                    }
+                    
+                }
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
 }
 
