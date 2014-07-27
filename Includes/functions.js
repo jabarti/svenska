@@ -247,8 +247,9 @@ function getTr(text){
 }
 
 $(document).ready(function(){
-    $("#id_ord").keypress(function(){
+    $("#id_ord").keyup(function(){
         var tekst = $("#id_ord").val();
+//        console.log(tekst);
         $.ajax({    url:"ajax.admin.php",
                             type: 'post',
                             data: {
@@ -257,7 +258,7 @@ $(document).ready(function(){
                             },
                             success:function(result){
                                 $('#p2').html(result);
-                                $('#p2').clear();
+//                                $('#p2').clear();
 //                                return result;
                             }              
            });
