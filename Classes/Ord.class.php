@@ -756,8 +756,12 @@ class Ord {
             return $str;
         }
         
-        public function getCountSimOrdByIdOrd($text){
-            $SQL = "SELECT count(*) FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
+        // zlicza ilość rekordów w BD podobnych do wprowadzonego słowa
+        public function getCountSimOrdByIdOrd($text, $co){
+            
+            $co = $co?$co:'id_ord';
+            
+            $SQL = "SELECT count(*) FROM ".$this->table." WHERE `".$co."` like '%".$text."%';";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             if(mysql_result($mq, 0)){
@@ -767,6 +771,7 @@ class Ord {
             }
         }
         
+        // tworzy tabelkę rekordów o id_ord podobnym do wprowadzonego słowa 
         public function getSimOrdByIdOrd($text){
             $SQL = "SELECT id, id_ord, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
@@ -784,10 +789,37 @@ class Ord {
                             break;
                         default:
                             echo "<td>$v</td>";
-                            break;
-                            
+                            break;                            
                     }
-                    
+                }
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
+        
+        // tworzy tabelkę rekordów o trans podobnym do wprowadzonego słowa 
+        public function getSimOrdByTrans($text){
+            $SQL = "SELECT id, rodzaj, trans, id_ord FROM ".$this->table." WHERE `trans` like '%".$text."%';";
+//            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
+            $mq = mysql_query($SQL);
+            echo "<table>";
+            while($row = mysql_fetch_assoc($mq)){
+                echo "<tr>";
+                foreach($row as $k => $v){
+                    switch($k){
+                        case 'rodzaj':
+                            echo "<td>$v ";
+                            break;
+                        case 'trans':
+                            echo "$v</td>";
+                            break;
+                        case 'id_ord':
+                            echo "<td> => $v</td>";
+                            break;
+                        default:
+                            echo "<td>$v</td>";
+                            break;  
+                    }                
                 }
                 echo "</tr>";
             }

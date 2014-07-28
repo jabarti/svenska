@@ -71,6 +71,7 @@ $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
 $str = $Word->setSQLstringToCode($str_old);
 $str2 = $Word->setSQLstringDeCode($str);
 $str3 = $Word->getCountSimOrdByIdOrd("ok");
+//$str4 = $Word->getSimOrdByTrans("ok");
 
 echo "<br>".$str_old;
 echo "<br>".$str;
@@ -80,6 +81,7 @@ echo "<br>ILE?: ".$str3;
 echo "<br> LISTA WYRAZÓW:";
 
 $Word->getSimOrdByIdOrd("ok");
+$Word->getSimOrdByTrans("ok");
 
 if($User = new User()){
     echo "<br>OK";

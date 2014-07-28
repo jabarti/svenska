@@ -250,10 +250,11 @@ $(document).ready(function(){
     $("#id_ord").keyup(function(){
         var tekst = $("#id_ord").val();
 //        console.log(tekst);
-        $.ajax({    url:"ajax.admin.php",
+        if (tekst != ''){
+            $.ajax({    url:"ajax.admin.php",
                             type: 'post',
                             data: {
-                                action: 'text_input',
+                                action: 'text_input_id_ord',
                                 var1:   tekst
                             },
                             success:function(result){
@@ -261,6 +262,33 @@ $(document).ready(function(){
 //                                $('#p2').clear();
 //                                return result;
                             }              
-           });
+            });
+       } else {
+           $('#p2').html('');
+       }
+    }),
+    $("#trans").keyup(function(){
+        var tekst = $("#trans").val();
+        console.log(tekst);
+//        alert(tekst);
+        if (tekst != ''){
+            $.ajax({    url:"ajax.admin.php",
+                            type: 'post',
+                            data: {
+                                action: 'text_input_trans',
+                                var1:   tekst
+                            },
+                            success:function(result){
+                                $('#p2').html(result);
+//                                $('#p2').clear();
+//                                return result;
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                }              
+            });
+       } else {
+           $('#p2').html('');
+       }
     });
 });

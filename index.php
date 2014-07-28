@@ -67,7 +67,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                     </select>
                 </td>
                 <td class='label'><?php echo t("szwedzki"); ?></td>
-                <td><input id='in1' name='trans'></td>
+                <td><input id='trans' name='trans'></td>
             </tr>
             <tr>
                 <td><br></td>
