@@ -128,7 +128,7 @@ class Ord {
                 return false;
             }
         }
-
+        
         public function getId($id_ord){
 //            echo mysql_real_escape_string($id_ord);
             $SQL = sprintf("SELECT id FROM `".$this->table."` WHERE id_ord = \"".$id_ord."\";");            
@@ -777,6 +777,7 @@ class Ord {
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
+            echo "<tr><th colspan=4>Jest <span class=red>".$this->getCountSimOrdByIdOrd($text)."</span> podobnych wyników:<th><tr>";
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
@@ -803,6 +804,7 @@ class Ord {
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
+            echo "<tr><th colspan=4>Jest <span class=red>".$this->getCountSimOrdByIdOrd($text, 'trans')."</span> podobnych wyników:<th><tr>";
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
@@ -825,5 +827,51 @@ class Ord {
             }
             echo "</table>";
         }
+        
+        public function howManyOrdByPartOfSpeech($part_speech){
+            
+            $part_speech = $part_speech ? $part_speech : '???';
+                    
+            $SQL = "SELECT count(*) FROM ".$this->table." WHERE typ = '".$part_speech."';";
+//            echo $SQL;
+            $mq = mysql_query($SQL);
+            
+            if(mysql_result($mq, 0)){
+                return mysql_result($mq, 0);
+            }else{
+                return 0;
+            }
+        }
+        
+        public function howManyOrd(){
+                    
+            $SQL = "SELECT count(*) FROM ".$this->table.";";
+//            echo $SQL;
+            $mq = mysql_query($SQL);
+            
+            if(mysql_result($mq, 0)){
+                return mysql_result($mq, 0);
+            }else{
+                return 0;
+            }
+        }
+        
+        public function getTypesOfOrd(){
+            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'typ'";
+//            echo '<br>SQL:'.$sql;
+            $mq = mysql_query($sql);
+            $row = mysql_fetch_row($mq);
+//            echo "<br>row:"; var_dump($row);
+            $type = $row['1'];
+//            echo '<br>type:'.$type;
+            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
+//            echo "<br>matches";var_dump ($matches);
+//            echo "<br>matches1: ".$matches[1];
+            $vals = explode('\',\'', $matches[1]);
+//            echo "<br>Vals: ";var_dump ($vals);
+            return $vals;
+        }
+        
+        
 }
 

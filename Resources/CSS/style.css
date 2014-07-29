@@ -206,7 +206,16 @@ div.movingsearch:hover input {
 div.movingsearch:hover select {
     font-size: 14px;
 }
-        
+div.tab_info {
+    /*background: gainsboro;*/
+    /*float: left;*/
+    width: 50%;
+}
+div.tab_stat {
+    /*background: gainsboro;*/
+    float: left;
+    width: 15%;
+}
 div.guziki {
 position:fixed;
 top:5;

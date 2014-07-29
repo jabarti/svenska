@@ -218,11 +218,25 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
         </table>
     </form>
 <!--</div>    // end of div: edit_tab_contener-->
-    <p id='p1'></p>
-    <p id='p2'></p>
 
     
 <?php
+$Word = new Ord();
+
+$arr = $Word->getTypesOfOrd();
+
+echo "<div class=tab_stat>
+        <table>";
+foreach($arr as $k){
+    echo "<tr><td>".t($k).t("ów").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
+}
+    echo "<tr><td></td><td>------</td></tr>";
+    echo "<tr><td>".t("Razem").": </td><td>".$Word->howManyOrd()."</td></tr>";
+echo "</table>
+         </div>";
+
+echo "<div id=p2 class=\"tab_info\"></div>";
+
 $id_ord = 'samochod';
 if(isset($_POST['submit'])){
     if($_POST['id_ord'] !=''){

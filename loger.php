@@ -80,7 +80,7 @@ if(isset($_POST) || isset($_GET)){
         $score = new Score();
         $_SESSION['scoresOfUsr'] = $score->getScoresOfUser($_SESSION['user']);
 //        echo "<p class=red><b>".$_SESSION['scoresOfUsr'][0]."/".$_SESSION['scoresOfUsr'][1]."</b></p>";
-        $time = time()+60*60*12;
+        $time = time()+60*60*18;    // 18h
 //        $time = time()+15;
         $time_str = date($time)? date($time) : $_SESSION['user'];
 //        setcookie("log", $_SESSION['user'], time()+60*60*24);       // ciastko ważne 24h

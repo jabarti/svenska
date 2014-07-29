@@ -83,6 +83,10 @@ echo "<br> LISTA WYRAZÓW:";
 $Word->getSimOrdByIdOrd("ok");
 $Word->getSimOrdByTrans("ok");
 
+echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
+echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
+$Word->tryColumns();
+
 if($User = new User()){
     echo "<br>OK";
 }else{

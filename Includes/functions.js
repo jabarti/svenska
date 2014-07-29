@@ -219,14 +219,14 @@ $(document).ready(function(){
 function Menu(){
     location.href="#menu";
 }
+
 // umożliwia wysłanie formularzy kliknięciem "enter" - bez myszki!!!
-$(document).keypress(function(e){
+$(document).keyup(function(e){
     if (e.which == 13){
         $("#but1").click();             // accept w inserterze
         $("#btn_sub_01").click();       // accept w test
     }
 });
-
 
 $(document).ready(function(){
     $("#try").focus();      // Focusig cursor in test.php on answer field
