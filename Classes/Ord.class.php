@@ -183,7 +183,7 @@ class Ord {
         }
         
         public function getTabOfAttr(){
-            $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+            $tab = Array( 'id',     'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
@@ -805,6 +805,91 @@ class Ord {
             }
         }
         
+        // tworzy tabelkę 1go rekordów na podst ID == coś nie działa jeszcze
+        public function getTabOrdById($id){
+            $SQL = "SELECT * FROM ".$this->table." WHERE `id` = '".$id."';";
+            echo $SQL;
+            $mq = mysql_query($SQL);
+            
+            //tworzenie tabelek
+            $method='post';
+//            $liczID = 0;
+
+            echo "<div class=edit_tab_contener>";
+            while($row = mysql_fetch_assoc($mq)){
+            var_dump($row);
+            echo "<table id ='ord_".$id."'>";
+            echo "<form method=".$method." action=Edit.php >";
+            $j=0;
+            foreach($row as $k=>$v){
+
+                if($j%4==0){
+                    echo "<tr>";
+                }
+        
+                if($k == 'typ'){
+                    echo "<td>".$k."</td><td>";
+                    echo "<select name='".$k."'>
+                            <option value=".$v.">".trans($v)."</option>
+                            <option value='noun'>rzeczownik</option>
+                            <option value='verb'>czasownik</option>
+                            <option value='hjalp_verb'>czas. posiłkowy</option>
+                            <option value='adjective'>przymiotnik</option>
+                            <option value='adverb'>przysłówek</option>
+                            <option value='preposition'>przyimek</option>
+                            <option value='pronoun'>zaimek</option>
+                            <option value='conjunction'>spójnik</option>
+                            <option value='interjection'>wykrzyknik</option>
+                            <option value='numeral'>liczebnik</option>
+                            <option value='particle'>partykuła</option>
+                            <option value='wyrazenie'>wyrażenie</option>
+                            <option value='???'>???</option>
+                          </select>";        
+                    echo "</td>";
+                }  elseif($k == 'rodzaj'){
+                    echo "<td>".$k."</td><td>";
+        
+                    echo "      <select id=rodzaj name='rodzaj'>
+                                    <option value='".$v."'>".$v."</option>
+                                    <option value='att'>att</option>
+                                    <option value='ett'>ett</option>
+                                    <option value='en'>en</option>
+                                </select>";
+                    echo "</td>";
+            
+                }elseif($k == 'uwagi'){
+                    echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
+                    echo "<td>".$k."</td>";
+                    echo "<td colspan=7>";
+                    echo "<textarea d=uwagi_ta class=uwagi_ta name=".$k." >".$v."</textarea>";
+                    echo "</td>";
+                    echo "</tr>";
+                    break;
+                }else{
+                    echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
+                }
+        
+                if($j%4==3){
+                    echo "</tr>";
+                }     
+            $j++;    
+            }
+            echo "<tr> <td colspan=6></td>
+                    <td colspan=2>
+                        <button onclick='Menu();'>".t("Menu")."</button>
+                        <input id=Edit_".$id." type=submit name=edit value='".t('Edit')."'>
+                        <input id=Del_".$id." type=submit name=delete value='".t("DELETE")."'>
+                        <input id=CBedit_".$id." type=checkbox name=CBedit_".$id." value='".t('wartość')."' />
+                    </td>
+                    </tr>
+                    </form>
+                    </table>";    
+        
+//            $i++; $id++;
+            }
+            echo "</div>";      // end of div: edit_tab_contener
+        }
+        
         // tworzy tabelkę rekordów o id_ord podobnym do wprowadzonego słowa 
         public function getSimOrdByIdOrd($text){
             $SQL = "SELECT id, id_ord, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
@@ -821,6 +906,11 @@ class Ord {
                             break;
                         case 'trans':
                             echo "$v</td>";
+                            echo "<td><a href='Edit.php?sercz_id=".$id."'>=></a></td>";
+                            break;
+                        case 'id':
+                            echo "<td>$v</td>";
+                            $id=$v;
                             break;
                         default:
                             echo "<td>$v</td>";
@@ -851,6 +941,12 @@ class Ord {
                             break;
                         case 'id_ord':
                             echo "<td> => $v</td>";
+                            echo "<td><a href='Edit.php?sercz_id=".$id."'>=></a></td>";
+                            break;
+                        case 'id':
+                            echo "<td>$v</td>";
+                            $id=$v;
+//                            echo "<td><a href='Edit.php?sercz_id=".$v."'>=></a></td>";
                             break;
                         default:
                             echo "<td>$v</td>";

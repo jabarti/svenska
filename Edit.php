@@ -28,6 +28,7 @@ include 'buttons.php';
 $wher='';
 $sort='';
 $sercz='';
+$sercz_id='';
 //}
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
@@ -66,6 +67,14 @@ if(isset($_POST)){
     }
 }
 
+if(isset($_GET['sercz_id'])){
+    $id = $_GET['sercz_id'];
+    $Word = new Ord();
+//    $tabAttr = $Word->getTabOfAttr();
+    
+//    $Word->getTabOrdById($id);
+    $sercz_id = " WHERE `id` = '".$id."'";
+}
 
 //$sercz='';
 if (isset($_POST['sercz'])){
@@ -91,10 +100,13 @@ if (isset($_POST['sercz'])){
 }else{
     $sercz = '';
 }
+
 $text = "SELECT * FROM `ord` ";
+//$text = "SELECT id FROM `ord` ";
 $text .=$wher." ";
 $text .=$sercz." ";
 $text .=$sort." ";
+$text .=$sercz_id." ";
 $text .=";";
 
 //echo "<br>TEXT: ".$text;
@@ -127,6 +139,8 @@ $li=0;
 //echo "</table>";
 //echo "</div><br>";
 
+
+//tworzenie tabelek
 $method='post';
 $id = 0;
 

@@ -35,16 +35,16 @@ if(isset($_SESSION['log'])&& isset($_COOKIE['log'])){
     }
 }
 
-echo '<br><br>linia: '.__LINE__.' ROOT: '.ROOT.'<br>';
-echo 'linia: '.__LINE__.' BASE_PATH: '.BASE_PATH.'<br>';
-echo 'linia: '.__LINE__.' INCLUDE_PATH: '.INCLUDE_PATH.'<br>';
-echo 'linia: '.__LINE__.' CLASSES_PATH: '.CLASSES_PATH.'<br>';
-echo 'linia: '.__LINE__.' FILES_PATH: '.FILES_PATH.'<br>';
-echo 'linia: '.__LINE__.' PICTURES_PATH: '.PICTURES_PATH.'<br>';
-echo 'linia: '.__LINE__.' STYLES_PATH: '.STYLES_PATH.'<br>';
-
-echo 'linia: '.__LINE__.' BL_WEB_ROOT_PATH: '.BL_WEB_ROOT_PATH.'<br>';
-echo 'linia: '.__LINE__.' BL_TRANSLATION_PATH: '.BL_TRANSLATION_PATH.'<br>';
+//echo '<br><br>linia: '.__LINE__.' ROOT: '.ROOT.'<br>';
+//echo 'linia: '.__LINE__.' BASE_PATH: '.BASE_PATH.'<br>';
+//echo 'linia: '.__LINE__.' INCLUDE_PATH: '.INCLUDE_PATH.'<br>';
+//echo 'linia: '.__LINE__.' CLASSES_PATH: '.CLASSES_PATH.'<br>';
+//echo 'linia: '.__LINE__.' FILES_PATH: '.FILES_PATH.'<br>';
+//echo 'linia: '.__LINE__.' PICTURES_PATH: '.PICTURES_PATH.'<br>';
+//echo 'linia: '.__LINE__.' STYLES_PATH: '.STYLES_PATH.'<br>';
+//
+//echo 'linia: '.__LINE__.' BL_WEB_ROOT_PATH: '.BL_WEB_ROOT_PATH.'<br>';
+//echo 'linia: '.__LINE__.' BL_TRANSLATION_PATH: '.BL_TRANSLATION_PATH.'<br>';
 
 //echo 'linia: '.__LINE__.' LOCALE_PATH: '.LOCALE_PATH.'<br>';
 //echo 'linia: '.__LINE__.' UPRODUCE_UPLOAD_PATH: '.UPRODUCE_UPLOAD_PATH.'<br>';
@@ -71,12 +71,14 @@ $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
 $str = $Word->setSQLstringToCode($str_old);
 $str2 = $Word->setSQLstringDeCode($str);
 $str3 = $Word->getCountSimOrdByIdOrd("ok");
+$str3 = $Word->getTabOrdById("12");
 //$str4 = $Word->getSimOrdByTrans("ok");
 
-echo "<br>".$str_old;
-echo "<br>".$str;
-echo "<br>".$str2;
-echo "<br>ILE?: ".$str3;
+//echo "<br>".$str_old;
+//echo "<br>".$str;
+//echo "<br>".$str2;
+//echo "<br>ILE?: ".$str3;
+
 
 echo "<br> LISTA WYRAZÓW:";
 
