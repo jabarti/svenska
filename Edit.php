@@ -192,9 +192,9 @@ while($row = mysql_fetch_assoc($mq)){
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>
                         <button onclick='Menu();'>".t("Menu")."</button>
-                        <input id=Edit_".$id." type=submit name=edit value=".t('Edit').">
-                        <input id=Del_".$id." type=submit name=delete value=".t('DELETE').">
-                        <input id=CBedit_".$id." type=checkbox name=CBedit_".$id." value=".t('wartość')." />
+                        <input id=Edit_".$id." type=submit name=edit value='".t('Edit')."'>
+                        <input id=Del_".$id." type=submit name=delete value='".t("DELETE")."'>
+                        <input id=CBedit_".$id." type=checkbox name=CBedit_".$id." value='".t('wartość')."' />
                     </td>
               </tr>
         </form>
@@ -203,6 +203,9 @@ while($row = mysql_fetch_assoc($mq)){
     $i++; $id++;
 }
 echo "</div>";      // end of div: edit_tab_contener
+// Wyniki!!??? z sercza
+//echo "<div id=p3 class=\"tab_info2\"></div>";
+
 
 if(isset($_POST)){
     ?><script>//alert("w isset $_POST");</script><?php

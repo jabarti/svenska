@@ -85,7 +85,7 @@ $Word->getSimOrdByTrans("ok");
 
 echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
 echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
-$Word->tryColumns();
+//$Word->tryColumns();
 
 if($User = new User()){
     echo "<br>OK";

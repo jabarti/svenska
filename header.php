@@ -4,7 +4,8 @@
 	<title><?php echo (isset($title)?$title  : 'My Page'); ?></title>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script src="Includes/functions.js"></script>
+        <script src="<?php echo FUNCTIONS2_PATH."functions.js";?>"></script>
+        <!--<script src="Includes/functions/functions.js"></script>-->
         <link rel="shortcut icon" href="Resources/img/favicon_no_euro.ico" type="image/x-icon"/><!---->
         <link rel="Stylesheet" type="text/css" href="../Translations/translation.css" />
         <link rel="Stylesheet" type="text/css" href="Resources/CSS/style.css" />

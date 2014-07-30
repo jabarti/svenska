@@ -61,7 +61,7 @@ function start(){
     $("#rzeczownik").hide();
     $("#przymiotnik").hide();
     $("#stopniowanie").hide();
-    $("#zaimek").hide();
+    $("#liczebnik").hide();
 }
 
 $(document).ready(function(){
@@ -77,7 +77,7 @@ $(document).ready(function(){
                 $("#rzeczownik").show();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
-                $("#zaimek").hide();
+                $("#liczebnik").hide();
                 break;
   
             case 'hjalp_verb':
@@ -86,7 +86,7 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
-                $("#zaimek").hide();
+                $("#liczebnik").hide();
                 break;
                 
             case 'adjective':       // przymiotnik
@@ -94,7 +94,7 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").show();
                 $("#stopniowanie").show();
-                $("#zaimek").hide();
+                $("#liczebnik").hide();
                 break;
                 
             case 'wyrazenie':    
@@ -104,7 +104,7 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
-                $("#zaimek").hide();
+                $("#liczebnik").hide();
                 break
                 
             case 'adverb':
@@ -113,7 +113,7 @@ $(document).ready(function(){
                 $("#przymiotnik").hide();
                 $("#stopniowanie").show();
                 $("#podstawowe").addClass("nobordbottom");
-                $("#zaimek").hide();
+                $("#liczebnik").hide();
                 break;
                 
             case 'pronoun':
@@ -121,15 +121,15 @@ $(document).ready(function(){
                 $("#rzeczownik").hide();
                 $("#przymiotnik").hide();
                 $("#stopniowanie").hide();
-                $("#zaimek").show();
+                $("#liczebnik").hide();
                 break;
                 
             case'numeral':
-                $("#czasownik").show();
-                $("#rzeczownik").show();
-                $("#przymiotnik").show();
-                $("#stopniowanie").show();
-                $("#zaimek").show();
+                $("#czasownik").hide();
+                $("#rzeczownik").hide();
+                $("#przymiotnik").hide();
+                $("#stopniowanie").hide();
+                $("#liczebnik").show();
                 break;
                 
             default:
@@ -137,7 +137,7 @@ $(document).ready(function(){
                 $("#rzeczownik").show();
                 $("#przymiotnik").show();
                 $("#stopniowanie").show();
-                $("#zaimek").show();
+                $("#liczebnik").show();
                 break;
         }
         // Tu ustalamy tylko opisy do cz.mowy
@@ -289,6 +289,31 @@ $(document).ready(function(){
             });
        } else {
            $('#p2').html('');
+       }
+    })
+    $("#sercz").keyup(function(){
+        var tekst = $("#sercz").val();
+        console.log(tekst);
+//        alert(tekst);
+        if (tekst != ''){
+            $.ajax({    url:"ajax.admin.php",
+                            type: 'post',
+                            data: {
+                                action: 'text_input_sercz',
+                                var1:   tekst
+                            },
+                            success:function(result){
+                                $('#p3').html(result);
+//                                $('#p2').clear();
+//                                return result;
+                                  console.log("REZULTAT:"+result);
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                }              
+            });
+       } else {
+           $('#p3').html('');
        }
     });
 });

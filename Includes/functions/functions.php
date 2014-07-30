@@ -107,6 +107,12 @@ function trans($var){
         case 'particle':
             return "partykuła";
             break;
+        case 'glowny':
+            return "liczebnik główny";
+            break;
+        case 'porzadkowy':
+            return "liczebnik porządkowy";
+            break;
         case 'wyrazenie':
             return "wyrażenie";
             break;

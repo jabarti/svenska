@@ -30,6 +30,12 @@ switch($_REQUEST['action']){
         $Word->getSimOrdByTrans($text);
 //            echo $text;
         break;
+    case 'text_input_sercz':
+        $text = $_REQUEST['var1'];
+//        echo "Jest: <span class=red>".$Word->getCountSimOrdByIdOrd($text, 'trans')."</span> podobnych wyników:";
+//        $Word->getSimOrdByTrans($text);
+            echo $text;
+        break;
     default:
         break;
 }

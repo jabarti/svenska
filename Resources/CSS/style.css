@@ -211,6 +211,15 @@ div.tab_info {
     /*float: left;*/
     width: 50%;
 }
+div.tab_info2 {
+    background: red;
+    /*float: left;*/
+    /*width: 50%;*/
+    position: fixed;
+    top:5px;
+    right: 180px;   
+}
+
 div.tab_stat {
     /*background: gainsboro;*/
     float: left;

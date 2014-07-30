@@ -69,7 +69,7 @@ $max = $Word->getLastId();
 $rand =  mt_rand(1, $max); // wybór słowa
 //echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 
-//$rand = 254;  // For test - fixed ID of word; 
+//$rand = 510;  // For test - fixed ID of word; 
 
 $testTab = $Word->getQuestAndAnswerById($rand);
 $wordPL = $Word->getOrdPLById($rand);
@@ -81,7 +81,7 @@ echo "<table>"
    . "<form id=testForm1 action=test.php method=".$method.">";
 echo "<tr>"
                 ."<td>".t("To jest")." ".trans($testTab[0])."</td>"
-                .'<td><textarea disabled rows=1 cols=20 name="'.$testTab[0].' disabled">'.$testTab[1].'</textarea></td>';
+                .'<td><textarea rows=1 cols=20 name="'.$testTab[0].'" disabled>'.$testTab[1].'</textarea></td>';
         echo    "<td>".t("Podaj")." ".trans($testTab[2])."</td>"
                 ."<td>"
                 . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie

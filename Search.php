@@ -45,8 +45,8 @@ echo "
       </form>";
 
 echo "<form action='Edit.php' method=post>
-        <input type=text name=sercz>
-        <input type=submit value='".t("Szukaj")."'></input>
+        <input id='sercz' type='text' name='sercz'>
+        <input type='submit' value='".t("Szukaj")."'></input>
         <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
         <br>  ".t("Tip: use")." '%' ".t("for string of unknown symbols/letters")."</span>
       </form>";

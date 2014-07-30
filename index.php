@@ -169,9 +169,9 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tbody>
             </tbody>
             
-<!--            <tbody id="zaimek">
+            <tbody id="liczebnik">
             <tr>
-                <td><b><?php echo t("Zaimek"); ?></b></td>
+                <td><b><?php echo t("Liczebnik"); ?></b></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
@@ -179,17 +179,17 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td colspan='7'></td>
             </tr>            
             <tr>
-                <td class='label'>common</td>
-                <td><input id='in1' name='common'></td>
-                <td class='label'>plural</td>
-                <td><input id='in1' name='plural'></td>
+                <td class='label'><?php echo t("glowny"); ?></td>
+                <td><input id='in1' name='glowny'></td>
+                <td class='label'><?php echo t("porzadkowy"); ?></td>
+                <td><input id='in1' name='porzadkowy'></td>
                  <td colspan="4"></td>
             </tr>
             <tr>
                 <td><br></td>
                 <td colspan='7'></td>
             </tr>    
-            </tbody>-->
+            </tbody>
             
             <tbody id='inne'>
             <tr>
@@ -228,7 +228,19 @@ $arr = $Word->getTypesOfOrd();
 echo "<div class=tab_stat>
         <table>";
 foreach($arr as $k){
-    echo "<tr><td>".t($k).t("ów").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
+    switch($k){
+        case'???':
+        case'wyrazenie':
+            echo "<tr><td>".t($k).": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
+            break;
+        case'hjalp_verb':
+            echo "<tr><td>".t("czasowników posiłkowych").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
+            break;
+        default:
+            echo "<tr><td>".t($k).t("ów").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
+            break;
+    }
+    
 }
     echo "<tr><td></td><td>------</td></tr>";
     echo "<tr><td>".t("Razem").": </td><td>".$Word->howManyOrd()."</td></tr>";
@@ -263,6 +275,8 @@ if(isset($_POST['submit'])){
         $st_wyzszy =            $_POST['st_wyzszy'];
         $st_najwyzszy =         $_POST['st_najwyzszy'];
         $wymowa =               $_POST['wymowa'];
+        $glowny =               $_POST['glowny'];
+        $porzadkowy =           $_POST['porzadkowy'];
         $uwagi =                $_POST['uwagi'];
 
         ?><script>//one();</script><?php
@@ -277,6 +291,7 @@ if(isset($_POST['submit'])){
                         $supine, $imperative, $present_participle, $past_participle, 
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
+                        $glowny, $porzadkowy,
                         $wymowa, $uwagi);
     } 
     
