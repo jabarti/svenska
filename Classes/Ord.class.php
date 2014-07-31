@@ -121,8 +121,9 @@ class Ord {
             return $this->id_ord;
         }
         
-        public function getLastId() {
-            $SQL = sprintf("SELECT max(id) FROM `".$this->table."`;");
+        public function getLastId($tabLH) {
+            $tabLH = $tabLH ? 'LH' : '';
+            $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
             
 //            echo "<br>".$SQL;
             
@@ -906,7 +907,7 @@ class Ord {
                             break;
                         case 'trans':
                             echo "$v</td>";
-                            echo "<td><a href='Edit.php?sercz_id=".$id."'>=></a></td>";
+                            echo "<td><a href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
                             break;
                         case 'id':
                             echo "<td>$v</td>";
@@ -941,7 +942,7 @@ class Ord {
                             break;
                         case 'id_ord':
                             echo "<td> => $v</td>";
-                            echo "<td><a href='Edit.php?sercz_id=".$id."'>=></a></td>";
+                            echo "<td><a href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
                             break;
                         case 'id':
                             echo "<td>$v</td>";
@@ -1000,6 +1001,87 @@ class Ord {
             $vals = explode('\',\'', $matches[1]);
 //            echo "<br>Vals: ";var_dump ($vals);
             return $vals;
+        }
+        
+        public function copyFromOrdLHToOrd(){
+            $idLH = $this->getLastId(true);
+//            $idLH = 3;
+            $idDB = $this->getLastId();
+            
+//            echo "<br>LastId from LH=".$idLH;
+//            echo "<br>LastId from DB=".$idDB;
+            
+            for ($i=1; $i<$idLH; $i++){
+                $arr = Array();
+                $SQL_LH = sprintf("SELECT * FROM `".$this->table."LH` WHERE `id` = ".$i.";");
+//                $SQL_DB = sprintf("SELECT id FROM `".$this->table."` WHERE `id` = ".$i.";"); /// tylko do spr czy jest taki rekord
+                $SQL_DB = sprintf("SELECT id FROM `".$this->table."TEST` WHERE `id` = ".$i.";"); /// tylko do spr czy jest taki rekord
+                
+//                echo "<br>".$SQL;
+                $mq_LH = mysql_query($SQL_LH);
+                if(mysql_affected_rows()){
+//                    echo "<br>$i=true";
+                    $row_LH = mysql_fetch_assoc($mq_LH);
+//                    var_dump($row);
+                    
+                    foreach ($row_LH as $k => $v){
+//                        echo "<br>$k => $v, decode: ".$this-> setSQLstringDeCode($v);
+                        array_push($arr, array($k ,$this-> setSQLstringDeCode($v)));
+                    }
+//                    echo "<br>";
+//                    var_dump($arr);
+//                    echo "<br>Arr[00]: ".$arr[0][0]."=>".$arr[0][1];
+//                    echo "<br>Arr[01]: ".$arr[1][0]."=>".$arr[1][1];
+                    
+                    $mq_DB = mysql_query($SQL_DB); // można dopiero tu, bo inaczej go affected_rows może wykryć
+                    
+                    if(mysql_affected_rows()){  // czyli jest rekord o takim num w DB!
+//                        echo "<br>JEST TAKI ID W ".$this->table."TEST";
+                        $SQL_INS = "UPDATE `".$this->table."TEST` SET ";
+                        $roz = count($arr);
+                        for ($j=1; $j<$roz; $j++){
+                            for ($t=0; $t<2; $t++){
+//                                echo "<br>arr[$j,$t]=".$arr[$j][$t];
+                                if($t==0 ){
+                                    $SQL_INS .= "`".$arr[$j][$t]."` = ";
+                                }elseif($j != $roz-1){
+                                    $SQL_INS .= "'".$arr[$j][$t]."', ";
+                                }else{
+                                     $SQL_INS .= "'".$arr[$j][$t]."' WHERE `id` = ".$arr[0][1].";";
+                                }
+                            }
+                        }      
+                    }else{
+//                        echo "<br>NIE MA TAKIEGO ID W ".$this->table."TEST => INSERT";
+                        $SQL_INS = "INSERT INTO `".$this->table."TEST` VALUES (";
+                        $roz = count($arr);
+                        for ($j=0; $j<$roz; $j++){
+                            for ($t=0; $t<2; $t++){
+//                                echo "<br>arr[$j,$t]=".$arr[$j][$t];
+                                if($t==0 ){
+//                                    $SQL_INS .= "`".$arr[$j][$t]."` = ";
+                                }elseif($j != $roz-1){
+                                    $SQL_INS .= "'".$arr[$j][$t]."', ";
+                                }else{
+                                     $SQL_INS .= "'".$arr[$j][$t]."'); ";
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                    echo "<br> INSERT/UPDATE SQL FINN: ".$SQL_INS;
+                    $mq = mysql_query($SQL_INS);
+                    if(mysql_affected_rows()){
+                        echo "<br>WESZŁO!!!!!!!!";
+                    }else{
+                        echo "<br>NIE WESZŁO!!!!!!!!";
+                    }
+                    
+                }else{
+                    echo "<br>$i=false";
+                }
+            }
         }
         
         

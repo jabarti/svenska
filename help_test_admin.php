@@ -71,7 +71,13 @@ $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
 $str = $Word->setSQLstringToCode($str_old);
 $str2 = $Word->setSQLstringDeCode($str);
 $str3 = $Word->getCountSimOrdByIdOrd("ok");
-$str3 = $Word->getTabOrdById("12");
+//$str3 = $Word->getTabOrdById("3");       // To jest próbna tabela TODO!!!!!
+echo "<br>";
+
+//UŻYWAĆ OSTROŻNIE!!!!
+$Word->copyFromOrdLHToOrd();
+
+echo "<br>";
 //$str4 = $Word->getSimOrdByTrans("ok");
 
 //echo "<br>".$str_old;
