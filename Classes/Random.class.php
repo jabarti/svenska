@@ -25,54 +25,105 @@ class Random {
 //            
 //        }
         
-        public function setData($word_id, $countOfWordId, $ques_num, $countOfQuesNum){
+//        public function setData($word_id, $countOfWordId, $ques_num, $countOfQuesNum){
+        public function setData($word_id, $ques_num){
             $this->word_id = $word_id;
-            $this->countOfWordId = $countOfWordId;
+//            $this->countOfWordId = $countOfWordId;
             $this->ques_num = $ques_num;
-            $this->countOfQuesNum = $countOfQuesNum;
+//            $this->countOfQuesNum = $countOfQuesNum;
                         
-            $this->id = $this->getIdByWordId($word_id);
+            $this->id = $this->getIdByWordIdAndQuestNum($word_id, $ques_num);
             
             if($this->id === false){
-                echo "<br> No ID like this! LET's INSERT";
+                
+                $this->id = ((int)$this->getLastId())+1;
+//                echo "<br> No ID like this! LET's INSERT";
+//                INSERT INTO `random`(`id`, `word_id`, `countOfWordId`, `ques_num`, `countOfQuesNum`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])
+                $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `word_id`, `countOfWordId`, `ques_num`, `countOfQuesNum`) VALUES ('".$this->id."', '".$this->word_id."', '1', '".$this->ques_num."', '1');");
+//                echo "<br> SQL = ".$SQL;
+                $mq = mysql_query($SQL);
+                
+                if(mysql_affected_rows()){
+//                    echo "<br>WESZŁO do RAND";
+                }else{
+                    echo "<br>NIE WESZŁO do RAND";
+                }
             }else{
-                echo "<br> Is ID like this! LET's UPDATE";
+//                echo "<br> Is ID like this! LET's UPDATE";
                 $row = $this->getParamsFromDBById();
+                
+                $SQL = "UPDATE `".$this->table."` SET ";
+                
+                
+                foreach($row as $k => $v){
+                    switch($k){
+                        case 'id':
+                            $tag = " WHERE `$k` ='".$v."' AND ";
+                            break;
+                        case 'word_id':
+                            $tag .= " `$k` ='".$v."' AND";
+                            break;
+                        case 'countOfWordId':
+                            $v = ((int)$v)+1;
+                            $SQL .= "`$k` ='".$v."',";
+                            break;
+                        case 'ques_num':
+                            $tag .= " `$k` ='".$v."';";
+                            break;
+                        case 'countOfQuesNum':
+                            $v = ((int)$v)+1;
+                            $SQL .= "`$k` ='".$v."'";
+                            break;
+                    }
+                }
+                $SQL .= $tag;
+                
+//                echo "<br> fin SQl: ".$SQL;
+                
+                $mq = mysql_query($SQL);
+                
+                if(mysql_affected_rows()){
+//                    echo "<br>WESZŁO do RAND";
+                }else{
+                    echo "<br>NIE WESZŁO do RAND";
+                }
             }
             
-            $this->getParams();
+//            $this->getParams();
             
         }
         
-        public function getIdByWordId($word_id){
-            $SQL = sprintf("SELECT id FROM ".$this->table." WHERE `word_id` = '".$word_id."';");
-            echo "<br>======<br>SQL: ".$SQL;
+        public function getIdByWordIdAndQuestNum($word_id, $ques_num){
+            $SQL = sprintf("SELECT id FROM ".$this->table." WHERE `word_id` = '".$word_id."' AND `ques_num` = '".$ques_num."';");
+//            echo "<br>======<br>SQL: ".$SQL;
             $mq = mysql_query($SQL);
             
 //            $res=0;
             
             if(mysql_affected_rows()){
-                echo "<br> JEST Stat dla Słowa o ID=".$word_id;
+//                echo "<br> JEST Stat dla Słowa o ID=".$word_id;
                 $res = mysql_result($mq,0);
             }else{
-                echo "<br> NIE MA Stat dla Słowa o ID=".$word_id;    
+//                echo "<br> NIE MA Stat dla Słowa o ID=".$word_id;    
                 $res=false;
             }
-            echo "<br>ID: ".$res;
+//            echo "<br>ID: ".$res;
             return $res;
         }
         
         public function getParamsFromDBById(){
 
             $SQL = sprintf("SELECT * FROM ".$this->table." WHERE `id` = '".$this->id."';");
-            echo "<br>======<br>SQL: ".$SQL;
+//            echo "<br>======<br>SQL: ".$SQL;
             $mq = mysql_query($SQL);
             
-//            $res=0;
-            
             if(mysql_affected_rows()){
-                $row = mysql_fetch_row($mq);
-                echo '<br>';var_dump($row);
+//                $row = mysql_fetch_row($mq);
+                $row = mysql_fetch_assoc($mq);
+                
+//                echo '<br>Pobrany rekord:';var_dump($row);
+
+                return $row;
             }
         }
     
@@ -82,5 +133,21 @@ class Random {
             echo "<br>Oto Parametr tego obj o nazwie word_id:".$this->word_id;
             echo "<br>Oto Parametr tego obj o nazwie ques_num:".$this->ques_num;
             echo "<br>Oto Parametr tego obj o nazwie countOfQuesNum:".$this->countOfQuesNum;
+        }
+        
+        public function getLastId($tabLH) {
+            $tabLH = $tabLH ? 'LH' : '';
+            $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
+            
+//            echo "<br>".$SQL;
+            
+            $res = mysql_fetch_row(mysql_query($SQL));
+            if (mysql_affected_rows()){
+//            echo "<br>res[0]:".$res[0];
+                return $res[0];
+            }else{
+                echo "<br>ERROR getLastId()";
+                return false;
+            }
         }
 }

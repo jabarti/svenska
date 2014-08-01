@@ -69,7 +69,8 @@ $max = $Word->getLastId();
 $rand =  mt_rand(1, $max); // wybór słowa
 //echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 
-//$rand = 510;  // For test - fixed ID of word; 
+//$rand = 123;  // For test - fixed ID of word; 
+
 
 $testTab = $Word->getQuestAndAnswerById($rand);
 $wordPL = $Word->getOrdPLById($rand);

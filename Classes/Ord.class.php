@@ -566,7 +566,8 @@ class Ord {
             return $res;
         }
         
-        public function getQuestAndAnswerById($id){
+        public function getQuestAndAnswerById($id, $rand2){
+            
             $quest = $this->getQuestionById($id);
             
             $tab_All = $this->getPropAnsTabById($id);
@@ -596,6 +597,10 @@ class Ord {
             $len = count($row_NoEmFin);
             
             $rand = mt_rand(1, $len);
+            
+            // Tu wrzuca do bazy statystyk dot losowań wyrazów i quest!!!
+            $Random = new Random();
+            $Random->setData($id, $rand);
             
 //            echo "<br>".__LINE__." / Rand:".$rand;
             

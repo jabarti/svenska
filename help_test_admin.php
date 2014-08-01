@@ -62,8 +62,9 @@ if($_SESSION['log'] == true && $_SESSION['user'] == 'Bartek'){
 if($Random = new Random()){
     echo "<br>Random OK";
 //    $Random->getIdByWordId("7");
-    $Random->setData(1, 3, 5, 7);
-    $Random->setData(2, 7, 4, 3);
+//    $Random->setData(1, 3, 5, 7);
+//    $Random->setData(2, 7, 4, 3);
+//    $Random->setData(1, 7, 3, 3);
     // test id 19750
 }else{
     echo "<br>Random NOT OK: Object of User class not created!";
