@@ -104,6 +104,8 @@ try{
     require_once CLASSES_PATH.'Ord.class.php';
     require_once CLASSES_PATH.'User.class.php';
     require_once CLASSES_PATH.'Score.class.php';
+    require_once CLASSES_PATH.'Random.class.php';
+    
     require_once FUNCTIONS_PATH.'functions.php';
     if(isset($_SESSION['server'])){
         if($_SESSION['server']=='server'){

@@ -279,19 +279,19 @@ if(isset($_POST)){
             if( mysql_affected_rows()){
                 ?><script>alert("WESZŁO do PLLH (update)");</script><?php
             }else{
-                ?><script>alert("NIE WESZŁO do PLLH (update)");</script><?php
+                ?><script>//alert("NIE WESZŁO do PLLH (update)");</script><?php
                 // TODO: czyli nie ma ord o taki mnumerze i trzeba insertować!!!
                 // Wpleść kolejny SQL????
                 mysql_query($sql_textErrINSPLLH);
                 if(mysql_affected_rows()){
-                    ?><script>alert("WESZŁO do PLLH (INSERTEM)");</script><?php
+                    ?><script>//alert("WESZŁO do PLLH (INSERTEM)");</script><?php
                 }else{
-                    ?><script>alert("NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
+                    ?><script>//alert("NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
                 }
             }
             header("Location: Edit.php");
         }else{
-            ?><script>alert("NIE WESZŁO do BD");</script><?php
+            ?><script>//alert("NIE WESZŁO do BD");</script><?php
         }  
     }
     elseif(isset($_POST['delete'])){
@@ -335,7 +335,7 @@ if(isset($_POST)){
             if( mysql_query($sql_textPLLH)){
                 ?><script>//alert("WESZŁO do PLLH");</script><?php
             }else{
-                ?><script>alert("NIE WESZŁO do PLLH");</script><?php
+                ?><script>//alert("NIE WESZŁO do PLLH");</script><?php
 
             }
             header("Location: Edit.php");

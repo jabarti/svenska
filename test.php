@@ -89,19 +89,23 @@ echo "<tr>"
                 . "<input type=hidden name=quest_p3 value='".$testTab[0]."'>"       // to jest.. 
                 . "<input type=hidden name=quest_p4 value='".$wordPL."'>";          // słowo PL
         if ($testTab[2] == "typ"){
-            echo "<select name='try'>
-                        <option value='noun'>rzeczownik</option>
-                        <option value='verb'>czasownik</option>
-                        <option value='hjalp_verb'>czas. posiłkowy</option>
-                        <option value='adjective'>przymiotnik</option>
-                        <option value='adverb'>przysłówek</option>
-                        <option value='preposition'>przyimek</option>
-                        <option value='pronoun'>zaimek</option>
-                        <option value='conjunction'>spójnik</option>
-                        <option value='interjection'>wykrzyknik</option>
-                        <option value='wyrazenie'>wyrażenie</option>
-                        <option value='???'>???</option>
-                </select>";
+            ?> <select name='try'>
+                        <option ><?php echo t("część mowy"); ?></option>
+                        <!--<option ></option>-->
+                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo t("rzeczownik", "en"); ?> )</option>
+                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo t("czasownik", "en"); ?> )</option>
+                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo t("czas. posiłkowy", "en"); ?> )</option>
+                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo t("przymiotnik", "en"); ?> )</option>
+                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo t("przysłówek", "en"); ?> )</option>
+                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo t("przyimek", "en"); ?> )</option>
+                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo t("zaimek", "en"); ?> )</option>
+                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo t("spójnik", "en"); ?> )</option>
+                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo t("wykrzyknik", "en"); ?> )</option>
+                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo t("liczebnik", "en"); ?> )</option>
+                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo t("partykuła", "en"); ?> )</option>
+                        <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
+                        <option value="???">???</option>
+                </select><?php
         }else{
             echo      "<textarea id=try rows=1 cols=20 name=try></textarea>";
         }
@@ -116,6 +120,22 @@ echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
     ."</form>"
     ."</table>";
 
+?>
+<button id="butt_diak_01" value="ą">ą</button>
+<button id="butt_diak_02" value="ć">ć</button>
+<button id="butt_diak_03" value="ę">ę</button>
+<button id="butt_diak_04" value="ł">ł</button>
+<button id="butt_diak_05" value="ń">ń</button>
+<button id="butt_diak_06" value="ó">ó</button>
+<button id="butt_diak_07" value="ś">ś</button>
+<button id="butt_diak_08" value="ź">ź</button>
+<button id="butt_diak_09" value="ż">ż</button>
+<br>
+<button id="butt_diak_10" value="ä">ä</button>
+<button id="butt_diak_11" value="å">å</button>
+<button id="butt_diak_12" value="ö">ö</button>
+
+<?php
 //if(isset($_POST['test']))
 //    echo $_POST['test'];
 //

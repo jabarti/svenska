@@ -59,59 +59,65 @@ echo $_SESSION['user'];
 //if(true){
 if($_SESSION['log'] == true && $_SESSION['user'] == 'Bartek'){   
     
+if($Random = new Random()){
+    echo "<br>Random OK";
+//    $Random->getIdByWordId("7");
+    $Random->setData(1, 3, 5, 7);
+    $Random->setData(2, 7, 4, 3);
+    // test id 19750
+}else{
+    echo "<br>Random NOT OK: Object of User class not created!";
+}
+
 
 
 if($Word = new Ord()){
     echo "<br>OK";
+    echo "<br>Cięcie stringa do bazy:";
+    $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
+    $str = $Word->setSQLstringToCode($str_old);
+    $str2 = $Word->setSQLstringDeCode($str);
+    $str3 = $Word->getCountSimOrdByIdOrd("ok");
+    //$str3 = $Word->getTabOrdById("3");       // To jest próbna tabela TODO!!!!!
+    echo "<br>";
+    //UŻYWAĆ OSTROŻNIE!!!!
+//    $Word->copyFromOrdLHToOrd();
+    //$str4 = $Word->getSimOrdByTrans("ok");
+
+    //echo "<br>".$str_old;
+    //echo "<br>".$str;
+    //echo "<br>".$str2;
+    //echo "<br>ILE?: ".$str3;
+    
+    echo "<br>";
+
+    echo "<br> LISTA WYRAZÓW:";
+
+    $Word->getSimOrdByIdOrd("ok");
+    $Word->getSimOrdByTrans("ok");
+
+    echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
+    echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
+    //$Word->tryColumns();
+    $max = $Word->getLastId();
+
+    $Word->findEmptyOrdId();
+    $Word->getOrdArrByType("pronoun");
+    
 }else{
     echo "<br>NOT OK: Object of Ord class not created!";
 }
-echo "<br>Cięcie stringa do bazy:";
-$str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
-$str = $Word->setSQLstringToCode($str_old);
-$str2 = $Word->setSQLstringDeCode($str);
-$str3 = $Word->getCountSimOrdByIdOrd("ok");
-//$str3 = $Word->getTabOrdById("3");       // To jest próbna tabela TODO!!!!!
-echo "<br>";
-
-//UŻYWAĆ OSTROŻNIE!!!!
-$Word->copyFromOrdLHToOrd();
-
-echo "<br>";
-//$str4 = $Word->getSimOrdByTrans("ok");
-
-//echo "<br>".$str_old;
-//echo "<br>".$str;
-//echo "<br>".$str2;
-//echo "<br>ILE?: ".$str3;
-
-
-echo "<br> LISTA WYRAZÓW:";
-
-$Word->getSimOrdByIdOrd("ok");
-$Word->getSimOrdByTrans("ok");
-
-echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
-echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
-//$Word->tryColumns();
 
 if($User = new User()){
-    echo "<br>OK";
+    echo "<br>USER OK";
+    $User->getUsersNames();
 }else{
-    echo "<br>NOT OK: Object of User class not created!";
+    echo "<br>USER NOT OK: Object of User class not created!";
 }
 
-$max = $Word->getLastId();
 
-
-$Word->findEmptyOrdId();
-
-
-$Word->getOrdArrByType("pronoun");
-
-$User->getUsersNames();
-$str='try';
-echo "<br>SHA: ".sha1($str);
+    $str='try';
+    echo "<br>SHA: ".sha1($str);
 
 } else {
     require 'loger.php';
@@ -140,5 +146,5 @@ setInterval(function() {
     
 }, 1000);
     </script>
-    
+<?php
     
