@@ -52,8 +52,8 @@ echo "  <tr>
             <th>".t("L.p.")."</th>
             <th>".t("Słowo PL")."</th>
             <th>".t("Część mowy")."</th>
-            <th>".t("rodzajnik")."</th>
-            <th>".t("słowo SE")."</th>
+            <th>".t("Rodzajnik")."</th>
+            <th>".t("Słowo SE")."</th>
             <th>".t("Formy")."</th>
         </tr>" ; 
             
@@ -63,25 +63,30 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
        $attr = 0;
        foreach($row as $k => $v){
            if($attr < 5){
-                echo "<td id=norm>".$v."</td>";
+                echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
            }else{
                 if($attr==5 && $v!=''){
                     if(!$flat)
-                        echo "<td id=piec>".substr($k,0,6).": <span class=red>$v</span>,<br>";
+                        echo "<td id=piec>".substr($k,0,6).": <span class=red>$v</span>,<br>";  // kolumna z info w trybie bez flat, pierwszy wiersz!!
                     else
-                        echo "<td id=piec>$v, ";
-                }
+                        echo "<td id=piec>$v, ";   // kolumna z info Z FLATEM, 1-szy wyraz
+                    }
                 elseif($attr==5 && $v==''){
-                    echo "<td id=piec>";
+                    echo "<td id=piec>";   // puste albo 1szy wyraz
                 }
                 elseif($attr==(count($row))){
                     echo "</td>";
                 }
                 elseif($v!='' && $k !='wymowa'){
-                    if(!$flat)
+                    if(!$flat){
                         echo substr($k,0,6).": <span class=red>$v</span>,<br>";
-                    else
-                        echo "$v, ";
+                    }else{
+                        if($k == "uwagi" || $k == "kategoria" ){
+                            echo "<br><span class=blue><b>".t($k)."</b></span>: $v, ";
+                        }else{
+                            echo "$v, ";
+                        }
+                    }
                 }
                 else {
                     continue;

@@ -10,13 +10,6 @@
  * ************************************************* */
 ob_start(); // żeby sie dało reloadeować
 
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = 'Svenska | Edit';
-//include 'header.php';
-////include 'flag.php';
-//include 'buttons.php';
-
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
@@ -45,6 +38,9 @@ if(isset($_POST)){
                 break;
             case 'alf':
                 $sort= "ORDER BY id_ord";
+                break;
+            case 'cat':
+                $sort= "ORDER BY kategoria";
                 break;
             default:
                 ?><script>//alert("DEFAULT sort");</script><?php
@@ -158,8 +154,9 @@ while($row = mysql_fetch_assoc($mq)){
         
         if($k == 'typ'){
             echo "<td>".$k."</td><td>";
-            echo "<select name='".$k."'>
-                        <option value=".$v.">".trans($v)."</option>
+            echo "<select name='".$k."'>";
+            ?>
+<!--                        <option value=".$v.">".trans($v)."</option>
                         <option value='noun'>rzeczownik</option>
                         <option value='verb'>czasownik</option>
                         <option value='hjalp_verb'>czas. posiłkowy</option>
@@ -172,21 +169,70 @@ while($row = mysql_fetch_assoc($mq)){
                         <option value='numeral'>liczebnik</option>
                         <option value='particle'>partykuła</option>
                         <option value='wyrazenie'>wyrażenie</option>
-                        <option value='???'>???</option>
-                </select>";        
+                        <option value='???'>???</option>-->
+
+          <?php   echo" <option value=".$v.">".trans($v)." ( ".t("zapisane")." )</option>"; 
+          
+                        $Word = new Ord();
+                        $OrdCat = $Word->getTypesOfOrd();
+//                            echo "<option>".t("część mowy")."</option>"
+//                                    . "<option ></option>";
+                        foreach($OrdCat as $k){
+                            if(strlen(t($k)) > 14 || strlen(t($k, "en")) > 14)
+                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(t($k,"en"),0,14)." ) </option>";
+                            else
+                                echo "<option value=$k>".t($k)." ( ".t($k,"en")." )</option>";
+                        }   
+                        ?>
+          
+          
+          
+          ?>
+<!--                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo tl("rzeczownik", "en"); ?> )</option>
+                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo tl("czasownik", "en"); ?> )</option>
+                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo tl("czas. posiłkowy", "en"); ?> )</option>
+                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo tl("przymiotnik", "en"); ?> )</option>
+                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo tl("przysłówek", "en"); ?> )</option>
+                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo t("przyimek", "en"); ?> )</option>
+                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo tl("zaimek", "en"); ?> )</option>
+                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo tl("spójnik", "en"); ?> )</option>
+                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo tl("wykrzyknik", "en"); ?> )</option>
+                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo tl("liczebnik", "en"); ?> )</option>
+                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo tl("partykuła", "en"); ?> )</option>
+                        <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
+                        <option value="???">???</option>-->
+                        
+                </select>
+             <?php
              echo "</td>";
-        }  elseif($k == 'rodzaj'){
+        }  
+        elseif($k == 'rodzaj'){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=rodzaj name='rodzaj'>
-                            <option value='".$v."'>".$v."</option>
-                            <option value='att'>att</option>
-                            <option value='ett'>ett</option>
-                            <option value='en'>en</option>
-                        </select>";
-            echo "</td>";
-            
-        }elseif($k == 'uwagi'){
+                            <option value='".$v."'>".$v."</option>";
+                            $Word = new Ord();
+                            $OrdCat = $Word->getRodzOfOrd();
+                            foreach($OrdCat as $k){
+                            echo "<option value=$k>".t($k)."</option>";
+                        }
+            echo "      </select>";
+            echo "</td>";            
+        }
+        elseif($k == 'kategoria'){
+            echo "<td>".$k."</td><td>";
+        
+            echo "      <select id=kategoria name='kategoria'>
+                            <option value='".$v."'>".$v."</option>";
+                        $Word = new Ord();
+                        $OrdCat = $Word->getCategoriesOfOrd();
+                        foreach($OrdCat as $k){
+                            echo "<option value=$k>".t($k)."</option>";
+                        }
+            echo "      </select>";
+            echo "</td>";              
+        }
+        elseif($k == 'uwagi'){
             echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
                 echo "<td>".$k."</td>";
                 echo "<td colspan=7>";
@@ -194,7 +240,8 @@ while($row = mysql_fetch_assoc($mq)){
                 echo "</td>";
             echo "</tr>";
             break;
-        }else{
+        }
+        else{
             echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
         }
         
@@ -268,7 +315,7 @@ if(isset($_POST)){
         $sql_textPLLH .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
 //        $sql_textPLLH = str_replace($this->table."LH", $this->table, $sql_text);
         
-//        echo '<br>SQL: '.$sql_text;
+        echo '<br>SQL: '.$sql_text;
 //        echo '<br>SQL_PLLH: '.$sql_textPLLH;
 //        echo '<br>$sql_textErrINSPLLH: '.$sql_textErrINSPLLH;
         

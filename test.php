@@ -64,7 +64,7 @@ if($Word = new Ord()){
     echo "<br>NOT OK: Object of Ord class not created!";
 }
 
-$max = $Word->getLastId();
+$max = $Word->getLastId(false);
 
 $rand =  mt_rand(1, $max); // wybór słowa
 //echo "<br>".__LINE__." / Słowo(Rand):".$rand;
@@ -93,17 +93,17 @@ echo "<tr>"
             ?> <select name='try'>
                         <option ><?php echo t("część mowy"); ?></option>
                         <!--<option ></option>-->
-                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo t("rzeczownik", "en"); ?> )</option>
-                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo t("czasownik", "en"); ?> )</option>
-                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo t("czas. posiłkowy", "en"); ?> )</option>
-                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo t("przymiotnik", "en"); ?> )</option>
-                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo t("przysłówek", "en"); ?> )</option>
-                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo t("przyimek", "en"); ?> )</option>
-                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo t("zaimek", "en"); ?> )</option>
-                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo t("spójnik", "en"); ?> )</option>
-                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo t("wykrzyknik", "en"); ?> )</option>
-                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo t("liczebnik", "en"); ?> )</option>
-                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo t("partykuła", "en"); ?> )</option>
+                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo tl("rzeczownik", "en"); ?> )</option>
+                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo tl("czasownik", "en"); ?> )</option>
+                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo tl("czas. posiłkowy", "en"); ?> )</option>
+                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo tl("przymiotnik", "en"); ?> )</option>
+                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo tl("przysłówek", "en"); ?> )</option>
+                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo tl("przyimek", "en"); ?> )</option>
+                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo tl("zaimek", "en"); ?> )</option>
+                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo tl("spójnik", "en"); ?> )</option>
+                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo tl("wykrzyknik", "en"); ?> )</option>
+                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo tl("liczebnik", "en"); ?> )</option>
+                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo tl("partykuła", "en"); ?> )</option>
                         <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
                         <option value="???">???</option>
                 </select><?php

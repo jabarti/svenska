@@ -39,31 +39,47 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td><input id='id_ord' name='id_ord'></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
-                    <select id=typ name='typ'>
+<!--                    <select id=typ name='typ'>
                         <option ><?php echo t("część mowy"); ?></option>
-                        <!--<option ></option>-->
-                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo t("rzeczownik", "en"); ?> )</option>
-                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo t("czasownik", "en"); ?> )</option>
-                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo t("czas. posiłkowy", "en"); ?> )</option>
-                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo t("przymiotnik", "en"); ?> )</option>
-                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo t("przysłówek", "en"); ?> )</option>
-                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo t("przyimek", "en"); ?> )</option>
-                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo t("zaimek", "en"); ?> )</option>
-                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo t("spójnik", "en"); ?> )</option>
-                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo t("wykrzyknik", "en"); ?> )</option>
-                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo t("liczebnik", "en"); ?> )</option>
-                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo t("partykuła", "en"); ?> )</option>
+                        <option ></option>
+                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo tl("rzeczownik", "en"); ?> )</option>
+                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo tl("czasownik", "en"); ?> )</option>
+                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo tl("czas. posiłkowy", "en"); ?> )</option>
+                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo tl("przymiotnik", "en"); ?> )</option>
+                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo tl("przysłówek", "en"); ?> )</option>
+                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo tl("przyimek", "en"); ?> )</option>
+                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo tl("zaimek", "en"); ?> )</option>
+                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo tl("spójnik", "en"); ?> )</option>
+                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo tl("wykrzyknik", "en"); ?> )</option>
+                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo tl("liczebnik", "en"); ?> )</option>
+                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo tl("partykuła", "en"); ?> )</option>
                         <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
                         <option value="???">???</option>
+                    </select>-->
+                    <select id=typ name='typ'>
+                        <?php
+                        $Word = new Ord();
+                        $OrdCat = $Word->getTypesOfOrd();
+                            echo "<option>".t("część mowy")."</option>";
+                        foreach($OrdCat as $k){
+                            if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
+                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
+                            else
+                                echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
+                        }   
+                        ?>
                     </select>
                 </td>
                 <td class='label'><?php echo t("rodzaj"); ?></td>
                 <td>
                     <select id=rodzaj name='rodzaj'>
-                            <option value=""></option>
-                            <option value="att">att</option>
-                            <option value="ett">ett</option>
-                            <option value="en">en</option>
+                        <?php
+                        $Word = new Ord();
+                        $OrdCat = $Word->getRodzOfOrd();
+                        foreach($OrdCat as $k){
+                            echo "<option value=$k>".$k."</option>";
+                        }
+                        ?>
                     </select>
                 </td>
                 <td class='label'><?php echo t("szwedzki"); ?></td>
@@ -207,8 +223,19 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>
             <tr>
                 <td class='label'><?php echo t("uwagi"); ?></td>
-                <td colspan="4"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"></textarea></td>
-                <td colspan='2'></td>
+                <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"></textarea></td>
+                <td class='label'><?php echo t("kategoria"); ?> </td>
+                <td colspan='2'>
+                    <select id=kategoria name='kategoria'>
+                        <?php
+                        $Word = new Ord();
+                        $OrdCat = $Word->getCategoriesOfOrd();
+                        foreach($OrdCat as $k){
+                            echo "<option value=$k>".t($k)."</option>";
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan='7'></td>
@@ -277,6 +304,7 @@ if(isset($_POST['submit'])){
         $wymowa =               $_POST['wymowa'];
         $glowny =               $_POST['glowny'];
         $porzadkowy =           $_POST['porzadkowy'];
+        $kategoria =            $_POST['kategoria'];
         $uwagi =                $_POST['uwagi'];
 
         ?><script>//one();</script><?php
@@ -284,7 +312,7 @@ if(isset($_POST['submit'])){
         
         $Word = new Ord();
 //        echo "<br>id of a: ".$Word->getId($id_ord);
-        echo "<br>Last index: ".$Word->getLastId();
+        echo "<br>Last index: ".$Word->getLastId(false);
        
         
         $Word->setData( $id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
@@ -292,7 +320,7 @@ if(isset($_POST['submit'])){
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $glowny, $porzadkowy,
-                        $wymowa, $uwagi);
+                        $wymowa, $kategoria, $uwagi);
     } 
     
 //    echo "<br>Do Translation test KROWA: t()".t("krowa")."/ g()".g( "krowa");

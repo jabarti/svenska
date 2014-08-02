@@ -41,6 +41,7 @@ class Ord {
     private $porzadkowy;
     
     private $wymowa;
+    private $kategoria;
     private $uwagi;
     
     private $table = "ord";
@@ -51,7 +52,7 @@ class Ord {
                             $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                             $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                             $glowny, $porzadkowy,
-                            $wymowa, $uwagi){
+                            $wymowa, $kategoria, $uwagi){
         
         if(!$this->getId($id_ord)){
             
@@ -61,14 +62,14 @@ class Ord {
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                 . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                 . "`glowny`, `porzadkowy`, "
-                . "`wymowa`, `uwagi`) "
+                . "`wymowa`, `kategoria`, `uwagi`) "
                 . "VALUES "
                 . "('".$id_ord."','".$typ."','".$rodzaj."','".$trans."','".$infinitive."','".$presens."','".$past."',"
                 . "'".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
                 . "'".$glowny."','".$porzadkowy."',"
-                . "'".$wymowa."','".$uwagi."');");
+                . "'".$wymowa."', '".$kategoria."', '".$uwagi."');");
                    
 //            try{mysql_query($SQL);}
 //                catch(Exception $ex){
@@ -78,7 +79,7 @@ class Ord {
             if (mysql_query($SQL)){
                 echo "<br>".t("WSADZONE do ord!!!");
                 
-                $id_LH = $this->getLastId()+1;
+                $id_LH = $this->getLastId(false)+1;
                 $id_LH = $this->getId($id_ord);
 //                echo "<br>ID:".$id_LH;
             
@@ -88,14 +89,14 @@ class Ord {
                     . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                     . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                     . "`glowny`, `porzadkowy`, "
-                    . "`wymowa`, `uwagi`) "
+                    . "`wymowa`, `kategoria`, `uwagi`) "
                     . "VALUES "
                     . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$this->setSQLstringToCode($trans)."','".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."',"
                     . "'".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
                     . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
                     . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
                     . "'".$this->setSQLstringToCode($glowny)."','".$this->setSQLstringToCode($porzadkowy)."',"
-                    . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($uwagi)."');");
+                    . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($kategoria)."','".$this->setSQLstringToCode($uwagi)."');");
 //                 echo "<br>INSERT: ".$SQL_PLLH;
                 if (mysql_query($SQL_PLLH)){
                     echo "<br>".t("WSADZONE do ordLH!!!");
@@ -122,7 +123,11 @@ class Ord {
         }
         
         public function getLastId($tabLH) {
-            $tabLH = $tabLH ? 'LH' : '';
+            if( $tabLH){
+                $tabLH = $tabLH; 
+            }else{
+                $tabLH = '';
+            }
             $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
             
 //            echo "<br>".$SQL;
@@ -132,7 +137,7 @@ class Ord {
 //            echo "<br>res[0]:".$res[0];
                 return $res[0];
             }else{
-                echo "<br>ERROR getLastId()";
+                echo "<br>ERROR getLastId(false)";
                 return false;
             }
         }
@@ -190,7 +195,7 @@ class Ord {
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                     'glowny', 'porzadkowy',
-                                    'wymowa', 'uwagi');
+                                    'wymowa', 'kategoria', 'uwagi');
             
             return $tab;
         }
@@ -212,7 +217,7 @@ class Ord {
                 case 'noun':            // rzeczownik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'S_indefinite', 'S_definite','P_indefinite', 'P_definite', 
-                                    'wymowa', 'uwagi'
+                                    'wymowa', 'kategoria', 'uwagi'
                                 );
                     break;
                 
@@ -221,13 +226,13 @@ class Ord {
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
-                                    'wymowa', 'uwagi'); 
+                                    'wymowa', 'kategoria', 'uwagi');
                     break;
                 
                 case 'adjective':       // przymiotnik   
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'wymowa', 'uwagi'); 
+                                    'wymowa', 'kategoria', 'uwagi');
                     break;
                 
                 case 'adverb':          // przysłówek
@@ -263,14 +268,14 @@ class Ord {
                                     'glowny', 'porzadkowy'); 
                     break;
                 
-                case 'particle':
+                case 'particle':    // partykuła
                     $tab = Array(   'id_ord', 'typ', 'trans', 
                                     'wymowa', 'uwagi'); 
                     break;
                 
                 case 'wyrazenie':
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
-                                    'wymowa', 'uwagi'); 
+                                    'wymowa', 'kategoria', 'uwagi');
                     break;
                 
                 default:
@@ -280,7 +285,7 @@ class Ord {
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                     'glowny', 'porzadkowy',
-                                    'wymowa', 'uwagi'); 
+                                    'wymowa', 'kategoria', 'uwagi');
                     break;
             }
             
@@ -566,7 +571,7 @@ class Ord {
             return $res;
         }
         
-        public function getQuestAndAnswerById($id, $rand2){
+        public function getQuestAndAnswerById($id){
             
             $quest = $this->getQuestionById($id);
             
@@ -799,7 +804,7 @@ class Ord {
         // zlicza ilość rekordów w BD podobnych do wprowadzonego słowa
         public function getCountSimOrdByIdOrd($text, $co){
             
-            $co = $co?$co:'id_ord';
+            $co = $co ? $co : 'id_ord';
             
             $SQL = "SELECT count(*) FROM ".$this->table." WHERE `".$co."` like '%".$text."%';";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
@@ -902,7 +907,7 @@ class Ord {
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
-            echo "<tr><th colspan=4>Jest <span class=red>".$this->getCountSimOrdByIdOrd($text)."</span> podobnych wyników:<th><tr>";
+            echo "<tr><th colspan=4>Jest <span class=red>".$this->getCountSimOrdByIdOrd($text, false)."</span> podobnych wyników:<th><tr>";
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
@@ -1008,10 +1013,42 @@ class Ord {
             return $vals;
         }
         
+        public function getCategoriesOfOrd(){
+            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'kategoria'";
+//            echo '<br>SQL:'.$sql;
+            $mq = mysql_query($sql);
+            $row = mysql_fetch_row($mq);
+//            echo "<br>row:"; var_dump($row);
+            $type = $row['1'];
+//            echo '<br>type:'.$type;
+            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
+//            echo "<br>matches";var_dump ($matches);
+//            echo "<br>matches1: ".$matches[1];
+            $vals = explode('\',\'', $matches[1]);
+//            echo "<br>Vals: ";var_dump ($vals);
+            return $vals;
+        }
+        
+        public function getRodzOfOrd(){
+            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'rodzaj'";
+//            echo '<br>SQL:'.$sql;
+            $mq = mysql_query($sql);
+            $row = mysql_fetch_row($mq);
+//            echo "<br>row:"; var_dump($row);
+            $type = $row['1'];
+//            echo '<br>type:'.$type;
+            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
+//            echo "<br>matches";var_dump ($matches);
+//            echo "<br>matches1: ".$matches[1];
+            $vals = explode('\',\'', $matches[1]);
+//            echo "<br>Vals: ";var_dump ($vals);
+            return $vals;
+        }
+        
         public function copyFromOrdLHToOrd(){
             $idLH = $this->getLastId(true);
 //            $idLH = 3;
-            $idDB = $this->getLastId();
+            $idDB = $this->getLastId(false);
             
 //            echo "<br>LastId from LH=".$idLH;
 //            echo "<br>LastId from DB=".$idDB;
@@ -1092,3 +1129,40 @@ class Ord {
         
 }
 
+
+
+/*
+DROP table `ord`;
+
+CREATE TABLE IF NOT EXISTS `ord` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ord` varchar(145) NOT NULL,
+  `typ` enum('noun','verb','hjalp_verb','adjective','adverb','preposition','pronoun','conjunction','interjection','numeral','particle','wyrazenie','???') NOT NULL,
+  `rodzaj` enum('ett','en','att') DEFAULT NULL,
+  `trans` varchar(145) NOT NULL,
+  `infinitive` varchar(45) DEFAULT NULL,
+  `presens` varchar(45) DEFAULT NULL,
+  `past` varchar(45) DEFAULT NULL,
+  `supine` varchar(45) DEFAULT NULL,
+  `imperative` varchar(45) DEFAULT NULL,
+  `present_participle` varchar(45) DEFAULT NULL,
+  `past_participle` varchar(45) DEFAULT NULL,
+  `S_indefinite` varchar(45) DEFAULT NULL,
+  `S_definite` varchar(45) DEFAULT NULL,
+  `P_indefinite` varchar(45) DEFAULT NULL,
+  `P_definite` varchar(45) DEFAULT NULL,
+  `neuter` varchar(45) DEFAULT NULL,
+  `masculin` varchar(45) DEFAULT NULL,
+  `plural` varchar(45) DEFAULT NULL,
+  `st_rowny` varchar(45) DEFAULT NULL,
+  `st_wyzszy` varchar(45) DEFAULT NULL,
+  `st_najwyzszy` varchar(45) DEFAULT NULL,
+  `glowny` varchar(45) DEFAULT NULL,
+  `porzadkowy` varchar(45) DEFAULT NULL,
+  `wymowa` varchar(45) DEFAULT NULL,
+  `kategoria` enum('ludzie','sport','przyroda','kolory','muzyka','dom','jedzenie') DEFAULT NULL,
+  `uwagi` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`,`id_ord`),
+  UNIQUE KEY `id_ord_UNIQUE` (`id_ord`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+ */

@@ -36,7 +36,7 @@ class Random {
             
             if($this->id === false){
                 
-                $this->id = ((int)$this->getLastId())+1;
+                $this->id = ((int)$this->getLastId(false))+1;
 //                echo "<br> No ID like this! LET's INSERT";
 //                INSERT INTO `random`(`id`, `word_id`, `countOfWordId`, `ques_num`, `countOfQuesNum`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])
                 $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `word_id`, `countOfWordId`, `ques_num`, `countOfQuesNum`) VALUES ('".$this->id."', '".$this->word_id."', '1', '".$this->ques_num."', '1');");
@@ -136,7 +136,12 @@ class Random {
         }
         
         public function getLastId($tabLH) {
-            $tabLH = $tabLH ? 'LH' : '';
+            
+            if($tabLH){
+                $tabLH = 'LH';
+            }else{
+                $tabLH = '';
+            }
             $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
             
 //            echo "<br>".$SQL;
@@ -146,7 +151,7 @@ class Random {
 //            echo "<br>res[0]:".$res[0];
                 return $res[0];
             }else{
-                echo "<br>ERROR getLastId()";
+                echo "<br>ERROR getLastId(false)";
                 return false;
             }
         }

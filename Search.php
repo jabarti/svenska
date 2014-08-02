@@ -22,6 +22,7 @@ echo "<form action='Edit.php' method=post>
                         <option value='id'>id</option>
                         <option value='cz_mov'>".t("części mowy")."</option>
                         <option value='alf'>".t("alfabet")."</option>
+                        <option value='cat'>".t("kategoria")."</option>
         </select>";
 echo "
         <select name='wher'>

@@ -185,6 +185,7 @@ div.movingsearch {
     padding: 5px;
     width:180px;
     font-size: 7px;
+    z-index:999;
 }
 div.movingsearch input {
     font-size: 7px;

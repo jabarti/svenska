@@ -78,7 +78,7 @@ if($Word = new Ord()){
     $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
     $str = $Word->setSQLstringToCode($str_old);
     $str2 = $Word->setSQLstringDeCode($str);
-    $str3 = $Word->getCountSimOrdByIdOrd("ok");
+    $str3 = $Word->getCountSimOrdByIdOrd("ok", false);
     //$str3 = $Word->getTabOrdById("3");       // To jest próbna tabela TODO!!!!!
     echo "<br>";
     //UŻYWAĆ OSTROŻNIE!!!!
@@ -100,10 +100,12 @@ if($Word = new Ord()){
     echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
     echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
     //$Word->tryColumns();
-    $max = $Word->getLastId();
-
+    $max = $Word->getLastId(false);
+    
     $Word->findEmptyOrdId();
     $Word->getOrdArrByType("pronoun");
+    echo "<br>=============CATEGORIES=================<br>";
+    $Word->getCategoriesOfOrd();
     
 }else{
     echo "<br>NOT OK: Object of Ord class not created!";
