@@ -223,7 +223,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=kategoria name='kategoria'>
-                            <option value='".$v."'>".$v."</option>";
+                            <option value='".$v."'>".t($v)."</option>";
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
                         foreach($OrdCat as $k){

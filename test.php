@@ -148,7 +148,7 @@ echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
 if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
 
     $arr = explode(', ',$_POST['check']);
-    $try = $_POST['try'];
+    $try = trim($_POST['try']);        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku!
     
     $wordInArr = false;
     
@@ -169,11 +169,6 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
         }
     }
     
-//    if($_POST['try'] == $_POST['check']){
-    
-//    foreach ($_POST as $k => $v){
-//        echo "<br>Oto klucz: ".$k." => ". $v;
-//    }
     $temp_scor = '';
     if($wordInArr){
         echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
