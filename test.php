@@ -122,19 +122,20 @@ echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
     ."</table>";
 
 ?>
-<button id="butt_diak_01" value="ą">ą</button>
-<button id="butt_diak_02" value="ć">ć</button>
-<button id="butt_diak_03" value="ę">ę</button>
-<button id="butt_diak_04" value="ł">ł</button>
-<button id="butt_diak_05" value="ń">ń</button>
-<button id="butt_diak_06" value="ó">ó</button>
-<button id="butt_diak_07" value="ś">ś</button>
-<button id="butt_diak_08" value="ź">ź</button>
-<button id="butt_diak_09" value="ż">ż</button>
+<button class="butt_diak" id="butt_diak_01" value="ą">ą</button>
+<button class="butt_diak" id="butt_diak_02" value="ć">ć</button>
+<button class="butt_diak" id="butt_diak_03" value="ę">ę</button>
+<button class="butt_diak" id="butt_diak_04" value="ł">ł</button>
+<button class="butt_diak" id="butt_diak_05" value="ń">ń</button>
+<button class="butt_diak" id="butt_diak_06" value="ó">ó</button>
+<button class="butt_diak" id="butt_diak_07" value="ś">ś</button>
+<button class="butt_diak" id="butt_diak_08" value="ź">ź</button>
+<button class="butt_diak" id="butt_diak_09" value="ż">ż</button>
 <br>
-<button id="butt_diak_10" value="ä">ä</button>
-<button id="butt_diak_11" value="å">å</button>
-<button id="butt_diak_12" value="ö">ö</button>
+<button class="butt_diak" id="butt_diak_10" value="ä">ä</button>
+<button class="butt_diak" id="butt_diak_11" value="å">å</button>
+<button class="butt_diak" id="butt_diak_12" value="ö">ö</button>
+<button class="butt_diak" id="butt_diak_13" value="é">é</button>
 
 <?php
 //if(isset($_POST['test']))

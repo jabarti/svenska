@@ -318,83 +318,11 @@ $(document).ready(function(){
     });
 });
 
-$(document).ready(function(){
-    
-//    $('#butt_diak_01').click(function(){
-//    var ktory = $('#butt_diak_01').val();
-//    
-//    switch (ktory){
-//        case 'ą':
-//            alert('ą');
-//            break
-//        case 'ć':
-//            alert('ć');
-//            break
-//        default:
-//            alert('inny')
-//            break
-//    }
-//    });
-    
-    $('#butt_diak_01').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ą");
-        $("#try").focus();
-    });
-    $('#butt_diak_02').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ć");
-        $("#try").focus();
-    });
-    $('#butt_diak_03').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ę");
-        $("#try").focus();
-    });
-    $('#butt_diak_04').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ł");
-        $("#try").focus();
-    });
-    $('#butt_diak_05').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ń");
-        $("#try").focus();
-    });
-    $('#butt_diak_06').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ó");
-        $("#try").focus();
-    });
-    $('#butt_diak_07').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ś");
-        $("#try").focus();
-    });
-    $('#butt_diak_08').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ź");
-        $("#try").focus();
-    });
-    $('#butt_diak_09').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ż");
-        $("#try").focus();
-    });
-    $('#butt_diak_10').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ä");
-        $("#try").focus();
-    });
-    $('#butt_diak_11').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"å");
-        $("#try").focus();
-    });
-    $('#butt_diak_12').click(function(){
-        temp = $('#try').val();
-        $('#try').val(temp+"ö");
-        $("#try").focus();
-    });
-    
+$(document).ready(function(){   
+    $('button.butt_diak').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
+        var letter = $(this).attr('value')  // pobranie vartości klawisza klikniętego (literka np.: ą, ć itd
+        temp = $('#try').val()+letter;      // pobranie wartośi wprowadzanych i dodanie literki
+        $('#try').val(temp);                // PRZEPISANIE WARTOŚCI
+        $("#try").focus();                  // PRZYWRÓCENIE FOCUSA NA TEXTAREA!
+    });   
 });
