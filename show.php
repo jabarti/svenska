@@ -8,13 +8,6 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = 'Svenska | Show/printer';
-//include 'header.php';
-////include 'flag.php';
-//include 'buttons.php';
-
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
@@ -25,20 +18,54 @@ include 'buttons.php';
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 
 $word = new Ord();
-$mr = $word->getDBAll();
+
+if(isset($_POST['cz_mov'])){
+//    echo "SET POST"; echo " / POST flat = ".$_POST['flat'];
+//    echo "_POST['cz_mov']:".$_POST['cz_mov'];
+    if($_POST['cz_mov']=='cz_mov'){
+        $_SESSION['cz_mov'] = true;
+    }
+}else{
+        $_SESSION['cz_mov'] = false;
+}
+
+if(isset($_SESSION['cz_mov'])){
+    ?><script>//alert("SESSION SET!");</script><?php
+    if($_SESSION['cz_mov'] == true){
+        ?><script>//alert("SESSION SET == TRUE!");</script><?php
+        $mr = $word->getDBAllOrdByTyp();
+        $SQL = sprintf("SELECT * FROM `ord` ORDER BY `typ`, `id_ord;");
+        $czek = 'checked';
+    }else{
+        ?><script>//alert("SESSION SET == FALSE!");</script><?php
+        $mr = $word->getDBAll();
+        $SQL = sprintf("SELECT * FROM `ord` ;");
+        $czek ='';
+    }
+}else{
+    ?><script>//alert("SESSION NOT SET!");</script><?php
+    $mr = $word->getDBAll();
+    $SQL = sprintf("SELECT * FROM `ord`;");
+    $czek ='';
+}
+//$mr = $word->getDBAll();
 //$mr = $word->getAllArr();
 
-$SQL = sprintf("SELECT * FROM `ord`;");
+//$SQL = sprintf("SELECT * FROM `ord`;");
 //echo $SQL;
 $mq = mysql_query($SQL);
 ?>
 <form action="" method="post">
     <input type="checkbox" name="flat" value="flat"><?php echo t("płaskie"); ?>?
+    <br><?php
+    echo '<input type="checkbox" name="cz_mov" value="cz_mov" '.$czek.'>'.t("części mowy").'?';
+    ?>
     <input type="submit" name=sub_flat value="<?php echo t("zobacz"); ?>">
 
 </form>    
 <?php
 $flat = false;
+$cz_mov = false;
 
 if(isset($_POST['sub_flat'])){
 //    echo "SET POST"; echo " / POST flat = ".$_POST['flat'];

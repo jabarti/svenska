@@ -388,12 +388,12 @@ $(document).ready(function(){
     });
     $('#butt_diak_11').click(function(){
         temp = $('#try').val();
-        $('#try').val(temp+"ö");
+        $('#try').val(temp+"å");
         $("#try").focus();
     });
     $('#butt_diak_12').click(function(){
         temp = $('#try').val();
-        $('#try').val(temp+"å");
+        $('#try').val(temp+"ö");
         $("#try").focus();
     });
     

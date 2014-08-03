@@ -146,9 +146,13 @@ echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
 //
 
 if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
-
+    
+    $patern = '/\.|\?|\!|\_|\\s/';               // uwala "..." i ?
+    
     $arr = explode(', ',$_POST['check']);
-    $try = trim($_POST['try']);        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku!
+    
+    $str_tr = strtolower(trim($_POST['try']));        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku! A potem do małych liter!
+    $try = preg_replace($patern, '', $str_tr);
     
     $wordInArr = false;
     
@@ -156,11 +160,12 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
 //        echo "<br>try   : ".$try;
 //        echo "<br>arr[i]: ".$arr[$i];
         
-        $try2 = (string)$arr[$i];
-        
+        $str_ch = (string)$arr[$i];
+        $str_ch = strtolower(trim($str_ch));        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku! A potem do małych liter!
+        $check = preg_replace($patern, '', $str_ch);
 //        echo "<br>Czy jest?:".strcmp($try, $try2);
 
-        if(strcmp($try, $try2) == 0){
+        if(strcmp($try, $check) == 0){
 //            echo "<br>Pasuje!";
             $wordInArr = true;
             

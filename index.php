@@ -238,7 +238,8 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 </td>
             </tr>
             <tr>
-                <td colspan='7'></td>
+                <td colspan='5'></td>
+                <td colspan='2'><input type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
                 <td><input type='submit' name=submit id='but1' value='<?php echo t("Zapisz do Bazy"); ?>'></input></td>
             </tr>
     

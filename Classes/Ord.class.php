@@ -647,6 +647,14 @@ class Ord {
             return $mq;
         }
         
+        public function getDBAllOrdByTyp(){
+            $SQL = sprintf("SELECT * FROM `".$this->table."` ORDER BY `typ`;");
+//            echo $SQL;
+            $mq = mysql_query($SQL);
+//            echo $mq;
+            return $mq;
+        }
+        
         public function getAllArr(){ // robi to co show.php
             $SQL = sprintf("SELECT * FROM `".$this->table."`;");
 //            echo $SQL;
@@ -998,7 +1006,7 @@ class Ord {
         }
         
         public function getTypesOfOrd(){
-            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'typ'";
+            $sql = sprintf("SHOW COLUMNS FROM `".$this->table."` LIKE 'typ';");
 //            echo '<br>SQL:'.$sql;
             $mq = mysql_query($sql);
             $row = mysql_fetch_row($mq);

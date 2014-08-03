@@ -155,4 +155,73 @@ class Random {
                 return false;
             }
         }
+        
+        public function getAllToTable(){
+            $SQL = sprintf("SELECT r.`word_id`, o.`id_ord`, r.`ques_num`, r.`countOfWordId`, r.`countOfQuesNum` 
+                            FROM `random` r JOIN `ord` o 
+                            WHERE r.`word_id` = o.`id` 
+                            ORDER BY r.`word_id` ASC");
+            echo "<br>SQL: ".$SQL;
+            $mq = mysql_query($SQL);
+            if(mysql_affected_rows()){
+                echo "<table>";
+                echo "<th>wordId</th><th>Word</th><th>questID</th><th>countOfWordId</th><th>countOfQuesNum</th>";
+                while ($row = mysql_fetch_row($mq)) {
+//                    echo "<br>";var_dump($row);
+                    echo "<tr>";
+                    foreach ($row as $k ){
+                                echo "<td> $k  </td>";
+                    }
+                    echo "</tr>";
+                }
+                echo "</table>";
+                
+            }else{
+                echo "ERROR in SQL: ".$SQL;
+            }
+        }
+        
+        public function getCountWordToTable(){
+            $SQL = sprintf("SELECT `word_id`, count(`countOfWordId`) FROM `random` GROUP BY `word_id`;");
+            echo "<br>SQL: ".$SQL;
+            $mq = mysql_query($SQL);
+            if(mysql_affected_rows()){
+                echo "<table>";
+                echo "<th>wordId</th><th>count</th>";
+                while ($row = mysql_fetch_row($mq)) {
+//                    echo "<br>";var_dump($row);
+                    echo "<tr>";
+                    foreach ($row as $k ){
+                                echo "<td> $k  </td>";
+                    }
+                    echo "</tr>";
+                }
+                echo "</table>";
+                
+            }else{
+                echo "ERROR in SQL: ".$SQL;
+            }
+        }
+        
+        public function getMaxWordToTable(){
+            $SQL = sprintf("SELECT `word_id`, sum(`countOfWordId`) FROM `random` GROUP BY `word_id`;");
+            echo "<br>SQL: ".$SQL;
+            $mq = mysql_query($SQL);
+            if(mysql_affected_rows()){
+                echo "<table>";
+                echo "<th>wordId</th><th>count</th>";
+                while ($row = mysql_fetch_row($mq)) {
+//                    echo "<br>";var_dump($row);
+                    echo "<tr>";
+                    foreach ($row as $k ){
+                                echo "<td> $k  </td>";
+                    }
+                    echo "</tr>";
+                }
+                echo "</table>";
+                
+            }else{
+                echo "ERROR in SQL: ".$SQL;
+            }
+        }
 }
