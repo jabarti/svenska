@@ -19,6 +19,7 @@ class Ord {
     private $id_ord;
     private $typ;
     private $rodzaj;
+    private $grupa;
     private $trans;
     private $infinitive;
     private $presens;
@@ -47,7 +48,7 @@ class Ord {
     private $table = "ord";
     
 
-    public function setData($id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
+    public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, $infinitive, $presens,$past, 
                             $supine, $imperative, $present_participle, $past_participle, 
                             $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                             $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
@@ -57,24 +58,19 @@ class Ord {
         if(!$this->getId($id_ord)){
             
             $SQL = sprintf("INSERT INTO `".$this->table."` "
-                . "(`id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `presens`, `past`, "
+                . "(`id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, `infinitive`, `presens`, `past`, "
                 . "`supine`, `imperative`, `present_participle`, `past_participle`, "
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                 . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                 . "`glowny`, `porzadkowy`, "
                 . "`wymowa`, `kategoria`, `uwagi`) "
                 . "VALUES "
-                . "('".$id_ord."','".$typ."','".$rodzaj."','".$trans."','".$infinitive."','".$presens."','".$past."',"
+                . "('".$id_ord."','".$typ."','".$rodzaj."','".$grupa."','".$trans."','".$infinitive."','".$presens."','".$past."',"
                 . "'".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
                 . "'".$glowny."','".$porzadkowy."',"
-                . "'".$wymowa."', '".$kategoria."', '".$uwagi."');");
-                   
-//            try{mysql_query($SQL);}
-//                catch(Exception $ex){
-//                echo "ERROE wsadu";
-//            }
+                . "'".$wymowa."', '".$kategoria."', '".$uwagi."');");            
         
             if (mysql_query($SQL)){
                 echo "<br>".t("WSADZONE do ord!!!");
@@ -84,14 +80,14 @@ class Ord {
 //                echo "<br>ID:".$id_LH;
             
                 $SQL_PLLH = sprintf("INSERT INTO `".$this->table."LH` "
-                    . "(`id`, `id_ord`, `typ`, `rodzaj`, `trans`, `infinitive`, `presens`, `past`, "
+                    . "(`id`, `id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, `infinitive`, `presens`, `past`, "
                     . "`supine`, `imperative`, `present_participle`, `past_participle`, "
                     . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                     . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                     . "`glowny`, `porzadkowy`, "
                     . "`wymowa`, `kategoria`, `uwagi`) "
                     . "VALUES "
-                    . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$this->setSQLstringToCode($trans)."','".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."',"
+                    . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$grupa."','".$this->setSQLstringToCode($trans)."','".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."',"
                     . "'".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
                     . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
                     . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
@@ -189,7 +185,7 @@ class Ord {
         }
         
         public function getTabOfAttr(){
-            $tab = Array( 'id',     'id_ord', 'typ', 'rodzaj', 'trans', 
+            $tab = Array( 'id',     'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
@@ -215,7 +211,7 @@ class Ord {
             
             switch($typ){
                 case 'noun':            // rzeczownik
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'S_indefinite', 'S_definite','P_indefinite', 'P_definite', 
                                     'wymowa', 'kategoria', 'uwagi'
                                 );
@@ -223,7 +219,7 @@ class Ord {
                 
                 case 'hjalp_verb':
                 case 'verb':            // czasownik
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                     'wymowa', 'kategoria', 'uwagi');
@@ -279,7 +275,7 @@ class Ord {
                     break;
                 
                 default:
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
@@ -393,45 +389,45 @@ class Ord {
             
             switch($typ){
                 case 'noun':            // rzeczownik
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'rodzaj', 'grupa', 'trans', 
                                     'S_indefinite', 'S_definite','P_indefinite', 'P_definite', 
                                 );
                     break;
                 
                 case 'hjalp_verb':
                 case 'verb':            // czasownik
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                 ); 
                     break;
                 
                 case 'adjective':       // przymiotnik   
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'trans', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                 ); 
                     break;
                 
                 case 'adverb':          // przysłówek
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'trans', 
                                     'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                 ); 
                     break;
                 
                 case 'preposition':     // przyimek
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'trans', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                  ); 
                     break;
                 
                 case 'pronoun':         // zaimek
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'trans', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                  );  
                     break;
                 
                 case 'conjunction':    // spójnik
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans',  
+                    $tab = Array(   'id_ord', 'typ', 'trans',  
                                 ); 
                     break;
                 
@@ -456,7 +452,7 @@ class Ord {
                     break;
                 
                 default:
-                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'trans', 
+                    $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
@@ -1069,6 +1065,22 @@ class Ord {
         
         public function getRodzOfOrd(){
             $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'rodzaj'";
+//            echo '<br>SQL:'.$sql;
+            $mq = mysql_query($sql);
+            $row = mysql_fetch_row($mq);
+//            echo "<br>row:"; var_dump($row);
+            $type = $row['1'];
+//            echo '<br>type:'.$type;
+            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
+//            echo "<br>matches";var_dump ($matches);
+//            echo "<br>matches1: ".$matches[1];
+            $vals = explode('\',\'', $matches[1]);
+//            echo "<br>Vals: ";var_dump ($vals);
+            return $vals;
+        }
+        
+        public function getGroupOfOrd(){
+            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'grupa'";
 //            echo '<br>SQL:'.$sql;
             $mq = mysql_query($sql);
             $row = mysql_fetch_row($mq);

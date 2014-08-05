@@ -65,8 +65,23 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         ?>
                     </select>
                 </td>
+                <td class='label'><?php echo t("grupa"); ?></td>
+                <td>
+                    <select id=grupa name='grupa'>
+                        <?php
+                        $Word = new Ord();
+                        $OrdCat = $Word->getGroupOfOrd();
+                        foreach($OrdCat as $k){
+                            echo "<option value=$k>".$k."</option>";
+                        }
+                        ?>
+                    </select>
+                </td>
+            <tr>    
+            <tr>    
                 <td class='label'><?php echo t("szwedzki"); ?></td>
                 <td><input id='trans' name='trans'></td>
+                <td colspan="6"></td>
             </tr>
             <tr>
                 <td><br></td>
@@ -267,6 +282,7 @@ if(isset($_POST['submit'])){
         $id_ord =               trim(trim(trim($_POST['id_ord']),","));
         $typ =                  trim(trim(trim($_POST['typ']),","));
         $rodzaj =               trim(trim(trim($_POST['rodzaj']),","));
+        $grupa =                trim(trim(trim($_POST['grupa']),","));
         $trans =                trim(trim(trim($_POST['trans']),","));
         $infinitive =           trim(trim(trim($_POST['infinitive']),","));
         $presens =              trim(trim(trim($_POST['presens']),","));
@@ -299,7 +315,7 @@ if(isset($_POST['submit'])){
         echo "<br>Last index: ".$Word->getLastId(false);
        
         
-        $Word->setData( $id_ord, $typ, $rodzaj, $trans, $infinitive, $presens,$past, 
+        $Word->setData( $id_ord, $typ, $rodzaj, $grupa, $trans, $infinitive, $presens,$past, 
                         $supine, $imperative, $present_participle, $past_participle, 
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 

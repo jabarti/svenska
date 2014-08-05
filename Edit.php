@@ -157,17 +157,17 @@ while($row = mysql_fetch_assoc($mq)){
         if($k == 'typ'){
             echo "<td>".$k."</td><td>";
             echo "<select name='".$k."'>";
-                       echo" <option value=".$v.">".trans($v)." ( ".t("zapisane")." )</option>"; 
+                       echo" <option value=".$v.">".trans($v)." (".t("zapisane").")</option>"; 
           
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
 //                            echo "<option>".t("część mowy")."</option>"
 //                                    . "<option ></option>";
                         foreach($OrdCat as $k){
-                            if(strlen(t($k)) > 14 || strlen(t($k, "en")) > 14)
-                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(t($k,"en"),0,14)." ) </option>";
+                            if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
+                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
                             else
-                                echo "<option value=$k>".t($k)." ( ".t($k,"en")." )</option>";
+                                echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
                         }   
                     
              echo "   </select>";
@@ -177,9 +177,22 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=rodzaj name='rodzaj'>
-                            <option value='".$v."'>".$v."</option>";
+                            <option value='".$v."'>".$v." (".t("zapisane").")</option>";
                             $Word = new Ord();
                             $OrdCat = $Word->getRodzOfOrd();
+                            foreach($OrdCat as $k){
+                            echo "<option value=$k>".t($k)."</option>";
+                        }
+            echo "      </select>";
+            echo "</td>";            
+        }
+        elseif($k == 'grupa'){
+            echo "<td>".$k."</td><td>";
+        
+            echo "      <select id=grupa name='grupa'>
+                            <option value='".$v."'>".$v." (".t("zapisane").")</option>";
+                            $Word = new Ord();
+                            $OrdCat = $Word->getGroupOfOrd();
                             foreach($OrdCat as $k){
                             echo "<option value=$k>".t($k)."</option>";
                         }
