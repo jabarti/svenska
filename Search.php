@@ -14,9 +14,16 @@
 //include 'header.php';
 //include 'flag.php';
 //include 'buttons.php';
+$isEdit = strrpos($_SERVER['PHP_SELF'], "Edit.php");
+
+if($isEdit){
+    $isEdit = '';
+}else{
+    $isEdit = "target='_blank'";
+}
     
 echo "<div id=movingsearch class=movingsearch>";     
-echo "<form action='Edit.php' method=post>
+echo "<form action='Edit.php' ".$isEdit." method=post>
         <select name='sort'>
                         <option >".t("sortuj")."</option>
                         <option value='id'>id</option>
@@ -45,7 +52,7 @@ echo "
         <input type=submit name=wher_sub value='".t('wybierz')."'></input>
       </form>";
 
-echo "<form action='Edit.php' method=post>
+echo "<form action='Edit.php' ".$isEdit." method=post>
         <input id='sercz' type='text' name='sercz'>
         <input type='submit' value='".t("Szukaj")."'></input>
         <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
