@@ -53,7 +53,7 @@ $wordPL = $Word->getOrdPLById($rand);
 
 $method = 'post';
 
-echo "<table>"
+echo "<table class=tab_insert>"
    . "<form id=testForm1 action=test.php method=".$method.">";
 echo "<tr>"
                 ."<td>".t("To jest")." ".trans($testTab[0])."</td>"

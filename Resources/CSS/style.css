@@ -20,6 +20,7 @@ table {
 }
 
 .tab_insert {
+    background: deepskyblue;
     width: 90%;
 }
 
@@ -55,13 +56,18 @@ tbody {
 
 .edit_tab_contener {
     position: absolute;
-    background: deepskyblue;
+    /*background: deepskyblue;*/
+    /*width:75%;*/
     /*opacity: 0.1;*/
 /*    text-align: center;
     margin-right: auto; 
     margin-left: auto; */
     /*float: right;*/
     /*margin-left: 10%;*/
+}
+
+.edit_table {
+    background: deepskyblue;
 }
 
 div#translacje {

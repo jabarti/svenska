@@ -157,23 +157,7 @@ while($row = mysql_fetch_assoc($mq)){
         if($k == 'typ'){
             echo "<td>".$k."</td><td>";
             echo "<select name='".$k."'>";
-            ?>
-<!--                        <option value=".$v.">".trans($v)."</option>
-                        <option value='noun'>rzeczownik</option>
-                        <option value='verb'>czasownik</option>
-                        <option value='hjalp_verb'>czas. posiłkowy</option>
-                        <option value='adjective'>przymiotnik</option>
-                        <option value='adverb'>przysłówek</option>
-                        <option value='preposition'>przyimek</option>
-                        <option value='pronoun'>zaimek</option>
-                        <option value='conjunction'>spójnik</option>
-                        <option value='interjection'>wykrzyknik</option>
-                        <option value='numeral'>liczebnik</option>
-                        <option value='particle'>partykuła</option>
-                        <option value='wyrazenie'>wyrażenie</option>
-                        <option value='???'>???</option>-->
-
-          <?php   echo" <option value=".$v.">".trans($v)." ( ".t("zapisane")." )</option>"; 
+                       echo" <option value=".$v.">".trans($v)." ( ".t("zapisane")." )</option>"; 
           
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
@@ -185,27 +169,8 @@ while($row = mysql_fetch_assoc($mq)){
                             else
                                 echo "<option value=$k>".t($k)." ( ".t($k,"en")." )</option>";
                         }   
-                        ?>
-          
-          
-          
-          ?>
-<!--                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo tl("rzeczownik", "en"); ?> )</option>
-                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo tl("czasownik", "en"); ?> )</option>
-                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo tl("czas. posiłkowy", "en"); ?> )</option>
-                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo tl("przymiotnik", "en"); ?> )</option>
-                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo tl("przysłówek", "en"); ?> )</option>
-                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo t("przyimek", "en"); ?> )</option>
-                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo tl("zaimek", "en"); ?> )</option>
-                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo tl("spójnik", "en"); ?> )</option>
-                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo tl("wykrzyknik", "en"); ?> )</option>
-                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo tl("liczebnik", "en"); ?> )</option>
-                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo tl("partykuła", "en"); ?> )</option>
-                        <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
-                        <option value="???">???</option>-->
-                        
-                </select>
-             <?php
+                    
+             echo "   </select>";
              echo "</td>";
         }  
         elseif($k == 'rodzaj'){
@@ -257,7 +222,7 @@ while($row = mysql_fetch_assoc($mq)){
     }
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>
-                        <button id=ala onclick='Menu();'>".t("Menu")."</button>
+                        <button onclick='Menu();'>".t("Menu")."</button>
                         <input id=Edit_".$curr_word_id." type=submit name=edit value='".t('Edit')."'>";
 //                        <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$id." value='".t('wartość')."' disabled />
         echo "          <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$curr_word_id." value='".$curr_word_id."' disabled />
@@ -274,9 +239,7 @@ echo "</div>";      // end of div: edit_tab_contener
 
 // Wyniki!!??? z sercza
 //echo "<div id=p3 class=\"tab_info2\"></div>";
-
-
-         
+       
 if(isset($_POST)){
     ?><script>//alert("w isset $_POST");</script><?php
     if(isset($_POST['edit'])){
@@ -303,9 +266,6 @@ if(isset($_POST)){
                     $id = $v;
                     $sql_textErrINSPLLH .= "'".($v)."',";
                     break;
-//                case 'id_ord':
-//                    $id_ord = $v;
-//                    break;
                 case 'uwagi':           // ostatni musi mieć zakończenie z ";"
                     $sql_text .= "`".$k."`='".$v."'";
                     $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
@@ -393,7 +353,6 @@ if(isset($_POST)){
                 ?><script>//alert("WESZŁO do PLLH");</script><?php
             }else{
                 ?><script>//alert("NIE WESZŁO do PLLH");</script><?php
-
             }
             header("Location: Edit.php");
         }else{
