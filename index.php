@@ -39,23 +39,6 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td><input id='id_ord' name='id_ord'></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
-<!--                    <select id=typ name='typ'>
-                        <option ><?php echo t("część mowy"); ?></option>
-                        <option ></option>
-                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo tl("rzeczownik", "en"); ?> )</option>
-                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo tl("czasownik", "en"); ?> )</option>
-                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo tl("czas. posiłkowy", "en"); ?> )</option>
-                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo tl("przymiotnik", "en"); ?> )</option>
-                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo tl("przysłówek", "en"); ?> )</option>
-                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo tl("przyimek", "en"); ?> )</option>
-                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo tl("zaimek", "en"); ?> )</option>
-                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo tl("spójnik", "en"); ?> )</option>
-                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo tl("wykrzyknik", "en"); ?> )</option>
-                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo tl("liczebnik", "en"); ?> )</option>
-                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo tl("partykuła", "en"); ?> )</option>
-                        <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
-                        <option value="???">???</option>
-                    </select>-->
                     <select id=typ name='typ'>
                         <?php
                         $Word = new Ord();

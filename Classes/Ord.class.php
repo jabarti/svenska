@@ -509,6 +509,36 @@ class Ord {
             return $row;            
         }
         
+        // Zwraca tablicę z ID wszystkich rekordów w bazie w zależności od $type, 
+        // $type = szukany typ (noun, verb etc
+        // $type = false,  wszystkie ID z BD
+        public function getQuestionIDsArrByType($type){
+//            echo '<br>TYPE:'.$type.'<br>';
+            $arr = array();
+            $tempSQL = "SELECT id FROM `".$this->table."`";
+            if($type == 'verb'){
+                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb';";
+            }elseif($type==false){
+                $tempSQL .=";";
+            }else{
+                $tempSQL .= " WHERE `typ` = '".$type."';";
+            }
+//            echo "<br>".__FILE__.__LINE__.", SQL:".$tempSQL;
+            
+            $SQL = sprintf($tempSQL);
+            $mq = mysql_query($SQL);
+            
+            if(mysql_affected_rows()){
+//                echo "<br>".__FILE__.__LINE__.", SQL OK ";
+                while($row = mysql_fetch_assoc($mq)){
+                    array_push($arr, $row['id']);
+                }
+            }else{
+                echo "<br>".__FILE__.__LINE__.", SQL NO OK";
+            }
+            return $arr;
+        }
+        
         public function getQuestionById($id){
             $tab_All = $this->getPropQuestTabById($id);            
             $rowNoEmpty = $this->getNoEmptyAttrById($id);

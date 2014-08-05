@@ -39,17 +39,58 @@ if($Word = new Ord()){
     echo "<br>NOT OK: Object of Ord class not created!";
 }
 
-$max = $Word->getLastId(false);
+//        echo "<br>POST['typ_cz_mov']:".$_POST['typ_cz_mov'];
+//        echo "<br>SESSION['typ_cz_mov']:".$_SESSION['typ_cz_mov'];
+//        echo "<br>typ_current:".$typ_current;
 
-$rand =  mt_rand(1, $max); // wybór słowa
+if(isset($_POST['typ_cz_mov'])){
+    if($_POST['typ_cz_mov'] == 'clear'){
+        $_SESSION['typ_cz_mov'] = false;
+    }else{
+        $_SESSION['typ_cz_mov'] = $_POST['typ_cz_mov'];
+    }
+}
+$typ_current = $_SESSION['typ_cz_mov'];
+
+
+//        echo "<br>POST['typ_cz_mov']:".$_POST['typ_cz_mov'];
+//        echo "<br>SESSION['typ_cz_mov']:".$_SESSION['typ_cz_mov'];
+//        echo "<br>typ_current:".$typ_current;
+
+$arr = $Word->getQuestionIDsArrByType($typ_current);
+$max = count($arr)-1;
+$rand_index = mt_rand(0, $max); // wybór słowa
+$rand = $arr[$rand_index];
+
+//$max = $Word->getLastId(false);
+
+//$rand =  mt_rand(1, $max); // wybór słowa
 //echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 
 //$rand = 123;  // For test - fixed ID of word; 
 
-
 $testTab = $Word->getQuestAndAnswerById($rand);
 $wordPL = $Word->getOrdPLById($rand);
 //echo "<br>WordPL: ".$wordPL;
+
+echo "<form method=post action=''>";
+ echo t("Pytania z")." <select name='typ_cz_mov'>";
+                        $Word = new Ord();
+                        $OrdCat = $Word->getTypesOfOrd();
+                        if(isset($_SESSION['typ_cz_mov']) && $_SESSION['typ_cz_mov']!= 'clear'){
+                            echo "<option value=''>".t($_SESSION['typ_cz_mov'])."</option>";
+                        }
+//                            echo "<option value='cl>".t("część mowy")."</option>";
+                            echo "<option value='clear'>".t("wyczyść")."</option>";
+                        foreach($OrdCat as $k){
+                            if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
+                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
+                            else
+                                echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
+                        }   
+            echo "</select>";
+            echo "<input type=submit value='"."Wyślij"."'>";
+echo "</form>";
 
 $method = 'post';
 
@@ -65,23 +106,17 @@ echo "<tr>"
                 . "<input type=hidden name=quest_p3 value='".$testTab[0]."'>"       // to jest.. 
                 . "<input type=hidden name=quest_p4 value='".$wordPL."'>";          // słowo PL
         if ($testTab[2] == "typ"){
-            ?> <select name='try'>
-                        <option ><?php echo t("część mowy"); ?></option>
-                        <!--<option ></option>-->
-                        <option value="noun"><?php echo t("rzeczownik"); ?> ( <?php echo tl("rzeczownik", "en"); ?> )</option>
-                        <option value="verb"><?php echo t("czasownik"); ?> ( <?php echo tl("czasownik", "en"); ?> )</option>
-                        <option value="hjalp_verb"><?php echo t("czas. posiłkowy"); ?> ( <?php echo tl("czas. posiłkowy", "en"); ?> )</option>
-                        <option value="adjective"><?php echo t("przymiotnik"); ?> ( <?php echo tl("przymiotnik", "en"); ?> )</option>
-                        <option value="adverb"><?php echo t("przysłówek"); ?> ( <?php echo tl("przysłówek", "en"); ?> )</option>
-                        <option value="preposition"><?php echo t("przyimek"); ?> ( <?php echo tl("przyimek", "en"); ?> )</option>
-                        <option value="pronoun"><?php echo t("zaimek"); ?> ( <?php echo tl("zaimek", "en"); ?> )</option>
-                        <option value="conjunction"><?php echo t("spójnik"); ?> ( <?php echo tl("spójnik", "en"); ?> )</option>
-                        <option value="interjection"><?php echo t("wykrzyknik"); ?> ( <?php echo tl("wykrzyknik", "en"); ?> )</option>
-                        <option value="numeral"><?php echo t("liczebnik"); ?> ( <?php echo tl("liczebnik", "en"); ?> )</option>
-                        <option value="particle"><?php echo t("partykuła"); ?> ( <?php echo tl("partykuła", "en"); ?> )</option>
-                        <option value="wyrazenie"><?php echo t("wyrażenie"); ?></option>
-                        <option value="???">???</option>
-                </select><?php
+            echo "<select name='try'>";
+                        $Word = new Ord();
+                        $OrdCat = $Word->getTypesOfOrd();
+                            echo "<option>".t("część mowy")."</option>";
+                        foreach($OrdCat as $k){
+                            if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
+                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
+                            else
+                                echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
+                        }   
+            echo "</select>";
         }else{
             echo      "<textarea id=try rows=1 cols=20 name=try></textarea>";
         }

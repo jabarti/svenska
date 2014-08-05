@@ -212,7 +212,11 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td><input id='id".$curr_word_id."' name=".$k." value='".$v."' readonly></td>";
         }
         else{
-            echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
+            if(strlen($v)<21){
+                echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
+            } else {
+                echo "<td>".$k."</td><td><textarea rows=1 cols=15 name=".$k." >".$v."</textarea></td>";
+            }
         }
         
         if($j%4==3){
@@ -264,6 +268,7 @@ if(isset($_POST)){
                     break;
                 case 'id':
                     $id = $v;
+                    $_SESSION['curr_ord_id']=$id;
                     $sql_textErrINSPLLH .= "'".($v)."',";
                     break;
                 case 'uwagi':           // ostatni musi mieć zakończenie z ";"
@@ -305,7 +310,16 @@ if(isset($_POST)){
                     ?><script>//alert("NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
                 }
             }
-            header("Location: Edit.php");
+            if(isset($_SESSION['curr_ord_id'])){
+                $curr_ord_id = $_SESSION['curr_ord_id'];
+                $_SESSION['curr_ord_id']='';
+                header("Location: Edit.php");
+                
+//                header("Location: Edit.php?sercz_id=".$curr_word_id); // NIE DZIAŁA!
+            }else{
+                header("Location: Edit.php");
+            }
+//            header("Location: Edit.php");
 //            header("Location: Edit.php?sercz_id=".$curr_word_id); // AJAX????
         }else{
             ?><script>//alert("NIE WESZŁO do BD");</script><?php
@@ -364,8 +378,8 @@ if(isset($_POST)){
 echo "<div class=floating_button_div>"
         . "<button id=floating_button value=TRY>Edytuj wszystkie</button>"
    . "</div>";
-ob_end_flush();  // żeby sie dało reloadeować
 
+ob_end_flush();  // żeby sie dało reloadeować
 
 } else {
     require 'loger.php';

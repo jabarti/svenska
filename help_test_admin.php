@@ -73,13 +73,31 @@ if($Random = new Random()){
 
 
 if($Word = new Ord()){
-    echo "<br>OK";
-    echo "<br>Cięcie stringa do bazy:";
-    $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
-    $str = $Word->setSQLstringToCode($str_old);
-    $str2 = $Word->setSQLstringDeCode($str);
-    $str3 = $Word->getCountSimOrdByIdOrd("ok", false);
+//    echo "<br>OK";
+//    echo "<br>Cięcie stringa do bazy:";
+//    $str_old = "<br>Alą mać kotę, Ącko źrebiŃ, öäå+ÖÄÅ";
+//    $str = $Word->setSQLstringToCode($str_old);
+//    $str2 = $Word->setSQLstringDeCode($str);
+//    $str3 = $Word->getCountSimOrdByIdOrd("ok", false);
     //$str3 = $Word->getTabOrdById("3");       // To jest próbna tabela TODO!!!!!
+    $arr1 = $Word->getQuestionIDsArrByType("noun");       
+    $arr2 = $Word->getQuestionIDsArrByType("verb");       
+    $arr3 = $Word->getQuestionIDsArrByType("hjalp_verb");       
+    $arr4 = $Word->getQuestionIDsArrByType(false);      
+    
+    var_dump($arr4);
+    $max = count($arr4)-1;
+    $rand_index = mt_rand(0, $max);
+    $rand = $arr4[$rand_index];
+    
+//    $rand = rand($arr1);
+//    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
+//    $rand = rand($arr2);
+//    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
+    
+    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
+//    $rand = rand($arr4);
+//    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
     echo "<br>";
     //UŻYWAĆ OSTROŻNIE!!!!
 //    $Word->copyFromOrdLHToOrd();
@@ -94,26 +112,26 @@ if($Word = new Ord()){
 
     echo "<br> LISTA WYRAZÓW:";
 
-    $Word->getSimOrdByIdOrd("ok");
-    $Word->getSimOrdByTrans("ok");
+//    $Word->getSimOrdByIdOrd("ok");
+//    $Word->getSimOrdByTrans("ok");
 
-    echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
-    echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
-    //$Word->tryColumns();
-    $max = $Word->getLastId(false);
-    
-    $Word->findEmptyOrdId();
-    $Word->getOrdArrByType("pronoun");
-    echo "<br>=============CATEGORIES=================<br>";
-    $Word->getCategoriesOfOrd();
+//    echo "<br>Ile jest noun:".$Word->howManyOrdByPartOfSpeech("noun");
+//    echo "<br>Ile jest ???:".$Word->howManyOrdByPartOfSpeech("???");
+//    //$Word->tryColumns();
+//    $max = $Word->getLastId(false);
+//    
+//    $Word->findEmptyOrdId();
+//    $Word->getOrdArrByType("pronoun");
+//    echo "<br>=============CATEGORIES=================<br>";
+//    $Word->getCategoriesOfOrd();
     
 }else{
     echo "<br>NOT OK: Object of Ord class not created!";
 }
 
 if($User = new User()){
-    echo "<br>USER OK";
-    $User->getUsersNames();
+//    echo "<br>USER OK";
+//    $User->getUsersNames();
 }else{
     echo "<br>USER NOT OK: Object of User class not created!";
 }
