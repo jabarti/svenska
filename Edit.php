@@ -138,16 +138,18 @@ $li=0;
 
 //tworzenie tabelek
 $method='post';
-$id = 0;
-
+//$id = 0;
+//$curr_word_id = 'no';
 echo "<div class=edit_tab_contener>";
 while($row = mysql_fetch_assoc($mq)){
     
-    echo "<table id ='ord_".$id."'>";
-    echo "<form method=".$method." action=Edit.php >";
+    $curr_word_id = $row['id'];
+    
+    echo "<table class=edit_table id ='ord_".$curr_word_id."'>";
+    echo "<form id='form_ord_".$curr_word_id."' method=".$method." action=Edit.php >";
     $j=0;
     foreach($row as $k=>$v){
-
+            
         if($j%4==0){
             echo "<tr>";
         }
@@ -241,6 +243,9 @@ while($row = mysql_fetch_assoc($mq)){
             echo "</tr>";
             break;
         }
+        elseif($k == 'id'){
+            echo "<td>".$k."</td><td><input id='id".$curr_word_id."' name=".$k." value='".$v."' readonly></td>";
+        }
         else{
             echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
         }
@@ -253,29 +258,33 @@ while($row = mysql_fetch_assoc($mq)){
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>
                         <button id=ala onclick='Menu();'>".t("Menu")."</button>
-                        <input id=Edit_".$id." type=submit name=edit value='".t('Edit')."'>
-                        <input id=Del_".$id." type=submit name=delete value='".t("DELETE")."'>
-                        <input id=CBedit_".$id." type=checkbox name=CBedit_".$id." value='".t('wartość')."' />
+                        <input id=Edit_".$curr_word_id." type=submit name=edit value='".t('Edit')."'>";
+//                        <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$id." value='".t('wartość')."' disabled />
+        echo "          <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$curr_word_id." value='".$curr_word_id."' disabled />
+                        <input id=Del_".$curr_word_id." type=submit name=delete value='".t("DELETE")."'>                        
                     </td>
               </tr>
+              <tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
         </form>
         </table>";    
         
-    $i++; $id++;
+    $i++; //$id++;<tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
 }
 echo "</div>";      // end of div: edit_tab_contener
+
 // Wyniki!!??? z sercza
 //echo "<div id=p3 class=\"tab_info2\"></div>";
 
 
+         
 if(isset($_POST)){
     ?><script>//alert("w isset $_POST");</script><?php
     if(isset($_POST['edit'])){
-//        ?><script>//alert("w $_POST['edit']!=null");</script><?php
+//        ?><script>alert("w $_POST['edit']!=null");</script><?php
         $serial = serialize($_POST);
-        print_r($serial);
+//        print_r($serial);
         $serial=  unserialize($serial);
-        print_r($serial);
+//        print_r($serial);
     
         $sql_text = "UPDATE `ord` SET ";
         $sql_textPLLH = "UPDATE `ordLH` SET ";
@@ -286,7 +295,7 @@ if(isset($_POST)){
         $Word = new Ord();
 //        echo  '<br>1) '.$sql_text;
         foreach ($serial as $k=>$v){
-        echo "<br>".$k."=>".$v;
+//        echo "<br>".$k."=>".$v;
             switch($k){
                 case 'edit':
                     break;
@@ -315,16 +324,16 @@ if(isset($_POST)){
         $sql_textPLLH .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
 //        $sql_textPLLH = str_replace($this->table."LH", $this->table, $sql_text);
         
-        echo '<br>SQL: '.$sql_text;
+//        echo '<br>SQL: '.$sql_text;
 //        echo '<br>SQL_PLLH: '.$sql_textPLLH;
 //        echo '<br>$sql_textErrINSPLLH: '.$sql_textErrINSPLLH;
         
         mysql_query($sql_text);
         if(mysql_affected_rows()){
-            ?><script>alert("WESZŁO do BD (Update)");</script><?php
+//            ?><script>//alert("WESZŁO do BD (Update)");</script><?php
             mysql_query($sql_textPLLH);
             if( mysql_affected_rows()){
-                ?><script>alert("WESZŁO do PLLH (update)");</script><?php
+                ?><script>//alert("WESZŁO do PLLH (update)");</script><?php
             }else{
                 ?><script>//alert("NIE WESZŁO do PLLH (update)");</script><?php
                 // TODO: czyli nie ma ord o taki mnumerze i trzeba insertować!!!
@@ -337,6 +346,7 @@ if(isset($_POST)){
                 }
             }
             header("Location: Edit.php");
+//            header("Location: Edit.php?sercz_id=".$curr_word_id); // AJAX????
         }else{
             ?><script>//alert("NIE WESZŁO do BD");</script><?php
         }  
@@ -374,8 +384,8 @@ if(isset($_POST)){
         }
         $sql_text .= " WHERE `ord`.`id` ='".$id."' AND id_ord='".$id_ord."';";
         $sql_textPLLH .= " WHERE `ordLH`.`id` ='".$id."' AND id_ord='".trans($id_ord)."';";
-        echo '<br>SQL: '.$sql_text;
-        echo '<br>SQL: '.$sql_textPLLH;
+//        echo '<br>SQL: '.$sql_text;
+//        echo '<br>SQL: '.$sql_textPLLH;
 
         if( mysql_query($sql_text)){
             ?><script>//alert("Skasowało");</script><?php
@@ -391,6 +401,10 @@ if(isset($_POST)){
         } 
     }
 }
+
+echo "<div class=floating_button_div>"
+        . "<button id=floating_button value=TRY>Edytuj wszystkie</button>"
+   . "</div>";
 ob_end_flush();  // żeby sie dało reloadeować
 
 

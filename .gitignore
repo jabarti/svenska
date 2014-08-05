@@ -9,6 +9,7 @@
 *.z7
 *.sql
 SQL
+errors
 errors/error_log*
 nbproject
 DB_Connection.php

@@ -56,6 +56,7 @@ tbody {
 .edit_tab_contener {
     position: absolute;
     background: deepskyblue;
+    /*opacity: 0.1;*/
 /*    text-align: center;
     margin-right: auto; 
     margin-left: auto; */
@@ -74,6 +75,12 @@ div#translacje {
     margin-left: auto;
     text-align: left;
     z-index: 999;
+}
+div.floating_button_div{
+    background: red;
+    position: fixed;
+    top: 10px;
+    right: 180px;
 }
 
 div.flag {

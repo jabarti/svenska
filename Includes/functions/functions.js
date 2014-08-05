@@ -318,11 +318,71 @@ $(document).ready(function(){
     });
 });
 
-$(document).ready(function(){   
+$(document).ready(function(){ 
+    
     $('button.butt_diak').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
         var letter = $(this).attr('value')  // pobranie vartości klawisza klikniętego (literka np.: ą, ć itd
         temp = $('#try').val()+letter;      // pobranie wartośi wprowadzanych i dodanie literki
         $('#try').val(temp);                // PRZEPISANIE WARTOŚCI
         $("#try").focus();                  // PRZYWRÓCENIE FOCUSA NA TEXTAREA!
-    });   
+    });
+    
+//    $('table.edit_table').on('input',function(){
+//        var ID = $(this).attr('id');
+//        var pos1 = ID.search("_")
+//        var nID = ID.slice(pos1);   // e.g.: _345
+//        alert(nID)
+//        $('#CBedit'+nID).prop('checked', true);
+//        $('.myCheckbox').prop('checked', true);
+//            $.ajax({    url:"ajax.admin.php",
+//                            type: 'post',
+//                            data: {
+//                                action: 'text_input_sercz',
+//                                var1:   tekst
+//                            },
+//                            success:function(result){
+//                                $('#p3').html(result);
+////                                $('#p2').clear();
+////                                return result;
+//                                  console.log("REZULTAT:"+result);
+//                            },
+//                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+//                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+//                }              
+//            });
+//    });
+    
+    $('table.edit_table').change(function(){
+        var ID = $(this).attr('id');
+        var pos1 = ID.search("_")
+        var nID = ID.slice(pos1);   // e.g.: _345
+//        alert(nID)
+        $('#CBedit'+nID).prop('checked', true);
+        
+        var checkedVals = $('.edit_checkbox:checkbox:checked').map(function() {
+        return this.value;
+        }).get();
+//        alert(checkedVals.join(","));
+        
+//        $( "#form_ord"+nID ).submit(function( event ) {
+//            event.preventDefault();
+//            console.log( $( this ).serialize() );
+//        });
+//        
+        // Find disabled inputs, and remove the "disabled" attribute
+//        $("#id"+nID).removeAttr('disabled');
+//        alert(disabled);
+
+        // serialize the form
+        var serialized = $("#form_ord"+nID).serialize();
+
+        // re-disabled the set of inputs that you previously enabled
+//        $("#id"+nID).attr('disabled','disabled');
+        $("#ta_ser"+nID).text(serialized);
+    });
+    
+    $('#floating_button').click(function(){
+        alert("TODO");
+//        $("#form_ord_"+49).trigger('submit')
+    });
 });

@@ -827,7 +827,7 @@ class Ord {
         // tworzy tabelkę 1go rekordów na podst ID == coś nie działa jeszcze
         public function getTabOrdById($id){
             $SQL = "SELECT * FROM ".$this->table." WHERE `id` = '".$id."';";
-            echo $SQL;
+            echo __FILE__.__LINE__.$SQL;
             $mq = mysql_query($SQL);
             
             //tworzenie tabelek
@@ -836,7 +836,7 @@ class Ord {
 
             echo "<div class=edit_tab_contener>";
             while($row = mysql_fetch_assoc($mq)){
-            var_dump($row);
+            echo __FILE__.__LINE__; var_dump($row);
             echo "<table id ='ord_".$id."'>";
             echo "<form method=".$method." action=Edit.php >";
             $j=0;

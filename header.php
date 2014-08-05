@@ -9,6 +9,6 @@
         <link rel="shortcut icon" href="Resources/img/favicon_no_euro.ico" type="image/x-icon"/><!---->
         <link rel="Stylesheet" type="text/css" href="../Translations/translation.css" />
         <link rel="Stylesheet" type="text/css" href="Resources/CSS/style.css" />
-        <meta http-equiv="refresh" content="600"/>   <!-- Odświeżanie -->
+        <meta http-equiv="refresh" content="10801"/>   <!-- Odświeżanie loger: Cookie log =  18h, header (odświerzanie!): 18h01m-->
         <meta charset="utf-8">
 </head>

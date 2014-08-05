@@ -8,37 +8,12 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = 'Svenska | Test';
-//include 'header.php';
-////include '../Translations/flag.php';
-//include 'buttons.php';
-
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Test';
 include 'header.php';
 include 'buttons.php';
-
-//if(isset($_SESSION['log'])){
-//    if($_SESSION['log'] == true){
-//        echo "<br>Zalogowany jako: ".$_SESSION['user'];//." z hasłem: ". $_SESSION['password'];
-//    }else{
-//        echo "<br>NIE ZALOGOWANY";
-//    }
-//}
-
-//if (isset($_POST['clear'])){
-//    echo "<br>".__LINE__."/ 1 ISSET POST Clear";
-//    $score = new Score();
-//    $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
-//    $score->saveScoreData();
-//    $_SESSION['arrOfAnsw'] = array();
-//    $_SESSION['good']=0;
-//    $_SESSION['bad']=0;
-//}
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
     
@@ -138,13 +113,6 @@ echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
 <button class="butt_diak" id="butt_diak_13" value="é">é</button>
 
 <?php
-//if(isset($_POST['test']))
-//    echo $_POST['test'];
-//
-//if(isset($_POST['avoid']))
-//    echo $_POST['avoid'];
-//
-//
 
 if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
     
@@ -212,7 +180,7 @@ if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
 }
  if(isset($_SESSION['scoresOfUsr'])){
      echo "<br><br><b>Wcześniejsze wyniki:</b><br>";
-     echo "<span class=red>Good: <b>".$_SESSION['scoresOfUsr'][0]."</b></span>/<span class=red>Bad: <b>".$_SESSION['scoresOfUsr'][1]."</b></span>";
+     echo "<span class=red>Good: <b>".$_SESSION['scoresOfUsr'][0]."</b></span>/<span class=red>Bad: <b>".$_SESSION['scoresOfUsr'][1]."</b> = ".round(100*$_SESSION['scoresOfUsr'][0]/($_SESSION['scoresOfUsr'][0]+$_SESSION['scoresOfUsr'][1]),2)."% dobrych odpowiedzi.</span>";
  }else{
      echo "<br> NIE MA SESJA SCORE";
  }
