@@ -14,7 +14,9 @@ include 'divLog.php';
 $title = 'Svenska | ShowRandomStats';
 include 'header.php';
 include 'buttons.php';
-
+?>
+<button id="del_rand_stats">Usuń WSZYSTKIE rekordy z Random!</button>
+<?php
 $Rand = new Random();
 $Rand->getAllToTable();
 $Rand->getCountWordToTable();

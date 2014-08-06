@@ -36,6 +36,11 @@ switch($_REQUEST['action']){
 //        $Word->getSimOrdByTrans($text);
             echo $text;
         break;
+    case 'del_rand_stats':
+        $rand = new Random();
+        $rand->deleteAllRecords();
+        
+        break;
     default:
         break;
 }

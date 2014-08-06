@@ -28,6 +28,13 @@ class Ord {
     private $imperative;
     private $present_participle;
     private $past_participle;
+    
+    private $pas_infinitive;
+    private $pas_presens;
+    private $pas_preterite;
+    private $pas_supine;
+    private $pas_imperative;
+
     private $S_indefinite;
     private $S_definite;
     private $P_indefinite;
@@ -48,8 +55,9 @@ class Ord {
     private $table = "ord";
     
 
-    public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, $infinitive, $presens,$past, 
-                            $supine, $imperative, $present_participle, $past_participle, 
+    public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
+                            $infinitive, $presens, $past, $supine, $imperative, $present_participle, $past_participle, 
+                            $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
                             $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                             $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                             $glowny, $porzadkowy,
@@ -58,15 +66,17 @@ class Ord {
         if(!$this->getId($id_ord)){
             
             $SQL = sprintf("INSERT INTO `".$this->table."` "
-                . "(`id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, `infinitive`, `presens`, `past`, "
-                . "`supine`, `imperative`, `present_participle`, `past_participle`, "
+                . "(`id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, "
+                . "`infinitive`, `presens`, `past`, `supine`, `imperative`, `present_participle`, `past_participle`, "
+                . "`pas_infinitive`, `pas_presens`, `pas_preterite`, `pas_supine`, `pas_imperative`, "
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                 . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                 . "`glowny`, `porzadkowy`, "
                 . "`wymowa`, `kategoria`, `uwagi`) "
                 . "VALUES "
-                . "('".$id_ord."','".$typ."','".$rodzaj."','".$grupa."','".$trans."','".$infinitive."','".$presens."','".$past."',"
-                . "'".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
+                . "('".$id_ord."','".$typ."','".$rodzaj."','".$grupa."','".$trans."',"
+                . "'".$infinitive."','".$presens."','".$past."','".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
+                . "'".$pas_infinitive."','".$pas_presens."','".$pas_preterite."','".$pas_supine."','".$pas_imperative."',"
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
                 . "'".$glowny."','".$porzadkowy."',"
@@ -80,15 +90,17 @@ class Ord {
 //                echo "<br>ID:".$id_LH;
             
                 $SQL_PLLH = sprintf("INSERT INTO `".$this->table."LH` "
-                    . "(`id`, `id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, `infinitive`, `presens`, `past`, "
-                    . "`supine`, `imperative`, `present_participle`, `past_participle`, "
+                    . "(`id`, `id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, "
+                    . "`infinitive`, `presens`, `past`, `supine`, `imperative`, `present_participle`, `past_participle`, "
+                    . "`pas_infinitive`, `pas_presens`, `pas_preterite`, `pas_supine`, `pas_imperative`,"
                     . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                     . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                     . "`glowny`, `porzadkowy`, "
                     . "`wymowa`, `kategoria`, `uwagi`) "
                     . "VALUES "
-                    . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$grupa."','".$this->setSQLstringToCode($trans)."','".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."',"
-                    . "'".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
+                    . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$grupa."','".$this->setSQLstringToCode($trans)."',"
+                    . "'".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."','".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
+                    . "'".$this->setSQLstringToCode($pas_infinitive)."','".$this->setSQLstringToCode($pas_presens)."','".$this->setSQLstringToCode($pas_preterite)."','".$this->setSQLstringToCode($pas_supine)."','".$this->setSQLstringToCode($pas_imperative)."',"
                     . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
                     . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
                     . "'".$this->setSQLstringToCode($glowny)."','".$this->setSQLstringToCode($porzadkowy)."',"
@@ -98,13 +110,13 @@ class Ord {
                     echo "<br>".t("WSADZONE do ordLH!!!");
                 }else{
 //                    echo "<br>ERROR wsadu";
-                    echo "<br>".t("ERROR wsadu");
+                    echo "<br>".__FILE__.__LINE__.t("ERROR wsadu");
                 }
                 
                 
             }else{
 //                echo "<br>ERROR wsadu";
-                echo "<br>".t("ERROR wsadu");
+                echo "<br>".__FILE__.__LINE__.t("ERROR wsadu").", SQL:".$SQL;
             }
                     
             return true;
@@ -186,8 +198,8 @@ class Ord {
         
         public function getTabOfAttr(){
             $tab = Array( 'id',     'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
-                                    'infinitive', 'presens', 'past', 'supine', 'imperative', 
-                                    'present_participle', 'past_participle', 
+                                    'infinitive', 'presens', 'past', 'supine', 'imperative', 'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                     'glowny', 'porzadkowy',
@@ -222,6 +234,7 @@ class Ord {
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative',
                                     'wymowa', 'kategoria', 'uwagi');
                     break;
                 
@@ -278,6 +291,7 @@ class Ord {
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative',
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                     'glowny', 'porzadkowy',
@@ -313,6 +327,7 @@ class Ord {
                     $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
                                     ); 
                     break;
                 
@@ -365,8 +380,9 @@ class Ord {
                     $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative',
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
-                                    'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
+                                    'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy' 
                                     ); 
                     break;
             }
@@ -399,6 +415,7 @@ class Ord {
                     $tab = Array(   'id_ord', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
                                 ); 
                     break;
                 
@@ -455,6 +472,7 @@ class Ord {
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
+                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative',
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                 ); 

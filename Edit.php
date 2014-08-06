@@ -106,8 +106,7 @@ $text .=$sercz_id." ";
 $text .=";";
 
 //echo "<br>TEXT: ".$text;
-//$SQL1 = sprintf("SELECT * FROM `ord` ".$wher." ".$sercz." ".$sort.";");
-//$SQL2 = sprintf("SELECT * FROM `ord` ".$wher." ".$sercz." ".$sort.";");
+
 $SQL1 = $text;
 $SQL2 = $text;
 
@@ -118,28 +117,9 @@ $mq2 = mysql_query($SQL1);
 $i=0;
 $li=0;
 
-// Tu sie wyswietla ta tabela z linkami do słówek - REMOVE????
-//echo "<div id=menu>";
-//echo "<table class='table2'>";
-//while($row2 = mysql_fetch_assoc($mq2)){
-//    if($li%5==0){
-//            echo "<tr>";
-//    }
-//    echo "<td><a href='#ord_".$li."'>".$row2['id'].": ".$row2['id_ord']." => ".$row2['trans']."</a></td>";
-////    if ($li == 40) break;
-//    if($li%5==4){
-//            echo "</tr>";
-//    }
-//    $li++;
-//}
-//echo "</table>";
-//echo "</div><br>";
-
-
 //tworzenie tabelek
 $method='post';
 //$id = 0;
-//$curr_word_id = 'no';
 echo "<div class=edit_tab_contener>";
 while($row = mysql_fetch_assoc($mq)){
     
@@ -150,13 +130,14 @@ while($row = mysql_fetch_assoc($mq)){
     $j=0;
     foreach($row as $k=>$v){
             
-        if($j%4==0){
+        if($j%4==0){        // 4 kolumny w tabeli EDIT
             echo "<tr>";
         }
         
         if($k == 'typ'){
             echo "<td>".$k."</td><td>";
             echo "<select name='".$k."'>";
+                    if($v != '')
                        echo" <option value=".$v.">".trans($v)." (".t("zapisane").")</option>"; 
           
                         $Word = new Ord();
@@ -176,8 +157,10 @@ while($row = mysql_fetch_assoc($mq)){
         elseif($k == 'rodzaj'){
             echo "<td>".$k."</td><td>";
         
-            echo "      <select id=rodzaj name='rodzaj'>
-                            <option value='".$v."'>".$v." (".t("zapisane").")</option>";
+            echo "      <select id=rodzaj name='rodzaj'>";
+                        if($v != '')
+                            echo "<option value='".$v."'>".$v." (".t("zapisane").")</option>";
+                        
                             $Word = new Ord();
                             $OrdCat = $Word->getRodzOfOrd();
                             foreach($OrdCat as $k){
@@ -189,8 +172,10 @@ while($row = mysql_fetch_assoc($mq)){
         elseif($k == 'grupa'){
             echo "<td>".$k."</td><td>";
         
-            echo "      <select id=grupa name='grupa'>
-                            <option value='".$v."'>".$v." (".t("zapisane").")</option>";
+            echo "      <select id=grupa name='grupa'>";
+                    if($v != '')
+                        echo "<option value='".$v."'>".$v." (".t("zapisane").")</option>";
+                    
                             $Word = new Ord();
                             $OrdCat = $Word->getGroupOfOrd();
                             foreach($OrdCat as $k){

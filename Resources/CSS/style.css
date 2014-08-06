@@ -54,6 +54,10 @@ tbody {
     border: 1px solid #003AD9;
 }
 
+tbody.wew {
+    border: 1px solid greenyellow;
+}
+
 .edit_tab_contener {
     position: absolute;
     /*background: deepskyblue;*/

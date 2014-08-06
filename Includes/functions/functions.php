@@ -9,7 +9,7 @@
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
 
-function trans($var){
+function trans($var){       // działa w test.php do tłumaczenia pytań -dlatego musi być szerzej ujęte~!
     switch($var){
         case 'id_ord':
             return "słowo PL";
@@ -37,6 +37,21 @@ function trans($var){
             break;
         case 'imperative':
             return "tryb rozkazujący";
+            break;
+        case 'pas_infinitive':
+            return "bezokolicznik s.bierna";
+            break;
+        case 'pas_presens':
+            return "cz.teraźniejszy s.bierna";
+            break;
+        case 'pas_past':
+            return "cz.przeszły s.bierna";
+            break;
+        case 'pas_supine':
+            return "supine(perfect), dokonany s.bierna";
+            break;
+        case 'pas_imperative':
+            return "tryb rozkazujący s.bierna";
             break;
         case 'present_participle':
             return "imiesłów czynny(teraźniejszy)";

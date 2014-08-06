@@ -65,6 +65,12 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         ?>
                     </select>
                 </td>
+                <td class='label'><?php echo t("szwedzki"); ?></td>
+                <td><input id='trans' name='trans'></td>
+                
+            <tr>    
+            <tr>    
+                <td colspan="4"></td>
                 <td class='label'><?php echo t("grupa"); ?></td>
                 <td>
                     <select id=grupa name='grupa'>
@@ -77,11 +83,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         ?>
                     </select>
                 </td>
-            <tr>    
-            <tr>    
-                <td class='label'><?php echo t("szwedzki"); ?></td>
-                <td><input id='trans' name='trans'></td>
-                <td colspan="6"></td>
+                <td colspan="2"></td>
             </tr>
             <tr>
                 <td><br></td>
@@ -91,16 +93,16 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
             <tbody id='czasownik' >
             <tr>
-                <td><b><?php echo t("Czasownik"); ?></b></td>
+                <td><h3><?php echo t("Czasownik"); ?></h3></td>
                 <td colspan='7'></td>
             </tr>
-            
             <tr>
-                <td><br></td>
-                <td colspan='7'></td>
+                <td colspan="3"><i><?php echo t("str. czynna"); ?></i> (<b>Active</b>)</td>
+                <td></td>
+                <td colspan='3'></td>
             </tr>            
             <tr>
-                <td class='label'>infinitive</td>
+                <td class='label'><?php echo t("infinitive"); ?>(infinitive)</td>
                 <td><input id='in1' name='infinitive'></td>
                 <td class='label'>presens</td>
                 <td><input id='in1' name='presens'></td>
@@ -118,11 +120,41 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td><input id='in1' name='past_participle'></td>
                 <td colspan='2'></td>
             </tr>
+            
             <tr>
                 <td><br></td>
                 <td colspan='7'></td>
             </tr>            
-            </div>
+            <tr>
+                <td colspan="3"><i><?php echo t("str.bierna"); ?></i> (<b>Passive</b>)</td>
+                <td></td>
+                <td colspan='3'></td>
+            </tr>            
+            <tr>
+                <td class='label'>Pas_infinitive</td>
+                <td><input id='in1' name='pas_infinitive'></td>
+                <td class='label'>Pas_presens</td>
+                <td><input id='in1' name='pas_presens'></td>
+                <td class='label'>Pas_preterite</td>
+                <td><input id='in1' name='pas_preterite'></td>
+                <td class='label'>Pas_supine</td>
+                <td><input id='in1' name='pas_supine'></td>
+            </tr>
+            <tr>
+                <td class='label'>Pas_imperative</td>
+                <td><input id='in1' name='pas_imperative'></td>
+<!--                <td class='label'>P_present_participle</td>
+                <td><input id='in1' name='pas_present_participle'></td>
+                <td class='label'>P_past_participle</td>
+                <td><input id='in1' name='pas_past_participle'></td>-->
+                <td colspan='6'></td>
+            </tr>
+            
+            <tr>
+                <td><br></td>
+                <td colspan='7'></td>
+            </tr>            
+            <!--</div>-->
             </tbody>
             <tbody id='rzeczownik' >
             <tr>
@@ -291,6 +323,13 @@ if(isset($_POST['submit'])){
         $imperative =           trim(trim(trim($_POST['imperative']),","));
         $present_participle =   trim(trim(trim($_POST['present_participle']),","));
         $past_participle =      trim(trim(trim($_POST['past_participle']),","));
+
+        $pas_infinitive =       trim(trim(trim($_POST['pas_infinitive']),","));
+        $pas_presens =          trim(trim(trim($_POST['pas_presens']),","));
+        $pas_preterite =        trim(trim(trim($_POST['pas_preterite']),","));
+        $pas_supine =           trim(trim(trim($_POST['pas_supine']),","));
+        $pas_imperative =       trim(trim(trim($_POST['pas_imperative']),","));
+        
         $S_indefinite =         trim(trim(trim($_POST['S_indefinite']),","));
         $S_definite =           trim(trim(trim($_POST['S_definite']),","));
         $P_indefinite =         trim(trim(trim($_POST['P_indefinite']),","));
@@ -317,6 +356,7 @@ if(isset($_POST['submit'])){
         
         $Word->setData( $id_ord, $typ, $rodzaj, $grupa, $trans, $infinitive, $presens,$past, 
                         $supine, $imperative, $present_participle, $past_participle, 
+                        $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $glowny, $porzadkowy,

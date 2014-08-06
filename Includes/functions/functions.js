@@ -267,6 +267,7 @@ $(document).ready(function(){
            $('#p2').html('');
        }
     }),
+    
     $("#trans").keyup(function(){
         var tekst = $("#trans").val();
         console.log(tekst);
@@ -290,7 +291,8 @@ $(document).ready(function(){
        } else {
            $('#p2').html('');
        }
-    })
+    }),
+    
     $("#sercz").keyup(function(){
         var tekst = $("#sercz").val();
         console.log(tekst);
@@ -315,6 +317,20 @@ $(document).ready(function(){
        } else {
            $('#p3').html('');
        }
+    });
+    $("#del_rand_stats").click(function(){
+        if (confirm("Are you sure?") == true) {     // POPUP z potwierdznienim
+            $.ajax({    url:"ajax.admin.php",
+                            type: 'post',
+                            data: {
+                                action: 'del_rand_stats',
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                }              
+            });
+        } else {
+        }
     });
 });
 

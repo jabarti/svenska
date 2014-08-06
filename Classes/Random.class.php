@@ -224,4 +224,15 @@ class Random {
                 echo "ERROR in SQL: ".$SQL;
             }
         }
+        
+        public function deleteAllRecords(){
+            $SQL = sprintf("DELETE FROM ".$this->table.";");
+            $mq = mysql_query($SQL);
+            
+            if(mysql_affected_rows()){
+                echo "<br>OK, skasowane!";
+            }else{
+                echo "<br>Err, NIE skasowane!";
+            }
+        }
 }
