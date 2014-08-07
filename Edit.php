@@ -164,7 +164,7 @@ while($row = mysql_fetch_assoc($mq)){
                             $Word = new Ord();
                             $OrdCat = $Word->getRodzOfOrd();
                             foreach($OrdCat as $k){
-                            echo "<option value=$k>".t($k)."</option>";
+                            echo "<option value=$k>".$k."</option>";
                         }
             echo "      </select>";
             echo "</td>";            
@@ -179,7 +179,7 @@ while($row = mysql_fetch_assoc($mq)){
                             $Word = new Ord();
                             $OrdCat = $Word->getGroupOfOrd();
                             foreach($OrdCat as $k){
-                            echo "<option value=$k>".t($k)."</option>";
+                            echo "<option value=$k>".$k."</option>";
                         }
             echo "      </select>";
             echo "</td>";            
@@ -187,8 +187,12 @@ while($row = mysql_fetch_assoc($mq)){
         elseif($k == 'kategoria'){
             echo "<td>".$k."</td><td>";
         
-            echo "      <select id=kategoria name='kategoria'>
-                            <option value='".$v."'>".t($v)."</option>";
+            echo "      <select id=kategoria name='kategoria'>";
+                if($v !='')
+                    echo "<option value='".$v."'>".t($v)."</option>";
+                else
+                    echo "<option value='".$v."'>".$v."</option>";
+                
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
                         foreach($OrdCat as $k){

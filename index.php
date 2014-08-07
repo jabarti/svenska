@@ -23,11 +23,11 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
         <table class='tab_insert'>
         <tbody id='podstawowe'>
             <tr>
-                <td><b><?php echo t("Podstawowe"); ?></b></td>
+                <td><h4><?php echo t("Basic"); ?></h4></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td><br></td>
+                <td></td>
                 <!--<td></td>-->
                 <td id="resul" colspan="2"></td>
                 <td><p class=red id='ang_cz_m'></p></td>
@@ -46,7 +46,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                             echo "<option>".t("część mowy")."</option>";
                         foreach($OrdCat as $k){
                             if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
-                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
+                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." )</option>";
                             else
                                 echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
                         }   
@@ -71,7 +71,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             <tr>    
             <tr>    
                 <td colspan="4"></td>
-                <td class='label'><?php echo t("grupa"); ?></td>
+                <td class='label'><?php echo t("lab_grupa"); ?></td>
                 <td>
                     <select id=grupa name='grupa'>
                         <?php
@@ -93,30 +93,30 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
             <tbody id='czasownik' >
             <tr>
-                <td><h3><?php echo t("Czasownik"); ?></h3></td>
+                <td><h4><?php echo t("Verb"); ?></h4></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td colspan="3"><i><?php echo t("str. czynna"); ?></i> (<b>Active</b>)</td>
+                <td colspan="3"><i><?php echo t("Active"); ?></i> (<b>Active</b>)</td>
                 <td></td>
                 <td colspan='3'></td>
             </tr>            
             <tr>
-                <td class='label'><?php echo t("infinitive"); ?>(infinitive)</td>
+                <td class='label'><?php echo t("infinitive"); ?><br>(infinitive)</td>
                 <td><input id='in1' name='infinitive'></td>
-                <td class='label'>presens</td>
+                <td class='label'><?php echo t("present"); ?><br>(present)</td>
                 <td><input id='in1' name='presens'></td>
-                <td class='label'>preterite</td>
+                <td class='label'><?php echo t("past"); ?><br>(past)</td>
                 <td><input id='in1' name='past'></td>
-                <td class='label'>supine</td>
+                <td class='label'><?php echo t("supine"); ?><br>(supine)</td>
                 <td><input id='in1' name='supine'></td>
             </tr>
             <tr>
-                <td class='label'>imperative</td>
+                <td class='label'><?php echo t("imperative"); ?><br>(imperative)</td>
                 <td><input id='in1' name='imperative'></td>
-                <td class='label'>present_participle</td>
+                <td class='label'><?php echo t("present participle"); ?> <br>(present participle)</td>
                 <td><input id='in1' name='present_participle'></td>
-                <td class='label'>past_participle</td>
+                <td class='label'><?php echo t("past participle"); ?> <br>(past participle)</td>
                 <td><input id='in1' name='past_participle'></td>
                 <td colspan='2'></td>
             </tr>
@@ -126,22 +126,22 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td colspan='7'></td>
             </tr>            
             <tr>
-                <td colspan="3"><i><?php echo t("str.bierna"); ?></i> (<b>Passive</b>)</td>
+                <td colspan="3"><i><?php echo t("Passive"); ?></i> (<b>Passive</b>)</td>
                 <td></td>
                 <td colspan='3'></td>
             </tr>            
             <tr>
-                <td class='label'>Pas_infinitive</td>
+                <td class='label'><?php echo t("Passive infinitive"); ?> <br>(Passive infinitive)</td>
                 <td><input id='in1' name='pas_infinitive'></td>
-                <td class='label'>Pas_presens</td>
+                <td class='label'><?php echo t("Passive present"); ?> <br>(Passive present)</td>
                 <td><input id='in1' name='pas_presens'></td>
-                <td class='label'>Pas_preterite</td>
+                <td class='label'><?php echo t("Passive past"); ?> <br>(Passive past)</td>
                 <td><input id='in1' name='pas_preterite'></td>
-                <td class='label'>Pas_supine</td>
+                <td class='label'><?php echo t("Passive supine"); ?> <br>(Passive supine)</td>
                 <td><input id='in1' name='pas_supine'></td>
             </tr>
             <tr>
-                <td class='label'>Pas_imperative</td>
+                <td class='label'><?php echo t("Passive imperative"); ?> <br>(Passive imperative)</td>
                 <td><input id='in1' name='pas_imperative'></td>
 <!--                <td class='label'>P_present_participle</td>
                 <td><input id='in1' name='pas_present_participle'></td>
@@ -158,21 +158,21 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tbody>
             <tbody id='rzeczownik' >
             <tr>
-                <td><b><?php echo t("Rzeczownik"); ?></b></td>
+                <td><h4><?php echo t("Noun"); ?></h4></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td><br></td>
-                <td colspan='7'></td>
+<!--                <td><br></td>-->
+                <td colspan='8'></td>
             </tr>            
             <tr>
-                <td class='label'>S_indefinite</td>
+                <td class='label'><?php echo t("Single indefinite");?><br>(Single indefinite)</td>
                 <td><input id='in1' name='S_indefinite'></td>
-                <td class='label'>S_definite</td>
+                <td class='label'><?php echo t("Single definite");?><br>(Single definite)</td>
                 <td><input id='in1' name='S_definite'></td>
-                <td class='label'>P_indefinite</td>
+                <td class='label'><?php echo t("Plural indefinite");?><br>(Plural indefinite)</td>
                 <td><input id='in1' name='P_indefinite'></td>
-                <td class='label'>P_definite</td>
+                <td class='label'><?php echo t("Plural definite"); ?><br>(Plural definite)</td>
                 <td><input id='in1' name='P_definite'></td>
             </tr>
             <tr>
@@ -182,29 +182,29 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tbody>
             <tbody id='przymiotnik' class='nobordbottom'>               
             <tr>
-                <td><b><?php echo t("Przymiotnik"); ?></b></td>
+                <td><h4><?php echo t("Adjective"); ?></h4></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td><br></td>
-                <td colspan='7'></td>
+                <!--<td><br></td>-->
+                <td colspan='8'></td>
             </tr>            
             <tr>
-                <td class='label'>neuter</td>
+                <td class='label'><?php echo t("neuter"); ?> <br>(neuter)</td>
                 <td><input id='in1' name='neuter'></td>
-                <td class='label'>masculin</td>
+                <td class='label'><?php echo t("masculin"); ?> <br>(masculin)</td>
                 <td><input id='in1' name='masculin'></td>
-                <td class='label'>plural</td>
+                <td class='label'><?php echo t("plural"); ?> <br>(plural)</td>
                 <td><input id='in1' name='plural'></td>
                 <td colspan='2'></td>
             </tr>
             <tbody id='stopniowanie' class='nobordtop'>
             <tr>
-                <td  class='label'><?php echo t("st równy"); ?></td>
+                <td  class='label'><?php echo t("positive"); ?> <br>(positive)</td>
                 <td><input id='in1' name='st_rowny'></td>
-                <td  class='label'><?php echo t("st wyższy"); ?></td>
+                <td  class='label'><?php echo t("comparative"); ?> <br>(comparative)</td>
                 <td><input id='in1' name='st_wyzszy'></td>
-                <td  class='label'><?php echo t("st najwyższy"); ?></td>
+                <td  class='label'><?php echo t("superlative"); ?> <br>(superlative)</td>
                 <td><input id='in1' name='st_najwyzszy'></td>
                 <td colspan='2'></td>
             </tr>
@@ -217,17 +217,17 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
             <tbody id="liczebnik">
             <tr>
-                <td><b><?php echo t("Liczebnik"); ?></b></td>
+                <td><h4><?php echo t("Numeral"); ?></h4></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td><br></td>
-                <td colspan='7'></td>
+                <!--<td><br></td>-->
+                <td colspan='8'></td>
             </tr>            
             <tr>
-                <td class='label'><?php echo t("glowny"); ?></td>
+                <td class='label'><?php echo t("cardinal number"); ?> <br>(cardinal number)</td>
                 <td><input id='in1' name='glowny'></td>
-                <td class='label'><?php echo t("porzadkowy"); ?></td>
+                <td class='label'><?php echo t("ordinal number"); ?> <br>(ordinal number)</td>
                 <td><input id='in1' name='porzadkowy'></td>
                  <td colspan="4"></td>
             </tr>
@@ -239,12 +239,12 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             
             <tbody id='inne'>
             <tr>
-                <td><b><?php echo t("Inne"); ?></b></td>
+                <td><h4><?php echo t("Other"); ?></h4></td>
                 <td colspan='7'></td>
             </tr>
             <tr>
-                <td><br></td>
-                <td colspan='7'></td>
+                <!--<td><br></td>-->
+                <td colspan='8'></td>
             </tr>            
             <tr>
                 <td class='label'><?php echo t("wymowa"); ?></td>

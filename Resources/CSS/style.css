@@ -25,14 +25,15 @@ table {
 }
 
 .tab_insert td{
-    width: 12%; 
+    /*width: 10%;*/ 
     text-align: left;
     /*border: 1px solid #003AD9;*/
 }
-.tab_insert td.label{
- 
+.tab_insert td.label{ 
     text-align: right;
-
+    font-size: 12px;
+    border-bottom: 1px solid chartreuse;
+    border-top: 1px solid chartreuse;
 }
 
 .table2 td{
