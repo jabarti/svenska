@@ -11,4 +11,10 @@
         <link rel="Stylesheet" type="text/css" href="Resources/CSS/style.css" />
         <meta http-equiv="refresh" content="10801"/>   <!-- Odświeżanie loger: Cookie log =  18h, header (odświerzanie!): 18h01m-->
         <meta charset="utf-8">
+            
+        <link rel="stylesheet" type="text/css" href="../ExternSources/dropdown-check-list.1.4/lib/jquery-ui-1.8.13.custom.css">
+        <link rel="stylesheet" type="text/css" href="../ExternSources/dropdown-check-list.1.4/lib/ui.dropdownchecklist.themeroller.css">
+        <script type="text/javascript"          src="../ExternSources/dropdown-check-list.1.4/lib/jquery-1.6.1.min.js"></script>
+        <script type="text/javascript"          src="../ExternSources/dropdown-check-list.1.4/lib/jquery-ui-1.8.13.custom.min.js"></script>
+        <script type="text/javascript"          src="../ExternSources/dropdown-check-list.1.4/lib/ui.dropdownchecklist-1.4-min.js"></script>    
 </head>

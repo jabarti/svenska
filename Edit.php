@@ -120,7 +120,7 @@ $li=0;
 //tworzenie tabelek
 $method='post';
 //$id = 0;
-echo "<div class=edit_tab_contener>";
+echo "<div id=div_edit class=edit_tab_contener>";
 while($row = mysql_fetch_assoc($mq)){
     
     $curr_word_id = $row['id'];
@@ -188,6 +188,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=kategoria name='kategoria'>";
+//            echo "      <select class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
                 if($v !='')
                     echo "<option value='".$v."'>".t($v)."</option>";
                 else

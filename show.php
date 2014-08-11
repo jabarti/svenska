@@ -107,12 +107,20 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                 }
                 elseif($v!='' && $k !='wymowa'){
                     if(!$flat){
-                        echo substr($k,0,6).": <span class=red>$v</span>,<br>";
-                    }else{
-                        if($k == "uwagi" || $k == "kategoria" ){
-                            echo "<br><span class=blue><b>".t($k)."</b></span>: $v, ";
+                        if ( $k == "kategoria"){
+                            echo substr($k,0,6).": <span class=blue>$v</span>,<br>";
+//                            continue;
                         }else{
+                            echo substr($k,0,6).": <span class=red>$v</span>,<br>";
+                        }
+                    }else{
+//                        if($k == "uwagi" || $k == "kategoria" ){
+                        if($k == "uwagi" ){
+                            echo "<br><span class=blue><b>".t($k)."</b></span>: $v, ";
+                        }elseif ( $k != "kategoria"){
                             echo "$v, ";
+                        }else{
+                            continue;
                         }
                     }
                 }

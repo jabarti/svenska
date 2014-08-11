@@ -401,4 +401,38 @@ $(document).ready(function(){
         alert("TODO");
 //        $("#form_ord_"+49).trigger('submit')
     });
+    
+    // for this (like Kategory!!) select-option block =>dropdown-check-list.1.4.
+//    $("#div_edit").each(function(){$("select.kat_edit_sel").dropdownchecklist()});
+    $("#kategoria_ins").dropdownchecklist({forceMultiple: true,
+                    onComplete: function(selector) {
+                    var values = "";
+                    for( i=0; i < selector.options.length; i++ ) {
+                        if (selector.options[i].selected && (selector.options[i].value != "")) {
+                           if ( values != "" ) values += ";";
+                                values += selector.options[i].value;
+                        }
+                    }
+//                    alert("ala");
+//                    alert( values );
+//                    alert("4");
+                    $('#kategoria_val').val(values)
+                    } 
+     });
+//    $(".kategoria_multi").each(function(){$(this).html("ALA KOTA")});            
+//    $(".kategoria").dropdownchecklist({forceMultiple: true,
+//                    onComplete: function(selector) {
+//                    var values = "";
+//                    for( i=0; i < selector.options.length; i++ ) {
+//                        if (selector.options[i].selected && (selector.options[i].value != "")) {
+//                           if ( values != "" ) values += ";";
+//                                values += selector.options[i].value;
+//                        }
+//                    }
+////                    alert("ala");
+//                    alert( values );
+////                    alert("4");
+//                    $('#kategoria_val').val(values)
+//                    } 
+//                });
 });

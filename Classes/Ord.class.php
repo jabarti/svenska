@@ -54,6 +54,12 @@ class Ord {
     
     private $table = "ord";
     
+    private $category = array(  'brak',
+                                'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','sport','wydarzenia',
+                                'przyroda','nauka','geografia','miejsca','czas','kolory',
+                                'przedmioty','muzyka','jezyki',
+                                'gramatyka');
+    
 
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
                             $infinitive, $presens, $past, $supine, $imperative, $present_participle, $past_participle, 
@@ -1066,19 +1072,7 @@ class Ord {
         }
         
         public function getCategoriesOfOrd(){
-            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'kategoria'";
-//            echo '<br>SQL:'.$sql;
-            $mq = mysql_query($sql);
-            $row = mysql_fetch_row($mq);
-//            echo "<br>row:"; var_dump($row);
-            $type = $row['1'];
-//            echo '<br>type:'.$type;
-            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
-//            echo "<br>matches";var_dump ($matches);
-//            echo "<br>matches1: ".$matches[1];
-            $vals = explode('\',\'', $matches[1]);
-//            echo "<br>Vals: ";var_dump ($vals);
-            return $vals;
+            return $this->category;
         }
         
         public function getRodzOfOrd(){
