@@ -144,7 +144,7 @@ while($row = mysql_fetch_assoc($mq)){
     $curr_word_id = $row['id'];
     
     echo "<table class=edit_table id ='ord_".$curr_word_id."'>";
-    echo "<form id='form_ord_".$curr_word_id."' method=".$method." action=Edit.php >";
+    echo "<form id='form_ord_".$curr_word_id."' method=".$method." action='EditMod.php' >";
     $j=0;
     foreach($row as $k=>$v){
             
@@ -206,6 +206,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=kategoria name='kategoria'>";
+//            echo "      <select id=kategoria multiple='multiple' name='kategoria'>";
 //            echo "      <select class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
                 if($v !='')
                     echo "<option value='".$v."'>".t($v)."</option>";
@@ -261,140 +262,6 @@ while($row = mysql_fetch_assoc($mq)){
     $i++; //$id++;<tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
 }
 echo "</div>";      // end of div: edit_tab_contener
-
-// Wyniki!!??? z sercza
-//echo "<div id=p3 class=\"tab_info2\"></div>";
-       
-if(isset($_POST)){
-    ?><script>//alert("w isset $_POST");</script><?php
-    if(isset($_POST['edit'])){
-//        ?><script>alert("w $_POST['edit']!=null");</script><?php
-        $serial = serialize($_POST);
-//        print_r($serial);
-        $serial=  unserialize($serial);
-//        print_r($serial);
-    
-        $sql_text = "UPDATE `ord` SET ";
-        $sql_textPLLH = "UPDATE `ordLH` SET ";
-        $sql_textErrINSPLLH = "INSERT INTO `ordLH` VALUES (";
-        
-        $id = '';
-        $id_ord = '';
-        $Word = new Ord();
-//        echo  '<br>1) '.$sql_text;
-        foreach ($serial as $k=>$v){
-//        echo "<br>".$k."=>".$v;
-            switch($k){
-                case 'edit':
-                    break;
-                case 'id':
-                    $id = $v;
-                    $_SESSION['curr_ord_id']=$id;
-                    $sql_textErrINSPLLH .= "'".($v)."',";
-                    break;
-                case 'uwagi':           // ostatni musi mieć zakończenie z ";"
-                    $sql_text .= "`".$k."`='".$v."'";
-                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
-                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."');";
-//                    $sql_textPLLH .= "`".$k."`='".($v)."'";
-                    break;
-                default:
-                    $sql_text .= "`".$k."`='".$v."',";
-                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."',";
-                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."',";
-//                    $sql_textPLLH .= "`".$k."`='".($v)."'";
-                    break;
-            }
-        }
-        $sql_text .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
-        $sql_textPLLH .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
-//        $sql_textPLLH = str_replace($this->table."LH", $this->table, $sql_text);
-        
-//        echo '<br>SQL: '.$sql_text;
-//        echo '<br>SQL_PLLH: '.$sql_textPLLH;
-//        echo '<br>$sql_textErrINSPLLH: '.$sql_textErrINSPLLH;
-        
-        mysql_query($sql_text);
-        if(mysql_affected_rows()){
-//            ?><script>//alert("WESZŁO do BD (Update)");</script><?php
-            mysql_query($sql_textPLLH);
-            if( mysql_affected_rows()){
-                ?><script>//alert("WESZŁO do PLLH (update)");</script><?php
-            }else{
-                ?><script>//alert("NIE WESZŁO do PLLH (update)");</script><?php
-                // TODO: czyli nie ma ord o taki mnumerze i trzeba insertować!!!
-                // Wpleść kolejny SQL????
-                mysql_query($sql_textErrINSPLLH);
-                if(mysql_affected_rows()){
-                    ?><script>//alert("WESZŁO do PLLH (INSERTEM)");</script><?php
-                }else{
-                    ?><script>//alert("NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
-                }
-            }
-            if(isset($_SESSION['curr_ord_id'])){
-                $curr_ord_id = $_SESSION['curr_ord_id'];
-                $_SESSION['curr_ord_id']='';
-                header("Location: Edit.php");
-                
-//                header("Location: Edit.php?sercz_id=".$curr_word_id); // NIE DZIAŁA!
-            }else{
-                header("Location: Edit.php");
-            }
-//            header("Location: Edit.php");
-//            header("Location: Edit.php?sercz_id=".$curr_word_id); // AJAX????
-        }else{
-            ?><script>//alert("NIE WESZŁO do BD");</script><?php
-        }  
-    }
-    elseif(isset($_POST['delete'])){
-//        ?><script>//alert("w $_POST['delete']!=null");</script><?php
-        $serial = serialize($_POST);
-//        print_r($serial);
-        $serial=  unserialize($serial);
-//        print_r($serial);
-    
-        $sql_text = "DELETE FROM `ord` ";
-        $sql_textPLLH = "DELETE FROM `ordLH` ";
-        $id = '';
-        $id_ord = '';
-//        echo  '<br>1) '.$sql_text;
-        foreach ($serial as $k=>$v){
-//        echo "<br>".$k."=>".$v;
-            switch($k){
-                case 'edit':
-                    break;
-                case 'id':
-                    $id = $v;
-                    break;
-                case 'id_ord':
-                    $id_ord = $v;
-                    break;
-                case 'wymowa':
-//                    $sql_text .= "`".$k."`='".$v."'";
-                    break;
-                default:
-//                    $sql_text .= "`".$k."`='".$v."',";
-                    break;
-            }
-        }
-        $sql_text .= " WHERE `ord`.`id` ='".$id."' AND id_ord='".$id_ord."';";
-        $sql_textPLLH .= " WHERE `ordLH`.`id` ='".$id."' AND id_ord='".trans($id_ord)."';";
-//        echo '<br>SQL: '.$sql_text;
-//        echo '<br>SQL: '.$sql_textPLLH;
-
-        if( mysql_query($sql_text)){
-            ?><script>//alert("Skasowało");</script><?php
-            if( mysql_query($sql_textPLLH)){
-                ?><script>//alert("WESZŁO do PLLH");</script><?php
-            }else{
-                ?><script>//alert("NIE WESZŁO do PLLH");</script><?php
-            }
-            header("Location: Edit.php");
-        }else{
-            ?><script>alert("NIE skasowało");</script><?php
-        } 
-    }
-}
 
 echo "<div class=floating_button_div>"
         . "<button id=floating_button value=TRY>Edytuj wszystkie</button>"
