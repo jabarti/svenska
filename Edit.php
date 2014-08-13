@@ -93,6 +93,24 @@ if (isset($_POST['sercz'])){
     }     
 //    $sercz .=";";
 //    echo "<br>SERCZ: ".$sercz;
+}else
+if (isset($_POST['sercz_dok'])){
+       $szukane = $_POST['sercz_dok'];
+    
+    $Word = new Ord();
+    $tabAttr = $Word->getTabOfAttr();
+    
+    ?><script>//alert("isset post sercz");</script><?php
+    $sercz .= "WHERE ";
+    $licz=0;
+    foreach ($tabAttr as $value) {
+        if ($licz == 0){
+            $sercz .= $value." = \"".$szukane."\"";
+        } else {
+            $sercz .= " OR ". $value." = \"".$szukane."\"";
+        }
+        $licz++;
+    }     
 }else{
     $sercz = '';
 }

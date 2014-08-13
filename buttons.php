@@ -25,9 +25,9 @@
                     <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a><br>
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a><br>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer.php</a><br>
-                    <a href="help_test_admin.php" class="myButton"><?php echo t("Do"); ?> help_test_admin.php</a><br>
-                    <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats.php</a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a><br>
+                    <a href="help_test_admin.php" class="myButton"><?php echo t("Do"); ?> help_test_admin</a><br>
+                    <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats</a><br>
                 <?php
                 break;
             case 'Anetka':
@@ -38,14 +38,14 @@
                     <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer.php</a>
+                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                 <?php
                 break;
             
             default:
                 ?>
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer.php</a>
+                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                 <?php
                 break;
         }

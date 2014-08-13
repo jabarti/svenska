@@ -75,8 +75,10 @@ if(isset($_POST['sub_flat'])){
 }
 
 echo "<table class=print>";
-echo "  <tr>
-            <th >".t("L.p.")."</th>
+echo "  <tr>";
+if(!$flat)
+echo "      <th >".t("Link")."</th>";
+echo "      <th >".t("L.p.")."</th>
             <th >".t("Słowo PL")."</th>
             <th >".t("Część mowy")."</th>
             <th >".t("Rodz.")."</th>
@@ -91,7 +93,14 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
        $attr = 0;
        foreach($row as $k => $v){
            if($attr < 6){
+               if($attr == 0){
+                   $id = $v;
+                   if(!$flat)
+                        echo "<td><a href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
+                   echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
+               }else{
                 echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
+               }
            }else{
                 if($attr==6 && $v!=''){
                     if(!$flat)

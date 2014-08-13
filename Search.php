@@ -54,9 +54,13 @@ echo "
 
 echo "<form action='Edit.php' ".$isEdit." method=post>
         <input id='sercz' type='text' name='sercz'>
-        <input type='submit' value='".t("Szukaj")."'></input>
+        <input type='submit' value='".t("Szukaj podobnych")."'></input>
         <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
         <br>  ".t("Tip: use")." '%' ".t("for string of unknown symbols/letters")."</span>
+      </form>";
+echo "<form action='Edit.php' ".$isEdit." method=post>
+        <input id='sercz_dok' type='text' name='sercz_dok'>
+        <input type='submit' value='".t("Szukaj dokładnie")."'></input>
       </form>";
 echo "</div>";
 

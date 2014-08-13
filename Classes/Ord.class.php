@@ -47,6 +47,7 @@ class Ord {
     private $st_najwyzszy;
     private $glowny;
     private $porzadkowy;
+    private $ulamek;
     
     private $wymowa;
     private $kategoria;
@@ -56,7 +57,7 @@ class Ord {
     
     private $category = array(  'brak',
                                 'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','sport','wydarzenia',
-                                'przyroda','nauka','geografia','miejsca','czas','kolory',
+                                'przyroda','nauka','geografia','matematyka','miary','miejsca','czas','kolory',
                                 'przedmioty','muzyka','jezyki',
                                 'gramatyka');
     
@@ -66,7 +67,7 @@ class Ord {
                             $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
                             $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                             $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
-                            $glowny, $porzadkowy,
+                            $glowny, $porzadkowy,$ulamek,
                             $wymowa, $kategoria, $uwagi){
         
         if(!$this->getId($id_ord)){
@@ -77,7 +78,7 @@ class Ord {
                 . "`pas_infinitive`, `pas_presens`, `pas_preterite`, `pas_supine`, `pas_imperative`, "
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                 . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
-                . "`glowny`, `porzadkowy`, "
+                . "`glowny`, `porzadkowy`, `ulamek`,"
                 . "`wymowa`, `kategoria`, `uwagi`) "
                 . "VALUES "
                 . "('".$id_ord."','".$typ."','".$rodzaj."','".$grupa."','".$trans."',"
@@ -85,7 +86,7 @@ class Ord {
                 . "'".$pas_infinitive."','".$pas_presens."','".$pas_preterite."','".$pas_supine."','".$pas_imperative."',"
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
-                . "'".$glowny."','".$porzadkowy."',"
+                . "'".$glowny."','".$porzadkowy."','".$ulamek."',"
                 . "'".$wymowa."', '".$kategoria."', '".$uwagi."');");            
         
             if (mysql_query($SQL)){
@@ -101,7 +102,7 @@ class Ord {
                     . "`pas_infinitive`, `pas_presens`, `pas_preterite`, `pas_supine`, `pas_imperative`,"
                     . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                     . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
-                    . "`glowny`, `porzadkowy`, "
+                    . "`glowny`, `porzadkowy`,`ulamek`, "
                     . "`wymowa`, `kategoria`, `uwagi`) "
                     . "VALUES "
                     . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$grupa."','".$this->setSQLstringToCode($trans)."',"
@@ -109,7 +110,7 @@ class Ord {
                     . "'".$this->setSQLstringToCode($pas_infinitive)."','".$this->setSQLstringToCode($pas_presens)."','".$this->setSQLstringToCode($pas_preterite)."','".$this->setSQLstringToCode($pas_supine)."','".$this->setSQLstringToCode($pas_imperative)."',"
                     . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
                     . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
-                    . "'".$this->setSQLstringToCode($glowny)."','".$this->setSQLstringToCode($porzadkowy)."',"
+                    . "'".$this->setSQLstringToCode($glowny)."','".$this->setSQLstringToCode($porzadkowy)."','".$this->setSQLstringToCode($ulamek)."',"
                     . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($kategoria)."','".$this->setSQLstringToCode($uwagi)."');");
 //                 echo "<br>INSERT: ".$SQL_PLLH;
                 if (mysql_query($SQL_PLLH)){
@@ -208,7 +209,7 @@ class Ord {
                                     'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative', 
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'glowny', 'porzadkowy',
+                                    'glowny', 'porzadkowy', 'ulamek',
                                     'wymowa', 'kategoria', 'uwagi');
             
             return $tab;
@@ -280,7 +281,7 @@ class Ord {
                 
                 case 'numeral':    // wykrzyknik
                     $tab = Array(   'id_ord', 'typ', 'trans',  
-                                    'glowny', 'porzadkowy'); 
+                                    'glowny', 'porzadkowy', 'ulamek'); 
                     break;
                 
                 case 'particle':    // partykuła
@@ -300,7 +301,7 @@ class Ord {
                                     'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative',
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
-                                    'glowny', 'porzadkowy',
+                                    'glowny', 'porzadkowy', 'ulamek',
                                     'wymowa', 'kategoria', 'uwagi');
                     break;
             }
@@ -373,7 +374,7 @@ class Ord {
                 
                 case 'numeral':    // liczebnik
                     $tab = Array(   'id_ord', 'trans',  
-                                    'glowny', 'porzadkowy'); 
+                                    'glowny', 'porzadkowy', 'ulamek'); 
                     break;
                                
                 case 'particle':
@@ -461,7 +462,7 @@ class Ord {
                 
                 case 'numeral':    // wykrzyknik
                     $tab = Array(   'id_ord', 'typ', 'trans',  
-                                    'glowny', 'porzadkowy'); 
+                                    'glowny', 'porzadkowy', 'ulamek'); 
                     break;
                 
                 case 'particle':

@@ -229,7 +229,9 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                 <td><input id='in1' name='glowny'></td>
                 <td class='label'><?php echo t("ordinal number"); ?> <br>(ordinal number)</td>
                 <td><input id='in1' name='porzadkowy'></td>
-                 <td colspan="4"></td>
+                <td class='label'><?php echo t("fraction"); ?> <br>(fraction)</td>
+                <td><input id='in1' name='ulamek'></td>
+                 <td colspan="2"></td>
             </tr>
             <tr>
                 <td><br></td>
@@ -345,6 +347,8 @@ if(isset($_POST['submit'])){
         $wymowa =               trim(trim(trim($_POST['wymowa']),","));
         $glowny =               trim(trim(trim($_POST['glowny']),","));
         $porzadkowy =           trim(trim(trim($_POST['porzadkowy']),","));
+        $ulamek =               trim(trim(trim($_POST['ulamek']),","));
+        
         $kategoria =            trim(trim(trim($_POST['kategoria']),","));
         $uwagi =                trim(trim(trim($_POST['uwagi']),","));
 
@@ -361,7 +365,7 @@ if(isset($_POST['submit'])){
                         $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
-                        $glowny, $porzadkowy,
+                        $glowny, $porzadkowy, $ulamek,
                         $wymowa, $kategoria, $uwagi);
     } 
     
