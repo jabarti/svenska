@@ -61,15 +61,15 @@ if(isset($_POST)){
                     $sql_textErrINSPLLH .= "'".($v)."',";
                     break;
                 case 'uwagi':           // ostatni musi mieć zakończenie z ";"
-                    $sql_text .= "`".$k."`='".$v."'";
-                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."'";
-                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."');";
+                    $sql_text .= "`".$k."`='".triTrim($v)."'";
+                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode(triTrim($v))."'";
+                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode(triTrim($v))."');";
 //                    $sql_textPLLH .= "`".$k."`='".($v)."'";
                     break;
                 default:
-                    $sql_text .= "`".$k."`='".$v."',";
-                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode($v)."',";
-                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode($v)."',";
+                    $sql_text .= "`".$k."`='".triTrim($v)."',";
+                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode(triTrim($v))."',";
+                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode(triTrim($v))."',";
 //                    $sql_textPLLH .= "`".$k."`='".($v)."'";
                     break;
             }
@@ -83,20 +83,21 @@ if(isset($_POST)){
         echo '<br>line: '.__LINE__.'/ $sql_textErrINSPLLH: '.$sql_textErrINSPLLH;
         
         mysql_query($sql_text);
+        
         if(mysql_affected_rows()){
-//            ?><script>//alert("//85 WESZŁO do BD (Update)");</script><?php
+//            ?><script>alert("//85 WESZŁO do BD (Update)");</script><?php
             mysql_query($sql_textPLLH);
             if( mysql_affected_rows()){
-                ?><script>//alert("//88 WESZŁO do PLLH (update)");</script><?php
+                ?><script>alert("88 WESZŁO do PLLH (update)");</script><?php
             }else{
-                ?><script>//alert("//90 NIE WESZŁO do PLLH (update)");</script><?php
+                ?><script>alert("90 NIE WESZŁO do PLLH (update)");</script><?php
                 // TODO: czyli nie ma ord o taki mnumerze i trzeba insertować!!!
                 // Wpleść kolejny SQL????
                 mysql_query($sql_textErrINSPLLH);
                 if(mysql_affected_rows()){
-                    ?><script>//alert("95 WESZŁO do PLLH (INSERTEM)");</script><?php
+                    ?><script>alert("95 WESZŁO do PLLH (INSERTEM)");</script><?php
                 }else{
-                    ?><script>//alert("//97 NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
+                    ?><script>alert("97 NIE WESZŁO do PLLH nawet INSERTEM");</script><?php
                 }
             }
             if(isset($curr_ord_id)){
@@ -107,16 +108,19 @@ if(isset($_POST)){
                echo '<br>line: '.__LINE__."Location: Edit.php?sercz_id=".$curr_ord_id;
 //                header("Location: Edit.php");
                 
-                header("Location: Edit.php?sercz_id=".$curr_ord_id); // NIE DZIAŁA! Bo bierze ostatni po iteracji!
+                header("Location: Edit.php?sercz_id=".$curr_ord_id); 
             }else{
                 ?><script>//alert("//110 NIE iset SESS curr_ord_id Przed headerem!");</script><?php
                 header("Location: Edit.php");
             }
 //            header("Location: Edit.php");
-//            header("Location: Edit.php?sercz_id=".$curr_word_id); // AJAX????
-        }else{
+//            header("Location: Edit.php?sercz_id=".$curr_word_id);
             ?><script>//alert("//116 NIE WESZŁO do BD");</script><?php
-        }  
+        } else {
+            echo "<br> ERROR MYSQLA (żadnej zmiany!!!): ".$sql_text;
+             ?><script>alert("120 NIE WESZŁO do BD: mysql_affected_rows() == false");</script><?php
+             header("Location: Edit.php?sercz_id=".$curr_ord_id); 
+        } 
     }
     elseif(isset($_POST['delete'])){
 //        ?><script>alert("//120 w $_POST['delete']!=null");</script><?php

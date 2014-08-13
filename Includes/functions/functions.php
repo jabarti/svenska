@@ -149,3 +149,8 @@ function db_query($sql)
 		die('MySQL query failed: '.$sql.' Error message: '.mysql_error());//,$sql,mysql_error());
 	return $ret;
 }
+
+function triTrim($text){
+    $text_fin = trim(trim(trim($text),","));
+    return $text_fin;
+}

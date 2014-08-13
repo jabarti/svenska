@@ -18,42 +18,42 @@ $id_ord = '';
 if(isset($_POST['submit'])){
     if($_POST['id_ord'] !=''){
         
-        $id_ord =               trim(trim(trim($_POST['id_ord']),","));
-        $typ =                  trim(trim(trim($_POST['typ']),","));
-        $rodzaj =               trim(trim(trim($_POST['rodzaj']),","));
-        $grupa =                trim(trim(trim($_POST['grupa']),","));
-        $trans =                trim(trim(trim($_POST['trans']),","));
-        $infinitive =           trim(trim(trim($_POST['infinitive']),","));
-        $presens =              trim(trim(trim($_POST['presens']),","));
-        $past =                 trim(trim(trim($_POST['past']),","));
-        $supine =               trim(trim(trim($_POST['supine']),","));
-        $imperative =           trim(trim(trim($_POST['imperative']),","));
-        $present_participle =   trim(trim(trim($_POST['present_participle']),","));
-        $past_participle =      trim(trim(trim($_POST['past_participle']),","));
+        $id_ord =               triTrim($_POST['id_ord']);
+        $typ =                  triTrim($_POST['typ']);
+        $rodzaj =               triTrim($_POST['rodzaj']);
+        $grupa =                triTrim($_POST['grupa']);
+        $trans =                triTrim($_POST['trans']);
+        $infinitive =           triTrim($_POST['infinitive']);
+        $presens =              triTrim($_POST['presens']);
+        $past =                 triTrim($_POST['past']);
+        $supine =               triTrim($_POST['supine']);
+        $imperative =           triTrim($_POST['imperative']);
+        $present_participle =   triTrim($_POST['present_participle']);
+        $past_participle =      triTrim($_POST['past_participle']);
 
-        $pas_infinitive =       trim(trim(trim($_POST['pas_infinitive']),","));
-        $pas_presens =          trim(trim(trim($_POST['pas_presens']),","));
-        $pas_preterite =        trim(trim(trim($_POST['pas_preterite']),","));
-        $pas_supine =           trim(trim(trim($_POST['pas_supine']),","));
-        $pas_imperative =       trim(trim(trim($_POST['pas_imperative']),","));
+        $pas_infinitive =       triTrim($_POST['pas_infinitive']);
+        $pas_presens =          triTrim($_POST['pas_presens']);
+        $pas_preterite =        triTrim($_POST['pas_preterite']);
+        $pas_supine =           triTrim($_POST['pas_supine']);
+        $pas_imperative =       triTrim($_POST['pas_imperative']);
         
-        $S_indefinite =         trim(trim(trim($_POST['S_indefinite']),","));
-        $S_definite =           trim(trim(trim($_POST['S_definite']),","));
-        $P_indefinite =         trim(trim(trim($_POST['P_indefinite']),","));
-        $P_definite =           trim(trim(trim($_POST['P_definite']),","));
-        $neuter =               trim(trim(trim($_POST['neuter']),","));
-        $masculin =             trim(trim(trim($_POST['masculin']),","));
-        $plural =               trim(trim(trim($_POST['plural']),","));
-        $st_rowny =             trim(trim(trim($_POST['st_rowny']),","));
-        $st_wyzszy =            trim(trim(trim($_POST['st_wyzszy']),","));
-        $st_najwyzszy =         trim(trim(trim($_POST['st_najwyzszy']),","));
-        $wymowa =               trim(trim(trim($_POST['wymowa']),","));
-        $glowny =               trim(trim(trim($_POST['glowny']),","));
-        $porzadkowy =           trim(trim(trim($_POST['porzadkowy']),","));
-        $ulamek =               trim(trim(trim($_POST['ulamek']),","));
+        $S_indefinite =         triTrim($_POST['S_indefinite']);
+        $S_definite =           triTrim($_POST['S_definite']);
+        $P_indefinite =         triTrim($_POST['P_indefinite']);
+        $P_definite =           triTrim($_POST['P_definite']);
+        $neuter =               triTrim($_POST['neuter']);
+        $masculin =             triTrim($_POST['masculin']);
+        $plural =               triTrim($_POST['plural']);
+        $st_rowny =             triTrim($_POST['st_rowny']);
+        $st_wyzszy =            triTrim($_POST['st_wyzszy']);
+        $st_najwyzszy =         triTrim($_POST['st_najwyzszy']);
+        $wymowa =               triTrim($_POST['wymowa']);
+        $glowny =               triTrim($_POST['glowny']);
+        $porzadkowy =           triTrim($_POST['porzadkowy']);
+        $ulamek =               triTrim($_POST['ulamek']);
         
-        $kategoria =            trim(trim(trim($_POST['kategoria']),","));
-        $uwagi =                trim(trim(trim($_POST['uwagi']),","));
+        $kategoria =            triTrim($_POST['kategoria']);
+        $uwagi =                triTrim($_POST['uwagi']);
 
         ?><script>//one();</script><?php
 //        echo "<br>OTO text: ".$id_ord;
