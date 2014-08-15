@@ -55,11 +55,15 @@ class Ord {
     
     private $table = "ord";
     
+    private $group =    array(  '',
+                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
+                                'noun_or','noun_ar','noun_er','noun__');
+    
     private $category = array(  'brak',
                                 'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','sport','wydarzenia',
                                 'przyroda','nauka','geografia','matematyka','miary','miejsca','czas','kolory',
-                                'przedmioty','narzedzia','instrumenty','muzyka','jezyki',
-                                'gramatyka');
+                                'przedmioty','narzedzia','instrumenty','biuro','ubrania','muzyka','jezyki',
+                                'gramatyka','uzupelnic');
     
 
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
@@ -1093,19 +1097,7 @@ class Ord {
         }
         
         public function getGroupOfOrd(){
-            $sql = "SHOW COLUMNS FROM `".$this->table."` LIKE 'grupa'";
-//            echo '<br>SQL:'.$sql;
-            $mq = mysql_query($sql);
-            $row = mysql_fetch_row($mq);
-//            echo "<br>row:"; var_dump($row);
-            $type = $row['1'];
-//            echo '<br>type:'.$type;
-            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
-//            echo "<br>matches";var_dump ($matches);
-//            echo "<br>matches1: ".$matches[1];
-            $vals = explode('\',\'', $matches[1]);
-//            echo "<br>Vals: ";var_dump ($vals);
-            return $vals;
+            return $this->group;
         }
         
         public function copyFromOrdLHToOrd(){

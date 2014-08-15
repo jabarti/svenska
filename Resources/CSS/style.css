@@ -92,6 +92,7 @@ div.floating_button_div{
     position: fixed;
     top: 10px;
     right: 180px;
+    height:24px;
 }
 
 div.flag {

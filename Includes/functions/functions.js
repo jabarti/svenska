@@ -334,6 +334,8 @@ $(document).ready(function(){
     });
 });
 
+var nID = 0;
+
 $(document).ready(function(){ 
     
     $('button.butt_diak').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
@@ -367,11 +369,30 @@ $(document).ready(function(){
 //                }              
 //            });
 //    });
+    $('#typ').change(function(){
+        var typ_val = $('#typ').val();
+        switch(typ_val){
+            case 'hjalp_verb':
+            case 'verb':
+                $('#rodzaj').val('att');
+                break;
+            default:
+                $('#rodzaj').val('');
+                break;
+        }
+    });
+    $('#sercz_btn').click(function(){
+       $('#sercz').empty();
+    });
+    $('#sercz_dok_btn').click(function(){
+       $('#sercz_dok').empty();
+    });
+    
     
     $('table.edit_table').change(function(){
         var ID = $(this).attr('id');
         var pos1 = ID.search("_")
-        var nID = ID.slice(pos1);   // e.g.: _345
+        nID = ID.slice(pos1);   // e.g.: _345
 //        alert(nID)
         $('#CBedit'+nID).prop('checked', true);
         
@@ -398,7 +419,7 @@ $(document).ready(function(){
     });
     
     $('#floating_button').click(function(){
-        alert("TODO");
+        //alert("TODO: Status DOING!");
 //        $("#form_ord_"+49).trigger('submit')
     });
     
@@ -413,13 +434,25 @@ $(document).ready(function(){
                                 values += selector.options[i].value;
                         }
                     }
-//                    alert("ala");
-//                    alert( values );
-//                    alert("4");
                     $('#kategoria_val').val(values)
                     } 
      });
-//    $(".kategoria_multi").each(function(){$(this).html("ALA KOTA")});            
+//    $(".kategoria_multi").each(function(){$(this).html("ALA KOTA")});  
+    $('#div_edit').each( function() {
+        $( ".kateg" ).dropdownchecklist({forceMultiple: true,
+                    onComplete: function(selector) {
+//                        alert (nID);
+                    var values = "";
+                    for( i=0; i < selector.options.length; i++ ) {
+                        if (selector.options[i].selected && (selector.options[i].value != "")) {
+                           if ( values != "" ) values += ";";
+                                values += selector.options[i].value;
+                        }
+                    }
+                    $('#kategoria_edit_val'+nID).val(values)
+                    } 
+    });
+    });          
 //    $(".kategoria").dropdownchecklist({forceMultiple: true,
 //                    onComplete: function(selector) {
 //                    var values = "";

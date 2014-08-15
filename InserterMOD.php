@@ -70,10 +70,11 @@ if(isset($_POST['submit'])){
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $glowny, $porzadkowy, $ulamek,
                         $wymowa, $kategoria, $uwagi);
-    } 
-    
-    header("Location: index.php?result=OK");
-
+        
+        header("Location: index.php?result=OK");
+    } else {
+        header("Location: index.php?result=pusty");
+    }
 }else{
     header("Location: index.php?result=Error");
 }

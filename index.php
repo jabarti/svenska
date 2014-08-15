@@ -79,7 +79,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         $Word = new Ord();
                         $OrdCat = $Word->getGroupOfOrd();
                         foreach($OrdCat as $k){
-                            echo "<option value=$k>".$k."</option>";
+                            echo "<option value=$k>".t($k)."</option>";
                         }
                         ?>
                     </select>
@@ -315,15 +315,16 @@ echo "<div id=p2 class=\"tab_info\"></div>";
 if (isset($_GET['result'])){
     switch($_GET['result']){
         case 'OK':
-            echo 'Wstawione do BD!';
+            echo t('Wstawione do BD!');
             break;
         case 'Error':
-            echo "ERROR!!!!";
+            echo t("ERROR!!!!");
             break;
         default:
-            echo 'Sytuacja normalna!';
+            echo t('Nic się nie dzieje!');
             break;
     }
+    unset($_GET['result']);
 }
 
 ?>

@@ -152,5 +152,6 @@ function db_query($sql)
 
 function triTrim($text){
     $text_fin = trim(trim(trim($text),","));
+    $text_fin = str_replace("'"     ,"\"" , $text_fin);
     return $text_fin;
 }

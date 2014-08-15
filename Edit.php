@@ -72,6 +72,12 @@ if(isset($_GET['sercz_id'])){
     $sercz_id = " WHERE `id` = '".$id."'";
 }
 
+if(isset($_GET['urls'])){
+//    $urls = explode(",",$_GET['urls']);
+    $urls = " WHERE `id` IN (".$_GET['urls'].");";
+//    $sercz_id = " WHERE `id` = '".$id."'";
+}
+
 //$sercz='';
 if (isset($_POST['sercz'])){
     
@@ -86,7 +92,12 @@ if (isset($_POST['sercz'])){
     foreach ($tabAttr as $value) {
         if ($licz == 0){
             $sercz .= $value." LIKE \"%".$szukane."%\"";
-        } else {
+        } 
+//        elseif ($licz) {
+//            TODO!! jesli to kategoria żeby jakoś dzialiło wynik i go tłumaczyło (różn języki) -=> t($text)
+//            $licz żeby zawsze == kategoria - pobrać listę!!!
+//        }
+        else {
             $sercz .= " OR ". $value." LIKE \"%".$szukane."%\"";
         }
         $licz++;
@@ -121,6 +132,7 @@ $text .=$wher." ";
 $text .=$sercz." ";
 $text .=$sort." ";
 $text .=$sercz_id." ";
+$text .=$urls." ";
 $text .=";";
 
 //echo "<br>TEXT: ".$text;
@@ -192,12 +204,12 @@ while($row = mysql_fetch_assoc($mq)){
         
             echo "      <select id=grupa name='grupa'>";
                     if($v != '')
-                        echo "<option value='".$v."'>".$v." (".t("zapisane").")</option>";
+                        echo "<option value='".$v."'>".t($v)." (".t("zapisane").")</option>";
                     
                             $Word = new Ord();
                             $OrdCat = $Word->getGroupOfOrd();
                             foreach($OrdCat as $k){
-                            echo "<option value=$k>".$k."</option>";
+                            echo "<option value=$k>".t($k)."</option>";
                         }
             echo "      </select>";
             echo "</td>";            
@@ -206,8 +218,9 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
         
             echo "      <select id=kategoria name='kategoria'>";
-//            echo "      <select id=kategoria multiple='multiple' name='kategoria'>";
-//            echo "      <select class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
+//            echo "      <select id=kategoria".$curr_word_id." name='kategoria' class=kateg>";
+//            echo "      <select id=kategoria".$curr_word_id." multiple='multiple' class=kateg>";
+//            echo "      <select id=kategoria".$curr_word_id." class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
                 if($v !='')
                     echo "<option value='".$v."'>".t($v)."</option>";
                 else
@@ -219,6 +232,7 @@ while($row = mysql_fetch_assoc($mq)){
                             echo "<option value=$k>".t($k)."</option>";
                         }
             echo "      </select>";
+//            echo "      <input type='hidden' id='kategoria_edit_val_".$curr_word_id."' name='kategoria'></input>";
             echo "</td>";              
         }
         elseif($k == 'uwagi'){
@@ -255,7 +269,7 @@ while($row = mysql_fetch_assoc($mq)){
                         <input id=Del_".$curr_word_id." type=submit name=delete value='".t("DELETE")."'>                        
                     </td>
               </tr>
-              <tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
+              <tr><td colspan=8><textarea hidden form='edit_all' rows=5 cols=80 id='ta_ser_".$curr_word_id."' name='edit_all_".$curr_word_id."'></textarea></td></tr>
         </form>
         </table>";    
         
@@ -264,7 +278,10 @@ while($row = mysql_fetch_assoc($mq)){
 echo "</div>";      // end of div: edit_tab_contener
 
 echo "<div class=floating_button_div>"
-        . "<button id=floating_button value=TRY>Edytuj wszystkie</button>"
+//        . "<form id='edit_all' method=post action=EditAllMod.php target='_blank'>"
+        . "<form id='edit_all' method=post action=EditAllMod.php >"
+        . "<button id=floating_button>".t('Edytuj wszystkie')."</button>"
+        ."</form>"
    . "</div>";
 
 ob_end_flush();  // żeby sie dało reloadeować

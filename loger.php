@@ -8,13 +8,6 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = 'Logger';
-//include 'header.php';
-////include 'flag.php';
-//include 'buttons.php';
-
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 //include 'divLog.php';
