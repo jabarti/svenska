@@ -22,8 +22,6 @@ include 'buttons.php';
        
 if(isset($_POST)){
     ?><script>//alert(" isset $_POST");</script><?php
-    
-    
     $urls = '';
     $str = '';
     
@@ -59,6 +57,15 @@ if(isset($_POST)){
                 $v1 = str_replace('%C5%BC','ż' , $v1);
                 $v1 = str_replace('%C5%BA','ź' , $v1);
                 
+                $v1 = str_replace('%C3%B6','ö' , $v1);
+                $v1 = str_replace('%C3%96','Ö' , $v1);
+                
+                $v1 = str_replace('%C3%A4','ä' , $v1);
+                $v1 = str_replace('%C3%84','Ä' , $v1);
+                
+                $v1 = str_replace('%C3%A5','å' , $v1);
+                $v1 = str_replace('%C3%85','Å' , $v1);
+                
                 $arr2 = explode("=",$v1);
 
                 array_push($arr_fin, $arr2);
@@ -88,7 +95,7 @@ if(isset($_POST)){
             echo "</p>";
 
            echo "<br>LOCATION: ";
-           echo("Location: Edit.php?urls='".$urls."'");
+//           echo("Location: Edit.php?urls='".$urls."'"); // !!!!!!!!!!!!!!!!!!!!
 
             mysql_query($SQL);
             if(mysql_affected_rows()){
@@ -96,17 +103,25 @@ if(isset($_POST)){
 //            if(true){
                ?><script>//alert("Weszło");</script><?php
 //                  header("Location: Edit.php?urls='".$urls."'");        
-                  header("Location: Edit.php?urls=".rtrim($urls,",")."");        
+                  header("Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!      
             }else{
-                ?><script>alert("NIE Weszło");</script><?php
-                header("Location: Edit.php?urls='".$urls."'");
+                ?><script>alert("100 NIE Weszło");</script><?php
+//                header("Location: Edit.php?urls='".$urls."'");
+//                header("Location: Edit.php");
             }
-          
+          ?><script>alert("105 NIE Weszło");</script><?php
         }else{
+            echo "<br>".__LINE__."OTO: $k0";
+            $num = ltrim($k0, "edit_all_");
+            $urls .= $num.","; 
+            ?><script>alert("107 NIE Weszło");</script><?php
 //            echo "<br>$k jest PUSTE!";
+            header("Location: Edit.php?urls=".rtrim($urls,",").""); //!!!!!!!!!!!
+//            header("Location: Edit.php");
         }
 
     } // END of  foreach ($_POST as $k0
+    ?><script>alert("114 NIE Weszło");</script><?php
 //    var_dump($urls);
     $urls = rtrim($urls,",");    
     echo "<br>LOCATION: ";
@@ -114,10 +129,12 @@ if(isset($_POST)){
     echo "<br>";
     $str .="SELECT * FROM `ord` WHERE `id` IN (".$urls.");";  
     echo "<br>STR URL:".$str;
+//    header("Location: Edit.php?urls=".rtrim($urls,",").""); 
+//    header("Location: Edit.php");
 
 }   // END if(isset $POST)
 else{
-    ?><script>alert("NIE isset $_POST");</script><?php
+    ?><script>alert("127 NIE isset $_POST");</script><?php
 }
 
 //echo "<div class=floating_button_div>"
