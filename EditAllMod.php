@@ -23,12 +23,15 @@ include 'buttons.php';
 if(isset($_POST)){
     ?><script>//alert(" isset $_POST");</script><?php
     $urls = '';
+    $urls_EMPT = '';
     $str = '';
+    $test = false;          // ma sprawdzać czy była jakaś zmiana dokonana!, jeśli tak ma być tru!
     
     foreach ($_POST as $k0 => $v0){        
         $SQL = "UPDATE `ord` SET ";
         $arr_fin = array();
         if($v0 != ''){
+            $test = true;
             echo "<br>OTO: $k0 => $v0";
 //            $SQL .= $v;
 //            $arr = unserialize($v);  /// to idzie z seralize js! nie czyta tego php
@@ -103,21 +106,31 @@ if(isset($_POST)){
 //            if(true){
                ?><script>//alert("Weszło");</script><?php
 //                  header("Location: Edit.php?urls='".$urls."'");        
-                  header("Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!      
+//                  header("Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!      
             }else{
                 ?><script>alert("100 NIE Weszło");</script><?php
 //                header("Location: Edit.php?urls='".$urls."'");
 //                header("Location: Edit.php");
             }
           ?><script>alert("105 NIE Weszło");</script><?php
-        }else{
+        } // END of if($v0 != '')
+        
+        else {
             echo "<br>".__LINE__."OTO: $k0";
             $num = ltrim($k0, "edit_all_");
-            $urls .= $num.","; 
+            $urls_EMPT .= $num.","; 
             ?><script>alert("107 NIE Weszło");</script><?php
 //            echo "<br>$k jest PUSTE!";
-            header("Location: Edit.php?urls=".rtrim($urls,",").""); //!!!!!!!!!!!
+//            echo("Location: Edit.php?urls=".rtrim($urls_EMPT,",")."");
 //            header("Location: Edit.php");
+        }
+        echo "<br>".__LINE__."STAN TESTu: ".(bool)$test;
+        if($test){  // False = NIE było zmain, True = BYŁY zmiany
+            echo("<br>".__LINE__."TRUE Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!    
+            header("Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!    
+        }else{
+            echo("<br>".__LINE__."FALSE Location: Edit.php?urls=".rtrim($urls_EMPT,",").""); //!!!!!!!!!!!
+            header("Location: Edit.php?urls=".rtrim($urls_EMPT,",").""); //!!!!!!!!!!!
         }
 
     } // END of  foreach ($_POST as $k0
