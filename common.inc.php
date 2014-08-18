@@ -13,10 +13,10 @@ if(!isset($_SESSION)){
 //    ob_start();
     session_start();
 //    var_dump($_SESSION);
-    $_SESSION['try'] = 3;
+//    $_SESSION['try'] = 3;
 }else{
     echo t("SESJA JEST USTANOWIONA wcześniej");
-    $_SESSION['try']++;
+//    $_SESSION['try']++;
 }
 
 //header('Content-Type: text/html; charset=utf-8'); 

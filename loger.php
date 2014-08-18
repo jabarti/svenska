@@ -66,7 +66,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['log'] = true;
 //        echo "Ustanawiam SESS[log] na true:".$_SESSION['log'] ;
         $_SESSION['user'] = $_POST['user'] ? $_POST['user'] : $_GET['user'];
-        $_SESSION['password'] = $_POST['password'] ? $_POST['password'] : $_GET['password'];
+//        $_SESSION['password'] = sha1($_POST['password']) ? sha1($_POST['password'] : $_GET['password'];
         $_SESSION['arrOfAnsw'] = array();
         $_SESSION['good']=0;
         $_SESSION['bad']=0;
@@ -123,8 +123,8 @@ if(isset($_POST) || isset($_GET)){
             </tr>
             <tr>
                 <td><label for="pass"><?php echo t("Hasło"); ?>:</td>
-                <td><input id=pass type="password" name="password" value="" ></td>
-                <!--<td><input id=pass type="hidden" name="password" value="svenska" ></td>-->
+                <td><input id=pass type="password" name="password" ></td>
+                <!--<td><input id=pass type="hidden" name="password" value="" ></td>-->
             </tr>
             <tr>
                 <td></td>

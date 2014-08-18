@@ -35,4 +35,6 @@ if(isset($_SESSION['log'])){
     }
 }else{
     echo "<br>Brak sesji log!!!"."| File:".__FILE__.", line:".__LINE__;
+    $_SESSION['log'] = false;
+    header("Location: index.php");
 }

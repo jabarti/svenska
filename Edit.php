@@ -17,6 +17,15 @@ $title = 'Svenska | Edit';
 include 'header.php';
 include 'buttons.php';
 
+foreach($_POST as $k => $v){
+    echo "POST[$k]=".$v.", ";
+}
+echo "<br>";
+foreach($_SESSION as $k => $v){
+    echo "SESSION[$k]=".$v.", ";
+}
+
+
 //if(!isset($_POST)){
 $wher='';
 $sort='';
@@ -249,7 +258,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "</td>";            
         }
         elseif($k == 'grupa'){
-            echo "<td>".$k."</td><td>";
+            echo "<td>".t($k)."</td><td>";
         
             echo "      <select id=grupa name='grupa'>";
                     if($v != '')
@@ -264,24 +273,24 @@ while($row = mysql_fetch_assoc($mq)){
             echo "</td>";            
         }
         elseif($k == 'kategoria'){
-            echo "<td>".$k."</td><td>";
+            echo "<td>".$k."</td><td colspan=4>";
         
 //            echo "      <select id=kategoria name='kategoria'>";
-            echo "      <select id=kategoria".$curr_word_id." name='kategoria' class=kateg>";
+            echo "      <select id=kategoria".$curr_word_id."  class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." multiple='multiple' class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
-                if($v !='')
-                    echo "<option value='".$v."'>".t($v)."</option>";
-                else
-                    echo "<option value='".$v."'>".$v."</option>";
-                
+                if($v !=''){
+                    echo "<option value='".$k."'>".t($v)."</option>";
+                }else{
+                    echo "<option value='".$k."'>".$v."</option>";
+                }
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
                         foreach($OrdCat as $k){
                             echo "<option value=$k>".t($k)."</option>";
                         }
             echo "      </select>";
-//            echo "      <input type='hidden' id='kategoria_edit_val_".$curr_word_id."' name='kategoria'></input>";
+            echo "      <input type='hidden' id='kategoria_edit_val_".$curr_word_id."' name='kategoria'></input>";
             echo "</td>";              
         }
         elseif($k == 'uwagi'){
