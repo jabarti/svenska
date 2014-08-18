@@ -74,7 +74,7 @@ if(isset($_GET['sercz_id'])){
 
 if(isset($_GET['urls'])){
 //    $urls = explode(",",$_GET['urls']);
-    $urls = " WHERE `id` IN (".$_GET['urls'].");";
+    $urls = " WHERE `id` IN (".$_GET['urls'].")";
 //    $sercz_id = " WHERE `id` = '".$id."'";
 }
 
@@ -124,28 +124,77 @@ if (isset($_POST['sercz_dok'])){
     }     
 }else{
     $sercz = '';
-}
+}  
 
 $text = "SELECT * FROM `ord` ";
-//$text = "SELECT id FROM `ord` ";
+$text1 = "SELECT count(*) as all_ord FROM `ord` ";
 $text .=$wher." ";
 $text .=$sercz." ";
 $text .=$sort." ";
 $text .=$sercz_id." ";
 $text .=$urls." ";
+
+$text1 .=$wher." ";
+$text1 .=$sercz." ";
+$text1 .=$sort." ";
+$text1 .=$sercz_id." ";
+$text1 .=$urls." ";
+//$text .=" ORDER BY id ASC LIMIT $limit, $onpage";
+
+
+$SQL_pag = $text1;
+$mq1 = mysql_query($SQL_pag) or die (mysql_error());
+$row1 = mysql_fetch_array($mq1);
+//var_dump($row);
+extract($row1);
+//echo "<br>All Ord: ".$all_ord;
+
+if (isset($_POST['ile_onpage']) || isset($_SESSION['ile_onpage'])){
+    $onpage = $_POST['ile_onpage'] ? $_POST['ile_onpage'] : $_SESSION['ile_onpage']; //ilość newsów na stronę
+    if (isset($_POST['ile_onpage']))
+        $_SESSION['ile_onpage'] = $_POST['ile_onpage'];
+}else{
+    $onpage = 25; //ilość newsów na stronę
+}
+
+$navnum = 3; //ilość wyświetlanych numerów stron, ze względów estetycznych niech będzie to liczba nieparzysta
+$allpages = ceil($all_ord/$onpage); //wszysttkie strony to zaokrąglony w górę iloraz wszystkich postów i ilości postów na stronę
+        
+//sprawdzamy poprawnośc przekazanej zmiennej $_GET['page'] zwróć uwage na $_GET['page'] > $allpages
+if(!isset($_GET['page']) or $_GET['page'] > $allpages or !is_numeric($_GET['page']) or $_GET['page'] <= 0){
+     $page = 1;
+}else{
+     $page = $_GET['page'];
+}
+$limit = ($page - 1) * $onpage; //określamy od jakiego newsa będziemy pobierać informacje z bazy danych
+
+
+$text .="  LIMIT $limit, $onpage";
 $text .=";";
 
 //echo "<br>TEXT: ".$text;
 
 $SQL1 = $text;
-$SQL2 = $text;
+//$SQL2 = $text;
 
 //echo "<br>SQL1:".$SQL1;
 //echo "<br>SQL2:".$SQL2;
-$mq = mysql_query($SQL2);
-$mq2 = mysql_query($SQL1);
+$mq = mysql_query($SQL1);
+//$mq2 = mysql_query($SQL1);
 $i=0;
 $li=0;
+
+echo "<form action='' method=post>"
+. t('Ile na stronie').": <select name=ile_onpage>"
+. "<option value=".$_SESSION['ile_onpage'].">".$_SESSION['ile_onpage']."</option>"
+. "<option value=5>5</option>"
+. "<option value=10>10</option>"
+. "<option value=15>15</option>"
+. "<option value=20>20</option>"
+. "<option value=25>25</option>"
+. "</select>"
+. "<input type=submit value=".t('zmień').">"
+. "</form>";
 
 //tworzenie tabelek
 $method='post';
@@ -217,8 +266,8 @@ while($row = mysql_fetch_assoc($mq)){
         elseif($k == 'kategoria'){
             echo "<td>".$k."</td><td>";
         
-            echo "      <select id=kategoria name='kategoria'>";
-//            echo "      <select id=kategoria".$curr_word_id." name='kategoria' class=kateg>";
+//            echo "      <select id=kategoria name='kategoria'>";
+            echo "      <select id=kategoria".$curr_word_id." name='kategoria' class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." multiple='multiple' class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
                 if($v !='')
@@ -276,6 +325,67 @@ while($row = mysql_fetch_assoc($mq)){
     $i++; //$id++;<tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
 }
 echo "</div>";      // end of div: edit_tab_contener
+
+//zabezpieczenie na wypadek gdyby ilość stron okazała sie większa niż ilośc wyświetlanych numerów stron
+if($navnum > $allpages){
+       $navnum = $allpages;
+}
+
+        //ten fragment może być trudny do zrozumienia
+        //wyliczane są tu niezbędne dane do prawidłowego zbudowania pętli
+        //zmienne są bardzo opisowę więc nie będę ich tłumaczyć
+        $forstart = $page - floor($navnum/2);
+        $forend = $forstart + $navnum;
+        
+        if($forstart <= 0){ $forstart = 1; }
+        
+        $overend = $allpages - $forend;
+        
+        if($overend < 0){ $forstart = $forstart + $overend + 1; }
+        
+        //ta linijka jest ponawiana ze względu na to, że $forstart mogła ulec zmianie
+        $forend = $forstart + $navnum;
+        //w tych zmiennych przechowujemy numery poprzedniej i następnej strony
+        $prev = $page - 1;
+        $next = $page + 1;
+        
+        //nie wpisujemy "sztywno" nazwy skryptu, pobieramy ja od serwera
+        $script_name = $_SERVER['SCRIPT_NAME'];
+        
+        //ten fragment z kolei odpowiada za wyślwietenie naszej nawigacji
+        echo "<div id='nav'><ul>";
+        if($page > 1) echo "<li><a href=\"".$script_name."?page=".$prev."\">".t("Poprzednia")."</a></li>";
+        if ($forstart > 1) echo "<li><a href=\"".$script_name."?page=1\">[1]</a></li>";
+        if ($forstart > 2) echo "<li>...</li>";
+        for($forstart; $forstart < $forend; $forstart++){
+                if($forstart == $page){
+                        echo "<li class=\"current\">";
+                }else{
+                        echo "<li>";
+                }
+                echo "<a href=\"".$script_name."?page=".$forstart."\">[".$forstart."]</a></li>";
+        }
+        if($forstart < $allpages) echo "<li>...</li>";
+        if($forstart - 1 < $allpages) echo "<li><a href=\"".$script_name."?page=".$allpages."\">[".$allpages."]</a></li>";
+        if($page < $allpages) echo "<li><a href=\"".$script_name."?page=".$next."\">".t("Następna")."</a></li>";
+        echo "</ul></div><div class=\"clear\"></div>";
+        
+//        echo "<div id='nav2'><ul>";
+//        if($page > 1) echo "<li><a href=\"".$script_name."?page=".$prev."\">".t("Poprzednia")."</a></li>";
+//        if ($forstart > 1) echo "<li><a href=\"".$script_name."?page=1\">[1]</a></li>";
+//        if ($forstart > 2) echo "<li>...</li>";
+//        for($forstart; $forstart < $forend; $forstart++){
+//                if($forstart == $page){
+//                        echo "<li class=\"current\">";
+//                }else{
+//                        echo "<li>";
+//                }
+//                echo "<a href=\"".$script_name."?page=".$forstart."\">[".$forstart."]</a></li>";
+//        }
+//        if($forstart < $allpages) echo "<li>...</li>";
+//        if($forstart - 1 < $allpages) echo "<li><a href=\"".$script_name."?page=".$allpages."\">[".$allpages."]</a></li>";
+//        if($page < $allpages) echo "<li><a href=\"".$script_name."?page=".$next."\">".t("Następna")."</a></li>";
+//        echo "</ul></div><div class=\"clear\"></div>";
 
 echo "<div class=floating_button_div>"
 //        . "<form id='edit_all' method=post action=EditAllMod.php target='_blank'>"

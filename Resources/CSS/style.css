@@ -75,6 +75,30 @@ tbody.wew {
     background: deepskyblue;
 }
 
+#nav ul {
+        list-style-type:none;  
+        float:left; 
+        position:fixed; 
+        left:37%;
+        top: -10px;
+        /*background: red;*/
+}
+#nav li {
+        float:left; 
+        margin:0 5px; 
+        position:relative; 
+        right:50%; 
+        background: grey;
+        opacity: 0.5;
+}
+#nav li.current a{
+        color:#F00;
+        
+}
+
+div.clear {
+        clear:both;
+}
 div#translacje {
     position: fixed;
     bottom: -80px;

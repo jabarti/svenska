@@ -61,7 +61,7 @@ class Ord {
     
     private $category = array(  'brak',
                                 'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','sport','wydarzenia',
-                                'przyroda','nauka','geografia','matematyka','miary','miejsca','czas','kolory',
+                                'przyroda','nauka','geografia','matematyka','polityka','miary','miejsca','czas','kolory',
                                 'przedmioty','narzedzia','instrumenty','biuro','ubrania','muzyka','jezyki',
                                 'gramatyka','uzupelnic');
     
