@@ -280,9 +280,9 @@ while($row = mysql_fetch_assoc($mq)){
 //            echo "      <select id=kategoria".$curr_word_id." multiple='multiple' class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
                 if($v !=''){
-                    echo "<option value='".$k."'>".t($v)."</option>";
+                    echo "<option value='".$v."'>".t($v)."</option>";
                 }else{
-                    echo "<option value='".$k."'>".$v."</option>";
+                    echo "<option value='".$v."'>".$v."</option>";
                 }
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
