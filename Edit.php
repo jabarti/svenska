@@ -16,13 +16,30 @@ include 'divLog.php';
 $title = 'Svenska | Edit';
 include 'header.php';
 include 'buttons.php';
+//
+//foreach($_POST as $k => $v){
+//    echo "POST[$k]=".$v.", ";
+//}
+//echo "<br>";
+//foreach($_SESSION as $k => $v){
+//    echo "SESSION[$k]=".$v.", ";
+//}
 
-foreach($_POST as $k => $v){
-    echo "POST[$k]=".$v.", ";
+if(isset($_GET['urls'])){
+        $_SESSION['urls'] = $_GET['urls'];
+        unset($_SESSION['sercz_dok']);
+        unset($_SESSION['sercz']);
 }
-echo "<br>";
-foreach($_SESSION as $k => $v){
-    echo "SESSION[$k]=".$v.", ";
+
+if (isset($_POST['sercz'])){
+        $_SESSION['sercz']=$_POST['sercz'];
+        unset($_SESSION['sercz_dok']);
+        unset($_SESSION['urls']);
+}
+if(isset($_POST['sercz_dok'])){
+        $_SESSION['sercz_dok'] = $_POST['sercz_dok'];
+        unset($_SESSION['sercz']);
+        unset($_SESSION['urls']);
 }
 
 
@@ -48,27 +65,40 @@ if(isset($_POST)){
             case 'alf':
                 $sort= "ORDER BY id_ord";
                 break;
-            case 'cat':
-                $sort= "ORDER BY kategoria";
-                break;
+//            case 'cat':
+//                $sort= "ORDER BY kategoria";
+//                break;
             default:
                 ?><script>//alert("DEFAULT sort");</script><?php
                 $sort= "";
-                if(isset($_SESSION['sort'])){
-                    ?><script>//alert("isse sess sort");</script><?php
-                    $sort = $_SESSION['sort'];
-                }
+//                if(isset($_SESSION['sort'])){
+//                    ?><script>//alert("isse sess sort");</script><?php
+//                    $sort = $_SESSION['sort'];
+//                }
                 break;
         }
+//        $_SESSION['sort'] = $sort;
+//        $_SESSION['sort_id'] = $_POST['sort'];
     }
     
-    if(isset($_POST['wher'])){
+    if(isset($_POST['wher'])){      // szuka po części mowy (typ)
         if ($_POST['wher'] != 'część mowy')
             if ($_POST['wher'] != 'verb'){
-                $wher = "WHERE typ='".$_POST['wher']."'";
+                if(isset($_POST['wher']) || isset($_SESSION['wher'])){
+                    $wher = " AND `typ`='".$_POST['wher']."'";
+                }else{
+                    $wher = " WHERE `typ`='".$_POST['wher']."'";
+                }               
             }else{
-                $wher = "WHERE typ ='hjalp_verb' or typ='".$_POST['wher']."'";
+                if(isset($_POST['wher']) || isset($_SESSION['wher'])){
+//                    $wher = " (2aa wher) AND `typ`='".$_POST['wher']."'";
+                    $wher = " AND typ ='hjalp_verb' OR typ='".$_POST['wher']."'";
+                }else{
+                    $wher = " WHERE typ ='hjalp_verb' OR typ='".$_POST['wher']."'";
+                }
             }
+//        $_SESSION['wher'] = $wher;    
+//        $_SESSION['wher_id'] = $_POST['wher'];    
     }
 }
 
@@ -81,41 +111,50 @@ if(isset($_GET['sercz_id'])){
     $sercz_id = " WHERE `id` = '".$id."'";
 }
 
-if(isset($_GET['urls'])){
+if(isset($_GET['urls']) || isset ($_SESSION['urls'])){
 //    $urls = explode(",",$_GET['urls']);
-    $urls = " WHERE `id` IN (".$_GET['urls'].")";
+    
+    $urls_temp = $_GET['urls']?$_GET['urls']:$_SESSION['urls'];
+    
+    $urls = " WHERE `id` IN (".$urls_temp.")";
 //    $sercz_id = " WHERE `id` = '".$id."'";
 }
 
 //$sercz='';
-if (isset($_POST['sercz'])){
+if (    isset($_POST['sercz'])      ||  isset($_SESSION['sercz']) 
+    && !isset($_POST['sercz_dok'])
+    && !isset($_GET['urls'])        && !isset ($_SESSION['urls'])    ){
+//if (isset($_POST['sercz'])){
+
+//    $szukane = $_POST['sercz'];
     
-    $szukane = $_POST['sercz'];
+        $szukane = $_SESSION['sercz']?$_SESSION['sercz']:$_POST['sercz'];
     
     $Word = new Ord();
     $tabAttr = $Word->getTabOfAttr();
     
     ?><script>//alert("isset post sercz");</script><?php
-    $sercz .= "WHERE ";
+    $sercz .= " WHERE ";
     $licz=0;
     foreach ($tabAttr as $value) {
         if ($licz == 0){
-            $sercz .= $value." LIKE \"%".$szukane."%\"";
+            $sercz .= "`".$value."` LIKE \"%".$szukane."%\"";
         } 
 //        elseif ($licz) {
 //            TODO!! jesli to kategoria żeby jakoś dzialiło wynik i go tłumaczyło (różn języki) -=> t($text)
 //            $licz żeby zawsze == kategoria - pobrać listę!!!
 //        }
         else {
-            $sercz .= " OR ". $value." LIKE \"%".$szukane."%\"";
+            $sercz .= " OR `".$value."` LIKE \"%".$szukane."%\"";
         }
         $licz++;
     }     
 //    $sercz .=";";
 //    echo "<br>SERCZ: ".$sercz;
 }else
-if (isset($_POST['sercz_dok'])){
-       $szukane = $_POST['sercz_dok'];
+if (isset($_POST['sercz_dok']) || isset($_SESSION['sercz_dok']) && !isset($_POST['sercz'])){
+    
+       $szukane = $_POST['sercz_dok']?$_POST['sercz_dok']:$_SESSION['sercz_dok'];
     
     $Word = new Ord();
     $tabAttr = $Word->getTabOfAttr();
@@ -125,9 +164,9 @@ if (isset($_POST['sercz_dok'])){
     $licz=0;
     foreach ($tabAttr as $value) {
         if ($licz == 0){
-            $sercz .= $value." = \"".$szukane."\"";
+            $sercz .= "`".$value."` = \"".$szukane."\"";
         } else {
-            $sercz .= " OR ". $value." = \"".$szukane."\"";
+            $sercz .= " OR `".$value."` = \"".$szukane."\"";
         }
         $licz++;
     }     
@@ -135,21 +174,37 @@ if (isset($_POST['sercz_dok'])){
     $sercz = '';
 }  
 
-$text = "SELECT * FROM `ord` ";
-$text1 = "SELECT count(*) as all_ord FROM `ord` ";
-$text .=$wher." ";
-$text .=$sercz." ";
-$text .=$sort." ";
-$text .=$sercz_id." ";
-$text .=$urls." ";
+//$sort = $_SESSION['sort'] ? $_SESSION['sort'] : $sort;
+//
+//if($sort != ''){
+//    $wher ='';
+//}else{
+//    $wher = $_SESSION['wher'] ? $_SESSION['wher'] : $wher;
+//}
 
-$text1 .=$wher." ";
+$text = "SELECT * FROM `ord` ";
+
+
+$text .=$sercz." ";             // WHERE ... or ... //  niedokładnie
+$text .=$sercz_id." ";          // WHERE            // dokładnie
+$text .=$urls." ";              // WHERE
+$text .=$wher." ";              // WHERE
+$text .=$sort." ";              // ORDER BY id
+//$text .=$urls." ";              // WHERE
+
+$text1 = "SELECT count(*) as all_ord FROM `ord` ";
+
+
 $text1 .=$sercz." ";
-$text1 .=$sort." ";
 $text1 .=$sercz_id." ";
 $text1 .=$urls." ";
+$text1 .=$wher." ";
+$text1 .=$sort." ";
+
 //$text .=" ORDER BY id ASC LIMIT $limit, $onpage";
 
+//echo "<br>".__LINE__."SQL1:".$text;
+//echo "<br>".__LINE__."SQL2:".$text1;
 
 $SQL_pag = $text1;
 $mq1 = mysql_query($SQL_pag) or die (mysql_error());
@@ -181,13 +236,14 @@ $limit = ($page - 1) * $onpage; //określamy od jakiego newsa będziemy pobiera�
 $text .="  LIMIT $limit, $onpage";
 $text .=";";
 
-//echo "<br>TEXT: ".$text;
+//echo "<br>".__LINE__."TEXT: ".$text;
+//$_SESSION['sql'] = $text;
 
 $SQL1 = $text;
 //$SQL2 = $text;
 
-//echo "<br>SQL1:".$SQL1;
-//echo "<br>SQL2:".$SQL2;
+//echo "<br>".__LINE__."SQL1:".$SQL1;
+//echo "<br>".__LINE__."SQL2:".$SQL2;
 $mq = mysql_query($SQL1);
 //$mq2 = mysql_query($SQL1);
 $i=0;

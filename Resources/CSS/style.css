@@ -193,8 +193,9 @@ div.divLog {
     border: 1px #516ca3 solid;
     padding: 5px;
     width:180px;
-    height:120px;
+    height:110px;
     font-size: 11px;
+    
 }
 
 div.DBConn{
@@ -221,7 +222,7 @@ div.movingsearch {
     background: whitesmoke;
     opacity: 0.6;
     position: fixed;
-    bottom: 250px;
+    bottom: 140px;
     right: 5px;
     border-radius: 5px;
     border: 1px #516ca3 solid;

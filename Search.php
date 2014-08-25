@@ -24,17 +24,25 @@ if($isEdit){
     
 echo "<div id=movingsearch class=movingsearch>";     
 echo "<form action='Edit.php' ".$isEdit." method=post>
-        <select name='sort'>
-                        <option >".t("sortuj")."</option>
-                        <option value='id'>id</option>
+        <select name='sort'>";
+if(isset($_SESSION['sort']))  
+    echo                "<option value='".$_SESSION['sort_id']."'>".t("sortuj po ").t($_SESSION['sort_id'])."</option>";
+else                            
+    echo                "<option >".t("sortuj")."</option>";
+
+echo "                  <option value='id'>id</option>
                         <option value='cz_mov'>".t("części mowy")."</option>
                         <option value='alf'>".t("alfabet")."</option>
-                        <option value='cat'>".t("kategoria")."</option>
         </select>";
 echo "
-        <select name='wher'>
-                        <option >".t("część mowy")."</option>
-                        <option value='noun'>".t("rzeczownik")."</option>
+        <select name='wher'>";
+if(isset($_SESSION['wher']))  
+    echo                "<option value='".$_SESSION['wher_id']."'>".t("część mowy").": ".t($_SESSION['wher_id'])."</option>";
+else                            
+    echo                "<option >".t("część mowy")."</option>";
+                        
+                            
+ echo "                 <option value='noun'>".t("rzeczownik")."</option>
                         <option value='verb'>".t("czasownik")."</option>
                         <option value='hjalp_verb'>".t("czas. posiłkowy")."</option>
                         <option value='adjective'>".t("przymiotnik")."</option>
@@ -48,8 +56,18 @@ echo "
                         <option value='wyrazenie'>".t("wyrażenie")."</option>
                         <option value='???'>???</option>
                         <option value='empty'>".t("puste")."</option>
-        </select>
-        <input type=submit name=wher_sub value='".t('wybierz')."'></input>
+        </select>";
+
+echo "  <select name=kat_sercz>"
+               . "<option >".t("kategoria")."</option>";
+        $Word = new Ord();
+        $OrdCat = $Word->getCategoriesOfOrd();
+        foreach($OrdCat as $k){
+            echo "<option value=$k>".t($k)."</option>";
+        }
+echo "  </select>";
+        
+echo "  <input type=submit name=wher_sub value='".t('wybierz')."'></input>
       </form>";
 
 echo "<form action='Edit.php' ".$isEdit." method=post>
@@ -61,6 +79,9 @@ echo "<form action='Edit.php' ".$isEdit." method=post>
 echo "<form action='Edit.php' ".$isEdit." method=post>
         <input id='sercz_dok'     type='text' name='sercz_dok'>
         <input id='sercz_dok_btn' type='submit' value='".t("Szukaj dokładnie")."'></input>
+      </form>";
+echo "<form action='Eraser.php' ".$isEdit." method=post>
+        <input id='erase_btn' type='submit' value='".t("Wyczyść wszystko")."'></input>
       </form>";
 echo "</div>";
 

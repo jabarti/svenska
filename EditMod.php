@@ -119,7 +119,7 @@ if(isset($_POST)){
         } else {
             echo "<br> ERROR MYSQLA (żadnej zmiany!!!): ".$sql_text;
              ?><script>alert("120 NIE WESZŁO do BD: mysql_affected_rows() == false");</script><?php
-             header("Location: Edit.php?sercz_id=".$curr_ord_id); 
+//             header("Location: Edit.php?sercz_id=".$curr_ord_id); 
         } 
     }
     elseif(isset($_POST['delete'])){

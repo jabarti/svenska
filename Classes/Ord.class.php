@@ -61,9 +61,9 @@ class Ord {
     
     private $category = array(  'brak',
                                 'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','sport','wydarzenia',
-                                'przyroda','nauka','geografia','matematyka','polityka','miary','miejsca','czas','kolory',
+                                'przyroda','wiara','nauka','geografia','matematyka','polityka','miary','miejsca','czas','kolory',
                                 'przedmioty','narzedzia','instrumenty','biuro','ubrania','muzyka','jezyki',
-                                'gramatyka','uzupelnic');
+                                'gramatyka','pytajnik','idiom','uzupelnic');
     
 
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
