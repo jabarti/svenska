@@ -770,7 +770,7 @@ class Ord {
             echo "<br>ID's: ";
             
             while($row = mysql_fetch_row($mq)){
-                echo $row[0]."/$licz, ";
+//                echo $row[0]."/$licz, ";
 //                var_dump($row);
                 if($row[0] != $licz){
 //                    echo "<span class=red>BRAK $licz!!!!</span>";
