@@ -118,12 +118,12 @@ if(isset($_POST)){
             ?><script>//alert("//116 NIE WESZŁO do BD");</script><?php
         } else {
             echo "<br> ERROR MYSQLA (żadnej zmiany!!!): ".$sql_text;
-             ?><script>alert("120 NIE WESZŁO do BD: mysql_affected_rows() == false");</script><?php
+             ?><script>alert("121 NIE WESZŁO do BD: mysql_affected_rows() == false");</script><?php
 //             header("Location: Edit.php?sercz_id=".$curr_ord_id); 
         } 
     }
     elseif(isset($_POST['delete'])){
-//        ?><script>alert("//120 w $_POST['delete']!=null");</script><?php
+//        ?><script>alert("126 w $_POST['delete']!=null");</script><?php
         $serial = serialize($_POST);
 //        print_r($serial);
         $serial=  unserialize($serial);

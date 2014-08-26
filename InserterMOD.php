@@ -14,6 +14,15 @@ $title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
 
+//foreach($_POST as $k => $v){
+//    echo "POST['$k']=".$v.", ";
+//}
+//echo "<br>";
+//foreach($_SESSION as $k => $v){
+//    echo "SESSION['$k']=".$v.", ";
+//}
+
+
 $id_ord = '';
 if(isset($_POST['submit'])){
     if($_POST['id_ord'] !=''){
@@ -74,6 +83,39 @@ if(isset($_POST['submit'])){
         header("Location: index.php?result=OK");
     } else {
         header("Location: index.php?result=pusty");
+    }
+}else if(isset($_POST['submitHTA'])){       // tutaj robimy inserta dla ew. pustych pól z bazy z help_test_admin.php!
+    $SQL = "INSERT INTO `ord` ";
+    $attr = "(";
+    $values = " VALUES (";
+    foreach($_POST as $k => $v){
+//        echo "<br>K: $k => V: $v";
+        switch($k){
+            case 'submitHTA':
+                break;
+            case 'kategoria':
+//                $SQL .= "'".$v."');";
+                $attr .= "`$k`)";
+                $values .= "'".$v."');";
+                break;
+            default:
+                $attr .= "`$k`,";
+                $values.= "'".$v."',";
+                break;                
+        }
+        
+    }
+    $SQL .= $attr.$values;
+//    echo "<br>linia(".__LINE__.") SQL:".$SQL;
+    
+    mysql_query($SQL);
+    
+    if(mysql_affected_rows()){
+//         echo "<br>linia(".__LINE__.") JEST OK";
+         header("Location: help_test_admin.php");
+//         header("Location: index.php");
+    }else{
+         header("Location: help_test_admin.php");
     }
 }else{
     header("Location: index.php?result=Error");

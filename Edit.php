@@ -16,7 +16,7 @@ include 'divLog.php';
 $title = 'Svenska | Edit';
 include 'header.php';
 include 'buttons.php';
-//
+
 //foreach($_POST as $k => $v){
 //    echo "POST[$k]=".$v.", ";
 //}
@@ -29,6 +29,13 @@ if(isset($_GET['urls'])){
         $_SESSION['urls'] = $_GET['urls'];
         unset($_SESSION['sercz_dok']);
         unset($_SESSION['sercz']);
+}
+
+if(isset($_GET['sercz_id'])){
+        $_SESSION['urls'] = $_GET['urls'];
+        unset($_SESSION['sercz_dok']);
+        unset($_SESSION['sercz']);
+        unset($_SESSION['urls']);
 }
 
 if (isset($_POST['sercz'])){
@@ -111,7 +118,7 @@ if(isset($_GET['sercz_id'])){
     $sercz_id = " WHERE `id` = '".$id."'";
 }
 
-if(isset($_GET['urls']) || isset ($_SESSION['urls'])){
+if(isset($_GET['urls']) || isset ($_SESSION['urls']) && !isset($_GET['sercz_id'])){
 //    $urls = explode(",",$_GET['urls']);
     
     $urls_temp = $_GET['urls']?$_GET['urls']:$_SESSION['urls'];
@@ -123,7 +130,8 @@ if(isset($_GET['urls']) || isset ($_SESSION['urls'])){
 //$sercz='';
 if (    isset($_POST['sercz'])      ||  isset($_SESSION['sercz']) 
     && !isset($_POST['sercz_dok'])
-    && !isset($_GET['urls'])        && !isset ($_SESSION['urls'])    ){
+    && !isset($_GET['urls'])        && !isset ($_SESSION['urls'])    
+    && !isset($_GET['sercz_id'])    ){
 //if (isset($_POST['sercz'])){
 
 //    $szukane = $_POST['sercz'];
@@ -152,7 +160,8 @@ if (    isset($_POST['sercz'])      ||  isset($_SESSION['sercz'])
 //    $sercz .=";";
 //    echo "<br>SERCZ: ".$sercz;
 }else
-if (isset($_POST['sercz_dok']) || isset($_SESSION['sercz_dok']) && !isset($_POST['sercz'])){
+if (        isset($_POST['sercz_dok'])  ||  isset($_SESSION['sercz_dok']) 
+        && !isset($_POST['sercz'])      && !isset($_GET['sercz_id'])){
     
        $szukane = $_POST['sercz_dok']?$_POST['sercz_dok']:$_SESSION['sercz_dok'];
     

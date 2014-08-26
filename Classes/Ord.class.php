@@ -764,6 +764,8 @@ class Ord {
             echo $SQL;
             $mq = mysql_query($SQL);
             
+            $empty_record = array();
+            
             $licz = 1;
             echo "<br>ID's: ";
             
@@ -771,12 +773,19 @@ class Ord {
                 echo $row[0]."/$licz, ";
 //                var_dump($row);
                 if($row[0] != $licz){
-                    echo "<span class=red>BRAK $licz!!!!</span>";
-                    $licz++;
-                }
-                
+//                    echo "<span class=red>BRAK $licz!!!!</span>";
+                    while($row[0] != $licz){
+                        echo "<span class=red>BRAK $licz!!!!</span>";
+                        array_push($empty_record, $licz);
+                        $licz++;
+                    }
+//                    array_push($empty_record, $licz);
+//                    $licz++;
+                }             
                 $licz++;
             }
+            
+            return $empty_record;
         }
         
         public function getOrdArrByType($typ){
