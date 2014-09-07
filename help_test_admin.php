@@ -408,7 +408,7 @@ if($User = new User()){
 }
 
 
-    $str='try';
+    $str='m';
     echo "<br>SHA: ".sha1($str);
 
 } else {

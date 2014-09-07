@@ -88,12 +88,11 @@ tbody.wew {
         margin:0 5px; 
         position:relative; 
         right:50%; 
-        background: grey;
-        opacity: 0.5;
+        background: lightgrey;
+        opacity: 1;
 }
 #nav li.current a{
-        color:#F00;
-        
+        color:#F00;    
 }
 
 div.clear {

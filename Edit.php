@@ -443,23 +443,6 @@ if($navnum > $allpages){
         if($forstart - 1 < $allpages) echo "<li><a href=\"".$script_name."?page=".$allpages."\">[".$allpages."]</a></li>";
         if($page < $allpages) echo "<li><a href=\"".$script_name."?page=".$next."\">".t("Następna")."</a></li>";
         echo "</ul></div><div class=\"clear\"></div>";
-        
-//        echo "<div id='nav2'><ul>";
-//        if($page > 1) echo "<li><a href=\"".$script_name."?page=".$prev."\">".t("Poprzednia")."</a></li>";
-//        if ($forstart > 1) echo "<li><a href=\"".$script_name."?page=1\">[1]</a></li>";
-//        if ($forstart > 2) echo "<li>...</li>";
-//        for($forstart; $forstart < $forend; $forstart++){
-//                if($forstart == $page){
-//                        echo "<li class=\"current\">";
-//                }else{
-//                        echo "<li>";
-//                }
-//                echo "<a href=\"".$script_name."?page=".$forstart."\">[".$forstart."]</a></li>";
-//        }
-//        if($forstart < $allpages) echo "<li>...</li>";
-//        if($forstart - 1 < $allpages) echo "<li><a href=\"".$script_name."?page=".$allpages."\">[".$allpages."]</a></li>";
-//        if($page < $allpages) echo "<li><a href=\"".$script_name."?page=".$next."\">".t("Następna")."</a></li>";
-//        echo "</ul></div><div class=\"clear\"></div>";
 
 echo "<div class=floating_button_div>"
 //        . "<form id='edit_all' method=post action=EditAllMod.php target='_blank'>"

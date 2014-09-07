@@ -96,11 +96,11 @@ if(isset($_POST['submit'])){
             case 'kategoria':
 //                $SQL .= "'".$v."');";
                 $attr .= "`$k`)";
-                $values .= "'".$v."');";
+                $values .= "'".triTrim($v)."');";
                 break;
             default:
                 $attr .= "`$k`,";
-                $values.= "'".$v."',";
+                $values.= "'".triTrim($v)."',";
                 break;                
         }
         

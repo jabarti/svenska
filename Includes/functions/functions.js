@@ -144,7 +144,7 @@ $(document).ready(function(){
         switch(val){
             case 'preposition':     // przyimki
                 $('#coto').empty();
-                text1 = "informują o stosunkach między przedmiotami, łącząc części zdania o <u>niejednakowej</u> funkcji składniowej. (gdzie? kiedy?), <br>np: Jedziemy <span class=red><b>w</b></span> grudniu.";
+                text1 = "informują o stosunkach między przedmiotami, łącząc części zdania o <u>niejednakowej</u> funkcji składniowej (gdzie? kiedy?), <br>np: Jedziemy <span class=green><b>w</b></span> grudniu.";
                 getTr(text1);
                 break;
                 
@@ -168,7 +168,7 @@ $(document).ready(function(){
                 
             case 'adjective':       // przymiotnik
                 $('#coto').empty();
-                text1 = "nazywają cechy jakościowe rzeczowników (jaki?), <br>np.: <span class=red><b>duży</b></span> dom";
+                text1 = "nazywają cechy jakościowe rzeczowników (jaki?),<br>np.: <span class=green><b>duży</b></span> dom";
                 getTr(text1);
                 break;
                 
@@ -186,13 +186,13 @@ $(document).ready(function(){
                 
             case 'particle':     // partykuła
                 $('#coto').empty();
-                text1 = "(wyrazki) – wzmacniają lub modyfikują znaczenie innych wyrazów,";
+                text1 = "(wyrazki) – wzmacniają lub modyfikują znaczenie innych wyrazów";
                 getTr(text1);
                 break
                 
             case 'adverb':      // przysłówek
                 $('#coto').empty();
-                text1 = "nazywają cechy jakościowe czynności (jak? gdzie? kiedy?), <br>np. pies pracuje <span class=red><b>dużo</b></span>";
+                text1 = "nazywają cechy jakościowe czynności (jak? gdzie? kiedy?), <br>np. pies pracuje <span class=green><b>dużo</b></span>";
                 getTr(text1);
                 break;
                 

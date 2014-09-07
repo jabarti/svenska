@@ -117,8 +117,8 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                 elseif($v!='' && $k !='wymowa'){
                     if(!$flat){
                         if ( $k == "kategoria"){
-                            echo substr($k,0,6).": <span class=blue>$v</span>,<br>";
-//                            continue;
+//                            echo substr($k,0,6).": <span class=blue>$v</span>,<br>";
+                            continue;
                         }else{
                             echo substr($k,0,6).": <span class=red>$v</span>,<br>";
                         }
