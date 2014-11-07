@@ -22,8 +22,8 @@ $czek ='';
 $irreg = '';
 
 if(isset($_POST['cz_mov'])){
-    echo "SET POST"; echo " / POST cz_mov = ".$_POST['cz_mov'];
-    echo "_POST['cz_mov']:".$_POST['cz_mov'];
+//    echo "SET POST"; echo " / POST cz_mov = ".$_POST['cz_mov'];
+//    echo "_POST['cz_mov']:".$_POST['cz_mov'];
     if($_POST['cz_mov']=='cz_mov'){
         $_SESSION['cz_mov'] = true;
     }
@@ -32,8 +32,8 @@ if(isset($_POST['cz_mov'])){
 }
 
 if(isset($_POST['irreg'])){
-    echo "SET POST"; echo " / POST irreg = ".$_POST['irreg'];
-    echo "_POST['irreg']:".$_POST['irreg'];
+//    echo "SET POST"; echo " / POST irreg = ".$_POST['irreg'];
+//    echo "_POST['irreg']:".$_POST['irreg'];
     if($_POST['irreg']=='irreg'){
         $_SESSION['irreg'] = true;
     }
@@ -45,7 +45,8 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
     ?><script>//alert("SESSION NOT SET!");</script><?php
 //    if($_SESSION['irreg'] == true){
     $mr = $word->getDBAll();
-    $SQL = sprintf("SELECT * FROM `ord` WHERE `grupa` = 'irregular' AND `typ` != 'noun';");
+//    $SQL = sprintf("SELECT * FROM `ord` WHERE (`grupa` = 'irregular' OR `grupa` = 'modal_verb') AND `typ` != 'noun';");
+    $SQL = sprintf("SELECT * FROM `ord` WHERE (`grupa` = 'irregular' OR `grupa`='verb:g4_starka' OR `typ` = 'modal_verb') AND `typ` != 'noun';");
     $irreg = 'checked';
 //    }
 }else{
@@ -76,7 +77,7 @@ if(isset($_SESSION['cz_mov'])){
 //$mr = $word->getAllArr();
 
 //$SQL = sprintf("SELECT * FROM `ord`;");
-//echo "<br>SQL: $SQL";
+echo "<br>SQL: $SQL";
 $mq = mysql_query($SQL);
 ?>
 <form action="" method="post">

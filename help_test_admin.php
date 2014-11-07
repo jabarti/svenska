@@ -408,8 +408,9 @@ if($User = new User()){
 }
 
 
-    $str='m';
+    $str='';
     echo "<br>SHA: ".sha1($str);
+    echo "<br>pass: da39a3ee5e6b4b0d3255bfef95601890afd80709";
 
 } else {
     require 'loger.php';

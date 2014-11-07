@@ -81,7 +81,7 @@ function trans($var){       // działa w test.php do tłumaczenia pytań -dlateg
             return "rodzaj ogólny, l.mnoga";
             break;
         case 'st_rowny':
-            return "stopień rowny";
+            return "stopień równy";
             break;
         case 'st_wyzszy':
             return "stopień wyższy";
@@ -97,6 +97,12 @@ function trans($var){       // działa w test.php do tłumaczenia pytań -dlateg
             break;
         case 'hjalp_verb':
             return "czas. posiłkowy";
+            break;
+        case 'modal_verb':
+            return "czas. modalny";
+            break;
+        case 'partikelverb':
+            return "fraza czasownikowa";
             break;
         case 'adjective':
             return "przymiotnik";
@@ -131,12 +137,15 @@ function trans($var){       // działa w test.php do tłumaczenia pytań -dlateg
         case 'wyrazenie':
             return "wyrażenie";
             break;
+        case 'grupa':
+            return "grupę";
+            break;
         case '???':
             return "???";
             break;
         
         default:
-            return "Brak słowa '".$var."' w słowniku!!!";
+            return "Brak słowa '".$var."' w słowniku!!!funktion.php";
             break;
     }
 }

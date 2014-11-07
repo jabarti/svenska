@@ -40,6 +40,8 @@ $Usr_pass ='';
 if(isset($_POST) || isset($_GET)){
 //    echo "<br>POST1: ";var_dump($_POST);
 //    echo "<br>SESS1: ";var_dump($_SESSION);
+//    echo "<br>Cooki: ";var_dump($_COOKIE);
+//    echo "<br>COOKIE LOG: ".$_COOKIE['log'];
     
     
    if(isset($_POST['user'])){
@@ -73,12 +75,18 @@ if(isset($_POST) || isset($_GET)){
         $score = new Score();
         $_SESSION['scoresOfUsr'] = $score->getScoresOfUser($_SESSION['user']);
 //        echo "<p class=red><b>".$_SESSION['scoresOfUsr'][0]."/".$_SESSION['scoresOfUsr'][1]."</b></p>";
-        $time = time()+60*60*18;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
+        $time = time()+60*60*23;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
 //        $time = time()+15;
         $time_str = date($time)? date($time) : $_SESSION['user'];
 //        setcookie("log", $_SESSION['user'], time()+60*60*24);       // ciastko ważne 24h
-        setcookie("log", $time_str, $time);       // ciastko ważne 24h
-
+//        setcookie("log", $time_str, $time);       // ciastko ważne 24h
+        
+        if(setcookie("log", $time_str, $time)){   // ciastko ważne 24h
+            header("Location: ".$_SESSION['ref']);
+        }else{
+            echo "<BR>NO COOKIE LOG SET";
+            setcookie("log", time()+1);
+        }
         
         header("Location: ".$_SESSION['ref']);
     }else{
@@ -133,7 +141,7 @@ if(isset($_POST) || isset($_GET)){
         </table>
     </form>
     
-    <form method="post" action="" id="update_form">
+<!--    <form method="post" action="" id="update_form">
      <label for="user_name">Name</label>
      <input type="text" name="user[name]" id="user_name" />
      <label for="user_email">Email</label>
@@ -144,6 +152,6 @@ if(isset($_POST) || isset($_GET)){
           <option value="f">Female</option>
      </select>     
      <input type="submit" value="Update" />
-</form>
+    </form>-->
 </body>
 

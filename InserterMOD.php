@@ -79,8 +79,14 @@ if(isset($_POST['submit'])){
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $glowny, $porzadkowy, $ulamek,
                         $wymowa, $kategoria, $uwagi);
-        
-        header("Location: index.php?result=OK");
+        if ($_SESSION['test_001']=="true"){
+            $_SESSION['test_001']=="false";
+            $newID = $Word->getId($id_ord);
+            header("Location: index.php?result=OK&transz=".$trans."&newId=$newID");
+        }else{
+            header("Location: index.php?result=pusty");
+        }
+//        header("Location: index.php?result=OK");
     } else {
         header("Location: index.php?result=pusty");
     }

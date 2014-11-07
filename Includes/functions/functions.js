@@ -33,7 +33,7 @@ function logTime(){
     min = rozn.getMinutes();
     sec = rozn.getSeconds();
     
-    if (hou>22 || (hou==0 && min == 0 && sec==0)){
+    if (hou>22 || (hou==0 && min == 0 && sec==0)){      // >23 to zegar się "przekręca" i de fakto zawsze jest zalogowane!
         window.location.href = "loger.php"
     }    
     
@@ -81,6 +81,8 @@ $(document).ready(function(){
                 break;
   
             case 'hjalp_verb':
+            case 'modal_verb':
+            case 'partikelverb':
             case 'verb':
                 $("#czasownik").show();
                 $("#rzeczownik").hide();
@@ -285,7 +287,7 @@ $(document).ready(function(){
 //                                return result;
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+//                                alert("functions.js 288 Status: " + textStatus); alert("functions.js 288 Error: " + errorThrown); 
                 }              
             });
        } else {
@@ -311,7 +313,7 @@ $(document).ready(function(){
                                   console.log("REZULTAT:"+result);
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+//                                alert("functions.js 314 Status: " + textStatus); alert("functions.js 314 Error: " + errorThrown); 
                 }              
             });
        } else {
@@ -326,7 +328,7 @@ $(document).ready(function(){
                                 action: 'del_rand_stats',
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+//                                alert("functions.js 329 Status: " + textStatus); alert("functions.js 329 Error: " + errorThrown); 
                 }              
             });
         } else {
@@ -365,7 +367,7 @@ $(document).ready(function(){
 //                                  console.log("REZULTAT:"+result);
 //                            },
 //                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-//                                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+//                                alert("functions.js 368 Status: " + textStatus); alert("functions.js 368 Error: " + errorThrown); 
 //                }              
 //            });
 //    });
@@ -373,6 +375,8 @@ $(document).ready(function(){
         var typ_val = $('#typ').val();
         switch(typ_val){
             case 'hjalp_verb':
+            case 'modal_verb':
+            case 'partikelverb':
             case 'verb':
                 $('#rodzaj').val('att');
                 break;

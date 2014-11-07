@@ -58,6 +58,7 @@ $sercz_id='';
 //}
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+//if($_SESSION['log'] == true){
     include 'Search.php';
 
 if(isset($_POST)){
@@ -266,6 +267,7 @@ echo "<form action='' method=post>"
 . "<option value=15>15</option>"
 . "<option value=20>20</option>"
 . "<option value=25>25</option>"
+. "<option value=100>100</option>"
 . "</select>"
 . "<input type=submit value=".t('zmień').">"
 . "</form>";
@@ -291,7 +293,8 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".$k."</td><td>";
             echo "<select name='".$k."'>";
                     if($v != '')
-                       echo" <option value=".$v.">".trans($v)." (".t("zapisane").")</option>"; 
+//                       echo" <option value=".$v.">".trans($v)." TU(".t("zapisane").")</option>"; 
+                       echo" <option value=".$v.">".t($v)." ( ".t("zapisane")." )</option>"; 
           
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();

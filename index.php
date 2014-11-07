@@ -14,7 +14,11 @@ $title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
 
+//vardump($_SESSION);
+//vardump($_COOKIE);
+
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+//if($_SESSION['log'] == true ){
     include 'Search.php';
 ?>
 <body onload='start();'>
@@ -313,9 +317,15 @@ echo "</table>
 echo "<div id=p2 class=\"tab_info\"></div>";
 
 if (isset($_GET['result'])){
-    switch($_GET['result']){
+    switch($_GET['result']){ //Edit.php?sercz_id=$_GET['newId']
         case 'OK':
-            echo t('Wstawione do BD!');
+//            echo t('Wstawione do BD!')." SV: <a href=#>".$_GET['transz']."</a>";
+            $tempID =  $_GET['newId'];
+//            echo "<br>$tempID";
+//            echo "<br>";
+            
+            echo t('Wstawione do BD!')." SV: <a target='_blank' href='Edit.php?sercz_id=$tempID'>".$_GET['transz']."</a>";
+            
             break;
         case 'Error':
             echo t("ERROR!!!!");

@@ -97,9 +97,9 @@ $method = 'post';
 echo "<table class=tab_insert>"
    . "<form id=testForm1 action=test.php method=".$method.">";
 echo "<tr>"
-                ."<td>".t("To jest")." ".trans($testTab[0])."</td>"
+                ."<td>".t("To jest")." ".t(trans($testTab[0]))."</td>"
                 .'<td><textarea rows=1 cols=20 name="'.$testTab[0].'" disabled>'.$testTab[1].'</textarea></td>';
-        echo    "<td>".t("Podaj")." ".trans($testTab[2])."</td>"
+        echo    "<td>".t("Podaj")." ".t(trans($testTab[2]))."</td>"
                 ."<td>"
                 . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie
                 . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"       // słowo
@@ -125,8 +125,8 @@ echo "<tr>"
                     ."<td></td>"
                 ."</tr>";
         
-echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test value=Odpowiedz></td>";
-echo "<td><input id=btn_sub_02 type=submit name=avoid value='Pomiń=>'></td>"
+echo "<tr><td colspan=3></td><td><input id=btn_sub_01 type=submit name=test value=".t('Odpowiedz')."></td>";
+echo "<td><input id=btn_sub_02 type=submit name=avoid value='".t('Pomiń')." =>'></td>" 
 //echo "<tr><td colspan=3></td><td><button id=btn_submit >Sprawdź</button></td>"
     ."</form>"
     ."</table>";
@@ -180,14 +180,14 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
     
     $temp_scor = '';
     if($wordInArr){
-        echo "<br>POPRAWNA ODPOWIEDŹ!!!!!";
+        echo "<br>".t('POPRAWNA ODPOWIEDŹ')."!!!!!";
         $_SESSION['good']++;
-        $temp_scor = "OK";
+        $temp_scor = "OK"; 
     }else{
-        echo "<br>ŻLE - POPRAWNA ODPOWIEDŹ: na pytanie:<br>Podaj ".t($_POST['quest_p1']). " do \"<span class=red>".$_POST['quest_p2']."</span>\". Odpowiedź to:"
-        . " <span class=red><b>".$_POST['check']."</b></span><br>, a Twoja odpowiedź: \"".$_POST['try']."\"";
+        echo "<br>".t('ŻLE')." - ".t('POPRAWNA ODPOWIEDŹ').": ".t('na pytanie').":<br>".t('Podaj')." ".t($_POST['quest_p1']). " ".t('do')." \"<span class=red>".$_POST['quest_p2']."</span>\". ".t('Odpowiedź to').":"
+        . " <span class=red><b>".$_POST['check']."</b></span><br>, ".t('a Twoja odpowiedź').": \"".$_POST['try']."\"";
          $_SESSION['bad']++;
-         $temp_scor = "błąd";
+         $temp_scor = t("błąd");
     }
     
 //    echo "<br>ta tablica:";
@@ -202,22 +202,22 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
 }      
 else if(isset($_POST['avoid'])){
 //    echo "<br>JEST AVOID!!!";
-    $temp_scor = "BRAK ODPOWIEDZI!!!";
+    $temp_scor = t("BRAK ODPOWIEDZI")."!!!";
     $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], "-", $temp_scor );
     array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
 }
 
 if ($_SESSION['good'] != 0 || $_SESSION['bad'] != 0){
     $temp = $_SESSION['good']+$_SESSION['bad'];
-    echo    "<br><br>Dobrych odpowiedzi: <span id=good>".$_SESSION['good']."</span> tzn. ".round($_SESSION['good']/$temp*100,2)." %".
-            "<br>Złych odpowiedzi: <span id=bad>".$_SESSION['bad']."</span>".
-            "<br>Wszystkich odpowiedzi: <span id=all>".$temp."</span>";
+    echo    "<br><br>".t('Dobrych odpowiedzi').": <span id=good>".$_SESSION['good']."</span> ".t('tzn')." ".round($_SESSION['good']/$temp*100,2)." %".
+            "<br>".t('Złych odpowiedzi').": <span id=bad>".$_SESSION['bad']."</span>".
+            "<br>".t('Wszystkich odpowiedzi').": <span id=all>".$temp."</span>";
 }
  if(isset($_SESSION['scoresOfUsr'])){
-     echo "<br><br><b>Wcześniejsze wyniki:</b><br>";
-     echo "<span class=red>Good: <b>".$_SESSION['scoresOfUsr'][0]."</b></span>/<span class=red>Bad: <b>".$_SESSION['scoresOfUsr'][1]."</b> = ".round(100*$_SESSION['scoresOfUsr'][0]/($_SESSION['scoresOfUsr'][0]+$_SESSION['scoresOfUsr'][1]),2)."% dobrych odpowiedzi.</span>";
+     echo "<br><br><b>".t('Wcześniejsze wyniki').":</b><br>";
+     echo "<span class=red>".t('Dobre').": <b>".$_SESSION['scoresOfUsr'][0]."</b></span>/<span class=red>".t('Złe').": <b>".$_SESSION['scoresOfUsr'][1]."</b> = ".round(100*$_SESSION['scoresOfUsr'][0]/($_SESSION['scoresOfUsr'][0]+$_SESSION['scoresOfUsr'][1]),2)."% ".t('dobrych odpowiedzi').".</span>";
  }else{
-     echo "<br> NIE MA SESJA SCORE";
+     echo "<br> ".t('NIE MA SESJA SCORE')."";
  }
 
 $score = new Score();
@@ -225,24 +225,24 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
 
 ?>
 <form action="" method="post">
-    <input id=clear name="clear" type="submit" value="Clear score">
+    <input id=clear name="clear" type="submit" value="<?php echo t('Clear score') ?>">
 </form>
 
 <br>
 <!--<button onclick="window.location.href='loger.php'">Wyloguj</button>-->
 
 <?php
-
+// ".t('')."
     // Prezentacja wyników już osiągnietych!
-    echo "<h3> Twoje dotychczasowe odpowiedzi: </h3>";
+    echo "<h3> ".t('Twoje dotychczasowe odpowiedzi').": </h3>";
 
     foreach ($_SESSION['arrOfAnsw'] as $key) {
         echo "<p>";     
 //        echo "Pytanie: Do ".trans($key[0])." ( ".$key[1]." ) podaj ".trans($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
         if(trans($key[1])!= 'słowo PL')
-            echo "Pytanie: To jest ".trans($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) podaj ".trans($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
+            echo t('Pytanie').": ".t('To jest')." ".trans($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) ".t('podaj')." ".trans($key[3]).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
         else
-            echo "Pytanie: To jest ".trans($key[1])." ( <span class=green>".$key[2]."</span> ) podaj ".trans($key[3]).", Odp.: \"<span class=red>".$key[4]."</span>\" / Twoja odp: \"<span class=blue>".$key[5]."</span>\" czyli: <b>$key[6]</b>.";
+            echo t('Pytanie').": ".t('To jest')." ".trans($key[1])." ( <span class=green>".$key[2]."</span> ) ".t('podaj')." ".trans($key[3]).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
             echo "</p>";
     }
 

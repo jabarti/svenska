@@ -56,14 +56,18 @@ class Ord {
     private $table = "ord";
     
     private $group =    array(  '',
-                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
-                                'noun_or','noun_ar','noun_er','noun__');
+//                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
+                                'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx','verb:g3_kort_r/dd,tt','verb:g4_starka',
+//                                'noun_or','noun_ar','noun_er','noun__');
+                                'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na','noun:gr4_n+a','noun:gr5___+en/na');
     
-    private $category = array(  'brak',
-                                'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','sport','wydarzenia',
-                                'przyroda','wiara','nauka','geografia','matematyka','polityka','ekonomia','miary','miejsca','czas','kosmos','kolory',
-                                'przedmioty','narzedzia','instrumenty','biuro','ubrania','muzyka','jezyki',
-                                'gramatyka','pytajnik','idiom','zart','uzupelnic');
+//    private $category = array(  'brak', 'abstr.',
+    private $category = array(  'abstr.','mitologia',
+                                'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia',
+                                'przyroda','wiara','nauka','medycyna','geografia','matematyka','informatyka','polityka',
+                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
+                                'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
+                                'gramatyka','pytajnik','idiom','zart','wulgarne','uzupelnic');
     
 
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
@@ -74,7 +78,8 @@ class Ord {
                             $glowny, $porzadkowy,$ulamek,
                             $wymowa, $kategoria, $uwagi){
         
-        if(!$this->getId($id_ord)){
+        if(!$this->getId($id_ord)){ // blokada ponownego dodania rekordu o takim samym kluczu słownym
+//        if(true){
             
             $SQL = sprintf("INSERT INTO `".$this->table."` "
                 . "(`id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, "
@@ -98,7 +103,7 @@ class Ord {
                 
                 $id_LH = $this->getLastId(false)+1;
                 $id_LH = $this->getId($id_ord);
-//                echo "<br>ID:".$id_LH;
+                echo "<br>ID:".$id_LH;
             
                 $SQL_PLLH = sprintf("INSERT INTO `".$this->table."LH` "
                     . "(`id`, `id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, "
@@ -129,11 +134,12 @@ class Ord {
 //                echo "<br>ERROR wsadu";
                 echo "<br>".__FILE__.__LINE__.t("ERROR wsadu").", SQL:".$SQL;
             }
-                    
+            $_SESSION['test_001']="true";        
             return true;
-        }else{
-            echo "<br>ERROR W bazie jest!!";
-            return false;
+                }else{
+                    $_SESSION['test_001']="false";
+                    echo "<br>ERROR W bazie jest!!";
+                    return false;
         }
     }
               
@@ -241,6 +247,8 @@ class Ord {
                     break;
                 
                 case 'hjalp_verb':
+                case 'modal_verb':
+                case 'partikelverb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -334,6 +342,8 @@ class Ord {
                     break;
                 
                 case 'hjalp_verb':
+                case 'modal_verb':
+                case 'partikelverb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -422,6 +432,8 @@ class Ord {
                     break;
                 
                 case 'hjalp_verb':
+                case 'modal_verb':
+                case 'partikelverb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -437,7 +449,8 @@ class Ord {
                     break;
                 
                 case 'adverb':          // przysłówek
-                    $tab = Array(   'id_ord', 'typ', 'trans', 
+//                    $tab = Array(   'id_ord', 'typ', 'trans', 
+                    $tab = Array(   'id_ord', 'trans', 
                                     'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                 ); 
                     break;
@@ -542,7 +555,8 @@ class Ord {
             $arr = array();
             $tempSQL = "SELECT id FROM `".$this->table."`";
             if($type == 'verb'){
-                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb';";
+//                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb';";
+                $tempSQL .= " WHERE `typ` LIKE '%verb';"; // ? adverb!
             }elseif($type==false){
                 $tempSQL .=";";
             }else{
@@ -917,6 +931,8 @@ class Ord {
                             <option value='noun'>rzeczownik</option>
                             <option value='verb'>czasownik</option>
                             <option value='hjalp_verb'>czas. posiłkowy</option>
+                            <option value='modal_verb'>czas. modalny</option>
+                            <option value='partikelverb'>fraza czasownikowa</option>
                             <option value='adjective'>przymiotnik</option>
                             <option value='adverb'>przysłówek</option>
                             <option value='preposition'>przyimek</option>
@@ -975,11 +991,11 @@ class Ord {
         
         // tworzy tabelkę rekordów o id_ord podobnym do wprowadzonego słowa 
         public function getSimOrdByIdOrd($text){
-            $SQL = "SELECT id, id_ord, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
+            $SQL = "SELECT id, id_ord, typ, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
-            echo "<tr><th colspan=4>Jest <span class=red>".$this->getCountSimOrdByIdOrd($text, false)."</span> podobnych wyników:<th><tr>";
+            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$this->getCountSimOrdByIdOrd($text, false)."</span> podobnych wyników:<th><tr>";
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
@@ -990,11 +1006,14 @@ class Ord {
                         case 'trans':
                             echo "$v</td>";
                             echo "<td><a href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
-                            break;
+                            break;                     
                         case 'id':
                             echo "<td>$v</td>";
                             $id=$v;
                             break;
+                        case 'typ':
+                            echo "<td>(".substr($v,0,4).")</td";
+                            break;  
                         default:
                             echo "<td>$v</td>";
                             break;                            
@@ -1007,7 +1026,7 @@ class Ord {
         
         // tworzy tabelkę rekordów o trans podobnym do wprowadzonego słowa 
         public function getSimOrdByTrans($text){
-            $SQL = "SELECT id, rodzaj, trans, id_ord FROM ".$this->table." WHERE `trans` like '%".$text."%';";
+            $SQL = "SELECT id, rodzaj, trans, typ, id_ord FROM ".$this->table." WHERE `trans` like '%".$text."%';";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
@@ -1021,6 +1040,9 @@ class Ord {
                             break;
                         case 'trans':
                             echo "$v</td>";
+                            break;
+                        case 'typ':
+                            echo "<td>(".substr($v,0,4).")</td>";
                             break;
                         case 'id_ord':
                             echo "<td> => $v</td>";
@@ -1082,10 +1104,13 @@ class Ord {
 //            echo "<br>matches1: ".$matches[1];
             $vals = explode('\',\'', $matches[1]);
 //            echo "<br>Vals: ";var_dump ($vals);
+//            $vals = str_split($vals, 1);
+//            sort($vals);
             return $vals;
         }
         
         public function getCategoriesOfOrd(){
+            sort($this->category);      //sortowanie alfabetyczne
             return $this->category;
         }
         
