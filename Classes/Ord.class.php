@@ -441,7 +441,8 @@ class Ord {
                 case 'modal_verb':
                 case 'partikelverb':
                 case 'verb':            // czasownik
-                    $tab = Array(   'id_ord', 'grupa', 'trans', 
+//                    $tab = Array(   'id_ord', 'grupa', 'trans', 
+                    $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
                                     'present_participle', 'past_participle', 
                                     'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
@@ -590,7 +591,7 @@ class Ord {
 //            echo '<br>TYPE:'.$type.'<br>';
             $arr = array();
             $tempSQL = "SELECT id FROM `".$this->table."`";
-            $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb' AND `grupa` = '".$group."';";            
+            $tempSQL .= " WHERE (`typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb') AND `grupa` = \"".$group."\";";            
 //            $tempSQL .= " WHERE `typ` LIKE '%verb' AND `grupa` = '".$group."';"; // ? adverb!
 
 //            echo "<br>".__FILE__.__LINE__.", SQL:".$tempSQL;

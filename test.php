@@ -66,10 +66,12 @@ $group_ord =    $_SESSION['group_ord'];
 //        echo "<br>POST['typ_cz_mov']:".$_POST['typ_cz_mov'];
 //        echo "<br>SESSION['typ_cz_mov']:".$_SESSION['typ_cz_mov'];
 //        echo "<br>typ_current:".$typ_current;
-if($_POST['group_ord'] == false){
+if($_POST['group_ord'] == false && $group_ord == false){
+//    echo "<br>NORMAL!";
     $arr = $Word->getQuestionIDsArrByType($typ_current);
 }else{
     $arr = $Word->getQuestionIDsArrByGroup($group_ord);
+//    echo "<br>STARKA VERB!";
 }
 $max = count($arr)-1;
 $rand_index = mt_rand(0, $max); // wybór słowa
