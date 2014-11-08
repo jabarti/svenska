@@ -177,8 +177,7 @@ if(isset($_POST)){
         ?><script>alert("Funkcjonalność w budowie");</script><?php
         echo "<br>ID WORD: ".$_POST['id'];
         echo '<br>copy';
-//        header("Location: index.php?copy_id=".$_POST['id']);
-//        header("Location: Edit.php");
+        header("Location: index.php?copy_id=".$_POST['id']);
     }
 }
 

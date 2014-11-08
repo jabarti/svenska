@@ -20,8 +20,30 @@ include 'buttons.php';
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 //if($_SESSION['log'] == true ){
     include 'Search.php';
+if(isset($_GET['copy_id'])){    
+//    echo "GET COPY =".$_GET['copy_id'];
+    $copy_ord_id = $_GET['copy_id'];
+    $CopySQL = "SELECT * FROM `ord` WHERE `id` = '".$copy_ord_id."';";
+//    echo "<br>SQL: $CopySQL";
+    
+    $mqCopy = mysql_query($CopySQL);
+    
+    if(mysql_affected_rows()){
+        $mfa = mysql_fetch_assoc($mqCopy);
+    }
+}else{
+}
+
+if(!isset($_GET['copy_id'])){
 ?>
-<body onload='start();'>
+    <body onload='start();'>
+<?php
+}else{
+?>
+    <body>
+<?php
+}
+?>
 <!--<div class=edit_tab_contener>-->
     <!--<form id='form1' action='index.php' method="POST">-->
     <form id='form1' action='InserterMOD.php' method="POST">
@@ -41,14 +63,18 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             <tr>
             <tr>
                 <td class='label'><?php echo t("polski"); ?></td>
-                <td><input id='id_ord' name='id_ord'></td>
+                <td><input id='id_ord' name='id_ord' value="<?php echo $mfa['id_ord']?$mfa['id_ord']:''; ?>"></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
                     <select id=typ name='typ'>
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
+                        if(isset($_GET['copy_id'])){
+                            echo "<option>".substr(t($mfa['typ']),0,14)." ( ".substr(tl($mfa['typ'],"en"),0,14)." )</option>";
+                        }else{
                             echo "<option>".t("część mowy")."</option>";
+                        }
                         foreach($OrdCat as $k){
                             if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
                                 echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." )</option>";
@@ -64,6 +90,9 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getRodzOfOrd();
+                        if(isset($_GET['copy_id'])){
+                            echo "<option value='".$mfa['rodzaj']."'>".$mfa['rodzaj']."</option>";
+                        }
                         foreach($OrdCat as $k){
                             echo "<option value=$k>".$k."</option>";
                         }
@@ -71,7 +100,7 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                     </select>
                 </td>
                 <td class='label'><?php echo t("szwedzki"); ?></td>
-                <td><input id='trans' name='trans'></td>
+                <td><input id='trans' name='trans' value="<?php echo $mfa['trans']?$mfa['trans']:''; ?>"></td>
                 
             <tr>    
             <tr>    
@@ -82,6 +111,9 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getGroupOfOrd();
+                        if(isset($_GET['copy_id'])){
+                            echo "<option value='".$mfa['grupa']."'>".t($mfa['grupa'])."</option>";
+                        }
                         foreach($OrdCat as $k){
                             echo "<option value=$k>".t($k)."</option>";
                         }
@@ -108,21 +140,21 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("infinitive"); ?><br>(infinitive)</td>
-                <td><input id='in1' name='infinitive'></td>
+                <td><input id='in1' name='infinitive' value="<?php echo $mfa['infinitive']?$mfa['infinitive']:''; ?>"></td>
                 <td class='label'><?php echo t("present"); ?><br>(present)</td>
-                <td><input id='in1' name='presens'></td>
+                <td><input id='in1' name='presens' value="<?php echo $mfa['presens']?$mfa['presens']:''; ?>"></td>
                 <td class='label'><?php echo t("past"); ?><br>(past)</td>
-                <td><input id='in1' name='past'></td>
+                <td><input id='in1' name='past' value="<?php echo $mfa['past']?$mfa['past']:''; ?>"></td>
                 <td class='label'><?php echo t("supine"); ?><br>(supine)</td>
-                <td><input id='in1' name='supine'></td>
+                <td><input id='in1' name='supine' value="<?php echo $mfa['supine']?$mfa['supine']:''; ?>"></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("imperative"); ?><br>(imperative)</td>
-                <td><input id='in1' name='imperative'></td>
+                <td><input id='in1' name='imperative' value="<?php echo $mfa['imperative']?$mfa['imperative']:''; ?>"></td>
                 <td class='label'><?php echo t("present participle"); ?> <br>(present participle)</td>
-                <td><input id='in1' name='present_participle'></td>
+                <td><input id='in1' name='present_participle' value="<?php echo $mfa['present_participle']?$mfa['present_participle']:''; ?>"></td>
                 <td class='label'><?php echo t("past participle"); ?> <br>(past participle)</td>
-                <td><input id='in1' name='past_participle'></td>
+                <td><input id='in1' name='past_participle' value="<?php echo $mfa['past_participle']?$mfa['past_participle']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             
@@ -137,17 +169,17 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("Passive infinitive"); ?> <br>(Passive infinitive)</td>
-                <td><input id='in1' name='pas_infinitive'></td>
+                <td><input id='in1' name='pas_infinitive' value="<?php echo $mfa['pas_infinitive']?$mfa['pas_infinitive']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive present"); ?> <br>(Passive present)</td>
-                <td><input id='in1' name='pas_presens'></td>
+                <td><input id='in1' name='pas_presens' value="<?php echo $mfa['pas_presens']?$mfa['pas_presens']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive past"); ?> <br>(Passive past)</td>
-                <td><input id='in1' name='pas_preterite'></td>
+                <td><input id='in1' name='pas_preterite' value="<?php echo $mfa['pas_preterite']?$mfa['pas_preterite']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive supine"); ?> <br>(Passive supine)</td>
-                <td><input id='in1' name='pas_supine'></td>
+                <td><input id='in1' name='pas_supine' value="<?php echo $mfa['pas_supine']?$mfa['pas_supine']:''; ?>"></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("Passive imperative"); ?> <br>(Passive imperative)</td>
-                <td><input id='in1' name='pas_imperative'></td>
+                <td><input id='in1' name='pas_imperative' value="<?php echo $mfa['pas_imperative']?$mfa['pas_imperative']:''; ?>"></td>
 <!--                <td class='label'>P_present_participle</td>
                 <td><input id='in1' name='pas_present_participle'></td>
                 <td class='label'>P_past_participle</td>
@@ -172,13 +204,13 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("Single indefinite");?><br>(Single indefinite)</td>
-                <td><input id='in1' name='S_indefinite'></td>
+                <td><input id='in1' name='S_indefinite' value="<?php echo $mfa['S_indefinite']?$mfa['S_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Single definite");?><br>(Single definite)</td>
-                <td><input id='in1' name='S_definite'></td>
+                <td><input id='in1' name='S_definite' value="<?php echo $mfa['S_definite']?$mfa['S_definite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural indefinite");?><br>(Plural indefinite)</td>
-                <td><input id='in1' name='P_indefinite'></td>
+                <td><input id='in1' name='P_indefinite' value="<?php echo $mfa['P_indefinite']?$mfa['P_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural definite"); ?><br>(Plural definite)</td>
-                <td><input id='in1' name='P_definite'></td>
+                <td><input id='in1' name='P_definite' value="<?php echo $mfa['P_definite']?$mfa['P_definite']:''; ?>"></td>
             </tr>
             <tr>
                 <td><br></td>
@@ -196,21 +228,21 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("neuter"); ?> <br>(neuter)</td>
-                <td><input id='in1' name='neuter'></td>
+                <td><input id='in1' name='neuter' value="<?php echo $mfa['neuter']?$mfa['neuter']:''; ?>"></td>
                 <td class='label'><?php echo t("masculin"); ?> <br>(masculin)</td>
-                <td><input id='in1' name='masculin'></td>
+                <td><input id='in1' name='masculin' value="<?php echo $mfa['masculin']?$mfa['masculin']:''; ?>"></td>
                 <td class='label'><?php echo t("plural"); ?> <br>(plural)</td>
-                <td><input id='in1' name='plural'></td>
+                <td><input id='in1' name='plural' value="<?php echo $mfa['plural']?$mfa['plural']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             <tbody id='stopniowanie' class='nobordtop'>
             <tr>
                 <td  class='label'><?php echo t("positive"); ?> <br>(positive)</td>
-                <td><input id='in1' name='st_rowny'></td>
+                <td><input id='in1' name='st_rowny' value="<?php echo $mfa['st_rowny']?$mfa['st_rowny']:''; ?>"></td>
                 <td  class='label'><?php echo t("comparative"); ?> <br>(comparative)</td>
-                <td><input id='in1' name='st_wyzszy'></td>
+                <td><input id='in1' name='st_wyzszy' value="<?php echo $mfa['st_wyzszy']?$mfa['st_wyzszy']:''; ?>"></td>
                 <td  class='label'><?php echo t("superlative"); ?> <br>(superlative)</td>
-                <td><input id='in1' name='st_najwyzszy'></td>
+                <td><input id='in1' name='st_najwyzszy' value="<?php echo $mfa['st_najwyzszy']?$mfa['st_najwyzszy']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             <tr>
@@ -231,11 +263,11 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("cardinal number"); ?> <br>(cardinal number)</td>
-                <td><input id='in1' name='glowny'></td>
+                <td><input id='in1' name='glowny' value="<?php echo $mfa['glowny']?$mfa['glowny']:''; ?>"></td>
                 <td class='label'><?php echo t("ordinal number"); ?> <br>(ordinal number)</td>
-                <td><input id='in1' name='porzadkowy'></td>
+                <td><input id='in1' name='porzadkowy' value="<?php echo $mfa['porzadkowy']?$mfa['porzadkowy']:''; ?>"></td>
                 <td class='label'><?php echo t("fraction"); ?> <br>(fraction)</td>
-                <td><input id='in1' name='ulamek'></td>
+                <td><input id='in1' name='ulamek' value="<?php echo $mfa['ulamek']?$mfa['ulamek']:''; ?>"></td>
                  <td colspan="2"></td>
             </tr>
             <tr>
@@ -255,17 +287,20 @@ if($_SESSION['log'] == true && isset($_COOKIE['log'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("wymowa"); ?></td>
-                <td><input id='in1' name='wymowa'></td>
+                <td><input id='in1' name='wymowa' value="<?php echo $mfa['wymowa']?$mfa['wymowa']:''; ?>"></td>
                 <td colspan='6'></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("uwagi"); ?></td>
-                <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"></textarea></td>
+                <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"><?php echo $mfa['uwagi']?$mfa['uwagi']:''; ?></textarea></td>
                 <td class='label'><?php echo t("kategoria"); ?> </td>
                 <td colspan='2'>
                     <!--<select id=kategoria name='kategoria'>-->
                     <select id=kategoria_ins  multiple="multiple" name='kategoria'>                        
                         <?php
+                        if(isset($_GET['copy_id'])){
+                            echo "<option value='".$mfa['kategoria']."'>".t($mfa['kategoria'])."</option>";
+                        }
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
                         foreach($OrdCat as $k){
