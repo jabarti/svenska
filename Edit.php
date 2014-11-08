@@ -387,9 +387,10 @@ while($row = mysql_fetch_assoc($mq)){
     $j++;    
     }
         echo "<tr> <td colspan=6></td>
-                    <td colspan=2>
-                        <button onclick='Menu();'>".t("Menu")."</button>
-                        <input id=Edit_".$curr_word_id." type=submit name=edit value='".t('Edit')."'>";
+                    <td colspan=2>";
+//        echo "          <button onclick='Menu();'>".t("Menu")."</button>
+        echo "          <input id=Copy_".$curr_word_id." type=submit name=copy value='".t('Copy')."'>";
+        echo "          <input id=Edit_".$curr_word_id." type=submit name=edit value='".t('Edit')."'>";
 //                        <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$id." value='".t('wartość')."' disabled />
         echo "          <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$curr_word_id." value='".$curr_word_id."' disabled />
                         <input id=Del_".$curr_word_id." type=submit name=delete value='".t("DELETE")."'>                        

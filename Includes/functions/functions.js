@@ -217,7 +217,7 @@ $(document).ready(function(){
     });    
 });
 
-// EDIT.php
+// EDIT.php // no
 function Menu(){
     location.href="#menu";
 }

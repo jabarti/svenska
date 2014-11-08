@@ -41,6 +41,7 @@ if($Word = new Ord()){
 
 //        echo "<br>POST['typ_cz_mov']:".$_POST['typ_cz_mov'];
 //        echo "<br>SESSION['typ_cz_mov']:".$_SESSION['typ_cz_mov'];
+//        echo "<br>SESSION['group_ord']:".$_SESSION['group_ord'];
 //        echo "<br>typ_current:".$typ_current;
 
 if(isset($_POST['typ_cz_mov'])){
@@ -50,14 +51,26 @@ if(isset($_POST['typ_cz_mov'])){
         $_SESSION['typ_cz_mov'] = $_POST['typ_cz_mov'];
     }
 }
-$typ_current = $_SESSION['typ_cz_mov'];
+if(isset($_POST['group_ord'])){
+    if($_POST['group_ord'] == 'clear'){
+        $_SESSION['group_ord'] = false;
+    }else{
+        $_SESSION['typ_cz_mov'] = 'verb';
+        $_SESSION['group_ord'] = $_POST['group_ord'];
+    }
+}
+$typ_current =  $_SESSION['typ_cz_mov'];
+$group_ord =    $_SESSION['group_ord'];
 
 
 //        echo "<br>POST['typ_cz_mov']:".$_POST['typ_cz_mov'];
 //        echo "<br>SESSION['typ_cz_mov']:".$_SESSION['typ_cz_mov'];
 //        echo "<br>typ_current:".$typ_current;
-
-$arr = $Word->getQuestionIDsArrByType($typ_current);
+if($_POST['group_ord'] == false){
+    $arr = $Word->getQuestionIDsArrByType($typ_current);
+}else{
+    $arr = $Word->getQuestionIDsArrByGroup($group_ord);
+}
 $max = count($arr)-1;
 $rand_index = mt_rand(0, $max); // wybór słowa
 $rand = $arr[$rand_index];
@@ -74,7 +87,7 @@ $wordPL = $Word->getOrdPLById($rand);
 //echo "<br>WordPL: ".$wordPL;
 
 echo "<form method=post action=''>";
- echo t("Pytania z")." <select name='typ_cz_mov'>";
+echo t("Pytania z")." <select name='typ_cz_mov'>";
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
                         if(isset($_SESSION['typ_cz_mov']) && $_SESSION['typ_cz_mov']!= 'clear'){
@@ -89,7 +102,22 @@ echo "<form method=post action=''>";
                                 echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
                         }   
             echo "</select>";
-            echo "<input type=submit value='"."Wyślij"."'>";
+            echo "<input type=submit value='".t("Wyślij")."'>";
+echo "</form>";
+
+echo "<form method=post action=''>";
+ echo t("Czasowniki z grupy")." <select name='group_ord'>";
+                        $Word = new Ord();
+                        $OrdGroup = $Word->getOrdByGroup();
+                        if(isset($_SESSION['group_ord']) && $_SESSION['group_ord']!= 'clear'){
+                            echo "<option value=''>".t($_SESSION['group_ord'])."</option>";
+                        }
+                            echo "<option value='clear'>".t("wyczyść")."</option>";
+                        foreach($OrdGroup as $k){
+                           echo "<option value=$k>".substr(t($k),0,8)."</option>";
+                        }   
+            echo "</select>";
+            echo "<input type=submit value='".t("Wyślij")."'>";
 echo "</form>";
 
 $method = 'post';

@@ -57,9 +57,15 @@ class Ord {
     
     private $group =    array(  '',
 //                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
-                                'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx','verb:g3_kort_r/dd,tt','verb:g4_starka',
+                                'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx',
+                                'verb:g3_kort_r/dd,tt','verb:g4_starka',
 //                                'noun_or','noun_ar','noun_er','noun__');
-                                'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na','noun:gr4_n+a','noun:gr5___+en/na');
+                                'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
+                                'noun:gr4_n+a','noun:gr5___+en/na');
+
+    private $group_verb =   array(  '',
+                                'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx',
+                                'verb:g3_kort_r/dd,tt','verb:g4_starka');
     
 //    private $category = array(  'brak', 'abstr.',
     private $category = array(  'abstr.','mitologia',
@@ -555,8 +561,8 @@ class Ord {
             $arr = array();
             $tempSQL = "SELECT id FROM `".$this->table."`";
             if($type == 'verb'){
-//                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb';";
-                $tempSQL .= " WHERE `typ` LIKE '%verb';"; // ? adverb!
+                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb';";
+//                $tempSQL .= " WHERE `typ` LIKE '%verb';"; // ? adverb!
             }elseif($type==false){
                 $tempSQL .=";";
             }else{
@@ -575,6 +581,32 @@ class Ord {
             }else{
                 echo "<br>".__FILE__.__LINE__.", SQL NO OK";
             }
+            return $arr;
+        }
+        
+        // Zwraca tablicę z ID wszystkich verbów w bazie w zależności od $group, 
+        // $g = false,  wszystkie ID z BD
+        public function getQuestionIDsArrByGroup($group){
+//            echo '<br>TYPE:'.$type.'<br>';
+            $arr = array();
+            $tempSQL = "SELECT id FROM `".$this->table."`";
+            $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb' AND `grupa` = '".$group."';";            
+//            $tempSQL .= " WHERE `typ` LIKE '%verb' AND `grupa` = '".$group."';"; // ? adverb!
+
+//            echo "<br>".__FILE__.__LINE__.", SQL:".$tempSQL;
+            
+            $SQL = sprintf($tempSQL);
+            $mq = mysql_query($SQL);
+            
+            if(mysql_affected_rows()){
+//                echo "<br>".__FILE__.__LINE__.", SQL OK ";
+                while($row = mysql_fetch_assoc($mq)){
+                    array_push($arr, $row['id']);
+                }
+            }else{
+//                echo "<br>".__FILE__.__LINE__.", SQL NO OK";
+            }
+//            var_dump($arr);
             return $arr;
         }
         
@@ -975,7 +1007,7 @@ class Ord {
             }
             echo "<tr> <td colspan=6></td>
                     <td colspan=2>
-                        <button onclick='Menu();'>".t("Menu")."</button>
+                        <button onclick='Menu();'>".t("Menu")."ord.class line 978</button>
                         <input id=Edit_".$id." type=submit name=edit value='".t('Edit')."'>
                         <input id=Del_".$id." type=submit name=delete value='".t("DELETE")."'>
                         <input id=CBedit_".$id." type=checkbox name=CBedit_".$id." value='".t('wartość')."' />
@@ -1112,6 +1144,11 @@ class Ord {
         public function getCategoriesOfOrd(){
             sort($this->category);      //sortowanie alfabetyczne
             return $this->category;
+        }
+        
+        public function getOrdByGroup(){        // grupa czasowników lub rzeczowników
+//            return $this->group;
+            return $this->group_verb;
         }
         
         public function getRodzOfOrd(){

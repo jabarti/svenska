@@ -22,6 +22,9 @@ include 'buttons.php';
        
 if(isset($_POST)){
     ?><script>//alert("//24 w isset $_POST");</script><?php
+    echo "<br>POST:";
+    var_dump($_POST);
+    echo "<br>";
     if(isset($_POST['edit'])){
 //        ?><script>//alert("//26 w $_POST['edit']!=null");</script><?php
         if(isset($_POST['kategoria']) ){
@@ -169,6 +172,13 @@ if(isset($_POST)){
         }else{
             ?><script>alert("166 NIE skasowało");</script><?php
         } 
+    }
+    elseif(isset($_POST['copy'])){
+        ?><script>alert("Funkcjonalność w budowie");</script><?php
+        echo "<br>ID WORD: ".$_POST['id'];
+        echo '<br>copy';
+//        header("Location: index.php?copy_id=".$_POST['id']);
+//        header("Location: Edit.php");
     }
 }
 
