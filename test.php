@@ -258,7 +258,6 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
     <input id=clear name="clear" type="submit" value="<?php echo t('Clear score') ?>">
 </form>
 
-<br>
 <!--<button onclick="window.location.href='loger.php'">Wyloguj</button>-->
 
 <?php
@@ -270,9 +269,9 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
         echo "<p>";     
 //        echo "Pytanie: Do ".trans($key[0])." ( ".$key[1]." ) podaj ".trans($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
         if(trans($key[1])!= 'słowo PL')
-            echo t('Pytanie').": ".t('To jest')." ".trans($key[1])." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) ".t('podaj')." ".trans($key[3]).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
+            echo t('Pytanie').": ".t('To jest')." ".t(trans($key[1]))." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) ".t('podaj')." ".t(trans($key[3])).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
         else
-            echo t('Pytanie').": ".t('To jest')." ".trans($key[1])." ( <span class=green>".$key[2]."</span> ) ".t('podaj')." ".trans($key[3]).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
+            echo t('Pytanie').": ".t('To jest')." ".t(trans($key[1]))." ( <span class=green>".$key[2]."</span> ) ".t('podaj')." ".t(trans($key[3])).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
             echo "</p>";
     }
 

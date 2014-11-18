@@ -303,6 +303,14 @@ if(!isset($_GET['copy_id'])){
                         }
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
+
+                         // NIE DZIAŁA!!! 
+//                        foreach($OrdCat as $k =>$v){
+//                            echo "<br>OrdCat[$k]=$v ===>> ";
+//                            $OrdCat[$k] = t($v);
+//                            echo "PO <OrdCat[$k]=$v";
+//                        }
+
                         foreach($OrdCat as $k){
                             echo "<option value=$k>".t($k)."</option>";
                         }

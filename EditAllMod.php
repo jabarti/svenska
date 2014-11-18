@@ -8,6 +8,9 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
+/*
+ * NIE działa jeszcze przesyłanie kategorii - na razie jest zablokowany EDIT dla tego atrybutu!!!
+ */
 ob_start(); // żeby sie dało reloadeować
 
 require_once 'common.inc.php';
@@ -39,13 +42,22 @@ if(isset($_POST)){
             
             $arr1 = explode("&",$v0); //id_ord=jedzenie%2C+pokarm%2C+potrawa%2C+po%C5%BCywienie%2C+%C5%BCywno%C5%9B%C4%87
                
-            var_dump($arr1 );
-                
+            echo "<br>VarDump:";var_dump($arr1 );
+            
+            // Zamiana znaków z serializacji js na php  !ZNAKI!
             foreach($arr1 as $v1){
                 $v1 = str_replace('+'     ,' ' , $v1);
                 $v1 = str_replace('%3B'   ,';' , $v1);
                 $v1 = str_replace('%2C'   ,',' , $v1);
                 $v1 = str_replace('%3A'   ,':' , $v1);
+                $v1 = str_replace('%2B'   ,'+' , $v1);
+                $v1 = str_replace('%2F'   ,'/' , $v1);
+                $v1 = str_replace('%3F'   ,'?' , $v1);
+                $v1 = str_replace('%40'   ,'@' , $v1);
+                $v1 = str_replace('%3C'   ,'<' , $v1);
+                $v1 = str_replace('%3E'   ,'>' , $v1);
+                $v1 = str_replace('='     ,'|!|!|' , $v1); // Zastępuje znak podziału, żeby można podmienić =
+                $v1 = str_replace('%3D'   ,'=' , $v1); 
                 
                 $v1 = str_replace("'"     ,"\"" , $v1);
                 $v1 = str_replace("%22"   ,"\"" , $v1);
@@ -69,7 +81,7 @@ if(isset($_POST)){
                 $v1 = str_replace('%C3%A5','å' , $v1);
                 $v1 = str_replace('%C3%85','Å' , $v1);
                 
-                $arr2 = explode("=",$v1);
+                $arr2 = explode("|!|!|",$v1);
 
                 array_push($arr_fin, $arr2);
                 
@@ -85,6 +97,9 @@ if(isset($_POST)){
                     $id = $arr_fin[$i][1];
                 else if($i == $len-1)
                     $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."' ";
+                else if($i == $len-2)   // blokada nadpisywania kategorii!!!
+//                    $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."' ";
+                    continue;
                 else
                     $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."', ";
             }

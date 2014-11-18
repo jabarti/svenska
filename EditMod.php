@@ -118,11 +118,11 @@ if(isset($_POST)){
             }
 //            header("Location: Edit.php");
 //            header("Location: Edit.php?sercz_id=".$curr_word_id);
-            ?><script>//alert("//116 NIE WESZŁO do BD");</script><?php
+            ?><script>//alert("//121 NIE WESZŁO do BD");</script><?php
         } else {
             echo "<br> ERROR MYSQLA (żadnej zmiany!!!): ".$sql_text;
-             ?><script>alert("121 NIE WESZŁO do BD: mysql_affected_rows() == false");</script><?php
-//             header("Location: Edit.php?sercz_id=".$curr_ord_id); 
+             ?><script>alert("124 NIE WESZŁO do BD: mysql_affected_rows() == false");</script><?php
+             header("Location: Edit.php?sercz_id=".$curr_ord_id); 
         } 
     }
     elseif(isset($_POST['delete'])){
@@ -157,7 +157,7 @@ if(isset($_POST)){
             }
         }
         $sql_text .= " WHERE `ord`.`id` ='".$id."' AND id_ord='".$id_ord."';";
-        $sql_textPLLH .= " WHERE `ordLH`.`id` ='".$id."' AND id_ord='".trans($id_ord)."';";
+        $sql_textPLLH .= " WHERE `ordLH`.`id` ='".$id."' AND id_ord='".trans($id_ord)."';"; // ?? t(trans())????
 //        echo '<br>SQL: '.$sql_text;
 //        echo '<br>SQL: '.$sql_textPLLH;
 

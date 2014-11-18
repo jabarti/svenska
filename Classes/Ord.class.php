@@ -70,7 +70,7 @@ class Ord {
 //    private $category = array(  'brak', 'abstr.',
     private $category = array(  'abstr.','mitologia',
                                 'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia',
-                                'przyroda','wiara','nauka','medycyna','geografia','matematyka','informatyka','polityka',
+                                'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka',
                                 'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
                                 'gramatyka','pytajnik','idiom','zart','wulgarne','uzupelnic');
@@ -353,8 +353,9 @@ class Ord {
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
-                                    'present_participle', 'past_participle', 
-                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
+                                    // JESZCZE NIE
+//                                    'present_participle', 'past_participle', 
+//                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
                                     ); 
                     break;
                 
@@ -443,9 +444,11 @@ class Ord {
                 case 'verb':            // czasownik
 //                    $tab = Array(   'id_ord', 'grupa', 'trans', 
                     $tab = Array(   'id_ord', 'trans', 
-                                    'infinitive', 'presens', 'past', 'supine', 'imperative', 
-                                    'present_participle', 'past_participle', 
-                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
+                                    //'infinitive', 
+                                    'presens', 'past', 'supine', 'imperative', 
+                                    // JESZCZE NIE
+//                                    'present_participle', 'past_participle', 
+//                                    'pas_infinitive', 'pas_presens', 'pas_preterite', 'pas_supine', 'pas_imperative'
                                 ); 
                     break;
                 
@@ -1143,6 +1146,7 @@ class Ord {
         }
         
         public function getCategoriesOfOrd(){
+//            sort(t($this->category));      //sortowanie alfabetyczne t() nie działa
             sort($this->category);      //sortowanie alfabetyczne
             return $this->category;
         }
