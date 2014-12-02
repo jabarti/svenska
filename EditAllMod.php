@@ -58,6 +58,9 @@ if(isset($_POST)){
                 $v1 = str_replace('%3E'   ,'>' , $v1);
                 $v1 = str_replace('='     ,'|!|!|' , $v1); // Zastępuje znak podziału, żeby można podmienić =
                 $v1 = str_replace('%3D'   ,'=' , $v1); 
+                $v1 = str_replace('%5E'   ,'^' , $v1); 
+                $v1 = str_replace('%0D%0A'   ,'ENTER' , $v1); 
+                
                 
                 $v1 = str_replace("'"     ,"\"" , $v1);
                 $v1 = str_replace("%22"   ,"\"" , $v1);

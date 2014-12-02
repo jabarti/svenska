@@ -61,7 +61,7 @@ class Ord {
                                 'verb:g3_kort_r/dd,tt','verb:g4_starka',
 //                                'noun_or','noun_ar','noun_er','noun__');
                                 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
-                                'noun:gr4_n+a','noun:gr5___+en/na');
+                                'noun:gr4_n+a','noun:gr5___+en/na','b.lm.');
 
     private $group_verb =   array(  '',
                                 'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx',
@@ -69,7 +69,7 @@ class Ord {
     
 //    private $category = array(  'brak', 'abstr.',
     private $category = array(  'abstr.','mitologia',
-                                'ludzie','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia',
+                                'ludzie','rodzina','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia',
                                 'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka',
                                 'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
@@ -453,7 +453,8 @@ class Ord {
                     break;
                 
                 case 'adjective':       // przymiotnik   
-                    $tab = Array(   'id_ord', 'typ', 'trans', 
+                    $tab = Array(   'id_ord', //'typ', 
+                                    'trans', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                 ); 
                     break;
@@ -1031,7 +1032,7 @@ class Ord {
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
-            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$this->getCountSimOrdByIdOrd($text, false)."</span> podobnych wyników:<th><tr>";
+            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$this->getCountSimOrdByIdOrd($text, false)."</span> ".t('podobnych wyników').":<th><tr>";
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
@@ -1066,7 +1067,7 @@ class Ord {
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
-            echo "<tr><th colspan=4>Jest <span class=red>".$this->getCountSimOrdByIdOrd($text, 'trans')."</span> podobnych wyników:<th><tr>";
+            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$this->getCountSimOrdByIdOrd($text, 'trans')."</span> ".t('podobnych wyników').":<th><tr>";
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){

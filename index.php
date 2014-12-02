@@ -140,21 +140,21 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("infinitive"); ?><br>(infinitive)</td>
-                <td><input id='in1' name='infinitive' value="<?php echo $mfa['infinitive']?$mfa['infinitive']:''; ?>"></td>
+                <td><input id='infinitive' name='infinitive' value="<?php echo $mfa['infinitive']?$mfa['infinitive']:''; ?>"></td>
                 <td class='label'><?php echo t("present"); ?><br>(present)</td>
-                <td><input id='in1' name='presens' value="<?php echo $mfa['presens']?$mfa['presens']:''; ?>"></td>
+                <td><input id='presens' name='presens' value="<?php echo $mfa['presens']?$mfa['presens']:''; ?>"></td>
                 <td class='label'><?php echo t("past"); ?><br>(past)</td>
-                <td><input id='in1' name='past' value="<?php echo $mfa['past']?$mfa['past']:''; ?>"></td>
+                <td><input id='past' name='past' value="<?php echo $mfa['past']?$mfa['past']:''; ?>"></td>
                 <td class='label'><?php echo t("supine"); ?><br>(supine)</td>
-                <td><input id='in1' name='supine' value="<?php echo $mfa['supine']?$mfa['supine']:''; ?>"></td>
+                <td><input id='supine' name='supine' value="<?php echo $mfa['supine']?$mfa['supine']:''; ?>"></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("imperative"); ?><br>(imperative)</td>
-                <td><input id='in1' name='imperative' value="<?php echo $mfa['imperative']?$mfa['imperative']:''; ?>"></td>
+                <td><input id='imperative' name='imperative' value="<?php echo $mfa['imperative']?$mfa['imperative']:''; ?>"></td>
                 <td class='label'><?php echo t("present participle"); ?> <br>(present participle)</td>
-                <td><input id='in1' name='present_participle' value="<?php echo $mfa['present_participle']?$mfa['present_participle']:''; ?>"></td>
+                <td><input id='present_participle' name='present_participle' value="<?php echo $mfa['present_participle']?$mfa['present_participle']:''; ?>"></td>
                 <td class='label'><?php echo t("past participle"); ?> <br>(past participle)</td>
-                <td><input id='in1' name='past_participle' value="<?php echo $mfa['past_participle']?$mfa['past_participle']:''; ?>"></td>
+                <td><input id='past_participle' name='past_participle' value="<?php echo $mfa['past_participle']?$mfa['past_participle']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             
@@ -204,7 +204,7 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("Single indefinite");?><br>(Single indefinite)</td>
-                <td><input id='in1' name='S_indefinite' value="<?php echo $mfa['S_indefinite']?$mfa['S_indefinite']:''; ?>"></td>
+                <td><input id='S_indefinite' name='S_indefinite' value="<?php echo $mfa['S_indefinite']?$mfa['S_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Single definite");?><br>(Single definite)</td>
                 <td><input id='in1' name='S_definite' value="<?php echo $mfa['S_definite']?$mfa['S_definite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural indefinite");?><br>(Plural indefinite)</td>
@@ -228,21 +228,21 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("neuter"); ?> <br>(neuter)</td>
-                <td><input id='in1' name='neuter' value="<?php echo $mfa['neuter']?$mfa['neuter']:''; ?>"></td>
+                <td><input id='neuter' name='neuter' value="<?php echo $mfa['neuter']?$mfa['neuter']:''; ?>"></td>
                 <td class='label'><?php echo t("masculin"); ?> <br>(masculin)</td>
-                <td><input id='in1' name='masculin' value="<?php echo $mfa['masculin']?$mfa['masculin']:''; ?>"></td>
+                <td><input id='masculin' name='masculin' value="<?php echo $mfa['masculin']?$mfa['masculin']:''; ?>"></td>
                 <td class='label'><?php echo t("plural"); ?> <br>(plural)</td>
-                <td><input id='in1' name='plural' value="<?php echo $mfa['plural']?$mfa['plural']:''; ?>"></td>
+                <td><input id='plural' name='plural' value="<?php echo $mfa['plural']?$mfa['plural']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             <tbody id='stopniowanie' class='nobordtop'>
             <tr>
                 <td  class='label'><?php echo t("positive"); ?> <br>(positive)</td>
-                <td><input id='in1' name='st_rowny' value="<?php echo $mfa['st_rowny']?$mfa['st_rowny']:''; ?>"></td>
+                <td><input id='st_rowny' name='st_rowny' value="<?php echo $mfa['st_rowny']?$mfa['st_rowny']:''; ?>"></td>
                 <td  class='label'><?php echo t("comparative"); ?> <br>(comparative)</td>
-                <td><input id='in1' name='st_wyzszy' value="<?php echo $mfa['st_wyzszy']?$mfa['st_wyzszy']:''; ?>"></td>
+                <td><input id='st_wyzszy' name='st_wyzszy' value="<?php echo $mfa['st_wyzszy']?$mfa['st_wyzszy']:''; ?>"></td>
                 <td  class='label'><?php echo t("superlative"); ?> <br>(superlative)</td>
-                <td><input id='in1' name='st_najwyzszy' value="<?php echo $mfa['st_najwyzszy']?$mfa['st_najwyzszy']:''; ?>"></td>
+                <td><input id='st_najwyzszy' name='st_najwyzszy' value="<?php echo $mfa['st_najwyzszy']?$mfa['st_najwyzszy']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             <tr>
@@ -321,7 +321,7 @@ if(!isset($_GET['copy_id'])){
             </tr>
             <tr>
                 <td colspan='5'></td>
-                <td colspan='2'><input type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
+                <td colspan='2'><input id=resetFormIndex type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
                 <td><input type='submit' name=submit id='but1' value='<?php echo t("Zapisz do Bazy"); ?>'></input></td>
             </tr>
     

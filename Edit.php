@@ -290,7 +290,7 @@ while($row = mysql_fetch_assoc($mq)){
         }
         
         if($k == 'typ'){
-            echo "<td>".$k."</td><td>";
+            echo "<td>".t($k)."</td><td>";
             echo "<select name='".$k."'>";
                     if($v != '')
 //                       echo" <option value=".$v.">".trans($v)." TU(".t("zapisane").")</option>"; 
@@ -311,7 +311,7 @@ while($row = mysql_fetch_assoc($mq)){
              echo "</td>";
         }  
         elseif($k == 'rodzaj'){
-            echo "<td>".$k."</td><td>";
+            echo "<td>".t($k)."</td><td>";
         
             echo "      <select id=rodzaj name='rodzaj'>";
                         if($v != '')
@@ -326,7 +326,8 @@ while($row = mysql_fetch_assoc($mq)){
             echo "</td>";            
         }
         elseif($k == 'grupa'){
-            echo "<td>".t($k)."</td><td>";
+//            echo "<td>".t($k)."</td><td>";
+            echo "<td>".t("lab_grupa")."</td><td>";
         
             echo "      <select id=grupa name='grupa'>";
                     if($v != '')
@@ -341,7 +342,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "</td>";            
         }
         elseif($k == 'kategoria'){
-            echo "<td>".$k."</td><td colspan=4>";
+            echo "<td>".t($k)."</td><td colspan=4>";
         
 //            echo "      <select id=kategoria name='kategoria'>";
             echo "      <select id=kategoria".$curr_word_id."  class=kateg>";
@@ -363,7 +364,7 @@ while($row = mysql_fetch_assoc($mq)){
         }
         elseif($k == 'uwagi'){
             echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
-                echo "<td>".$k."</td>";
+                echo "<td>".t($k)."</td>";
                 echo "<td colspan=7>";
                     echo "<textarea d=uwagi_ta class=uwagi_ta name=".$k." >".$v."</textarea>";
                 echo "</td>";
@@ -371,13 +372,13 @@ while($row = mysql_fetch_assoc($mq)){
             break;
         }
         elseif($k == 'id'){
-            echo "<td>".$k."</td><td><input id='id".$curr_word_id."' name=".$k." value='".$v."' readonly></td>";
+            echo "<td>".t($k)."</td><td><input id='id".$curr_word_id."' name=".$k." value='".$v."' readonly></td>";
         }
         else{
             if(strlen($v)<21){
-                echo "<td>".$k."</td><td><input name=".$k." value='".$v."'></td>";
+                echo "<td>".t($k)."</td><td><input name=".$k." value='".$v."'></td>";
             } else {
-                echo "<td>".$k."</td><td><textarea rows=1 cols=15 name=".$k." >".$v."</textarea></td>";
+                echo "<td>".t($k)."</td><td><textarea rows=1 cols=15 name=".$k." >".$v."</textarea></td>";
             }
         }
         

@@ -338,7 +338,20 @@ $(document).ready(function(){
 
 var nID = 0;
 
+// Ta funkcja złuży do auto uzupełniania pól dla ADJECTIV
+function autoAdjectiv(trans) {
+    $('#neuter').val(trans+'t');
+    $('#masculin').val(trans+'e');
+    $('#plural').val(trans+'a');
+    $('#st_rowny').val(trans);
+    $('#st_wyzszy').val(trans+'are');
+    $('#st_najwyzszy').val(trans+'ast, '+trans+'aste');
+}
+
 $(document).ready(function(){ 
+    $('#resetFormIndex').click(function(){  // po kliknięciu "Wyczyść formularz usówa powiązania (bind)
+        $('#trans').unbind();
+    }),
     
     $('button.butt_diak').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
         var letter = $(this).attr('value')  // pobranie vartości klawisza klikniętego (literka np.: ą, ć itd
@@ -371,8 +384,11 @@ $(document).ready(function(){
 //                }              
 //            });
 //    });
-    $('#typ').change(function(){
+
+    $('#typ').change(function(){        // Po zmianie typu nastepuje m.in. powiązanie różnych autouzupełnienć do pola "trans"
+        $('#trans').unbind();
         var typ_val = $('#typ').val();
+        console.log("TYP: "+typ_val);
         switch(typ_val){
             case 'hjalp_verb':
             case 'modal_verb':
@@ -380,8 +396,96 @@ $(document).ready(function(){
             case 'verb':
                 $('#rodzaj').val('att');
                 break;
+            case 'noun':    // tutaj robimy (NIE SKOŃCZONE!!!) obsługę autouzupełniania.
+                 $('#rodzaj').change(function(){
+                     var rodzaj_val = $('#rodzaj').val().toString();
+                     var S_indefinite = $('#S_indefinite').val().toString();
+                     console.log('rodzaj_val:   '+rodzaj_val);
+                     console.log('S_indefinite: '+S_indefinite);
+                     
+                     switch(rodzaj_val){
+                         case 'en':
+                             if(S_indefinite == ''){
+                                $('#S_indefinite').val('en');
+                             }else{
+                                var arr = S_indefinite.split(' ')
+                                switch(arr[0]){     // sprawdzanie czy już cos nie stoii tam jako rodzajnik!
+                                    case 'ett':
+                                        var text = S_indefinite.substring(4);    // czyli to co jest poza ett lub en
+                                        console.log('text: '+text);
+                                         $('#S_indefinite').val('en '+text);
+                                        break;
+                                    case 'en':
+//                                        $('#S_indefinite').val(S_indefinite+'OK');
+                                        break;
+                                    case 'en/ett':
+                                        var text = S_indefinite.substring(6);   // czyli to co jest poza ett lub en
+                                        $('#S_indefinite').val('en'+ text);
+                                        break;
+                                    default:
+                                        $('#S_indefinite').val('en '+S_indefinite); 
+                                        break;
+                                }
+                             }
+                             break;
+                         case 'ett':
+                             if(S_indefinite == ''){
+                                $('#S_indefinite').val('ett');
+                             }else{
+                                var arr = S_indefinite.split(' ')
+                                switch(arr[0]){      // sprawdzanie czy już cos nie stoii tam jako rodzajnik!
+                                    case 'en':
+                                        var text = S_indefinite.substring(3);    // czyli to co jest poza ett lub en
+                                        console.log('text: '+text);
+                                         $('#S_indefinite').val('ett '+text);
+                                        break;
+                                    case 'ett':
+//                                        $('#S_indefinite').val(S_indefinite+'OK');
+                                        break;
+                                    case 'en/ett':
+                                        var text = S_indefinite.substring(6); // czyli to co jest poza ett lub en
+                                        $('#S_indefinite').val('ett'+ text);
+                                        break;
+                                    
+                                    default:
+                                        $('#S_indefinite').val('ett '+S_indefinite); 
+                                        break;
+                                }
+                             }
+                             break;
+
+                         default:
+                             if(S_indefinite == ''){
+                                $('#S_indefinite').val('en/ett');
+                             }else{
+                                $('#S_indefinite').val('en/ett '+S_indefinite); 
+                             }
+                             break
+                     }
+                 });
+                
+                break;
+            case 'adjective':
+                console.log('typ_val:'+typ_val)
+//                $('#rodzaj').val('att');
+//                $('#trans').keypress(function(){
+                $('#trans').bind({
+                    'change':function(){  // AUTOUZUPEŁNIANIE pól przymiotnika
+                        var trans = $('#trans').val();
+                        console.log('trans: '+trans+'/ntyp_val'+typ_val);
+                        autoAdjectiv(trans); 
+
+                        },
+                    'keyup': function(){  // AUTOUZUPEŁNIANIE pól przymiotnika
+                        var trans = $('#trans').val();
+                        console.log('trans: '+trans);
+                        autoAdjectiv(trans); 
+                    }
+                });
+                break;
             default:
                 $('#rodzaj').val('');
+                $('#trans').unbind();
                 break;
         }
     });
