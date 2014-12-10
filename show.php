@@ -46,7 +46,7 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
 //    if($_SESSION['irreg'] == true){
     $mr = $word->getDBAll();
 //    $SQL = sprintf("SELECT * FROM `ord` WHERE (`grupa` = 'irregular' OR `grupa` = 'modal_verb') AND `typ` != 'noun';");
-    $SQL = sprintf("SELECT * FROM `ord` WHERE (`grupa` = 'irregular' OR `grupa`='verb:g4_starka' OR `typ` = 'modal_verb') AND `typ` != 'noun';");
+    $SQL = sprintf("SELECT * FROM `ord` WHERE (`grupa` = 'irregular' OR `grupa`='verb:g4_starka' OR `grupa`='verb:gr4_starka' OR `typ` = 'modal_verb') AND `typ` != 'noun';");
     $irreg = 'checked';
 //    }
 }else{

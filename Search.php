@@ -21,7 +21,7 @@ if($isEdit){
 }else{
     $isEdit = "target='_blank'";
 }
-    
+
 echo "<div id=movingsearch class=movingsearch>";     
 //echo "<form action='Edit.php' ".$isEdit." method=post>
 //        <select name='sort'>";
@@ -71,17 +71,21 @@ echo "<div id=movingsearch class=movingsearch>";
 //      </form>";
 
 echo "<form action='Edit.php' ".$isEdit." method=post>
-        <input id='sercz'     type='text' name='sercz'>
+        <input id='sercz'     type='text' name='sercz' <!--value='".$_SESSION['serczCONST']."'-->
         <input id='sercz_btn' type='submit' value='".t("Szukaj podobnych")."'></input>
         <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
         <br>  ".t("Tip: use")." '%' ".t("for string of unknown symbols/letters")."</span>
       </form>";
-echo "<form action='Edit.php' ".$isEdit." method=post>
-        <input id='sercz_dok'     type='text' name='sercz_dok'>
+echo "<form action='Edit.php' ".$isEdit." method=post> 
+        <input id='sercz_dok'     type='text' name='sercz_dok' <!--value='".$_SESSION['serczCONST_dok']."'--> 
         <input id='sercz_dok_btn' type='submit' value='".t("Szukaj dokładnie")."'></input>
+        <!--input id='resetFormIndex' type='reset' value='".t("Wyczyść wszystko")."'></input-->
       </form>";
 //echo "<form action='Eraser.php' ".$isEdit." method=post>
 //        <input id='erase_btn' type='submit' value='".t("Wyczyść wszystko")."'></input>
+//      </form>";
+//echo "<form action='Edit.php' method=post>
+//        <input id='erase_btn' type='submit' name='erase' value='".t("Wyczyść wszystko")."'></input>
 //      </form>";
 echo "</div>";
 

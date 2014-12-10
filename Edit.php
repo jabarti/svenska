@@ -40,11 +40,15 @@ if(isset($_GET['sercz_id'])){
 
 if (isset($_POST['sercz'])){
         $_SESSION['sercz']=$_POST['sercz'];
+        $_SESSION['serczCONST']=$_POST['sercz'];  // będzie wyświetlone w oknie sercza      
+        unset($_SESSION['serczCONST_dok']);  // będzie usunięte z wyświetlania w oknie sercza      
         unset($_SESSION['sercz_dok']);
         unset($_SESSION['urls']);
 }
 if(isset($_POST['sercz_dok'])){
         $_SESSION['sercz_dok'] = $_POST['sercz_dok'];
+        $_SESSION['serczCONST_dok'] = $_POST['sercz_dok'];
+        unset($_SESSION['serczCONST']);  // będzie usunięte z wyświetlania w oknie sercza  
         unset($_SESSION['sercz']);
         unset($_SESSION['urls']);
 }
@@ -390,7 +394,7 @@ while($row = mysql_fetch_assoc($mq)){
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>";
 //        echo "          <button onclick='Menu();'>".t("Menu")."</button>
-        echo "          <input id=Copy_".$curr_word_id." type=submit name=copy value='".t('Copy')."'>";
+        echo "          <input id=Copy_".$curr_word_id." type=submit formtarget='_blank' name=copy value='".t('Copy')."'>";
         echo "          <input id=Edit_".$curr_word_id." type=submit name=edit value='".t('Edit')."'>";
 //                        <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$id." value='".t('wartość')."' disabled />
         echo "          <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$curr_word_id." value='".$curr_word_id."' disabled />

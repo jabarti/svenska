@@ -57,15 +57,16 @@ class Ord {
     
     private $group =    array(  '',
 //                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
-                                'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx',
-                                'verb:g3_kort_r/dd,tt','verb:g4_starka',
+                                'verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
+                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka',
 //                                'noun_or','noun_ar','noun_er','noun__');
                                 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
-                                'noun:gr4_n+a','noun:gr5___+en/na','b.lm.');
+                                'noun:gr4_n+a','noun:gr5___+en/na','noun:b.lm.','noun:nieregularny',
+                                'nieodmienny','bez stopniowania');
 
     private $group_verb =   array(  '',
-                                'verb:g1_ar','verb:g2A_er/de','verb:g2B_er/te_ptksx',
-                                'verb:g3_kort_r/dd,tt','verb:g4_starka');
+                                'verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
+                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka');
     
 //    private $category = array(  'brak', 'abstr.',
     private $category = array(  'abstr.','mitologia',
@@ -73,7 +74,7 @@ class Ord {
                                 'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka',
                                 'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
-                                'gramatyka','pytajnik','idiom','zart','wulgarne','uzupelnic');
+                                'gramatyka','pytajnik','idiom','zart','wulgarne','potoczne','uzupelnic');
     
 
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 

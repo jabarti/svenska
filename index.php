@@ -115,7 +115,7 @@ if(!isset($_GET['copy_id'])){
                             echo "<option value='".$mfa['grupa']."'>".t($mfa['grupa'])."</option>";
                         }
                         foreach($OrdCat as $k){
-                            echo "<option value=$k>".t($k)."</option>";
+                            echo "<option value='".$k."'>".t($k)."</option>";
                         }
                         ?>
                     </select>
@@ -169,17 +169,17 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("Passive infinitive"); ?> <br>(Passive infinitive)</td>
-                <td><input id='in1' name='pas_infinitive' value="<?php echo $mfa['pas_infinitive']?$mfa['pas_infinitive']:''; ?>"></td>
+                <td><input id='pas_infinitive' name='pas_infinitive' value="<?php echo $mfa['pas_infinitive']?$mfa['pas_infinitive']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive present"); ?> <br>(Passive present)</td>
-                <td><input id='in1' name='pas_presens' value="<?php echo $mfa['pas_presens']?$mfa['pas_presens']:''; ?>"></td>
+                <td><input id='pas_presens' name='pas_presens' value="<?php echo $mfa['pas_presens']?$mfa['pas_presens']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive past"); ?> <br>(Passive past)</td>
-                <td><input id='in1' name='pas_preterite' value="<?php echo $mfa['pas_preterite']?$mfa['pas_preterite']:''; ?>"></td>
+                <td><input id='pas_preterite' name='pas_preterite' value="<?php echo $mfa['pas_preterite']?$mfa['pas_preterite']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive supine"); ?> <br>(Passive supine)</td>
-                <td><input id='in1' name='pas_supine' value="<?php echo $mfa['pas_supine']?$mfa['pas_supine']:''; ?>"></td>
+                <td><input id='pas_supine' name='pas_supine' value="<?php echo $mfa['pas_supine']?$mfa['pas_supine']:''; ?>"></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("Passive imperative"); ?> <br>(Passive imperative)</td>
-                <td><input id='in1' name='pas_imperative' value="<?php echo $mfa['pas_imperative']?$mfa['pas_imperative']:''; ?>"></td>
+                <td><input id='pas_imperative' name='pas_imperative' value="<?php echo $mfa['pas_imperative']?$mfa['pas_imperative']:''; ?>"></td>
 <!--                <td class='label'>P_present_participle</td>
                 <td><input id='in1' name='pas_present_participle'></td>
                 <td class='label'>P_past_participle</td>
@@ -206,11 +206,11 @@ if(!isset($_GET['copy_id'])){
                 <td class='label'><?php echo t("Single indefinite");?><br>(Single indefinite)</td>
                 <td><input id='S_indefinite' name='S_indefinite' value="<?php echo $mfa['S_indefinite']?$mfa['S_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Single definite");?><br>(Single definite)</td>
-                <td><input id='in1' name='S_definite' value="<?php echo $mfa['S_definite']?$mfa['S_definite']:''; ?>"></td>
+                <td><input id='S_definite' name='S_definite' value="<?php echo $mfa['S_definite']?$mfa['S_definite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural indefinite");?><br>(Plural indefinite)</td>
-                <td><input id='in1' name='P_indefinite' value="<?php echo $mfa['P_indefinite']?$mfa['P_indefinite']:''; ?>"></td>
+                <td><input id='P_indefinite' name='P_indefinite' value="<?php echo $mfa['P_indefinite']?$mfa['P_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural definite"); ?><br>(Plural definite)</td>
-                <td><input id='in1' name='P_definite' value="<?php echo $mfa['P_definite']?$mfa['P_definite']:''; ?>"></td>
+                <td><input id='P_definite' name='P_definite' value="<?php echo $mfa['P_definite']?$mfa['P_definite']:''; ?>"></td>
             </tr>
             <tr>
                 <td><br></td>

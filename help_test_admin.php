@@ -355,7 +355,7 @@ if($Word = new Ord()){
     $arr2 = $Word->getQuestionIDsArrByType("verb");       
     $arr3 = $Word->getQuestionIDsArrByType("hjalp_verb");       
     $arr4 = $Word->getQuestionIDsArrByType(false);      
-    
+     
     var_dump($arr4);
     $max = count($arr4)-1;
     $rand_index = mt_rand(0, $max);
@@ -440,4 +440,17 @@ setInterval(function() {
 }, 1000);
     </script>
 <?php
+
+    $SQL = "SELECT id, trans, past_participle FROM `ord` WHERE `past_participle` LIKE '%en';";
+    echo "<br>SQL = $SQL<br>";
     
+    $mq = mysql_query($SQL);
+    $arr = array();
+    if(mysql_affected_rows()){
+        while($arr = mysql_fetch_assoc($mq)){
+            echo '<br>';
+            foreach($arr as $k => $v)
+                echo "| $k => $v";
+        }
+
+    }
