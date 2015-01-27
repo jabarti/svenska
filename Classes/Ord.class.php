@@ -58,11 +58,11 @@ class Ord {
     private $group =    array(  '',
 //                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
                                 'verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
-                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka',
+                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel',
 //                                'noun_or','noun_ar','noun_er','noun__');
                                 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
                                 'noun:gr4_n+a','noun:gr5___+en/na','noun:b.lm.','noun:nieregularny',
-                                'nieodmienny','bez stopniowania');
+                                'mer/mest', 'nieodmienny','bez stopniowania');
 
     private $group_verb =   array(  '',
                                 'verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
@@ -71,7 +71,7 @@ class Ord {
 //    private $category = array(  'brak', 'abstr.',
     private $category = array(  'abstr.','mitologia',
                                 'ludzie','rodzina','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia',
-                                'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka',
+                                'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka','sztuka',
                                 'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
                                 'gramatyka','pytajnik','idiom','zart','wulgarne','potoczne','uzupelnic');
@@ -256,6 +256,7 @@ class Ord {
                 case 'hjalp_verb':
                 case 'modal_verb':
                 case 'partikelverb':
+                case 'reflexivaverb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'typ', 'rodzaj', 'grupa', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -351,6 +352,7 @@ class Ord {
                 case 'hjalp_verb':
                 case 'modal_verb':
                 case 'partikelverb':
+                case 'reflexivaverb':
                 case 'verb':            // czasownik
                     $tab = Array(   'id_ord', 'trans', 
                                     'infinitive', 'presens', 'past', 'supine', 'imperative', 
@@ -442,6 +444,7 @@ class Ord {
                 case 'hjalp_verb':
                 case 'modal_verb':
                 case 'partikelverb':
+                case 'reflexivaverb':       
                 case 'verb':            // czasownik
 //                    $tab = Array(   'id_ord', 'grupa', 'trans', 
                     $tab = Array(   'id_ord', 'trans', 
@@ -567,7 +570,7 @@ class Ord {
             $arr = array();
             $tempSQL = "SELECT id FROM `".$this->table."`";
             if($type == 'verb'){
-                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb';";
+                $tempSQL .= " WHERE `typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb' OR `typ`='reflexivaverb';";
 //                $tempSQL .= " WHERE `typ` LIKE '%verb';"; // ? adverb!
             }elseif($type==false){
                 $tempSQL .=";";
@@ -596,7 +599,7 @@ class Ord {
 //            echo '<br>TYPE:'.$type.'<br>';
             $arr = array();
             $tempSQL = "SELECT id FROM `".$this->table."`";
-            $tempSQL .= " WHERE (`typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb') AND `grupa` = \"".$group."\";";            
+            $tempSQL .= " WHERE (`typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb' OR `typ`='reflexivaverb') AND `grupa` = \"".$group."\";";            
 //            $tempSQL .= " WHERE `typ` LIKE '%verb' AND `grupa` = '".$group."';"; // ? adverb!
 
 //            echo "<br>".__FILE__.__LINE__.", SQL:".$tempSQL;
@@ -971,6 +974,7 @@ class Ord {
                             <option value='hjalp_verb'>czas. posiłkowy</option>
                             <option value='modal_verb'>czas. modalny</option>
                             <option value='partikelverb'>fraza czasownikowa</option>
+                            <option value='reflexivaverb'>czas. zwrotny</option>
                             <option value='adjective'>przymiotnik</option>
                             <option value='adverb'>przysłówek</option>
                             <option value='preposition'>przyimek</option>

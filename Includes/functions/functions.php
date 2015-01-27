@@ -104,6 +104,9 @@ function trans($var){       // działa w test.php do tłumaczenia pytań -dlateg
         case 'partikelverb':
             return "fraza czasownikowa";
             break;
+        case 'reflexivaverb':
+            return "czas. zwrotny";
+            break;
         case 'adjective':
             return "przymiotnik";
             break;

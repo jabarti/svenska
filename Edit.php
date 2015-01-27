@@ -221,6 +221,7 @@ $text1 .=$sort." ";
 //echo "<br>".__LINE__."SQL2:".$text1;
 
 $SQL_pag = $text1;
+//echo $SQL_pag;
 $mq1 = mysql_query($SQL_pag) or die (mysql_error());
 $row1 = mysql_fetch_array($mq1);
 //var_dump($row);
@@ -284,7 +285,7 @@ while($row = mysql_fetch_assoc($mq)){
     
     $curr_word_id = $row['id'];
     
-    echo "<table class=edit_table id ='ord_".$curr_word_id."'>";
+    echo "<table id ='ord_".$curr_word_id."' class='edit_table'>";
     echo "<form id='form_ord_".$curr_word_id."' method=".$method." action='EditMod.php' >";
     $j=0;
     foreach($row as $k=>$v){
@@ -297,8 +298,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".t($k)."</td><td>";
             echo "<select name='".$k."'>";
                     if($v != '')
-//                       echo" <option value=".$v.">".trans($v)." TU(".t("zapisane").")</option>"; 
-                       echo" <option value=".$v.">".t($v)." ( ".t("zapisane")." )</option>"; 
+                       echo" <option id='ord_types_".$curr_word_id."' value=".$v.">".t($v)." ( ".t("zapisane")." )</option>";  
           
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
@@ -317,7 +317,7 @@ while($row = mysql_fetch_assoc($mq)){
         elseif($k == 'rodzaj'){
             echo "<td>".t($k)."</td><td>";
         
-            echo "      <select id=rodzaj name='rodzaj'>";
+            echo "      <select id='rodzaj_".$curr_word_id."' name='rodzaj'>";
                         if($v != '')
                             echo "<option value='".$v."'>".$v." (".t("zapisane").")</option>";
                         
@@ -333,7 +333,7 @@ while($row = mysql_fetch_assoc($mq)){
 //            echo "<td>".t($k)."</td><td>";
             echo "<td>".t("lab_grupa")."</td><td>";
         
-            echo "      <select id=grupa name='grupa'>";
+            echo "      <select id='grupa_".$curr_word_id."' name='grupa'>";
                     if($v != '')
                         echo "<option value='".$v."'>".t($v)." (".t("zapisane").")</option>";
                     
@@ -349,7 +349,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<td>".t($k)."</td><td colspan=4>";
         
 //            echo "      <select id=kategoria name='kategoria'>";
-            echo "      <select id=kategoria".$curr_word_id."  class=kateg>";
+            echo "      <select id='kategoria_".$curr_word_id."'  class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." multiple='multiple' class=kateg>";
 //            echo "      <select id=kategoria".$curr_word_id." class='kat_edit_sel' multiple='multiple'  name='kategoria'>";
                 if($v !=''){
@@ -370,7 +370,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
                 echo "<td>".t($k)."</td>";
                 echo "<td colspan=7>";
-                    echo "<textarea d=uwagi_ta class=uwagi_ta name=".$k." >".$v."</textarea>";
+                    echo "<textarea id='uwagi_ta_".$curr_word_id."' class=uwagi_ta name=".$k." >".$v."</textarea>";
                 echo "</td>";
             echo "</tr>";
             break;
@@ -394,16 +394,18 @@ while($row = mysql_fetch_assoc($mq)){
         echo "<tr> <td colspan=6></td>
                     <td colspan=2>";
 //        echo "          <button onclick='Menu();'>".t("Menu")."</button>
+//        echo "          <button id=Fill_".$curr_word_id." type=button onclick='tryEditFill($curr_word_id)' >".t('Uzupełnij')."</button>";        
         echo "          <input id=Copy_".$curr_word_id." type=submit formtarget='_blank' name=copy value='".t('Copy')."'>";
         echo "          <input id=Edit_".$curr_word_id." type=submit name=edit value='".t('Edit')."'>";
 //                        <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$id." value='".t('wartość')."' disabled />
-        echo "          <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$curr_word_id." value='".$curr_word_id."' disabled />
-                        <input id=Del_".$curr_word_id." type=submit name=delete value='".t("DELETE")."'>                        
-                    </td>
+        echo "          <input id=CBedit_".$curr_word_id." class=edit_checkbox type=checkbox name=CBedit_".$curr_word_id." value='".$curr_word_id."' disabled />";
+        echo "          <input id=Del_".$curr_word_id." type=submit name=delete value='".t("DELETE")."'>                      ";  
+        echo "      </td>
               </tr>
               <tr><td colspan=8><textarea hidden form='edit_all' rows=5 cols=80 id='ta_ser_".$curr_word_id."' name='edit_all_".$curr_word_id."'></textarea></td></tr>
-        </form>
-        </table>";    
+        </form>";
+echo "</table>";  
+        
         
     $i++; //$id++;<tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
 }
