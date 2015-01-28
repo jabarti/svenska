@@ -13,6 +13,7 @@ include 'divLog.php';
 $title = 'Svenska | SynonymerMOD';
 include 'header.php';
 include 'buttons.php';
+include 'rozdzielacz.php';
 
 foreach($_POST as $k => $v){
     echo "POST['$k']=".$v.", ";

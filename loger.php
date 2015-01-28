@@ -60,7 +60,7 @@ if(isset($_POST) || isset($_GET)){
    } 
 //   echo "<br>Usr_pass: ".$Usr_pass;
 //   echo "<br>sha1(_POST['password']): ".sha1($_POST['password']);
-   if(isset($_POST['user']) && isset($_POST['password'])){   
+   if(isset($_POST['user']) && isset($_POST['password'])){
     if($_POST['user']==$Usr_name  && sha1($_POST['password'])==$Usr_pass){
 //    if(($_POST['user']=='Anetka' || $_POST['user']=='Barti') && $_POST['password']=='svenska'){
 //    if($_GET['user']=='Anetka' && $_GET['password']=='svenska'){

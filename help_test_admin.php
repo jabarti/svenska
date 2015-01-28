@@ -8,19 +8,13 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = 'Svenska | Help_Adm';
-//include 'header.php';
-////include 'flag.php';
-//include 'buttons.php';
-
 include 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Help_Adm';
 include 'header.php';
 include 'buttons.php';
+include 'rozdzielacz.php';
 
 if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();

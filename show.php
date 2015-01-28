@@ -15,6 +15,13 @@ $title = 'Svenska | Show/printer';
 include 'header.php';
 include 'buttons.php';
 
+if(isset($_SESSION['user']) && $_SESSION['user']=='Gosc'){
+    $gosc = true;
+    echo $_SESSION['user']." / $gosc";
+}else{
+    $gosc = false;
+}
+
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 
 $word = new Ord();
@@ -83,6 +90,8 @@ if(isset($_SESSION['cz_mov'])){
 //$SQL = sprintf("SELECT * FROM `ord`;");
 echo "<br>SQL: $SQL";
 $mq = mysql_query($SQL);
+
+
 ?>
 <form action="" method="post">
     <input type="checkbox" name="flat" value="flat"><?php echo t("płaskie"); ?>?
@@ -106,7 +115,10 @@ if(isset($_POST['sub_flat'])){
 
 echo "<table class=print>";
 echo "  <tr>";
-if(!$flat)
+
+$sum = (!$flat and !$gosc);     // ograniczenie: jak jest gość nie ma linków!!!
+
+if($sum)
 echo "      <th >".t("Link")."</th>";
 echo "      <th >".t("L.p.")."</th>
             <th >".t("Słowo PL")."</th>
@@ -125,7 +137,8 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
            if($attr < 6){
                if($attr == 0){
                    $id = $v;
-                   if(!$flat)
+//                   if(!$flat)
+                   if($sum)
                         echo "<td><a href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
                    echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
                }else{

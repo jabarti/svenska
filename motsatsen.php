@@ -15,6 +15,7 @@ include 'divLog.php';
 $title = 'Svenska | '.t("Przeciwieństwa");
 include 'header.php';
 include 'buttons.php';
+include 'rozdzielacz.php';
 
 if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();
