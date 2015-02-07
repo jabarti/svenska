@@ -18,11 +18,13 @@
 //foreach($_SESSION as $k => $v){
 //    echo "<br>SESSION $k => $v";
 //}
+//        echo "<br>".__FILE__.__LINE__." ROLE:".$_SESSION['role'];
+//        echo "<br>user:".$_SESSION['user'];
 
 if(isset($_SESSION['log'])){
 //    echo "<br>SESS[log] isset!!!";
     if($_SESSION['log'] == true){
-    echo "<div class=divLog>  ".t('Zalogowany jako').": ".$_SESSION['user']."";//." z hasłem: ". $_SESSION['password'];
+    echo "<div class=divLog>  ".t('Zalogowany jako').": ".$_SESSION['user']." (".$_SESSION['role'].")";//." z hasłem: ". $_SESSION['password'];
         echo "<span id=zegar></span><br>";
         echo "<span id=zegar_log style='visibility: block'></span>";
         echo "<br><button onclick=\"window.location.href='loger.php'\">".t("Wyloguj")."</button>";

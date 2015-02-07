@@ -322,7 +322,7 @@ echo 'linia: '.__LINE__.' =============================================<br>';
 echo $_SESSION['user'];
 
 //if(true){
-if($_SESSION['log'] == true && $_SESSION['user'] == 'Bartek'){   
+if($_SESSION['log'] == true && $_SESSION['role'] == 'admin'){   
     
 if($Random = new Random()){
     echo "<br>Random OK";

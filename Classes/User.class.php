@@ -12,8 +12,12 @@
 class User {
     
     private $id;
+    private $imie;
+    private $nazwisko;
     private $user;
     private $password;
+    private $publicKey;
+    private $rola;
     private $data;
     
     private $table = "login";
@@ -26,19 +30,24 @@ class User {
 //      $userArr = array($this->id, $this->user, $this->password, $this->data);
 
        
-    public function setData($user, $password){
+    public function setData($imie, $nazwisko, $user, $password){
 //    private function setData($user, $password){
         
         $t=time();
         $data = date("Y-m-d, H:i:s",$t);
         $sha_password = sha1($password);
+        $publicKey = 'TO DO!!'.  mt_rand().rand().srand();
+        
+//        echo "<br>".__FILE__.__LINE__." | PASS: $password, SHAPASS: $sha_password";
         
         if(!$this->getId($user)){
-            $SQL = sprintf("INSERT INTO `".$this->table."` (`user`, `password`, `data`)
-                                                    VALUES ('".$user."', '".$sha_password."', '".$data."');");
-//            echo "<br>SQL INSERT user: ".$SQL;
+
+            $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`, `data`)
+                                                    VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."', '".$data."');");
+            echo "<br>SQL INSERT user: ".$SQL;
             $mq = mysql_query($SQL);
-            if(mysql_affected_rows()){
+//            echo "<br>mysql_affected_rows():".mysql_affected_rows();
+            if(mysql_affected_rows()==1){
 //                echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" added.";
                 return true;
             }else{
@@ -53,10 +62,10 @@ class User {
     
 //    private function getId($user){
     public function getId($user){
-        $SQL = sprintf("SELECT id FROM `".$this->table."` WHERE user=\"".$user."\";");
+        $SQL = sprintf("SELECT `id` FROM `".$this->table."` WHERE user=\"".$user."\";");
 //        echo "<br>SQL".$SQL;
         $mq = mysql_query($SQL);
-        if(mysql_affected_rows()){
+        if(mysql_affected_rows()==1){
 //            echo '<br>mysql_affected_rows == true';
             $mr = mysql_result($mq,0);
         }else{
@@ -69,6 +78,21 @@ class User {
     
     public function getUserByName($user){
         $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE user=\"".$user."\";");
+        $mq = mysql_query($SQL);
+        
+        if(mysql_affected_rows()){
+            $row = mysql_fetch_row($mq);
+//            echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" loaded.";
+            return $row;
+        }else{
+            echo "<br>ERROR: User \"<span class=blue>".$user."</span>\" NOT added.";
+            return false;
+        }
+    }  
+    
+    public function getLogDataByUser($user){
+        $SQL = sprintf("SELECT user, password, PublicKey, rola FROM `".$this->table."` WHERE user=\"".$user."\";");
+//        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE user=\"".$user."\";");
         $mq = mysql_query($SQL);
         
         if(mysql_affected_rows()){

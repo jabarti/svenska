@@ -16,8 +16,17 @@
             $user = "nouser";
         }
         
-        switch ($user){
-            case 'Bartek':
+        if(isset($_SESSION['role'])){
+            $usr_role = $_SESSION['role'];
+        }else{
+            $usr_role = '';
+        }
+        
+//        echo "<br>".__FILE__.__LINE__." ROLE:".$_SESSION['role'];
+//        echo "<br>user:".$_SESSION['user'];
+        
+        switch ($usr_role){
+            case 'admin':
                 ?>
                     <a href="../../" class="myButton">localhost</a><br>
                     <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a><br>
@@ -32,7 +41,20 @@
                     <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats</a><br>
                 <?php
                 break;
-            case 'Anetka':
+            case 'user_plus':
+                ?>
+                    <a href="../../" class="myButton">localhost</a>
+                    <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>
+                    ====================
+                    <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
+                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
+                    <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
+                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
+                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
+                <?php
+                break;
+            case 'user':
                 ?>
                     <a href="../../" class="myButton">localhost</a>
                     <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>

@@ -45,13 +45,17 @@ function logTime(){
 }
  
 //wywołanie ma na celu eliminację opóźnienia sekundowego
+if(document.getElementById('zegar') && document.getElementById('zegar_log')){
 document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
 document.getElementById('zegar_log').innerHTML = "do wylogowania "+logTime();
+}
  
 setInterval(function() {
 // logTime();
+if(document.getElementById('zegar') && document.getElementById('zegar_log')){
     document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
     document.getElementById('zegar_log').innerHTML = "do wylogowania  "+logTime();
+    }
      
 }, 1000);
 
@@ -70,6 +74,13 @@ function start(){
 }
 
 $(document).ready(function(){
+    
+    $('#CreateUser').click(function(){
+        alert("TODO: Status DOING!");
+        window.location.href = "CreateUser.php"
+        
+    });
+    
     $("#typ").change(function(){
         var val = $(this).val();
         $("#ang_cz_m").html(val); // przypisanie tego czerwonego tlumaczenia nazwy części mowy
@@ -1174,7 +1185,6 @@ $(document).ready(function(){
        $('#sercz_dok').empty();
     });
     
-    
     $('table.edit_table').change(function(){ // W Edytuj wszystkie!
         var ID = $(this).attr('id');
         var pos1 = ID.search("_")
@@ -1208,7 +1218,7 @@ $(document).ready(function(){
         //alert("TODO: Status DOING!");
 //        $("#form_ord_"+49).trigger('submit')
     });
-    
+       
     // for this (like Kategory!!) select-option block =>dropdown-check-list.1.4.
 //    $("#div_edit").each(function(){$("select.kat_edit_sel").dropdownchecklist()});
     $("#kategoria_ins").dropdownchecklist({forceMultiple: true,

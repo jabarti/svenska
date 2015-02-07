@@ -10,10 +10,10 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-//include 'divLog.php';
+include 'divLog.php';
 $title = 'Svenska | Logger';
 include 'header.php';
-include 'buttons.php';
+//include 'buttons.php';
 
 //echo "<br>1Przybywasz z: ".$_SESSION['ref'];
 $match = strpos($_SERVER['HTTP_REFERER'], "loger.php");
@@ -27,7 +27,7 @@ if(!$match){
         $_SESSION['ref'] = $_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : "index.php";
     }
     
-echo "<br>Przybywasz z: ".$_SESSION['ref'];
+echo "<br><span>".t('Przybywasz z: ').$_SESSION['ref']."</span>";
 
 //$user_try = new User();
 //    echo "<br>set data user: "; var_dump($user_try->setData("Lolas", "svenska"));
@@ -48,27 +48,33 @@ if(isset($_POST) || isset($_GET)){
         $user = new User();
         
         if($user->getId($_POST['user'])){
-            $user_data = $user->getUserByName($_POST['user']);
-//            echo "<br>DB user data: ";var_dump($user_data);
-            $Usr_name = $user_data[1];
-            $Usr_pass = $user_data[2];
+//            $user_data = $user->getUserByName($_POST['user']);
+            $user_data = $user->getLogDataByUser($_POST['user']);
+            echo "<br>DB user data: ";var_dump($user_data);
+            $Usr_name = $user_data[0];      // user
+            $Usr_pass = $user_data[1];      // pass
+            $Usr_PubKey = $user_data[2];      // PublicKey
+            $Usr_role = $user_data[3];      // PublicKey
 
         }else{
             $Usr_name = 'empty';
             $Usr_pass = 'empty';
+            $Usr_PubKey = 'empty';
+            $Usr_role = 'empty';
         }
    } 
 //   echo "<br>Usr_pass: ".$Usr_pass;
 //   echo "<br>sha1(_POST['password']): ".sha1($_POST['password']);
    if(isset($_POST['user']) && isset($_POST['password'])){
     if($_POST['user']==$Usr_name  && sha1($_POST['password'])==$Usr_pass){
-//    if(($_POST['user']=='Anetka' || $_POST['user']=='Barti') && $_POST['password']=='svenska'){
-//    if($_GET['user']=='Anetka' && $_GET['password']=='svenska'){
-//        echo "<br>Jest w TRU: ".$_POST['user']." / ".$_POST['password'];
+        echo "<br>Jest w TRU: ".$_POST['user']." / ".$_POST['password'];
         $_SESSION['log'] = true;
-//        echo "Ustanawiam SESS[log] na true:".$_SESSION['log'] ;
+        echo "Ustanawiam SESS[log] na true:".$_SESSION['log'] ;
         $_SESSION['user'] = $_POST['user'] ? $_POST['user'] : $_GET['user'];
 //        $_SESSION['password'] = sha1($_POST['password']) ? sha1($_POST['password'] : $_GET['password'];
+        $_SESSION['role'] = $Usr_role;
+        
+        
         $_SESSION['arrOfAnsw'] = array();
         $_SESSION['good']=0;
         $_SESSION['bad']=0;
@@ -94,12 +100,17 @@ if(isset($_POST) || isset($_GET)){
         unset($_SESSION['log']);
         setcookie("log", '', time()-7200);
         $_SESSION['log'] = false; 
+        $_SESSION['role'] = '';
+        unset($_SESSION['role']);
     }
   } else {
 //        echo "<br>// faktyczne wylogowanie!!!!!!!!!!!!";
         unset($_SESSION['log']);
         setcookie("log", '', time()-7200);
         $_SESSION['log'] = false;
+        $_SESSION['role'] = '';
+        unset($_SESSION['role']);
+        
   }
 }else{
     echo "<br>Brak POST or GET!!!"."| File:".__FILE__.", line:".__LINE__;
@@ -109,11 +120,12 @@ if(isset($_POST) || isset($_GET)){
 //    echo "<br>SESS2: ";var_dump($_SESSION);
 
 ?>
-<body>
-    <h1> <?php echo t("Panel logowania"); ?> </h1>
-    
-    <form action="loger.php" method="post">
-        <table>
+<body> 
+    <form action="loger.php" method="post" enctype="multipart/form-data">
+        <table class='table_log' >
+            <tr>
+                <td colspan='2'><h1 class='table_log' style='text-align: center;'> <?php echo t("Panel logowania"); ?> </h1></td>
+            </tr>
             <tr>
                 <td><label for="user"><?php echo t("Użytkownik"); ?>:</td>
                 <!--<td><input id=user type="text" name="user" value="Bartek"></td>-->
@@ -135,8 +147,21 @@ if(isset($_POST) || isset($_GET)){
                 <!--<td><input id=pass type="hidden" name="password" value="" ></td>-->
             </tr>
             <tr>
+                <td><label for="pass"><?php echo t("PrivateKey"); ?>:</td>
+                <td><input type="file" name="fileToUpload" id="fileToUpload"></td>
+                <!--<td><input id=pass type="hidden" name="password" value="" ></td>-->
+            </tr>
+            <tr>
                 <td></td>
                 <td><input id=sub name=sub type="submit" value="<?php echo t("Zaloguj"); ?>"></td>
+            </tr>
+
+        <tr><td colspan='2'><?php echo t("OR"); ?></td><tr>
+        <?php //echo t("OR"); ?>
+
+            <tr>
+                <td><?php echo t("Create New User"); ?></td>
+                <td><button id='CreateUser' type="button" ><?php echo t("CreateUser"); ?></button></td>
             </tr>
         </table>
     </form>

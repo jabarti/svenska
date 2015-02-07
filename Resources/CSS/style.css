@@ -10,6 +10,16 @@ table {
     vertical-align: center;
 }
 
+.table_log {
+    background:cadetblue;
+    vertical-align: center;
+    margin-left: auto; 
+    margin-right: auto;
+    allign: center;
+    border-collapse: collapse;
+    border: none;
+}
+
 .uwagi_ta{
     background: lemonchiffon;
     /*vertical-align: middle;*/
