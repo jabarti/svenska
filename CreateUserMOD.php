@@ -22,6 +22,7 @@ if(isset($_POST)){
     $imie = $_POST['imie'];
     $nazwisko = $_POST['nazwisko'];
     $login = $_POST['login'];
+    $email = $_POST['email'];
     $haslo = $_POST['haslo'];
     $haslo2 = $_POST['haslo2'];  // TODO: zrobić walidację na poziomie CreateUser.php
     
@@ -55,7 +56,7 @@ if(isset($_POST)){
         echo __FILE__;
         try{
             $newUser = new User();
-            $newUser->setData($imie, $nazwisko, $login, $haslo);
+            $newUser->setData($imie, $nazwisko, $login, $haslo, $email);
 //            $output = exec('/home/bartilev/public_html/Svenska/Includes/dll/gp-gitc8c06bc.exe skrypt_01.gp');
         } catch (Exception $ex) {
             echo '<br>Caught exception: ',  $ex->getMessage(), "\n";

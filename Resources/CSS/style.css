@@ -20,6 +20,12 @@ table {
     border: none;
 }
 
+.UsrAdm_grey {
+/*    background: seashell;
+    background: #d0e4fe;*/
+    background: antiquewhite;
+}
+
 .uwagi_ta{
     background: lemonchiffon;
     /*vertical-align: middle;*/

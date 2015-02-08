@@ -27,12 +27,12 @@ include 'buttons.php';
   <tr>
     <td>login</td>
     <td><input type="text" id="login" name="login"></td> 
-    <td></td>
-    <td></td> 
+    <td>email</td>
+    <td><input type="text" id="email" name="email"></td> 
   </tr>
   <tr>
 	<td colspan="2"><div id="errorLogin" class="error"></div></td>
-	<td colspan="2"></td>
+	<td colspan="2"><div id="errorEmail" class="error"></td>
   </tr>
   <tr>
     <td>haslo</td>

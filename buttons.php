@@ -39,6 +39,7 @@
                     <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
                     <a href="help_test_admin.php" class="myButton"><?php echo t("Do"); ?> help_test_admin</a><br>
                     <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats</a><br>
+                    <a href="UserAdmin.php" class="myButton"><?php echo t("Do")." ".t("UserAdmin"); ?></a><br>
                 <?php
                 break;
             case 'user_plus':

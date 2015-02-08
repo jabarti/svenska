@@ -50,7 +50,7 @@ if(isset($_POST) || isset($_GET)){
         if($user->getId($_POST['user'])){
 //            $user_data = $user->getUserByName($_POST['user']);
             $user_data = $user->getLogDataByUser($_POST['user']);
-            echo "<br>DB user data: ";var_dump($user_data);
+//            echo "<br>DB user data: ";var_dump($user_data);
             $Usr_name = $user_data[0];      // user
             $Usr_pass = $user_data[1];      // pass
             $Usr_PubKey = $user_data[2];      // PublicKey

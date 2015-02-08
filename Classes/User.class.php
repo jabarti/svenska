@@ -18,6 +18,7 @@ class User {
     private $password;
     private $publicKey;
     private $rola;
+    private $email;
     private $data;
     
     private $table = "login";
@@ -30,7 +31,7 @@ class User {
 //      $userArr = array($this->id, $this->user, $this->password, $this->data);
 
        
-    public function setData($imie, $nazwisko, $user, $password){
+    public function setData($imie, $nazwisko, $user, $password, $email){
 //    private function setData($user, $password){
         
         $t=time();
@@ -42,8 +43,8 @@ class User {
         
         if(!$this->getId($user)){
 
-            $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`, `data`)
-                                                    VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."', '".$data."');");
+            $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`,`email`, `data`)
+                                                    VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."','".$email."', '".$data."');");
             echo "<br>SQL INSERT user: ".$SQL;
             $mq = mysql_query($SQL);
 //            echo "<br>mysql_affected_rows():".mysql_affected_rows();
@@ -60,8 +61,20 @@ class User {
         }
     }
     
-//    private function getId($user){
-    public function getId($user){
+    public function updateDataByAdmin_I ($id, $imie, $nazwisko, $rola, $email){
+        $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."', `nazwisko`='".$nazwisko."',`rola`='".$rola."',`email`='".$email."' WHERE `id`='".$id."';";
+//        echo "<br>SQL:".$sql;
+        $mq = mysql_query($sql);
+        if(mysql_affected_rows()==1){
+            echo "UPDATE OK!";
+        }else{
+            echo "<br>UPDATE ERROR!";
+            throw new Exception('Nie udało się zmienić danych!');
+        }
+    }
+
+
+        public function getId($user){
         $SQL = sprintf("SELECT `id` FROM `".$this->table."` WHERE user=\"".$user."\";");
 //        echo "<br>SQL".$SQL;
         $mq = mysql_query($SQL);
@@ -122,5 +135,38 @@ class User {
         
         return $arr;
     }
+    
+   
+    /* POBIERA DANE DLA ADMINISTRACJI DANYMI */
+    public function getUsersDataForAdmin(){
+        $SQL = sprintf("SELECT * FROM `".$this->table."`;");
+//        echo "<br>===================USERs================<br>";
+//        echo "<br>SQL getUsersNames: ".$SQL;
+        $mq = mysql_query($SQL);
+        $arr = array();
+        while($us = mysql_fetch_array($mq,MYSQLI_ASSOC)){
+            array_push($arr, $us);
+        }
+//        var_dump($arr);
+        return $arr;
+    }
+    
+    public function getRolesOfUser(){
+            $sql = sprintf("SHOW COLUMNS FROM `".$this->table."` LIKE 'rola';");
+//            echo '<br>SQL:'.$sql;
+            $mq = mysql_query($sql);
+            $row = mysql_fetch_row($mq);
+//            echo "<br>row:"; var_dump($row);
+            $type = $row['1'];
+//            echo '<br>type:'.$type;
+            preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
+//            echo "<br>matches";var_dump ($matches);
+//            echo "<br>matches1: ".$matches[1];
+            $vals = explode('\',\'', $matches[1]);
+//            echo "<br>Vals: ";var_dump ($vals);
+//            $vals = str_split($vals, 1);
+//            sort($vals);
+            return $vals;
+        }
 
 }

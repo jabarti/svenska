@@ -76,8 +76,10 @@ function start(){
 $(document).ready(function(){
     
     $('#CreateUser').click(function(){
-        alert("TODO: Status DOING!");
-        window.location.href = "CreateUser.php"
+//        alert("TODO: Status DOING!");
+        if(confirm("TODO: Status DOING! \n Create NEW User?")== true){
+            window.location.href = "CreateUser.php"
+        }
         
     });
     
