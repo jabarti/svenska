@@ -14,7 +14,7 @@ include 'divLog.php';
 $title = 'Svenska | UserAdminMOD';
 include 'header.php';
 include 'buttons.php';
-include 'rozdzielacz.php';
+//include 'rozdzielacz.php';
 
 $user = new User();
 $AllUsrArr = $user->getUsersDataForAdmin();
@@ -68,8 +68,9 @@ for($i=0; $i<$len; $i++){
                 break;
         }
     }
-    echo "<td colspan=5></td>"
-        . "<td><input type=submit value=".t('Change_UsrAdm'). "></td>";
+    echo "<td colspan=4></td>"
+        . "<td><input type=submit value=".t('Change_UsrAdm'). " name=aktion></td>"
+        . "<td><input type=submit value=".t('Remove_UsrAdm'). " name=aktion></td>";
     echo "</form>";
     }
 echo "</tr>";

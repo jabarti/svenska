@@ -66,15 +66,27 @@ class User {
 //        echo "<br>SQL:".$sql;
         $mq = mysql_query($sql);
         if(mysql_affected_rows()==1){
-            echo "UPDATE OK!";
+//            echo "UPDATE OK!";
         }else{
-            echo "<br>UPDATE ERROR!";
+//            echo "<br>UPDATE ERROR!";
+            throw new Exception('Nie udało się zmienić danych!');
+        }
+    }
+    
+    public function deleteUserById($id){
+        $sql = "DELETE FROM `".$this->table."` WHERE `id` = ".$id.";";
+        echo "<br> SQL:".$sql;
+        $mq = mysql_query($sql);
+        if(mysql_affected_rows()==1){
+//            echo "DELETE OK!";
+        }else{
+//            echo "<br>DELETE ERROR!";
             throw new Exception('Nie udało się zmienić danych!');
         }
     }
 
 
-        public function getId($user){
+    public function getId($user){
         $SQL = sprintf("SELECT `id` FROM `".$this->table."` WHERE user=\"".$user."\";");
 //        echo "<br>SQL".$SQL;
         $mq = mysql_query($SQL);

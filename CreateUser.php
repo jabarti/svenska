@@ -13,7 +13,7 @@ include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Create New User';
 include 'header.php';
-include 'buttons.php';
+//include 'buttons.php';
 
 ?>
 <form action="CreateUserMOD.php" method="post">

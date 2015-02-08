@@ -13,7 +13,7 @@ include 'divLog.php';
 $title = 'Svenska | Inserter';
 include 'header.php';
 include 'buttons.php';
-include 'rozdzielacz.php';
+//include 'rozdzielacz.php';
 
 //vardump($_SESSION);
 //vardump($_COOKIE);

@@ -14,7 +14,7 @@ $title = 'Svenska | Eraser';
 include 'header.php';
 include 'flag.php';
 include 'buttons.php';
-include 'rozdzielacz.php';
+//include 'rozdzielacz.php';
 
 foreach($_POST as $k => $v){
     echo "<br>POST['$k']=".$v;

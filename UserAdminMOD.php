@@ -13,10 +13,14 @@ include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | UserAdmin';
 include 'header.php';
-include 'buttons.php';
+//include 'buttons.php';
 
 //var_dump ($_POST);
 if(isset($_POST)){
+    
+    
+    
+    $action = $_POST['aktion'];
     $id = $_POST['id'];
     $imie = $_POST['imie'];
     $nazwisko = $_POST['nazwisko'];
@@ -24,17 +28,40 @@ if(isset($_POST)){
     $email = $_POST['email'];
     
     $user = new User();
-    try{
-        $user->updateDataByAdmin_I($id, $imie, $nazwisko, $rola, $email);
-        echo "<script> window.location.replace('UserAdmin.php') </script>" ;
-    } catch (Exception $ex) {
-        $alert = t($ex->getMessage());
-//        $alert = t("User edit failure!");
-        ?><script>
+    
+    switch($action){
+        case 'Change_UsrAdm':       // akcja: zmiany na koncie usera
+            try{
+                $user->updateDataByAdmin_I($id, $imie, $nazwisko, $rola, $email);
+                echo "<script> window.location.replace('UserAdmin.php') </script>" ;
+            } catch (Exception $ex) {
+                $alert = t($ex->getMessage());
+                ?><script>
+                alert("<?php echo $alert;?>");
+                window.location.replace('UserAdmin.php')
+                </script><?php
+            }
+            break;
+        
+        case 'Remove_UsrAdm':       //  akcja: usunięcie usera
+            try{
+                $user->deleteUserById($id);
+                echo "<script> window.location.replace('UserAdmin.php') </script>" ;
+            } catch (Exception $ex) {
+                $alert = t($ex->getMessage());
+                ?><script>
+                alert("<?php echo $alert;?>");
+                window.location.replace('UserAdmin.php')
+                </script><?php
+            }
+            break;
+        default:
+            $alert = t('ERROR!!! Wywołano akcja DEFAULT w pliku:').__FILE__."!!";
+          ?><script>
             alert("<?php echo $alert;?>");
-            window.location.replace('UserAdmin.php')
           </script>
         <?php
+            break;
     }
 }else{
     echo "<br>".t("Brak danych!!");

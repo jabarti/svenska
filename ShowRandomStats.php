@@ -14,7 +14,7 @@ include 'divLog.php';
 $title = 'Svenska | ShowRandomStats';
 include 'header.php';
 include 'buttons.php';
-include 'rozdzielacz.php';
+//include 'rozdzielacz.php';
 ?>
 <button id="del_rand_stats">Usuń WSZYSTKIE rekordy z Random!</button>
 <?php

@@ -24,6 +24,7 @@
         
 //        echo "<br>".__FILE__.__LINE__." ROLE:".$_SESSION['role'];
 //        echo "<br>user:".$_SESSION['user'];
+//        echo "<br>userRole:".$usr_role;
         
         switch ($usr_role){
             case 'admin':
@@ -53,6 +54,7 @@
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                     <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
                     <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Do")." ".t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
             case 'user':
@@ -61,9 +63,10 @@
                     <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>
                     ====================
                     <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
+                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="mail.php" class="myButton"><?php echo t("Do")." ".t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
             
@@ -71,9 +74,14 @@
                 ?>
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="mail.php" class="myButton"><?php echo t("Do")." ".t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
         }
 //        echo "<br>guziki władowane!"
         ?>
 </div>
+
+<?php
+include 'rozdzielacz.php';
+?>
