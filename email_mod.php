@@ -17,7 +17,8 @@ include 'header.php';
 
 echo "<br>POST:";var_dump($_POST);
 
-if ($_SERVER["REMOTE_ADDR"] == '85.202.150.195')
+//if ($_SERVER["REMOTE_ADDR"] == '85.202.150.195')    // OBR11/90
+if ($_SERVER["REMOTE_ADDR"] == '81.234.110.249')    // Mullsjö
     $MyServ = "MyServer!";
 else
     $MyServ = $_SERVER["REMOTE_ADDR"];
@@ -25,25 +26,27 @@ else
 if (isset($_POST['mailform'])){
         if(isset($_POST['mail'])){
             echo "<br> POST[mail]=".$_POST['mail']."<br>";
-            $to = 'jabarti@wp.pl, ';        // note the comma
-//            $to = $_POST['mail'];           //'bartosz.lewinski@bartilevi.pl';$_POST['mail']
+            $to = 'bartosz.lewinski@bartilevi.pl, ';        // note the comma
+//            $to .= $_POST['mail'].',';           //'bartosz.lewinski@bartilevi.pl';$_POST['mail']
 //            $_SESSION['user_mail'] = $_POST['mail'];          //'bartosz.lewinski@bartilevi.pl';$_POST['mail']
 //            echo "<br>MAIL = ".$_SESSION['user_mail'].'<br>';
         } else {
             $to = '';//jabarti@wp.pl';          //'bartosz.lewinski@bartilevi.pl';
         }
 
-        $subject = isset($_POST['subject']) ? $_POST['subject'] : 'Empty';
+        $subject = $_POST['subject'] ? $_POST['subject'] : 'Empty';
         
         $message = isset($_POST['message']) 
-                ? "Your message:"."\r\n".$_POST['message']."\r\n"."================".
-                    "\r\n".'Hello from '.$_SERVER["HTTP_HOST"]."\r\n".'Your IP: '.$MyServ
+                ? "Your message:"."\r\n".
+                   $_POST['message'].
+                   "\r\n"."================".
+                   "\r\n".'Hello from '.$_SERVER["HTTP_HOST"]."\r\n".'Your IP: '.$MyServ
                 : 'Hello from '.$_SERVER["HTTP_HOST"]."\r\n"."Your IP: ".$MyServ;
 
 //        $headers .= 'To: ' . "\r\n";
-        $headers = 'From: bartosz.lewinski@bartilevi.pl' . "\r\n";
-//        $headers = 'Cc: bartus.lewinski@gmail.com' . "\r\n";
+        $headers =  'From: bartosz.lewinski@bartilevi.pl' . "\r\n";
         $headers .= 'Bcc: jabarti@wp.pl' . "\r\n";    //'bartosz.lewinski@bartilevi.pl';
+        $headers .= 'Bcc: '.$_POST['mail']. "\r\n";    //'bartosz.lewinski@bartilevi.pl';
         $headers .= 'Reply-To: bartosz.lewinski@bartilevi.pl' . "\r\n";
         $headers .= 'X-Mailer: PHP/' . phpversion();
 
@@ -59,13 +62,15 @@ if (isset($_POST['mailform'])){
                 
                 unset($_POST);
                 unset($_GET);
-                  
-                header("Location: mail.php?send=ok");
+                header("Location: mail.php?send=ok");                
+                echo "<br><button type='button' onclick='window.location.href=\"mail.php?send=ok\"'>Click Me!</button>";
 //                echo '<br>'.__line__.' | No.01 header("Location: index.php?send=ok")';
             } else {
                   unset($_POST);
                   unset($_GET);
-                  header("Location: mail.php?send=no");
+                  header("Location: mail.php?send=no");                  
+                  echo "<br><button type='button' onclick='window.location.href=\"mail.php?send=no\"'>Click Me!</button>";
+
 //                  echo '<br>'.__line__.' | No.02 header("Location: index.php?send=no")';
             }   
         } catch (Exception $ex) { 

@@ -14,10 +14,11 @@ include 'divLog.php';
 $title = 'Svenska | Show/printer';
 include 'header.php';
 include 'buttons.php';
-
-if(isset($_SESSION['user']) && $_SESSION['user']=='Gosc'){
+//echo "rola: ";var_dump($allowPages);
+//var_dump($_SESSION);
+if(isset($_SESSION['role']) && ($_SESSION['role']=='visitor' or $_SESSION['role']=='user')){
     $gosc = true;
-    echo $_SESSION['user']." / $gosc";
+//    echo $_SESSION['user']." / $gosc";
 }else{
     $gosc = false;
 }

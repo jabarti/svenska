@@ -14,26 +14,14 @@ include 'divLog.php';
 $title = 'Svenska | mail';
 include 'header.php';
 include 'buttons.php';
-
-/* it takes info about mail sent or not from email_mod.php */
-if (isset($_GET['send'])){
-    if($_GET['send'] == 'ok')
-        $send = 1;
-    else if ($_GET['send'] == 'ok')
-        $send = 0;
-    else
-        $send = -1;
-} else {
-    $send = -2;
-}
-
+//echo "<br>Usr_mial:".$_SESSION['usr_mail'];
 ?>
 <p id="textTitle" style="color: black;"><?php echo t("NAPISZ DO MNIE"); ?></p>
 <form name="formatka" action="email_mod.php" method="post">
     <table>
         <tr id="selfmail">
             <td><label for="text"><?php echo t("Podaj swój mail"); ?>:</label></td>
-            <td><input id="mail" type="text" name="mail" value="<?php echo $user_mail; ?>"></td>
+            <td><input id="mail" type="text" name="mail" value="<?php echo $_SESSION['usr_mail']; ?>"></td>
         </tr>
         <tr>
             <td><label for="subject"><?php echo t("Temat"); ?>:</label></td>
@@ -53,7 +41,23 @@ if (isset($_GET['send'])){
         </tr>
     </table>
 </form>
-<?php if($send == 1){ 
+
+<?php 
+
+// Informacja zwrotna, czy mail doszedł // 
+/* it takes info about mail sent or not from email_mod.php */
+if (isset($_GET['send'])){
+    if($_GET['send'] == 'ok')
+        $send = 1;
+    else if ($_GET['send'] == 'ok')
+        $send = 0;
+    else
+        $send = -1;
+} else {
+    $send = -2;
+}
+
+if($send == 1){ 
      echo '<p id="potw">'.t("Mail wysłany").'!</p>';
 }else if($send == -1){
     echo '<p id="potw">'.t("Mail nie wysłany").' - '.t("brak tematu").' '.t("lub").'/'.t("i").' '.t("treści").'</p>';

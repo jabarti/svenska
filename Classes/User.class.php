@@ -75,7 +75,7 @@ class User {
     
     public function deleteUserById($id){
         $sql = "DELETE FROM `".$this->table."` WHERE `id` = ".$id.";";
-        echo "<br> SQL:".$sql;
+//        echo "<br> SQL:".$sql;
         $mq = mysql_query($sql);
         if(mysql_affected_rows()==1){
 //            echo "DELETE OK!";
@@ -116,7 +116,7 @@ class User {
     }  
     
     public function getLogDataByUser($user){
-        $SQL = sprintf("SELECT user, password, PublicKey, rola FROM `".$this->table."` WHERE user=\"".$user."\";");
+        $SQL = sprintf("SELECT user, password, PublicKey, rola, email FROM `".$this->table."` WHERE user=\"".$user."\";");
 //        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE user=\"".$user."\";");
         $mq = mysql_query($SQL);
         

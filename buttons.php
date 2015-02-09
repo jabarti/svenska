@@ -41,6 +41,7 @@
                     <a href="help_test_admin.php" class="myButton"><?php echo t("Do"); ?> help_test_admin</a><br>
                     <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats</a><br>
                     <a href="UserAdmin.php" class="myButton"><?php echo t("Do")." ".t("UserAdmin"); ?></a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
             case 'user_plus':
@@ -54,7 +55,7 @@
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                     <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
                     <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
-                    <a href="mail.php" class="myButton"><?php echo t("Do")." ".t("Mail do Admina"); ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
             case 'user':
@@ -66,7 +67,7 @@
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
-                    <a href="mail.php" class="myButton"><?php echo t("Do")." ".t("Mail do Admina"); ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
             
@@ -74,7 +75,7 @@
                 ?>
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
-                    <a href="mail.php" class="myButton"><?php echo t("Do")." ".t("Mail do Admina"); ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
         }

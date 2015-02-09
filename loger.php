@@ -51,16 +51,18 @@ if(isset($_POST) || isset($_GET)){
 //            $user_data = $user->getUserByName($_POST['user']);
             $user_data = $user->getLogDataByUser($_POST['user']);
 //            echo "<br>DB user data: ";var_dump($user_data);
-            $Usr_name = $user_data[0];      // user
-            $Usr_pass = $user_data[1];      // pass
-            $Usr_PubKey = $user_data[2];      // PublicKey
-            $Usr_role = $user_data[3];      // PublicKey
+            $Usr_name = $user_data[0];                  // user
+            $Usr_pass = $user_data[1];                  // pass
+            $Usr_PubKey = $user_data[2];                // PublicKey
+            $Usr_role = $user_data[3];                  // PublicKey
+            $Usr_mail = $user_data[4];                  // email
 
         }else{
             $Usr_name = 'empty';
             $Usr_pass = 'empty';
             $Usr_PubKey = 'empty';
             $Usr_role = 'empty';
+            $Usr_mail = 'empty';
         }
    } 
 //   echo "<br>Usr_pass: ".$Usr_pass;
@@ -73,6 +75,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['user'] = $_POST['user'] ? $_POST['user'] : $_GET['user'];
 //        $_SESSION['password'] = sha1($_POST['password']) ? sha1($_POST['password'] : $_GET['password'];
         $_SESSION['role'] = $Usr_role;
+        $_SESSION['usr_mail'] = $Usr_mail;
         
         
         $_SESSION['arrOfAnsw'] = array();
@@ -102,6 +105,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['log'] = false; 
         $_SESSION['role'] = '';
         unset($_SESSION['role']);
+        unset($_SESSION['usr_mail']);
     }
   } else {
 //        echo "<br>// faktyczne wylogowanie!!!!!!!!!!!!";
@@ -110,6 +114,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['log'] = false;
         $_SESSION['role'] = '';
         unset($_SESSION['role']);
+        unset($_SESSION['usr_mail']);
         
   }
 }else{
