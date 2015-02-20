@@ -17,6 +17,7 @@ class User {
     private $user;
     private $password;
     private $publicKey;
+    private $PassCrypt;
     private $rola;
     private $email;
     private $data;
@@ -31,20 +32,21 @@ class User {
 //      $userArr = array($this->id, $this->user, $this->password, $this->data);
 
        
-    public function setData($imie, $nazwisko, $user, $password, $email){
+    public function setData($imie, $nazwisko, $user, $password, $email, $publicKey, $PassCrypt){
 //    private function setData($user, $password){
         
         $t=time();
         $data = date("Y-m-d, H:i:s",$t);
         $sha_password = sha1($password);
-        $publicKey = 'TO DO!!'.  mt_rand().rand().srand();
+//        if($publicKey == ""){$publicKey = 'TO DO!!'.  mt_rand().rand().srand();}else{}
+//        if($PassCrypt == ""){$PassCrypt = 'TO DO!!'.  mt_rand().rand().srand();}else{}
         
 //        echo "<br>".__FILE__.__LINE__." | PASS: $password, SHAPASS: $sha_password";
         
         if(!$this->getId($user)){
 
-            $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`,`email`, `data`)
-                                                    VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."','".$email."', '".$data."');");
+            $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`,`PassCrypt`,`email`, `data`)
+                                                    VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."','".$PassCrypt."','".$email."', '".$data."');");
             echo "<br>SQL INSERT user: ".$SQL;
             $mq = mysql_query($SQL);
 //            echo "<br>mysql_affected_rows():".mysql_affected_rows();
@@ -84,7 +86,6 @@ class User {
             throw new Exception('Nie udało się zmienić danych!');
         }
     }
-
 
     public function getId($user){
         $SQL = sprintf("SELECT `id` FROM `".$this->table."` WHERE user=\"".$user."\";");
@@ -179,6 +180,20 @@ class User {
 //            $vals = str_split($vals, 1);
 //            sort($vals);
             return $vals;
+    }
+    
+    public function getUserPassCryptByUserOrMail($param) {
+        $sql = "SELECT `email`,`PassCrypt` FROM `".$this->table."` WHERE `user`='".$param."' OR `email`='".$param."';";
+        echo '<br>SQL:'.$sql;
+        try{
+            $mq = mysql_query($sql);
+//            $result = mysql_result($mq, 0);
+            $result = mysql_fetch_assoc($mq);
+        } catch (Exception $ex) {
+            echo "<br>ERROR:".$ex;
         }
+        return $result;
+    }
+     
 
 }

@@ -91,6 +91,13 @@ tbody.wew {
     background: deepskyblue;
 }
 
+.error {
+	display:block; color: yellow; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+
+
 #nav ul {
         list-style-type:none;  
         float:left; 

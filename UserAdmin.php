@@ -38,28 +38,29 @@ for($i=0; $i<$len; $i++){
     foreach($AllUsrArr[$i] as $k => $v){
         switch($k){
             case 'id':
-                echo "<td><input class=UsrAdm_grey size=1 type=text name=".$k." value=".$v." readonly></td>";
+                echo "<td><input class=UsrAdm_grey size=1 type=text name='".$k."' value='".$v."' readonly></td>";
                 break;
             case 'user':
-                echo "<td><input class=UsrAdm_grey type=text name=".$k." value=".$v." readonly></td>";
+                echo "<td><input class=UsrAdm_grey type=text name='".$k."' value='".$v."' readonly></td>";
                 break;
             case 'password':
             case 'PublicKey':
             case 'data':
+            case 'PassCrypt':
                 continue;
                 break;
             case 'rola':
                 if($v != 'admin'){
-                    echo "<td><select name=$k>";
-                    echo "<option value=$v>".t($v)."</option>";
+                    echo "<td><select name='$k'>";
+                    echo "<option value='$v'>".t($v)."</option>";
                     $UsrRoles = $user->getRolesOfUser();
                     foreach($UsrRoles as $k){
-                         echo "<option value=$k>".t($k)."</option>";
+                         echo "<option value='$k'>".t($k)."</option>";
                     }   
                     echo "</select></td>";
                 }else{
-                    echo "<td><select name=$k readonly='readonly'>";
-                    echo "<option value=$v >".t($v)."</option>"; 
+                    echo "<td><select name='$k' readonly='readonly'>";
+                    echo "<option value='$v' >".t($v)."</option>"; 
                     echo "</select></td>";
                 }
                 break;

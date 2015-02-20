@@ -448,3 +448,5 @@ setInterval(function() {
         }
 
     }
+ echo "<br> MULTIPLIKATION:";
+    include_once 'mul.php';

@@ -14,7 +14,7 @@ include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Create New User MOD';
 include 'header.php';
-include 'buttons.php';
+//include 'buttons.php';
 
 echo "JESTEŚ W CreateUserMOD.php";
 
@@ -25,25 +25,15 @@ if(isset($_POST)){
     $email = $_POST['email'];
     $haslo = $_POST['haslo'];
     $haslo2 = $_POST['haslo2'];  // TODO: zrobić walidację na poziomie CreateUser.php
+    $PublicKey = $_POST['PublicKey'];
+    $PassCrypt = $_POST['PassCrypt'];
+    
+    foreach($_POST as $k =>$v){
+        echo "<br>$k=>$v";
+    }
     
 //    echo "<br>HASLA: 1) $haslo 2) $haslo2";
-    
-//    function Exeg($e){
-//        if (!$e){
-//            $message = "<br>DUpa blada";
-//            throw new Exception($message);
-//        }else{
-//            return 1/$e;
-//        }
-//    }
-//    
-//    try{
-//        echo "<br>EXEG(2):".Exeg(2);
-//        echo "<br>EXEG(0):".Exeg(0);
-//    } catch (Exception $e) {
-//        echo $e->getMessage();
-//    }
-    
+       
     if($haslo != $haslo2){
         ?><script> alert("Różne hasla!!!") </script><?php
 //        header("Location: CreateUser.php");
@@ -56,14 +46,22 @@ if(isset($_POST)){
         echo __FILE__;
         try{
             $newUser = new User();
-            $newUser->setData($imie, $nazwisko, $login, $haslo, $email);
+            $boola = $newUser->setData($imie, $nazwisko, $login, $haslo, $email, $PublicKey, $PassCrypt);
 //            $output = exec('/home/bartilev/public_html/Svenska/Includes/dll/gp-gitc8c06bc.exe skrypt_01.gp');
+            if($boola){
+                $communicate = '?comm='.'OK';
+            }else{
+                $communicate = '?comm='.'User like <span class=red>"'.$login.'"</span> exists';
+            }
         } catch (Exception $ex) {
-            echo '<br>Caught exception: ',  $ex->getMessage(), "\n";
+            $error = $ex->getMessage();
+            echo '<br>Caught exception: ',  t($error), "\n";
+            $communicate = '?comm='.$error;
         }
         
 //        $output = shell_exec('ls -l');
         echo "<pre>Output $output</pre>";
+//        header("Location: index.php".$communicate);
         header("Location: index.php");
     }
 }

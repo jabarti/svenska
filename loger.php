@@ -151,14 +151,19 @@ if(isset($_POST) || isset($_GET)){
                 <td><input id="pass" type="password" name="password" ></td>
                 <!--<td><input id=pass type="hidden" name="password" value="" ></td>-->
             </tr>
-            <tr>
+<!--            <tr>
                 <td><label for="pass"><?php echo t("PrivateKey"); ?>:</td>
                 <td><input type="file" name="fileToUpload" id="fileToUpload"></td>
-                <!--<td><input id=pass type="hidden" name="password" value="" ></td>-->
-            </tr>
+                <td><input id=pass type="hidden" name="password" value="" ></td>
+            </tr>-->
             <tr>
                 <td></td>
                 <td><input id=sub name=sub type="submit" value="<?php echo t("Zaloguj"); ?>"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="RestorePassword.php" id="passRestore"><?php echo t("Zapomniałem hasła");?></a></td>
+                <!--<td><input id=pass type="hidden" name="password" value="" ></td>-->
             </tr>
 
         <tr><td colspan='2'><?php echo t("OR"); ?></td><tr>
@@ -183,5 +188,13 @@ if(isset($_POST) || isset($_GET)){
      </select>     
      <input type="submit" value="Update" />
     </form>-->
+<?php
+// TODO!!! NIE DZIAŁA NA RAZIE!!!
+//if(isset($_GET['comm'])){
+//    echo '<br>'.t($_GET['comm']);
+//}else{
+//    echo ':)';
+//}
+?>
 </body>
 
