@@ -45,6 +45,7 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"test.php");
              array_push($allowPages,"show.php");
              array_push($allowPages,"mail.php");
+             array_push($allowPages,"EditUserByUser.php");
 //                 header("Location: test.php");
              break;
          default:

@@ -19,12 +19,16 @@ function (){
             isValidEmail(this.email)    &&
             
             czyWypelnione(this.haslo)   &&
+            isMinLength (this.haslo, 8)  &&
             czyWypelnione(this.haslo2)  &&
             
             areFieldsEqual(this.haslo, this.haslo2) &&
             
             czyWypelnione(this.PublicKey)  &&
-            czyWypelnione(this.PassCrypt)  
+            isMinLength (this.PublicKey, 25) &&
+            
+            czyWypelnione(this.PassCrypt)  &&
+            isMinLength (this.PassCrypt, 25)
 	){
             return true;
 	}else{

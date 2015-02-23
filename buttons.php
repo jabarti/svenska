@@ -33,14 +33,15 @@
                     <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a><br>
                     =================
                     <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a><br>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a><br>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a><br>
-                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
-                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
                     <a href="help_test_admin.php" class="myButton"><?php echo t("Do"); ?> help_test_admin</a><br>
                     <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats</a><br>
                     <a href="UserAdmin.php" class="myButton"><?php echo t("Do")." ".t("UserAdmin"); ?></a><br>
+                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
+                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>                    
+                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
@@ -50,11 +51,12 @@
                     <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>
                     ====================
                     <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                     <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
                     <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
+                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
@@ -64,9 +66,10 @@
                     <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>
                     ====================
                     <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
+                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;
@@ -75,6 +78,7 @@
                 ?>
                     <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                 <?php
                 break;

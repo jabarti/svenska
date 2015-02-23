@@ -75,6 +75,19 @@ class User {
         }
     }
     
+    public function updateDataByUser ($imie, $nazwisko, $password, $PublicKey, $PassCrypt, $email, $usr){
+        echo "<br>wchodze3";
+        $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".$password."',`PublicKey`='".$PublicKey."',`PassCrypt`='".$PassCrypt."',`email`='".$email."' WHERE `user` = '".$usr."';";
+        echo "<br>SQL:".$sql;
+        $mq = mysql_query($sql);
+        if(mysql_affected_rows()==1){
+//            echo "UPDATE OK!";
+        }else{
+//            echo "<br>UPDATE ERROR!";
+            throw new Exception('Nie udało się zmienić danych!');
+        }
+    }
+    
     public function deleteUserById($id){
         $sql = "DELETE FROM `".$this->table."` WHERE `id` = ".$id.";";
 //        echo "<br> SQL:".$sql;
@@ -162,6 +175,21 @@ class User {
         }
 //        var_dump($arr);
         return $arr;
+    }
+    
+    /* POBIERA DANE DLA EDYCJI DANYCH */
+    public function getUsersDataForEditByUser($user){
+        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE `user` = '".$user."';");
+//        echo "<br>===================USERs================<br>";
+//        echo "<br>SQL getUsersNames: ".$SQL;
+        $mq = mysql_query($SQL);
+        $arr = array();
+//        while($us = mysql_fetch_row($mq,MYSQLI_ASSOC)){
+//            array_push($arr, $us);
+//        }
+        $us = mysql_fetch_row($mq,MYSQLI_ASSOC);
+//        var_dump($arr);
+        return $us;
     }
     
     public function getRolesOfUser(){

@@ -32,10 +32,14 @@ if(isset($_POST)){
 //        $headers .= 'Bcc: jabarti@wp.pl' . "\r\n";    //'bartosz.lewinski@bartilevi.pl';
         $headers .= 'Bcc: '.$usrData['email']. "\r\n";    //'bartosz.lewinski@bartilevi.pl';
         $headers .= 'Reply-To: svenska@bartilevi.pl' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         $headers .= 'X-Mailer: PHP/' . phpversion();
     
+        $text = $usrData['PassCrypt'];
+        $text .= '<br><a href="http://www.bartilevi.pl/Svenska/Resources/Pari/RSAPassword/RSAPassword.zip" download>RSAPassword</a>';
+        $text .= '<br><a href="http://www.bartilevi.pl/Svenska/Resources/Pari/Pari-2-7-2.exe" download>Pari-2-7-2.exe</a>';
     try{
-        $boolka = mail($usrData['email'], t("Przypomnienie hasła(zaszyfrowane kluczem publicznym - algorytm RSA)"), $usrData['PassCrypt'],$headers);
+        $boolka = mail($usrData['email'], t("Przypomnienie hasła(zaszyfrowane kluczem publicznym - algorytm RSA)"),  $text,$headers);
         
         if($boolka){
             echo "<br>działa";

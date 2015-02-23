@@ -96,6 +96,26 @@ tbody.wew {
         font-family:Arial, Helvetica, sans-serif; 
         font-size:11px;
 }
+.fileldDescrBlu {
+	display:block; color: blue; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrYel {
+	display:block; color: yellow; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrRed {
+	display:block; color: red; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrOra {
+	display:block; color: orange; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
 
 
 #nav ul {
