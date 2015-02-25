@@ -48,13 +48,21 @@ class User {
             $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`,`PassCrypt`,`email`, `data`)
                                                     VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."','".$PassCrypt."','".$email."', '".$data."');");
             echo "<br>SQL INSERT user: ".$SQL;
-            $mq = mysql_query($SQL);
+//            $mq = mysql_query($SQL);
+            
+            try{
+                $mq = mysql_query($SQL);
+            } catch (Exception $ex) {
+                echo "<br>ERROR: $ex";
+            }
+            
+            
 //            echo "<br>mysql_affected_rows():".mysql_affected_rows();
             if(mysql_affected_rows()==1){
 //                echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" added.";
                 return true;
             }else{
-                echo "<br>ERROR";
+                echo "<br>ERROR mysql_affected_rows()!=1";
                 return false;
             }
         }else{
@@ -77,7 +85,14 @@ class User {
     
     public function updateDataByUser ($imie, $nazwisko, $password, $PublicKey, $PassCrypt, $email, $usr){
         echo "<br>wchodze3";
-        $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".$password."',`PublicKey`='".$PublicKey."',`PassCrypt`='".$PassCrypt."',`email`='".$email."' WHERE `user` = '".$usr."';";
+        if($password == ''){
+            return false;
+        }
+        if($PublicKey == '' OR $PassCrypt == ''){
+            $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".sha1($password)."', `email`='".$email."' WHERE `user` = '".$usr."';";
+        }else{
+            $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".sha1($password)."',`PublicKey`='".$PublicKey."',`PassCrypt`='".$PassCrypt."',`email`='".$email."' WHERE `user` = '".$usr."';";
+        }
         echo "<br>SQL:".$sql;
         $mq = mysql_query($sql);
         if(mysql_affected_rows()==1){
@@ -97,6 +112,27 @@ class User {
         }else{
 //            echo "<br>DELETE ERROR!";
             throw new Exception('Nie udało się zmienić danych!');
+        }
+    }
+    
+    public function comparePassByUser($user, $pass_old, $pass_new_1, $pass_new_2) {
+        if($pass_new_1 === $pass_new_2){
+            $sql = "SELECT `password` FROM ".$this->table." WHERE `user` = '".$user."';";
+//            echo "<br>sql: ".$sql;
+            $mq = mysql_query($sql);
+            $mr = mysql_result($mq,0);
+//            echo "<br>MR: ".$mr;
+            if($mr){
+                if($mr == sha1($pass_old)){
+//                    echo "<br>Compare OK";
+                    return true;
+                }else{
+//                    echo "<br>Compare NIE OK";
+                    return false;
+                }
+            }
+        }else{
+            return false;
         }
     }
 
@@ -179,7 +215,8 @@ class User {
     
     /* POBIERA DANE DLA EDYCJI DANYCH */
     public function getUsersDataForEditByUser($user){
-        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE `user` = '".$user."';");
+//        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE `user` = '".$user."';");
+        $SQL = sprintf("SELECT `id`, `imie`, `nazwisko`, `user`, `password`, `rola`, `email`, `PublicKey`, `PassCrypt`, `data` FROM `".$this->table."` WHERE `user` = '".$user."';");
 //        echo "<br>===================USERs================<br>";
 //        echo "<br>SQL getUsersNames: ".$SQL;
         $mq = mysql_query($SQL);

@@ -43,7 +43,7 @@ include 'header.php';
   </tr>
   <tr>
       <td colspan=3></td>
-      <td colspan=1><button onclick="window.location.href='index.php'"><?php echo t("wróć");?></button></td>
+      <td colspan=1><button type='button' onclick="window.location.href='index.php'"><?php echo t("wróć");?></button></td>
   </tr>
 
 </table>

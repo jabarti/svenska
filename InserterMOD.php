@@ -12,7 +12,7 @@ include 'DB_Connection.php';
 include 'divLog.php';
 $title = 'Svenska | Inserter';
 include 'header.php';
-include 'buttons.php';
+//include 'buttons.php';
 
 //foreach($_POST as $k => $v){
 //    echo "POST['$k']=".$v.", ";

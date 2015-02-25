@@ -167,3 +167,20 @@ function triTrim($text){
     $text_fin = str_replace("'"     ,"\"" , $text_fin);
     return $text_fin;
 }
+
+
+//function recursiveDelete($handle, $directory){   
+//    echo $handle;
+//    # here we attempt to delete the file/directory
+//    if( !(@ftp_rmdir($handle, $directory) || @ftp_delete($handle, $directory)) )
+//    {            
+//        # if the attempt to delete fails, get the file listing
+//        $filelist = @ftp_nlist($handle, $directory);
+//        // var_dump($filelist);exit;
+//        # loop through the file list and recursively delete the FILE in the list
+//        foreach($filelist as $file) {            
+//            recursiveDelete($handle, $file);            
+//        }
+//        recursiveDelete($handle, $directory);
+//    }
+//}

@@ -16,13 +16,13 @@ include 'header.php';
 //include 'buttons.php';
 
 ?>
-<form id="CreateUserForm" action="CreateUserMOD.php" method="post">
+<form id="CreateUserForm" action="CreateUserMOD.php" method="post" enctype="multipart/form-data" >
 <table class='table_log'>
   <tr>
     <td><?php echo t("imie");?></td>
-    <td><input type="text" id="Imie" name="imie"></td> 
+    <td><input type="text" id="Imie" name="imie" value='Aleksander'></td> 
     <td><?php echo t("nazwisko");?></td>
-    <td><input type="text" id="Nazwisko" name="nazwisko"></td> 
+    <td><input type="text" id="Nazwisko" name="nazwisko" value='Gruźlik'></td> 
   </tr>
   <tr>
     <td></td>
@@ -32,9 +32,9 @@ include 'header.php';
   </tr>
   <tr>
     <td><?php echo t("login");?></td>
-    <td><input type="text" id="Login" name="login"></td> 
+    <td><input type="text" id="Login" name="login" value='AlekGruzl'></td> 
     <td><?php echo t("email");?></td>
-    <td><input type="text" id="Email" name="email"></td> 
+    <td><input type="text" id="Email" name="email" value='AlekGruzl@wp.pl'></td> 
   </tr>
   <tr>
     <td></td>
@@ -44,9 +44,9 @@ include 'header.php';
   </tr>
   <tr>
     <td><?php echo t("hasło");?></td>
-    <td><input type="password" id="Haslo" name="haslo"></td> 
+    <td><input type="password" id="Haslo" name="haslo" value='AlekGruzl'></td> 
     <td><?php echo t("powtórz hasło");?></td>
-    <td><input type="password" id="Haslo2" name="haslo2"></td> 
+    <td><input type="password" id="Haslo2" name="haslo2" value='AlekGruzl'></td> 
   </tr>
   <tr>
     <td></td>
@@ -59,7 +59,10 @@ include 'header.php';
   </tr>
   <tr>
     <td><?php echo t("PublicKey")."<span class='fileldDescrBlu'> (".t('wygenerowany algorytmem RSA');?>)</td>
-    <td colspan="3"><input size=45 type="text" id="PublicKey" name="PublicKey"></td> 
+    <!--<td colspan="3"><input size=45 type="text" id="PublicKey" name="PublicKey"></td>--> 
+    <!--<td colspan="3"><input name="PublicKey" type="file" /><br></td>--> 
+    <td colspan="3"><input name="file[]" type="file" /><br></td> 
+
   </tr>
   <tr>
     <td></td>
@@ -68,7 +71,9 @@ include 'header.php';
   </tr>
   <tr>
       <td><?php echo t("PassCrypt")."<span class=fileldDescrBlu> (".t('wygenerowany algorytmem RSA');?>)</span></td>
-    <td colspan="3"><input size=45 type="text" id="PassCrypt" name="PassCrypt"></td> 
+    <!--<td colspan="3"><input size=45 type="text" id="PassCrypt" name="PassCrypt"></td>--> 
+    <!--<td colspan="3"><input name="PassCrypt" type="file" /><br></td>--> 
+    <td colspan="3"><input name="file[]" type="file" /><br></td> 
   </tr>
   <tr>
     <td></td>
@@ -90,14 +95,14 @@ include 'header.php';
       <td colspan=3></td>
   </tr>
   <tr>
-      <td colspan=4><a href="Resources/Pari/RSAPassword/RSAPassword.zip" download>RSAPassword</a></td>
+      <td colspan=4><a href="Resources/Pari/RSAPassword/RSAPassword.zip" download>RSAPassword.zip</a></td>
   </tr>
   <tr>
       <td colspan=4><a href="Resources/Pari/Pari-2-7-2.exe" download>Pari-2-7-2.exe</a></td>
   </tr>
   <tr>
       <td colspan=3></td>
-      <td colspan=1><button onclick="window.location.href='index.php'"><?php echo t("wróć");?></button></td>
+      <td colspan=1><button type='button' onclick="window.location.href='index.php'"><?php echo t("wróć");?></button></td>
   </tr>
 </table>
 </form>

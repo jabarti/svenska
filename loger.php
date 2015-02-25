@@ -106,6 +106,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['role'] = '';
         unset($_SESSION['role']);
         unset($_SESSION['usr_mail']);
+        unset($_SESSION['user']);
     }
   } else {
 //        echo "<br>// faktyczne wylogowanie!!!!!!!!!!!!";
@@ -115,6 +116,7 @@ if(isset($_POST) || isset($_GET)){
         $_SESSION['role'] = '';
         unset($_SESSION['role']);
         unset($_SESSION['usr_mail']);
+        unset($_SESSION['user']);
         
   }
 }else{
@@ -190,11 +192,12 @@ if(isset($_POST) || isset($_GET)){
     </form>-->
 <?php
 // TODO!!! NIE DZIAŁA NA RAZIE!!!
-//if(isset($_GET['comm'])){
-//    echo '<br>'.t($_GET['comm']);
-//}else{
-//    echo ':)';
-//}
+if(isset($_SESSION['communicate'])){
+    echo '<br>'.$_SESSION['communicate'];
+}else{
+    echo ':)';
+}
+unset($_SESSION['communicate']);
 ?>
 </body>
 

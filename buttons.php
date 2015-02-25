@@ -1,4 +1,4 @@
-﻿<div class="guziki">
+﻿<div class="guziki"> 
 <!--	<a href="../../" class="myButton">localhost</a>
 	<a href='../' class="myButton">Do ParentDir</a>
 	====================
@@ -43,6 +43,12 @@
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
+                    <a href="http://www.bartilevi.pl/translation_interface.php" class="myButton"><?php echo t("Do")." Translation"; ?> </a><br>
+                    =================
+                    <a href="try.php" class="myButton"><?php echo t("Do")." Try"; ?> </a><br>
+                    =================
+                    <a href="check_php_inf.php" class="myButton"><?php echo t("Do")." check_php_inf.php"; ?> </a><br>
+                    
                 <?php
                 break;
             case 'user_plus':
@@ -58,6 +64,7 @@
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
+                    <a href="try.php" class="myButton"><?php echo t("Do")." Try"; ?> </a><br>
                 <?php
                 break;
             case 'user':

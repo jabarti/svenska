@@ -14,7 +14,7 @@ include 'divLog.php';
 $title = 'Svenska | Help_Adm';
 include 'header.php';
 include 'buttons.php';
-include 'rozdzielacz.php';
+//include 'rozdzielacz.php';
 
 if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();

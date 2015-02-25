@@ -80,7 +80,6 @@ $(document).ready(function(){
         if(confirm("Create NEW User?")== true){
             window.location.href = "CreateUser.php"
         }
-        
     });
     
     $("#typ").change(function(){

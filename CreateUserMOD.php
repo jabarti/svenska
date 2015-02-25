@@ -16,7 +16,15 @@ $title = 'Svenska | Create New User MOD';
 include 'header.php';
 //include 'buttons.php';
 
-echo "JESTEŚ W CreateUserMOD.php";
+//foreach($_SESSION as $k => $v){
+//    echo "<br>SESSION[$k] => $v";
+//}
+//
+//foreach($_POST as $k => $v){
+//    echo "<br>POST[$k] => $v";
+//}
+
+//echo "<br>JESTEŚ W CreateUserMOD.php";
 
 if(isset($_POST)){
     $imie = $_POST['imie'];
@@ -25,44 +33,160 @@ if(isset($_POST)){
     $email = $_POST['email'];
     $haslo = $_POST['haslo'];
     $haslo2 = $_POST['haslo2'];  // TODO: zrobić walidację na poziomie CreateUser.php
-    $PublicKey = $_POST['PublicKey'];
-    $PassCrypt = $_POST['PassCrypt'];
+    
+//    echo "<br>vardump(files)";var_dump($_FILES); 
+    
+    require 'FTP_Connection.php';
+           
+    $real_name_PK = $_FILES['file']['name'][0];
+    $real_name_PC = $_FILES['file']['name'][1];
+    
+//    echo "<br>File_Name1: ".$real_name_PK;
+//    echo "<br>File_Name2: ".$real_name_PC;
+    
+    if(isset($_SESSION['user'])){
+        $userFolder = $_SESSION['user'];//?$_SESSION['user']:$_POST['login']; 
+    }elseif(isset($_POST['login'])){
+        $userFolder = $_POST['login'];
+    }else{
+        $userFolder = 'WildFolder';
+    }  
+          
+    $remote_file_PK = $userFolder."/".$real_name_PK;
+    $remote_file_PC = $userFolder."/".$real_name_PC;
+        
+//    echo "<br>remote_file_PK: ".$remote_file_PK;
+//    echo "<br>remote_file_PC: ".$remote_file_PC;
+    
+               if(!is_dir('../svenska/'.$userFolder)){
+//                    echo "<br>NIE istnieje userFolder: $userFolder";
+                    if(ftp_mkdir($conn_id,$userFolder)){
+//                        echo "<br> Dir $userFolder CREATED"; 
+                    }else{
+//                        echo "<br> Dir $userFolder NOT created";
+                    }
+                }else{
+//                    echo "<br>Istnieje już folder: $userFolder - nie tworzę nowego!";
+                }
+//                echo "<br> $remote_file_PK / ".$_FILES['file']['tmp_name'][0];
+                $try_put_file_PK = ftp_put($conn_id, $remote_file_PK, $_FILES['file']['tmp_name'][0], FTP_BINARY);
+                if($try_put_file_PK){
+//                    echo "<br>".__LINE__."/ successfully uploaded {$_FILES['file']['name'][0]}\n";
+                }else{
+//                    echo "<br>".__LINE__."/ NOT uploaded {$_FILES['file']['name'][0]}\n";
+                }
+
+//                 echo "<br> $remote_file_PC / ".$_FILES['file']['tmp_name'][1];    
+                $try_put_file_PC = ftp_put($conn_id, $remote_file_PC, $_FILES['file']['tmp_name'][1], FTP_BINARY);
+                if($try_put_file_PC){
+//                    echo "<br>".__LINE__."/ successfully uploaded {$_FILES['file']['name'][1]}\n";
+                }else{
+//                    echo "<br>".__LINE__."/ NOT uploaded {$_FILES['file']['name'][1]}\n";
+                }    
+    
+   /**/ 
+    
+    
+    
+    // Tu odczytujemy plik i zapisujemy odczytane wartości (jeśli klucz lub zaszyfr. wiadomość) do BD
+                try{
+//                    echo "<br>FILE TYPE_PublicKey:" .$_FILES['file']['type'][0]."<br>";
+//                    echo "<br>FILE Name_PublicKey:" .$_FILES['file']['name'][0]."<br>";
+//
+//                    echo "<br>FILE TYPE_PassCrypt:" .$_FILES['file']['type'][1]."<br>";
+//                    echo "<br>FILE Name_PassCrypt:" .$_FILES['file']['name'][1]."<br>";
+
+                    $fil_PK = $_FILES['file']['name'][0];
+                    $fil_PC = $_FILES['file']['name'][1];
+                    
+//                    echo "<br>STRPOS: ".strpos($fil_PK,"public_key")."<br>";
+//                    echo "<br>STRPOS: ".strpos($fil_PC,"Secret_Message")."<br>";
+                    
+                    $filBool_PK = false;
+                    $filBool_PC = false;
+                    
+                    $filBool_PK = strpos($fil_PK,"public_key");
+                    $filBool_PC = strpos($fil_PC,"Secret_Message");
+                            
+                    if($filBool_PK AND $filBool_PC){
+//                        echo "<br> biere plik $fil_PK i $fil_PC do zabawy!!! <br>";
+                        $file_PK = trim(file_get_contents($_FILES['file']['tmp_name'][0], true));
+                        $file_PC = trim(file_get_contents($_FILES['file']['tmp_name'][1], true));
+//         
+//                        echo "<br>".__LINE__."/file_PK: ".$file_PK;
+//                        echo "<br>".__LINE__."/file_PC: ".$file_PC;
+//                        echo "<br>_FILES[file][tmp_name]: ".$_FILES["file"]["tmp_name"][0];
+//                        echo "<br>_FILES[file][tmp_name]: ".$_FILES["file"]["tmp_name"][1];
+                     }else{
+//                        echo "<br> NIE biere pliku $fil do zabawy!!! <br>";
+                     }
+                } catch (Exception $ex) {
+//                    echo "<br>".__LINE__."/ERROR: ".$ex;
+                }
+	ftp_close($conn_id);
+
+    $PublicKey = $file_PK;
+    $PassCrypt = $file_PC;
     
     foreach($_POST as $k =>$v){
-        echo "<br>$k=>$v";
+//        echo "<br>$k=>$v";
     }
-    
-//    echo "<br>HASLA: 1) $haslo 2) $haslo2";
-       
+         
     if($haslo != $haslo2){
-        ?><script> alert("Różne hasla!!!") </script><?php
-//        header("Location: CreateUser.php");
-//        $output = shell_exec('ls -lart');
-//        echo "<pre>$output</pre>";
-        
+        ?><script> alert("Różne hasla!!!") </script><?php        
     }else{
-        echo "<br>".$imie." / ".$nazwisko." / ".$login." / ".$haslo." / ".$haslo2."<br>";
-        echo __DIR__."<br>";
-        echo __FILE__;
+//        echo "<br>".$imie." / ".$nazwisko." / ".$login." / ".$haslo." / ".$haslo2."<br>";
+//        echo __DIR__."<br>";
+//        echo __FILE__;
         try{
             $newUser = new User();
             $boola = $newUser->setData($imie, $nazwisko, $login, $haslo, $email, $PublicKey, $PassCrypt);
-//            $output = exec('/home/bartilev/public_html/Svenska/Includes/dll/gp-gitc8c06bc.exe skrypt_01.gp');
             if($boola){
-                $communicate = '?comm='.'OK';
+                $_SESSION['communicate'] = 'OK';
+//                echo "<br> WESZŁO DO BAZY!!!!!!";
+                // Jak weszło do bazy to robię dopieroupload plików!!! -- W tym miejscu nie działa, nie wiem czemu.
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!! CZEMU NIE DZIAŁA!!!!!!!!!!!!!!
+/*               if(!is_dir('../svenska/'.$userFolder)){
+                    echo "<br>NIE istnieje userFolder: $userFolder";
+                    if(ftp_mkdir($conn_id,$userFolder."/")){
+                        echo "<br> Dir $userFolder CREATED"; 
+                    }else{
+                        echo "<br> Dir $userFolder NOT created";
+                    }
+                }else{
+                    echo "<br>Istnieje już folder: $userFolder - nie tworzę nowego!";
+                }
+                echo "<br> $remote_file_PK / ".$_FILES['file']['tmp_name'][0];
+                $try_put_file_PK = ftp_put($conn_id, $remote_file_PK, $_FILES['file']['tmp_name'][0], FTP_BINARY);
+                if($try_put_file_PK){
+                    echo "<br>".__LINE__."/ successfully uploaded {$_FILES['file']['name'][0]}\n";
+                }else{
+                    echo "<br>".__LINE__."/ NOT uploaded {$_FILES['file']['name'][0]}\n";
+                }
+                
+                    $remote_file_PK = $userFolder."/".$real_name_PK;
+                    $remote_file_PC = $userFolder."/".$real_name_PC;
+                
+                 echo "<br> $remote_file_PC / ".$_FILES['file']['tmp_name'][1];    
+                $try_put_file_PC = ftp_put($conn_id, $remote_file_PC, $_FILES['file']['tmp_name'][1], FTP_BINARY);
+                if($try_put_file_PC){
+                    echo "<br>".__LINE__."/ successfully uploaded {$_FILES['file']['name'][1]}\n";
+                }else{
+                    echo "<br>".__LINE__."/ NOT uploaded {$_FILES['file']['name'][1]}\n";
+                }/**/
             }else{
-                $communicate = '?comm='.'User like <span class=red>"'.$login.'"</span> exists';
+//                echo "<br>".__LINE__."/MSQL ERROR: ".mysql_error();
+                $_SESSION['communicate'] = 'User like <span class=red>"'.$login.'"</span> exists';
             }
         } catch (Exception $ex) {
             $error = $ex->getMessage();
-            echo '<br>Caught exception: ',  t($error), "\n";
-            $communicate = '?comm='.$error;
+//            echo '<br>Caught exception: ',  t($error), "\n";
+//            $_SESSION['communicate'] = $error;
         }
-        
-//        $output = shell_exec('ls -l');
-        echo "<pre>Output $output</pre>";
+//        echo "<pre>Output $output</pre>";
 //        header("Location: index.php".$communicate);
-        header("Location: index.php");
+//        header("Location: index.php");
+        echo "<script> window.location.replace('index.php') </script>" ;
     }
 }
 ?>

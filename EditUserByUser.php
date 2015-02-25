@@ -24,7 +24,7 @@ $dataRow = $User->getUsersDataForEditByUser($_SESSION['user']);
 
 //var_dump($dataRow);
 ?>
-<form id="EditUserForm" action="EditUserByUserMOD.php" method="post">
+<form id="EditUserForm" action="EditUserByUserMOD.php" method="post" enctype="multipart/form-data">
     <table class='table_log'>
 <?php
     $i=0;
@@ -37,14 +37,35 @@ $dataRow = $User->getUsersDataForEditByUser($_SESSION['user']);
             
             switch($k){
                 case 'id':
+    echo "          <tr><td colspan=8></td></tr>";
+                    echo "<td>".t($k)."</td><td ><input type='text' class='UsrAdm_grey' name='$k' value='$v' readonly></td></tr>";
+                    break;
                 case 'user':
                 case 'rola':
                     echo "<td>".t($k)."</td><td ><input type='text' class='UsrAdm_grey' name='$k' value='$v' readonly></td>";  
                     break;
-                case 'data':
+                case 'PublicKey':
+    echo "          <tr><td colspan=8>================</td></tr>";
+                case 'PassCrypt':
+
+    
+    echo "          <tr>"
+                    . "<td>".t('Old')." ".t($k)."<span class='fileldDescrBlu'>(".t('obecnie funkcjonujący').")</span></td>"
+                    . "<td colspan=2><input size='40' class='UsrAdm_grey' value='".substr($v,0,35)."...' readonly></td>"
+                        ."<td colspan=1></td>"
+                    . "<td>".t($k)."<span class='fileldDescrBlu'>(".t('wygenerowany algorytmem RSA').")</span></td>"
+                    . "<td colspan='3'><input name='file[]' type='file' value='".$v."' /><br></td></td>"
+                ."</tr>";
                     
+                    break;
+                case 'data':
+echo "          <tr><td colspan=8>================</td></tr>";
                     continue;
 //                    echo "<td>".t($k)."</td><td><input type='text' name='$k' value='$v' readonly></td>";  
+                    break;
+                case 'password':
+//                    echo "<td>".t($k)."</td><td><input type='text' name='$k' value='$v'>passs</td>";
+                    continue;
                     break;
                 default:
                     echo "<td>".t($k)."</td><td><input type='text' name='$k' value='$v'></td>";  
@@ -56,7 +77,30 @@ $dataRow = $User->getUsersDataForEditByUser($_SESSION['user']);
             }
             $i++;
         }
-        echo "<tr><td colspan='".(2*$n-1)."'></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
+        ?>
+        <tr>
+            <td><u><b><?php echo t('CHANGE_PASSWORD') ?></b></u></td>
+            <td colspan ="5"></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><?php echo t('OLD_PASSWORD') ?></td>
+            <td><input type='password' id='pass_old' name='pass_old' value='<?php echo $dataRow['password'] /*Do usunięcia!!!!*/?>'></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><?php echo t('NEW_PASSWORD_1') ?></td>
+            <td><input type='password' id='pass_new_1' name='pass_new_1' value=''></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><?php echo t('NEW_PASSWORD_2') ?></td>
+            <td><input type='password' id='pass_new_2' name='pass_new_2' value=''></td>
+        </tr>
+        <tr><td colspan=8>================</td></tr>
+        <?php
+        echo "<tr><td colspan='".(2*$n-3)."'></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
 ?>          
   <tr>
       <td colspan=4><u><b><?php echo t("Download files");?>:</b></u></td>
@@ -67,7 +111,7 @@ $dataRow = $User->getUsersDataForEditByUser($_SESSION['user']);
       <td colspan=4></td>
   </tr>
   <tr>
-      <td colspan=4><a href="Resources/Pari/RSAPassword/RSAPassword.zip" download>RSAPassword</a></td>
+      <td colspan=4><a href="Resources/Pari/RSAPassword/RSAPassword.zip" download>RSAPassword.zip</a></td>
   </tr>
   <tr>
       <td colspan=4><a href="Resources/Pari/Pari-2-7-2.exe" download>Pari-2-7-2.exe</a></td>

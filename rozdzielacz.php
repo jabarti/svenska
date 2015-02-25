@@ -1,5 +1,4 @@
 <?php
-
 /****************************************************
  * Project:     Svenska
  * Filename:    rozdzielacz.php
@@ -32,8 +31,12 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"ShowRandomStats.php");
              array_push($allowPages,"help_test_admin.php");
              array_push($allowPages,"UserAdmin.php");
+             array_push($allowPages,"try.php");
+             array_push($allowPages,"upload.php");
          case 'user_plus':
              array_push($allowPages,"Edit.php");
+             array_push($allowPages,"try.php");
+             array_push($allowPages,"upload.php");
          case 'user':
              array_push($allowPages,"motsatsen.php");
              array_push($allowPages,"synonymer.php");
