@@ -89,7 +89,7 @@ if(isset($_SESSION['cz_mov'])){
 //$mr = $word->getAllArr();
 
 //$SQL = sprintf("SELECT * FROM `ord`;");
-echo "<br>SQL: $SQL";
+//echo "<br>SQL: $SQL";
 $mq = mysql_query($SQL);
 
 

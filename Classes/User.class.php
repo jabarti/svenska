@@ -85,11 +85,11 @@ class User {
     
     public function updateDataByUser ($imie, $nazwisko, $password, $PublicKey, $PassCrypt, $email, $usr){
         echo "<br>wchodze3";
-        if($password == ''){
-            return false;
-        }
-        if($PublicKey == '' OR $PassCrypt == ''){
-            $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".sha1($password)."', `email`='".$email."' WHERE `user` = '".$usr."';";
+//        if($password == ''){
+//            return false;
+//        }
+        if($PublicKey == '' OR $PassCrypt == '' OR $password == ''){    // nie można zmienić danych o pass, bez zmiany WSZYSTKICH tych pól
+            $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`email`='".$email."' WHERE `user` = '".$usr."';";
         }else{
             $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".sha1($password)."',`PublicKey`='".$PublicKey."',`PassCrypt`='".$PassCrypt."',`email`='".$email."' WHERE `user` = '".$usr."';";
         }

@@ -139,8 +139,8 @@ try{
     echo "<br>Sorry $ex";
     $bol = "Nie udało się zmienić danych";
 }
-//    echo "<script> window.location.replace('EditUserByUser.php?comm=".$bol."') </script>";
-//    header("Location: EditUserByUser.php?comm=$bol");
+    echo "<script> window.location.replace('EditUserByUser.php?comm=".$bol."') </script>";
+    header("Location: EditUserByUser.php?comm=$bol");
 
 ?>
 <br><button onclick="window.location.href='EditUserByUser.php'">WRÓĆ</button>

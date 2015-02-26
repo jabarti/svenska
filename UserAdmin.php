@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | UserAdminMOD';
+$title = 'Svenska | UserAdmin';
 include 'header.php';
 include 'buttons.php';
 //include 'rozdzielacz.php';

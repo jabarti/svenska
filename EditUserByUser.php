@@ -50,7 +50,7 @@ $dataRow = $User->getUsersDataForEditByUser($_SESSION['user']);
 
     
     echo "          <tr>"
-                    . "<td>".t('Old')." ".t($k)."<span class='fileldDescrBlu'>(".t('obecnie funkcjonujący').")</span></td>"
+                    . "<td>".t('Old').": ".t($k)."<span class='fileldDescrBlu'>(".t('obecnie funkcjonujący').")</span></td>"
                     . "<td colspan=2><input size='40' class='UsrAdm_grey' value='".substr($v,0,35)."...' readonly></td>"
                         ."<td colspan=1></td>"
                     . "<td>".t($k)."<span class='fileldDescrBlu'>(".t('wygenerowany algorytmem RSA').")</span></td>"
@@ -66,9 +66,15 @@ echo "          <tr><td colspan=8>================</td></tr>";
                 case 'password':
 //                    echo "<td>".t($k)."</td><td><input type='text' name='$k' value='$v'>passs</td>";
                     continue;
-                    break;
+//                    break;
+                case 'email':
+                    echo "<tr></tr>";
                 default:
-                    echo "<td>".t($k)."</td><td><input type='text' name='$k' value='$v'></td>";  
+                    echo "<td>".t($k)."</td><td><input type='text' id='$k' name='$k' value='$v'></td>"; 
+                    echo '<tr>
+                            <td colspan="1"></td>
+                            <td colspan="1"><div id="error'.$k.'" class="error"></div></td>
+                          </tr>';
                     break;
             }
             
@@ -86,7 +92,12 @@ echo "          <tr><td colspan=8>================</td></tr>";
         <tr>
             <td></td>
             <td><?php echo t('OLD_PASSWORD') ?></td>
-            <td><input type='password' id='pass_old' name='pass_old' value='<?php echo $dataRow['password'] /*Do usunięcia!!!!*/?>'></td>
+            <!--<td><input type='password' id='pass_old' name='pass_old' value='<?php echo $dataRow['password'] /*Do usunięcia!!!!*/?>'></td>-->
+            <td><input type='password' id='pass_old' name='pass_old' value=''></td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td colspan="1"><div id="errorpass_old" class="error"></div></td>
         </tr>
         <tr>
             <td></td>
@@ -94,14 +105,29 @@ echo "          <tr><td colspan=8>================</td></tr>";
             <td><input type='password' id='pass_new_1' name='pass_new_1' value=''></td>
         </tr>
         <tr>
+            <td colspan="2"></td>
+            <td colspan="1"><div id="errorpass_new_1" class="error"></div></td>
+        </tr>
+        <tr>
             <td></td>
             <td><?php echo t('NEW_PASSWORD_2') ?></td>
             <td><input type='password' id='pass_new_2' name='pass_new_2' value=''></td>
         </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td colspan="1"><div id="errorpass_new_2" class="error"></div></td>
+        </tr>
         <tr><td colspan=8>================</td></tr>
         <?php
-        echo "<tr><td colspan='".(2*$n-3)."'></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
-?>          
+        echo "<tr><td colspan=3 ></td>";
+            if(isset($_GET['comm'])){ ?>
+                <td colspan="2"><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>
+        <?php }else{ ?>
+                <!--<td colspan=4><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>-->
+        <?php }
+//        echo "<td colspan='".(2*$n-)."'></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
+        echo "<td></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
+        ?>          
   <tr>
       <td colspan=4><u><b><?php echo t("Download files");?>:</b></u></td>
       <td colspan=4></td>
@@ -116,12 +142,14 @@ echo "          <tr><td colspan=8>================</td></tr>";
   <tr>
       <td colspan=4><a href="Resources/Pari/Pari-2-7-2.exe" download>Pari-2-7-2.exe</a></td>
   </tr>
-  <tr>
+<!--  <tr>
       <td colspan=4></td>
       <?php if(isset($_GET['comm'])){ ?>
-      <td colspan=4><span class='green'><?php echo t($_GET['comm']); ?></span></td>
+                <td colspan=4><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>
+      <?php }else{ ?>
+                <td colspan=4><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>
       <?php } ?>
-  </tr>
+  </tr>-->
     </table>
 </form>
 <?php
