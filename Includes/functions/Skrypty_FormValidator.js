@@ -82,11 +82,11 @@ function tx() {
     alert("DONE!");
 }
 
-function start(){
+function Validator(){
     t1();
     t2();
 //    tx();
 }
 
-window.onload = start;
+window.onload = Validator;
 //*/
