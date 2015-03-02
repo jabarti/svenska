@@ -49,6 +49,8 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"show.php");
              array_push($allowPages,"mail.php");
              array_push($allowPages,"EditUserByUser.php");
+             array_push($allowPages,"loger.php");
+             array_push($allowPages,"logerMOD.php");
 //                 header("Location: test.php");
              break;
          default:
@@ -56,14 +58,15 @@ if(isset($_SESSION['role'])){
              break;
      }
  }else{
-     ?><script> //alert("05. Wala") </script><?php
+     ?><script>//alert("05. Wala") </script><?php
+     header("Location: loger.php");
  }
 
 //echo "<br>REF:".$ref;
 //echo "<br>allowPages:"; var_dump($allowPages);
 
 if(!in_array($file,$allowPages)){
-//    echo "<BR><br>NIE JEST na liście allowPages";
+    echo "<BR><br>NIE JEST na liście allowPages";
     if($file != 'test.php'){
         ?><script>alert("przed location")</script><?php
         header("Location: test.php");

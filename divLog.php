@@ -27,7 +27,7 @@ if(isset($_SESSION['log'])){
     echo "<div class=divLog>  ".t('Zalogowany jako').": ".$_SESSION['user']." (".$_SESSION['role'].")";//." z hasłem: ". $_SESSION['password'];
         echo "<span id=zegar></span><br>";
         echo "<span id=zegar_log style='visibility: block'></span>";
-        echo "<br><button onclick=\"window.location.href='loger.php'\">".t("Wyloguj")."</button>";
+        echo "<br><button onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
         $tim = $_COOKIE['log'];
         echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
 //        echo "<input id=log_time type=hidden value='".$tim."'>";

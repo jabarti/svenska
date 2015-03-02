@@ -21,7 +21,7 @@ function t1(){
             isValidEmail(this.email)    &&
             
             czyWypelnione(this.haslo)   &&
-            isMinLength (this.haslo, 8)  &&
+            isMinLength (this.haslo, 7)  &&
             czyWypelnione(this.haslo2)  &&
             
             areFieldsEqual(this.haslo, this.haslo2) 

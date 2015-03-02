@@ -34,7 +34,7 @@ function logTime(){
     sec = rozn.getSeconds();
     
     if (hou>22 || (hou==0 && min == 0 && sec==0)){      // >23 to zegar się "przekręca" i de fakto zawsze jest zalogowane!
-        window.location.href = "loger.php"
+        window.location.href = "logerMOD.php?action=logout"
     }    
     
     if (hou==0 && min == 0 && sec<10){

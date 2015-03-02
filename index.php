@@ -15,8 +15,8 @@ include 'header.php';
 include 'buttons.php';
 //include 'rozdzielacz.php';
 
-//vardump($_SESSION);
-//vardump($_COOKIE);
+//var_dump($_SESSION);
+//var_dump($_COOKIE);
 
 if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 //if($_SESSION['log'] == true ){

@@ -19,8 +19,8 @@ include 'buttons.php';
 //    echo "<br>$k => $v";
 //}
 
-$User = new User();
-$dataRow = $User->getUsersDataForEditByUser($_SESSION['user']);
+$UserED = new User();
+$dataRow = $UserED->getUsersDataForEditByUser($_SESSION['user']);
 
 //var_dump($dataRow);
 ?>
