@@ -33,7 +33,8 @@ function logTime(){
     min = rozn.getMinutes();
     sec = rozn.getSeconds();
     
-    if (hou>22 || (hou==0 && min == 0 && sec==0)){      // >23 to zegar się "przekręca" i de fakto zawsze jest zalogowane!
+    if ((hou>22 && min>58)|| (hou==0 && min == 0 && sec==0)){      // >23 to zegar się "przekręca" i de fakto zawsze jest zalogowane!
+//        alert("Ide do logout");
         window.location.href = "logerMOD.php?action=logout"
     }    
     

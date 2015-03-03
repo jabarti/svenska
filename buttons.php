@@ -1,4 +1,4 @@
-﻿<div class="guziki"> 
+<!--﻿<div class="guziki"> -->
 <!--	<a href="../../" class="myButton">localhost</a>
 	<a href='../' class="myButton">Do ParentDir</a>
 	====================
@@ -10,14 +10,17 @@
 //        echo "test1";
 //        echo "<br>".t("jestem tu").": ".__LINE__;
 //        echo "test2";
-        if(isset($_SESSION['user'])){
-            $user = $_SESSION['user'];
-        }else{
-            $user = "nouser";
-        }
+//        if(isset($_SESSION['user'])){
+//            $user = $_SESSION['user'];
+//        }else{
+//            $user = "nouser";
+//        }
         
         if(isset($_SESSION['role'])){
             $usr_role = $_SESSION['role'];
+            ﻿?>
+            <div class="guziki">
+            <?php
         }else{
             $usr_role = '';
         }
@@ -83,17 +86,19 @@
             
             default:
                 ?>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
+<!--                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
                     <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
-                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>-->
                 <?php
                 break;
         }
 //        echo "<br>guziki władowane!"
-        ?>
-</div>
 
+if(isset($_SESSION['role'])){      
+?>
+</div>
 <?php
+}
 include 'rozdzielacz.php';
 ?>

@@ -12,12 +12,100 @@
 if(!isset($_SESSION)){
 //    ob_start();
     session_start();
+?>
+    <script> //console.log("$_SESSIONstart") </script>
+<?php
 //    var_dump($_SESSION);
-//    $_SESSION['try'] = 3;
+//    $_SESSION['licznik_odw'] = 0;
 }else{
-    echo t("SESJA JEST USTANOWIONA wcześniej");
-//    $_SESSION['try']++;
+//    echo t("SESJA JEST USTANOWIONA wcześniej");
+//    $_SESSION['licznik_odw']++;
 }
+
+//echo "<script> console.log('common.inc.php') </script>";
+?>
+    <script> //console.log("$_SESSION['licznik_odw']: <?php echo $_SESSION['licznik_odw']?>") </script>
+<?php
+
+if(isset($_POST)){
+    ?><script>//alert ("Jest POST!!");</script><?php
+    if(isset($_POST['submitLOG'])){
+//        ?><script>//alert ("Jest POST[submitLOG]!!");</script><?php
+        // to to co przeszło z logera, jeszcze nie wiadomo czy jest taki user!!
+        $_SESSION['submitLOG']['user'] = $_POST['user'];
+        $_SESSION['submitLOG']['password'] = sha1($_POST['password']);
+        unset($_POST['submitLOG']);
+    }else{
+//        ?><script>//alert ("NIE MA POST[submitLOG]!!");</script><?php
+//        unset($_SESSION['submitLOG']);
+    }
+}
+
+$log_hours = 23;
+$log_min = 60*57;
+
+if(isset($_GET['kuki'])){
+//    var_dump($_GET);
+    ?><script>//console.log("Jest GET['kuki']!!: <?php echo $_GET['kuki'] ?>");</script><?php
+    switch($_GET['kuki']){       
+        case 'NOT_OK':
+            ?><script>//alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script><?php
+            $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
+            $time_str = date($time);
+            try{
+                if(setcookie("log", $time_str, $time)){
+//                    echo "<br>".__LINE__." / COOKIE (USTAWIONE!:".var_export($_COOKIE['log'], true);
+                }else{
+//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
+                }
+                if(isset($_COOKIE['log'])){
+//                    echo "<br>".__LINE__." / COOKIE (USTAWIONE!:".var_export($_COOKIE['log'], true);
+                }else{
+//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
+                }                  
+            } catch (Exception $ex) {
+                echo "error: $ex";
+//                    echo "<br>COOKIE (ERROR: nie ustawione, czemu???:".var_export($_COOKIE['log'], true);                    
+            }
+            break;
+        case 'NOT_OKW':
+            ?><script>//alert ("Jest GET['kuki']!!: <?php echo $_GET['kuki'] ?> ||");</script><?php
+            $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
+            $time_str = date($time);
+            try{
+                if(setcookie("log", $time_str, $time)){
+//                    echo "<br>".__LINE__." / COOKIE (USTAWIONE!:".var_export($_COOKIE['log'], true);
+                }else{
+//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
+                }
+                if(isset($_COOKIE['log'])){
+//                    echo "<br>".__LINE__." / COOKIE USTAWIONE!:".var_export($_COOKIE['log'], true);
+                }else{
+//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
+                }                  
+            } catch (Exception $ex) {
+                echo "error: $ex";
+//                    echo "<br>COOKIE (ERROR: nie ustawione, czemu???:".var_export($_COOKIE['log'], true);                    
+            }
+            if(isset($_SESSION['licznik_odw']) && $_SESSION['licznik_odw']<3){
+                echo "<script> window.location.reload(); </script>";
+            }elseif(isset($_SESSION['licznik_odw']) && $_SESSION['licznik_odw']<9){
+//                echo $_SESSION['licznik_odw'];
+            }else{
+//                echo "brak Session licznik";
+            }
+
+            
+            break;
+        default:
+            ?><script>//alert ("DEFAULT: Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script><?php 
+            break;
+    }
+}else{
+    ?><script>//alert ("NIE ma GET[kuki]!!");</script><?php
+}
+
+
 
 //header('Content-Type: text/html; charset=utf-8'); 
  // LOAD CUSTOM SETTINGS
@@ -67,6 +155,7 @@ if(!isset($_SESSION)){
 if (isset($_GET['lang'])||isset($_SESSION['lang'])){
     if(isset($_GET['lang']))
         $_SESSION['lang'] = $_GET['lang'];
+        ?><script>//alert ("SESSION LANG!!");</script><?php
 } else {
     $_SESSION['lang'] = "pl";
 }
@@ -100,6 +189,7 @@ if (!AUTO_LOGIN) {
 //	session_write_close();
 //}
 try{
+    ?><script>//alert ("common - try");</script><?php
     require_once 'Paths.php';
     require_once CLASSES_PATH.'Ord.class.php';
     require_once CLASSES_PATH.'User.class.php';
@@ -108,7 +198,9 @@ try{
     
     require_once FUNCTIONS_PATH.'functions.php';
     if(isset($_SESSION['server'])){
+        ?><script>//alert ("isset($_SESSION['server'])");</script><?php
         if($_SESSION['server']=='server'){
+            ?><script>//alert ("isset($_SESSION['server']) == 'server");</script><?php
             include BL_TRANSLATION_PATH.'translacjon.php';
             include BL_TRANSLATION_PATH.'flag.php';
         }else{  // poza serwerem bartilevi nie widoczna będzie zawartość /translation

@@ -48,20 +48,20 @@ class Score {
     }
     
     public function getScoresOfUser($user_name){
-        echo "<br>This USR ID: ". $this->user_id; 
-        echo "<br>get USR ID by name: ". $this->getUsrIdByUsrName($user_name);
+//        echo "<br>This USR ID: ". $this->user_id; 
+//        echo "<br>get USR ID by name: ". $this->getUsrIdByUsrName($user_name);
         
         $user_id = ($this->user_id) ? ($this->user_id) : ($this->getUsrIdByUsrName($user_name));
         
-        echo "<br>FIN USR ID by name: ".$user_id;
+//        echo "<br>FIN USR ID by name: ".$user_id;
         
         $SQL = sprintf("SELECT SUM(`good`), SUM(`bad`) FROM `".$this->table."` WHERE user_id = '".$user_id."';"); // GROUP BY 'id';");
-        echo "<br>SQL: $SQL";
+//        echo "<br>SQL: $SQL";
         $mq = mysql_query($SQL);
         
         $row = mysql_fetch_row($mq);
                
-        echo "<br>Good: ".$row[0]." Bad: ".$row[1];
+//        echo "<br>Good: ".$row[0]." Bad: ".$row[1];
         return $row;
     }
     

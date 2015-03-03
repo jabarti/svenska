@@ -235,6 +235,7 @@ if (isset($_POST['ile_onpage']) || isset($_SESSION['ile_onpage'])){
         $_SESSION['ile_onpage'] = $_POST['ile_onpage'];
 }else{
     $onpage = 25; //ilość newsów na stronę
+    $_SESSION['ile_onpage'] = 25;
 }
 
 $navnum = 3; //ilość wyświetlanych numerów stron, ze względów estetycznych niech będzie to liczba nieparzysta

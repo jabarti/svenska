@@ -8,11 +8,15 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-require_once 'common.inc.php';
-include 'DB_Connection.php';
-include 'divLog.php';
+//require_once 'common.inc.php';
+//include 'DB_Connection.php';
+//include 'divLog.php';
 $title = 'Svenska | Logger';
 include 'header.php';
+
+$_SESSION['licznik_odw']++;     // dla reloaudu z common.inc.php (złe rozwiązanie!!!)
+
+//echo "<script> console.log('loger.php') </script>";
 
 $match = strpos($_SERVER['HTTP_REFERER'], "loger.php");
 ////echo "<br>Macz: ".$match."<br>";
@@ -25,11 +29,11 @@ if(!$match){
         $_SESSION['ref'] = "index.php";
     }
 //    
-echo "<br><span>".t('Przybywasz z: ').$_SESSION['ref']."</span>";
+echo "<span>".t('Przybywasz z: <br><span class=red>').$_SESSION['ref']."</span></span>";
 
 ?>
 <body> 
-    <form action="logerMOD.php" method="post" enctype="multipart/form-data">
+    <form action="logerMOD.php" method="post" >
         <table class='table_log' >
             <tr>
                 <td colspan='2'><h1 class='table_log' style='text-align: center;'> <?php echo t("Panel logowania"); ?> </h1></td>
@@ -61,7 +65,7 @@ echo "<br><span>".t('Przybywasz z: ').$_SESSION['ref']."</span>";
             </tr>-->
             <tr>
                 <td></td>
-                <td><input id=sub name="sub" type="submit" value="<?php echo t("Zaloguj"); ?>"></td>
+                <td><input id='submitLOG' name="submitLOG" type="submit" value="<?php echo t("Zaloguj"); ?>"></td>
             </tr>
             <tr>
                 <td></td>
