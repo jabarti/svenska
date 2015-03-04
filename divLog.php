@@ -42,24 +42,8 @@ if(isset($_SESSION['log'])){
         echo "<div class=divLog>".g("NIE ZALOGOWANY")."</div>";
     }
 }
-//else{
+else{
 //    echo "<br>Brak SESS[log]!!!"."| File:".__FILE__.", line:".__LINE__;
-//    
-////    $_SESSION['log'] = false;
-//if(!isset($_SESSION)){
-//    echo "<br>BARK SESSJI";
-////    ob_start();
-//    require 'common.inc.php';
-////    echo "<script> history.go(-1); </script>";
-////    header("Location: index.php");
-////        header("Location: index.php");
-////    header("Location: Backer.php");
-//}else{
-//    echo "<br>JEST SESSJI";
-//    
-////    header("Location: loger.php");
-//}
-////echo "<script> history.go(-2); </script>";
-////header("Location: Backer.php");
-//
-//}
+//    if(!isset($_SESSION['log']))
+//        echo "ERROR: Brak sesji użytkownika. Prosze wcisnąć F5";
+}
