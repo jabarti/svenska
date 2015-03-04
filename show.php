@@ -23,8 +23,9 @@ if(isset($_SESSION['role']) && ($_SESSION['role']=='visitor' or $_SESSION['role'
     $gosc = false;
 }
 
-if($_SESSION['log'] == true && isset($_COOKIE['log'])){
-
+//if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+if($_SESSION['log'] == true ){
+    
 $word = new Ord();
 $czek ='';
 $irreg = '';

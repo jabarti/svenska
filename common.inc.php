@@ -12,19 +12,11 @@
 if(!isset($_SESSION)){
 //    ob_start();
     session_start();
-?>
-    <script> //console.log("$_SESSIONstart") </script>
-<?php
-//    var_dump($_SESSION);
-//    $_SESSION['licznik_odw'] = 0;
-}else{
-//    echo t("SESJA JEST USTANOWIONA wcześniej");
-//    $_SESSION['licznik_odw']++;
 }
 
 //echo "<script> console.log('common.inc.php') </script>";
 ?>
-    <script> //console.log("$_SESSION['licznik_odw']: <?php echo $_SESSION['licznik_odw']?>") </script>
+    <script> //console.log("$_SESSION['licznik_odw']: <?php// echo $_SESSION['licznik_odw']?>") </script>
 <?php
 
 if(isset($_POST)){
@@ -88,7 +80,7 @@ if(isset($_GET['kuki'])){
 //                    echo "<br>COOKIE (ERROR: nie ustawione, czemu???:".var_export($_COOKIE['log'], true);                    
             }
             if(isset($_SESSION['licznik_odw']) && $_SESSION['licznik_odw']<3){
-                echo "<script> window.location.reload(); </script>";
+//                echo "<script> window.location.reload(); </script>";
             }elseif(isset($_SESSION['licznik_odw']) && $_SESSION['licznik_odw']<9){
 //                echo $_SESSION['licznik_odw'];
             }else{

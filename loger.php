@@ -8,9 +8,9 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-//require_once 'common.inc.php';
-//include 'DB_Connection.php';
-//include 'divLog.php';
+require_once 'common.inc.php';
+include 'DB_Connection.php';
+include 'divLog.php';
 $title = 'Svenska | Logger';
 include 'header.php';
 

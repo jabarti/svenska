@@ -15,7 +15,8 @@ $title = 'Svenska | Test';
 include 'header.php';
 include 'buttons.php';
 
-if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+//if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+if($_SESSION['log'] == true ){
     
  if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
  $_SESSION['good']=0;

@@ -62,8 +62,8 @@ $sercz='';
 $sercz_id='';
 //}
 
-if($_SESSION['log'] == true && isset($_COOKIE['log'])){
-//if($_SESSION['log'] == true){
+//if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+if($_SESSION['log'] == true){
     include 'Search.php';
 
 if(isset($_POST)){

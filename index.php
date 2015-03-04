@@ -18,8 +18,8 @@ include 'buttons.php';
 //var_dump($_SESSION);
 //var_dump($_COOKIE);
 
-if($_SESSION['log'] == true && isset($_COOKIE['log'])){
-//if($_SESSION['log'] == true ){
+//if($_SESSION['log'] == true && isset($_COOKIE['log'])){
+if($_SESSION['log'] == true ){
     include 'Search.php';
 if(isset($_GET['copy_id'])){    
 //    echo "GET COPY =".$_GET['copy_id'];
@@ -46,7 +46,6 @@ if(!isset($_GET['copy_id'])){
 }
 ?>
 <!--<div class=edit_tab_contener>-->
-    <!--<form id='form1' action='index.php' method="POST">-->
     <form id='form1' action='InserterMOD.php' method="POST">
         <table class='tab_insert'>
         <tbody id='podstawowe'>

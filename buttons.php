@@ -1,26 +1,9 @@
 <!--﻿<div class="guziki"> -->
-<!--	<a href="../../" class="myButton">localhost</a>
-	<a href='../' class="myButton">Do ParentDir</a>
-	====================
-	<a href="index.php" class="myButton">Do Insertera.php</a>
-	<a href="test.php" class="myButton">Do testu</a>
-	<a href="Edit.php" class="myButton">Do Edycji</a>
-	<a href="show.php" class="myButton">Do Show/Printer.php</a>-->
-        <?php
-//        echo "test1";
-//        echo "<br>".t("jestem tu").": ".__LINE__;
-//        echo "test2";
-//        if(isset($_SESSION['user'])){
-//            $user = $_SESSION['user'];
-//        }else{
-//            $user = "nouser";
-//        }
+<?php
         
         if(isset($_SESSION['role'])){
             $usr_role = $_SESSION['role'];
-            ﻿?>
-            <div class="guziki">
-            <?php
+            echo '<div class="guziki">';
         }else{
             $usr_role = '';
         }

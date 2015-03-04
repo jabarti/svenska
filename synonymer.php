@@ -25,7 +25,8 @@ if($Word = new Ord()){
     
 }
 
-if(isset($_SESSION['log'])&& isset($_COOKIE['log'])){
+//if(isset($_SESSION['log'])&& isset($_COOKIE['log'])){
+if($_SESSION['log'] == true ){    
     if($_SESSION['log'] == true){
 //        echo "<br>Zalogowany jako: ".$_SESSION['user'];//." z hasłem: ". $_SESSION['password'];
         

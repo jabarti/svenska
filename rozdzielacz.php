@@ -61,9 +61,11 @@ if(!in_array($file,$allowPages)){
         ?><script>//alert('TESTER:<?php //echo $tester; ?>')</script><?php
         header("Location: test.php");
     }
-}else{
+}/*
+else{
     ?><script>//alert('<?php //echo $tester?>')</script><?php
     ?><script>//alert('JEST na liście allowPages')</script><?php
 //    echo "<BR>JEST na liście allowPages";
 //    header("Location: ".$file);
 }
+/**/

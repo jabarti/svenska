@@ -33,7 +33,7 @@ if(isset($_SESSION['log'])){
         if(isset($_COOKIE['log'])){
            $tim = $_COOKIE['log']; 
         }else{
-            $tim = time()+60*1;
+            $tim = time()+60*60;
         }
         echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
 //        echo "<input id=log_time type=hidden value='".$tim."'>";
@@ -41,9 +41,25 @@ if(isset($_SESSION['log'])){
     }else{
         echo "<div class=divLog>".g("NIE ZALOGOWANY")."</div>";
     }
-}else{
-    echo "<br>Brak SESS[log]!!!"."| File:".__FILE__.", line:".__LINE__;
-    
-//    $_SESSION['log'] = false;
-    header("Location: index.php");
 }
+//else{
+//    echo "<br>Brak SESS[log]!!!"."| File:".__FILE__.", line:".__LINE__;
+//    
+////    $_SESSION['log'] = false;
+//if(!isset($_SESSION)){
+//    echo "<br>BARK SESSJI";
+////    ob_start();
+//    require 'common.inc.php';
+////    echo "<script> history.go(-1); </script>";
+////    header("Location: index.php");
+////        header("Location: index.php");
+////    header("Location: Backer.php");
+//}else{
+//    echo "<br>JEST SESSJI";
+//    
+////    header("Location: loger.php");
+//}
+////echo "<script> history.go(-2); </script>";
+////header("Location: Backer.php");
+//
+//}
