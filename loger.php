@@ -14,7 +14,7 @@ include 'divLog.php';
 $title = 'Svenska | Logger';
 include 'header.php';
 
-$_SESSION['licznik_odw']++;     // dla reloaudu z common.inc.php (złe rozwiązanie!!!)
+//$_SESSION['licznik_odw']++;     // dla reloaudu z common.inc.php (złe rozwiązanie!!!)
 
 //echo "<script> console.log('loger.php') </script>";
 

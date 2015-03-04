@@ -21,7 +21,7 @@ if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();
 //    echo "<br>line(".__LINE__.") Empty_records: ";var_dump($empty_rec);
     
-    $MAX = $Word->getLastId();
+//    $MAX = $Word->getLastId();
     
 }
 
@@ -38,7 +38,7 @@ if($_SESSION['log'] == true ){
                 <input type=submit name=submit value=".t('Szukaj synonimów').">
               </form>";
         
-        
+        $i=0;
         if(isset($_GET)){
             echo "<br>ISSET GET!!!";
             if(isset($_GET['sercz_synonym_nr'])){

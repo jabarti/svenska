@@ -124,6 +124,7 @@ if(isset($_GET['sercz_id'])){
     $sercz_id = " WHERE `id` = '".$id."'";
 }
 
+$urls = '';
 if(isset($_GET['urls']) || isset ($_SESSION['urls']) && !isset($_GET['sercz_id'])){
 //    $urls = explode(",",$_GET['urls']);
     
@@ -230,7 +231,7 @@ extract($row1);
 //echo "<br>All Ord: ".$all_ord;
 
 if (isset($_POST['ile_onpage']) || isset($_SESSION['ile_onpage'])){
-    $onpage = $_POST['ile_onpage'] ? $_POST['ile_onpage'] : $_SESSION['ile_onpage']; //ilość newsów na stronę
+    $onpage = (isset($_POST['ile_onpage'])) ? $_POST['ile_onpage'] : $_SESSION['ile_onpage']; //ilość newsów na stronę
     if (isset($_POST['ile_onpage']))
         $_SESSION['ile_onpage'] = $_POST['ile_onpage'];
 }else{

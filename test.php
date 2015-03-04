@@ -52,22 +52,27 @@ if(isset($_POST['typ_cz_mov'])){
         $_SESSION['typ_cz_mov'] = $_POST['typ_cz_mov'];
     }
 }
+
+$typ_current = '';
+$group_ord = '';
+
 if(isset($_POST['group_ord'])){
     if($_POST['group_ord'] == 'clear'){
         $_SESSION['group_ord'] = false;
     }else{
         $_SESSION['typ_cz_mov'] = 'verb';
         $_SESSION['group_ord'] = $_POST['group_ord'];
+        
+        $typ_current =  $_SESSION['typ_cz_mov'];
+        $group_ord =    $_SESSION['group_ord'];
     }
 }
-$typ_current =  $_SESSION['typ_cz_mov'];
-$group_ord =    $_SESSION['group_ord'];
-
 
 //        echo "<br>POST['typ_cz_mov']:".$_POST['typ_cz_mov'];
 //        echo "<br>SESSION['typ_cz_mov']:".$_SESSION['typ_cz_mov'];
 //        echo "<br>typ_current:".$typ_current;
-if($_POST['group_ord'] == false && $group_ord == false){
+
+if(isset($_POST['group_ord']) && $_POST['group_ord'] == false && $group_ord == false){
 //    echo "<br>NORMAL!";
     $arr = $Word->getQuestionIDsArrByType($typ_current);
 }else{

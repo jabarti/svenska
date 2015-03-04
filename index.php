@@ -17,7 +17,7 @@ include 'buttons.php';
 
 //var_dump($_SESSION);
 //var_dump($_COOKIE);
-
+$mfa = array();
 //if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 if($_SESSION['log'] == true ){
     include 'Search.php';
@@ -63,7 +63,7 @@ if(!isset($_GET['copy_id'])){
             <tr>
             <tr>
                 <td class='label'><?php echo t("polski"); ?></td>
-                <td><input id='id_ord' name='id_ord' value="<?php echo $mfa['id_ord']?$mfa['id_ord']:''; ?>"></td>
+                <td><input id='id_ord' name='id_ord' value="<?php echo (isset($mfa['id_ord']))?$mfa['id_ord']:''; ?>"></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
                     <select id=typ name='typ'>
@@ -100,7 +100,7 @@ if(!isset($_GET['copy_id'])){
                     </select>
                 </td>
                 <td class='label'><?php echo t("szwedzki"); ?></td>
-                <td><input id='trans' name='trans' value="<?php echo $mfa['trans']?$mfa['trans']:''; ?>"></td>
+                <td><input id='trans' name='trans' value="<?php echo (isset($mfa['trans']))?$mfa['trans']:''; ?>"></td>
                 
             <tr>    
             <tr>    
@@ -140,21 +140,21 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("infinitive"); ?><br>(infinitive)</td>
-                <td><input id='infinitive' name='infinitive' value="<?php echo $mfa['infinitive']?$mfa['infinitive']:''; ?>"></td>
+                <td><input id='infinitive' name='infinitive' value="<?php echo (isset($mfa['infinitive']))?$mfa['infinitive']:''; ?>"></td>
                 <td class='label'><?php echo t("present"); ?><br>(present)</td>
-                <td><input id='presens' name='presens' value="<?php echo $mfa['presens']?$mfa['presens']:''; ?>"></td>
+                <td><input id='presens' name='presens' value="<?php echo (isset($mfa['presens']))?$mfa['presens']:''; ?>"></td>
                 <td class='label'><?php echo t("past"); ?><br>(past)</td>
-                <td><input id='past' name='past' value="<?php echo $mfa['past']?$mfa['past']:''; ?>"></td>
+                <td><input id='past' name='past' value="<?php echo (isset($mfa['past']))?$mfa['past']:''; ?>"></td>
                 <td class='label'><?php echo t("supine"); ?><br>(supine)</td>
-                <td><input id='supine' name='supine' value="<?php echo $mfa['supine']?$mfa['supine']:''; ?>"></td>
+                <td><input id='supine' name='supine' value="<?php echo (isset($mfa['supine']))?$mfa['supine']:''; ?>"></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("imperative"); ?><br>(imperative)</td>
-                <td><input id='imperative' name='imperative' value="<?php echo $mfa['imperative']?$mfa['imperative']:''; ?>"></td>
+                <td><input id='imperative' name='imperative' value="<?php echo (isset($mfa['imperative']))?$mfa['imperative']:''; ?>"></td>
                 <td class='label'><?php echo t("present participle"); ?> <br>(present participle)</td>
-                <td><input id='present_participle' name='present_participle' value="<?php echo $mfa['present_participle']?$mfa['present_participle']:''; ?>"></td>
+                <td><input id='present_participle' name='present_participle' value="<?php echo (isset($mfa['present_participle']))?$mfa['present_participle']:''; ?>"></td>
                 <td class='label'><?php echo t("past participle"); ?> <br>(past participle)</td>
-                <td><input id='past_participle' name='past_participle' value="<?php echo $mfa['past_participle']?$mfa['past_participle']:''; ?>"></td>
+                <td><input id='past_participle' name='past_participle' value="<?php echo (isset($mfa['past_participle']))?$mfa['past_participle']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             
@@ -169,17 +169,17 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("Passive infinitive"); ?> <br>(Passive infinitive)</td>
-                <td><input id='pas_infinitive' name='pas_infinitive' value="<?php echo $mfa['pas_infinitive']?$mfa['pas_infinitive']:''; ?>"></td>
+                <td><input id='pas_infinitive' name='pas_infinitive' value="<?php echo (isset($mfa['pas_infinitive']))?$mfa['pas_infinitive']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive present"); ?> <br>(Passive present)</td>
-                <td><input id='pas_presens' name='pas_presens' value="<?php echo $mfa['pas_presens']?$mfa['pas_presens']:''; ?>"></td>
+                <td><input id='pas_presens' name='pas_presens' value="<?php echo (isset($mfa['pas_presens']))?$mfa['pas_presens']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive past"); ?> <br>(Passive past)</td>
-                <td><input id='pas_preterite' name='pas_preterite' value="<?php echo $mfa['pas_preterite']?$mfa['pas_preterite']:''; ?>"></td>
+                <td><input id='pas_preterite' name='pas_preterite' value="<?php echo (isset($mfa['pas_preterite']))?$mfa['pas_preterite']:''; ?>"></td>
                 <td class='label'><?php echo t("Passive supine"); ?> <br>(Passive supine)</td>
-                <td><input id='pas_supine' name='pas_supine' value="<?php echo $mfa['pas_supine']?$mfa['pas_supine']:''; ?>"></td>
+                <td><input id='pas_supine' name='pas_supine' value="<?php echo (isset($mfa['pas_supine']))?$mfa['pas_supine']:''; ?>"></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("Passive imperative"); ?> <br>(Passive imperative)</td>
-                <td><input id='pas_imperative' name='pas_imperative' value="<?php echo $mfa['pas_imperative']?$mfa['pas_imperative']:''; ?>"></td>
+                <td><input id='pas_imperative' name='pas_imperative' value="<?php echo (isset($mfa['pas_imperative']))?$mfa['pas_imperative']:''; ?>"></td>
 <!--                <td class='label'>P_present_participle</td>
                 <td><input id='in1' name='pas_present_participle'></td>
                 <td class='label'>P_past_participle</td>
@@ -204,13 +204,13 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("Single indefinite");?><br>(Single indefinite)</td>
-                <td><input id='S_indefinite' name='S_indefinite' value="<?php echo $mfa['S_indefinite']?$mfa['S_indefinite']:''; ?>"></td>
+                <td><input id='S_indefinite' name='S_indefinite' value="<?php echo (isset($mfa['S_indefinite']))?$mfa['S_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Single definite");?><br>(Single definite)</td>
-                <td><input id='S_definite' name='S_definite' value="<?php echo $mfa['S_definite']?$mfa['S_definite']:''; ?>"></td>
+                <td><input id='S_definite' name='S_definite' value="<?php echo (isset($mfa['S_definite']))?$mfa['S_definite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural indefinite");?><br>(Plural indefinite)</td>
-                <td><input id='P_indefinite' name='P_indefinite' value="<?php echo $mfa['P_indefinite']?$mfa['P_indefinite']:''; ?>"></td>
+                <td><input id='P_indefinite' name='P_indefinite' value="<?php echo (isset($mfa['P_indefinite']))?$mfa['P_indefinite']:''; ?>"></td>
                 <td class='label'><?php echo t("Plural definite"); ?><br>(Plural definite)</td>
-                <td><input id='P_definite' name='P_definite' value="<?php echo $mfa['P_definite']?$mfa['P_definite']:''; ?>"></td>
+                <td><input id='P_definite' name='P_definite' value="<?php echo (isset($mfa['P_definite']))?$mfa['P_definite']:''; ?>"></td>
             </tr>
             <tr>
                 <td><br></td>
@@ -228,21 +228,21 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("neuter"); ?> <br>(neuter)</td>
-                <td><input id='neuter' name='neuter' value="<?php echo $mfa['neuter']?$mfa['neuter']:''; ?>"></td>
+                <td><input id='neuter' name='neuter' value="<?php echo (isset($mfa['neuter']))?$mfa['neuter']:''; ?>"></td>
                 <td class='label'><?php echo t("masculin"); ?> <br>(masculin)</td>
-                <td><input id='masculin' name='masculin' value="<?php echo $mfa['masculin']?$mfa['masculin']:''; ?>"></td>
+                <td><input id='masculin' name='masculin' value="<?php echo (isset($mfa['masculin']))?$mfa['masculin']:''; ?>"></td>
                 <td class='label'><?php echo t("plural"); ?> <br>(plural)</td>
-                <td><input id='plural' name='plural' value="<?php echo $mfa['plural']?$mfa['plural']:''; ?>"></td>
+                <td><input id='plural' name='plural' value="<?php echo (isset($mfa['plural']))?$mfa['plural']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             <tbody id='stopniowanie' class='nobordtop'>
             <tr>
                 <td  class='label'><?php echo t("positive"); ?> <br>(positive)</td>
-                <td><input id='st_rowny' name='st_rowny' value="<?php echo $mfa['st_rowny']?$mfa['st_rowny']:''; ?>"></td>
+                <td><input id='st_rowny' name='st_rowny' value="<?php echo (isset($mfa['st_rowny']))?$mfa['st_rowny']:''; ?>"></td>
                 <td  class='label'><?php echo t("comparative"); ?> <br>(comparative)</td>
-                <td><input id='st_wyzszy' name='st_wyzszy' value="<?php echo $mfa['st_wyzszy']?$mfa['st_wyzszy']:''; ?>"></td>
+                <td><input id='st_wyzszy' name='st_wyzszy' value="<?php echo (isset($mfa['st_wyzszy']))?$mfa['st_wyzszy']:''; ?>"></td>
                 <td  class='label'><?php echo t("superlative"); ?> <br>(superlative)</td>
-                <td><input id='st_najwyzszy' name='st_najwyzszy' value="<?php echo $mfa['st_najwyzszy']?$mfa['st_najwyzszy']:''; ?>"></td>
+                <td><input id='st_najwyzszy' name='st_najwyzszy' value="<?php echo (isset($mfa['st_najwyzszy']))?$mfa['st_najwyzszy']:''; ?>"></td>
                 <td colspan='2'></td>
             </tr>
             <tr>
@@ -263,11 +263,11 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("cardinal number"); ?> <br>(cardinal number)</td>
-                <td><input id='in1' name='glowny' value="<?php echo $mfa['glowny']?$mfa['glowny']:''; ?>"></td>
+                <td><input id='in1' name='glowny' value="<?php echo (isset($mfa['glowny']))?$mfa['glowny']:''; ?>"></td>
                 <td class='label'><?php echo t("ordinal number"); ?> <br>(ordinal number)</td>
-                <td><input id='in1' name='porzadkowy' value="<?php echo $mfa['porzadkowy']?$mfa['porzadkowy']:''; ?>"></td>
+                <td><input id='in1' name='porzadkowy' value="<?php echo (isset($mfa['porzadkowy']))?$mfa['porzadkowy']:''; ?>"></td>
                 <td class='label'><?php echo t("fraction"); ?> <br>(fraction)</td>
-                <td><input id='in1' name='ulamek' value="<?php echo $mfa['ulamek']?$mfa['ulamek']:''; ?>"></td>
+                <td><input id='in1' name='ulamek' value="<?php echo (isset($mfa['ulamek']))?$mfa['ulamek']:''; ?>"></td>
                  <td colspan="2"></td>
             </tr>
             <tr>
@@ -287,12 +287,12 @@ if(!isset($_GET['copy_id'])){
             </tr>            
             <tr>
                 <td class='label'><?php echo t("wymowa"); ?></td>
-                <td><input id='in1' name='wymowa' value="<?php echo $mfa['wymowa']?$mfa['wymowa']:''; ?>"></td>
+                <td><input id='in1' name='wymowa' value="<?php echo (isset($mfa['wymowa']))?$mfa['wymowa']:''; ?>"></td>
                 <td colspan='6'></td>
             </tr>
             <tr>
                 <td class='label'><?php echo t("uwagi"); ?></td>
-                <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"><?php echo $mfa['uwagi']?$mfa['uwagi']:''; ?></textarea></td>
+                <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"><?php echo (isset($mfa['uwagi']))?$mfa['uwagi']:''; ?></textarea></td>
                 <td class='label'><?php echo t("kategoria"); ?> </td>
                 <td colspan='2'>
                     <!--<select id=kategoria name='kategoria'>-->

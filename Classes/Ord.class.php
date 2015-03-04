@@ -155,11 +155,11 @@ class Ord {
         }
         
         public function getLastId($tabLH) {
-            if( $tabLH){
-                $tabLH = $tabLH; 
-            }else{
-                $tabLH = '';
-            }
+//            if( $tabLH!=''){
+//                $tabLH = $tabLH; 
+//            }else{
+//                $tabLH = '';
+//            }
             $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
             
 //            echo "<br>".$SQL;

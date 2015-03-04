@@ -15,9 +15,9 @@ if(!isset($_SESSION)){
 }
 
 //echo "<script> console.log('common.inc.php') </script>";
-?>
-    <script> //console.log("$_SESSION['licznik_odw']: <?php// echo $_SESSION['licznik_odw']?>") </script>
-<?php
+
+//    echo "<script>console.log('_SESSION[licznik_odw]:".$_SESSION['licznik_odw']."') </script>";
+
 
 if(isset($_POST)){
     ?><script>//alert ("Jest POST!!");</script><?php

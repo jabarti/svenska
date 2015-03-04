@@ -123,7 +123,7 @@ echo "          <tr><td colspan=8>================</td></tr>";
             if(isset($_GET['comm'])){ ?>
                 <td colspan="2"><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>
         <?php }else{ ?>
-                <!--<td colspan=4><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>-->
+                <!--<td colspan=4><span class='red'><b><?php //echo t($_GET['comm']); ?></b></span></td>-->
         <?php }
 //        echo "<td colspan='".(2*$n-)."'></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
         echo "<td></td><td><input type='submit' value='".t("Edytuj dane")."'></td></tr>";
@@ -145,9 +145,9 @@ echo "          <tr><td colspan=8>================</td></tr>";
 <!--  <tr>
       <td colspan=4></td>
       <?php if(isset($_GET['comm'])){ ?>
-                <td colspan=4><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>
+                <td colspan=4><span class='red'><b><?php //echo t($_GET['comm']); ?></b></span></td>
       <?php }else{ ?>
-                <td colspan=4><span class='red'><b><?php echo t($_GET['comm']); ?></b></span></td>
+                <td colspan=4><span class='red'><b><?php //echo t($_GET['comm']); ?></b></span></td>
       <?php } ?>
   </tr>-->
     </table>

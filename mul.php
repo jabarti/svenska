@@ -69,14 +69,14 @@ printf("  Mul(%s,%s); // %s\r\n",$A,$B,  Mul($A,$B));
 printf("BCMul(%s,%s); // %s\r\n",$A,$B,BCMul($A,$B)); // build-in function
 
 function terminal_mul($a, $b){
-    return (int) shell_exec('echo "'.$a.'*'.$b.'"|bc');
+//    return (int) shell_exec('echo "'.$a.'*'.$b.'"|bc');
 }
 
 echo "<br> Mull=".terminal_mul($A, $B);
 
- $r    = mysql_query("Select @sum:=$A * $B");
- $sumR = mysql_fetch_row($r);
- $sum  = $sumR[0];
+// $r    = mysql_query("Select @sum:=$A * $B");
+// $sumR = mysql_fetch_row($r);
+// $sum  = $sumR[0];
  
  echo "<br> SumMSQL=".$sum;
 
@@ -84,14 +84,14 @@ echo "<br> Mull=".terminal_mul($A, $B);
  
  echo "<br>BIG=";var_dump($x);
  
-$abs1 = gmp_abs("274982683358");
-$abs2 = gmp_abs("-274982683358");
-
-echo gmp_strval($abs1) . "\n";
-echo gmp_strval($abs2) . "\n";
-
-$mul = gmp_mul($A, $B);
-echo gmp_strval($mul) . "\n";
+//$abs1 = gmp_abs("274982683358");
+//$abs2 = gmp_abs("-274982683358");
+//
+//echo gmp_strval($abs1) . "\n";
+//echo gmp_strval($abs2) . "\n";
+//
+//$mul = gmp_mul($A, $B);
+//echo gmp_strval($mul) . "\n";
 
 //$path = "http://www.bartilevi.pl/Svenska/Includes/cpp/try1.exe";
 
