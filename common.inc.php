@@ -144,6 +144,9 @@ if(isset($_GET['kuki'])){
 //echo 'linia: '.__LINE__.' =============================================<br>';
 ///**/
 
+//var_dump($_SERVER);
+
+//echo "ACCEPT LANG:".$_SERVER["HTTP_ACCEPT_LANGUAGE"];
 if (isset($_GET['lang'])||isset($_SESSION['lang'])){
     if(isset($_GET['lang']))
         $_SESSION['lang'] = $_GET['lang'];
@@ -152,6 +155,14 @@ if (isset($_GET['lang'])||isset($_SESSION['lang'])){
     $_SESSION['lang'] = "pl";
 }
 
+$REMOTE_ADDR = false;
+//echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
+
+$ServerList = array("81.234.110.249", "85.202.150.195"); //(Mullsjö,OBR11/90)
+if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
+    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
+    $REMOTE_ADDR = "true";
+}
 
 // INCLUDE FILES - DO NOT TOUCH SEQUENCE
 //die("a");

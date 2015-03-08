@@ -17,8 +17,8 @@ include 'header.php';
 
 echo "<br>POST:";var_dump($_POST);
 
-//if ($_SERVER["REMOTE_ADDR"] == '85.202.150.195')    // OBR11/90
-if ($_SERVER["REMOTE_ADDR"] == '81.234.110.249')    // Mullsjö
+
+if ($REMOTE_ADDR)
     $MyServ = "MyServer!";
 else
     $MyServ = $_SERVER["REMOTE_ADDR"];

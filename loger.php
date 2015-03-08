@@ -29,7 +29,7 @@ if(!$match){
         $_SESSION['ref'] = "index.php";
     }
 //    
-echo "<span>".t('Przybywasz z: <br><span class=red>').$_SESSION['ref']."</span></span>";
+//echo "<span>".t('Przybywasz z: <br><span class=red>').$_SESSION['ref']."</span></span>";
 
 ?>
 <body> 
@@ -40,17 +40,21 @@ echo "<span>".t('Przybywasz z: <br><span class=red>').$_SESSION['ref']."</span><
             </tr>
             <tr>
                 <td><label for="user"><?php echo t("Użytkownik"); ?>:</td>
-                <!--<td><input id=user type="text" name="user" value="Bartek"></td>-->
-                <td><select id=user name="user" >
                 <?php
-                    $usr = new User();
-//                    $names = array();
-                    $names = $usr->getUsersNames();
-                    foreach ($names as $k=>$v){
-                        echo "<option value=".$v.">".$v."</option>";
-                    }
+                if($REMOTE_ADDR){
+                    echo "<td><select id=user name='user' >";
+                            echo "<option value='Bartek'>Bartek</option>";
+                        $usr = new User();
+//                      $names = array();
+                        $names = $usr->getUsersNames();
+                        foreach ($names as $k=>$v){
+                            echo "<option value=".$v.">".$v."</option>";
+                        }
+                    echo"    </select>";
+                }else{
+                    echo '<td><input id=user type="text" name="user" ></td>';
+                }
                 ?>
-                    </select>
                 </td>
             </tr>
             <tr>
