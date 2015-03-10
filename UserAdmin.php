@@ -70,8 +70,10 @@ for($i=0; $i<$len; $i++){
         }
     }
     echo "<td colspan=4></td>"
-        . "<td><input type=submit value=".t('Change_UsrAdm'). " name=aktion></td>"
-        . "<td><input type=submit id='Remove_UsrAdm' value=".t('Remove_UsrAdm'). " name=aktion></td>";
+        . "<td><input type='submit' value=".t('Change_UsrAdm'). " name=aktion></td>"
+        . "<td><input type='submit' id='Remove_UsrAdm' value=".t('Remove_UsrAdm'). " name='aktion'></td>"
+//        . "<td><input type='button' id='Remove_UsrAdm' onclick='if(confirm(\"Are you sure?\")==true)submit(".$i.");' name='aktion' value='".t('Remove_UsrAdm')."'></input></td>"
+        ."";
     echo "</form>";
     }
 echo "</tr>";

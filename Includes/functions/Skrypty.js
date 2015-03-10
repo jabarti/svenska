@@ -17,7 +17,18 @@ function isMinLength (pole, mindlugosc)
 	var wartoscpola = pole.value;
 	if(wartoscpola.length < mindlugosc && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Pole musi miec min " + mindlugosc + " znaków!";
+                text1 = "Pole musi miec min ";
+                text2 = mindlugosc;
+                text3 = " znaków!";
+                
+                textFIN = text1 + text2 + text3;
+                try{
+                    this.getTrans(textFIN, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+
+//		document.getElementById("error"+pole.id).innerHTML = textFIN;
 		return false;
 	}
 	else
@@ -32,7 +43,18 @@ function hasLength (pole, dlugosc)
 	var wartoscpola = pole.value;
 	if(wartoscpola.length != dlugosc && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Pole musi miec " + dlugosc + " znakow!";
+                text1 = "Pole musi miec ";
+                text2 = dlugosc;
+                text3 = " znaków!";
+                
+                textFIN = text1 + text2 + text3;
+                try{
+                    this.getTrans(textFIN, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole.id).innerHTML = "Pole musi miec " + dlugosc + " znakow!";
 		return false;
 	}
 	else
@@ -46,7 +68,15 @@ function czyWypelnione(pole)
 {
 	if(pole.value == "")
 	{
-		document.getElementById("error"+pole.id).innerHTML = "To pole jest wymagane!";
+                text1 = "To pole jest wymagane!";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole.id).innerHTML = "To pole jest wymagane!";
 		return false;
 	}
 	else
@@ -63,7 +93,14 @@ function czyWypelnione(pole)
 																										// tzn 12$_dsds-bubaaAAAA@wp.pl lub jabarti@23_&&&.com.pl.
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy adres e-mail w formacie x@x.x lub x@x.x.x";
+                text1 = "Musisz podac prawidlowy adres e-mail w formacie x@x.x lub x@x.x.x";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy adres e-mail w formacie x@x.x lub x@x.x.x";
 		return false;
 	}
 	else
@@ -80,7 +117,15 @@ function isValidPESEL(pole)
 	
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy PESEL";
+                text1 = "Musisz podac prawidlowy PESEL";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy PESEL";
 		return false;
 	}
 	else
@@ -97,7 +142,15 @@ function isValidDowOs(pole)
 																										// tzn 12$_dsds-bubaaAAAA@wp.pl lub jabarti@23_&&&.com.pl.
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy nr Dowodu osobistego";
+                text1 = "Musisz podac prawidlowy nr Dowodu osobistego";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy nr Dowodu osobistego";
 		return false;
 	}
 	else
@@ -114,7 +167,14 @@ function isValidKod(pole)
 																										// tzn 12$_dsds-bubaaAAAA@wp.pl lub jabarti@23_&&&.com.pl.
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy Kod pocztowy w formacie xx-xxx";
+                text1 = "Musisz podac prawidlowy Kod pocztowy w formacie xx-xxx";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy Kod pocztowy w formacie xx-xxx";
 		return false;
 	}
 	else
@@ -130,7 +190,15 @@ function isValidNIP(pole)
 	
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy NIP w formacie np.: 1111111111";
+                text1 = "Musisz podac prawidlowy NIP w formacie np.: 1111111111";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy NIP w formacie np.: 1111111111";
 		return false;
 	}
 	else
@@ -147,7 +215,15 @@ function isValidREGON(pole)
 	
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy REGON w formacie np.: 111111111";
+                text1 = "Musisz podac prawidlowy REGON w formacie np.: 111111111";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy REGON w formacie np.: 111111111";
 		return false;
 	}
 	else
@@ -164,7 +240,14 @@ function isValidKRS(pole)
 	
 	if((reg.test(pole.value)==false) && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy KRS w formacie np.: 1111111111";
+                text1 = "Musisz podac prawidlowy KRS w formacie np.: 1111111111";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy KRS w formacie np.: 1111111111";
 		return false;
 	}
 	else
@@ -180,7 +263,14 @@ function isValidYear(pole)
 		
 	if((reg.test(pole.value)==false)  && (pole.value !=""))
 	{
-		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy ROK";
+                text1 = "Musisz podac prawidlowy ROK";
+
+                try{
+                    this.getTrans(text1, pole);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+//		document.getElementById("error"+pole.id).innerHTML = "Musisz podac prawidlowy ROK";
 		return false;
 	}
 	else
@@ -195,7 +285,15 @@ function areFieldsEqual (pole1, pole2)
 {
 	if (pole1.value != pole2.value)
 	{
-		document.getElementById("error"+pole2.id).innerHTML = "Hasla musza byc takie same!";
+                text1 = "Hasla musza byc takie same!";
+
+                try{
+                    this.getTrans(text1, pole2);
+                }catch(err){
+                    alert("ERROR: "+err);
+                }
+                
+//		document.getElementById("error"+pole2.id).innerHTML = "Hasla musza byc takie same!";
 		return false;
 	}
 	else

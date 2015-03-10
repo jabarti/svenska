@@ -95,6 +95,7 @@ if(isset($_POST)){
 //                }
 //                ftp_close($conn_id);
                 echo "<script> window.location.replace('UserAdmin.php') </script>" ;
+//                exit("Wyszło OK");
             } catch (Exception $ex) {
                 $alert = t($ex->getMessage());
                 ?><script>

@@ -15,14 +15,23 @@ $title = 'Svenska | Create New User';
 include 'header.php';
 //include 'buttons.php';
 
+//$REMOTE_ADDR = false; // Do testów!!!! false oznacza zewnętrznego (normalnego) usera!!!
+
 ?>
 <form id="CreateUserForm" action="CreateUserMOD.php" method="post" enctype="multipart/form-data" >
 <table class='table_log'>
   <tr>
+      <?php if($REMOTE_ADDR){ ?>
     <td><?php echo t("imie");?></td>
     <td><input type="text" id="Imie" name="imie" value='Aleksander'></td> 
     <td><?php echo t("nazwisko");?></td>
     <td><input type="text" id="Nazwisko" name="nazwisko" value='Gruźlik'></td> 
+      <?php }else{ ?>
+    <td><?php echo t("imie");?></td>
+    <td><input type="text" id="Imie" name="imie" value=''></td> 
+    <td><?php echo t("nazwisko");?></td>
+    <td><input type="text" id="Nazwisko" name="nazwisko" value=''></td> 
+      <?php } ?>
   </tr>
   <tr>
     <td></td>
@@ -31,10 +40,17 @@ include 'header.php';
     <td colspan="1"><div id="errorNazwisko" class="error"></td>
   </tr>
   <tr>
+        <?php if($REMOTE_ADDR){ ?>
     <td><?php echo t("login");?></td>
-    <td><input type="text" id="Login" name="login" value='AlekGruzl'></td> 
+    <td><input type="text" id="Login" name="login" value='Al'></td> 
     <td><?php echo t("email");?></td>
     <td><input type="text" id="Email" name="email" value='AlekGruzl@wp.pl'></td> 
+        <?php }else{ ?>
+    <td><?php echo t("login");?></td>
+    <td><input type="text" id="Login" name="login" value=''></td> 
+    <td><?php echo t("email");?></td>
+    <td><input type="text" id="Email" name="email" value=''></td>     
+        <?php } ?>
   </tr>
   <tr>
     <td></td>
@@ -43,10 +59,17 @@ include 'header.php';
     <td colspan="1"><div id="errorEmail" class="error"></td>
   </tr>
   <tr>
+        <?php if($REMOTE_ADDR){ ?>
     <td><?php echo t("hasło");?></td>
     <td><input type="password" id="Haslo" name="haslo" value='AlekGruzl'></td> 
     <td><?php echo t("powtórz hasło");?></td>
     <td><input type="password" id="Haslo2" name="haslo2" value='AlekGruzl'></td> 
+        <?php }else{ ?>
+    <td><?php echo t("hasło");?></td>
+    <td><input type="password" id="Haslo" name="haslo" value=''></td> 
+    <td><?php echo t("powtórz hasło");?></td>
+    <td><input type="password" id="Haslo2" name="haslo2" value=''></td> 
+        <?php } ?>
   </tr>
   <tr>
     <td></td>

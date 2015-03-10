@@ -14,6 +14,10 @@ include 'divLog.php';
 $title = 'Svenska | Logger';
 include 'header.php';
 
+if($REMOTE_ADDR){
+    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
+}
+
 //$_SESSION['licznik_odw']++;     // dla reloaudu z common.inc.php (złe rozwiązanie!!!)
 
 //echo "<script> console.log('loger.php') </script>";

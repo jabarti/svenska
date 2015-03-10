@@ -80,6 +80,8 @@ $(document).ready(function(){
 //        alert("TODO: Status DOING!");
         if(confirm("Create NEW User?")== true){
             window.location.href = "CreateUser.php"
+        }else{
+            window.location.href = "index.php"
         }
     });
     
@@ -252,7 +254,22 @@ $(document).keyup(function(e){
 $(document).ready(function(){
     $("#try").focus();      // Focusig cursor in test.php on answer field
   });
-
+  
+function getTrans(text, pole){
+    $.ajax({    url:"ajax.admin.php",
+                            datatype: 'json',
+                            type: 'post',
+                            data: {
+                                action: 'trans',
+                                var1:   text
+                            },
+                            success:function(data){
+                                $('#error'+pole.id).html(data);
+                                return data
+                            }             
+           });    
+}
+  
 function getTr(text){       // tłumaczenie 'text' (dokładnie opis części mowy wyświetlający się na czerwono
     $.ajax({    url:"ajax.admin.php",
                             type: 'post',
