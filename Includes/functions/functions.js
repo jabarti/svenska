@@ -39,29 +39,29 @@ function logTime(){
     }    
     
     if (hou==0 && min == 0 && sec<10){
-        return("<br>zostało:     <span class=red><b>"+ rozn_str+"</b></span>");
+        return("<span class=red><b>"+ rozn_str+"</b></span>");
     }else{
-        return("<br>zostało:     "+ rozn_str);
+        return(rozn_str);
     }
 }
  
 //wywołanie ma na celu eliminację opóźnienia sekundowego
 if(document.getElementById('zegar') && document.getElementById('zegar_log')){
-document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
-document.getElementById('zegar_log').innerHTML = "do wylogowania "+logTime();
+    document.getElementById('zegar').innerHTML =    getTime();
+    document.getElementById('zegar_log').innerHTML = logTime();
 }
  
 setInterval(function() {
 // logTime();
-if(document.getElementById('zegar') && document.getElementById('zegar_log')){
-    document.getElementById('zegar').innerHTML =     "<br>obecny czas: "+getTime();
-    document.getElementById('zegar_log').innerHTML = "do wylogowania  "+logTime();
+    if(document.getElementById('zegar') && document.getElementById('zegar_log')){
+        document.getElementById('zegar').innerHTML =    getTime(); //"<br>obecny czas: "+getTime();
+        document.getElementById('zegar_log').innerHTML = logTime();
     }
      
 }, 1000);
 
 
-var samogl = new Array('a','å','e','i','o','u','y','ä','ö');  //A, E, I, O, U, Y, Å, Ä och Ö
+//var samogl = new Array('a','å','e','i','o','u','y','ä','ö');  //A, E, I, O, U, Y, Å, Ä och Ö
 //var spolgl = new Array('b');
 //
 
@@ -75,15 +75,16 @@ function start(){
 }
 
 $(document).ready(function(){
-    
-    $('#CreateUser').click(function(){
-//        alert("TODO: Status DOING!");
-        if(confirm("Create NEW User?")== true){
-            window.location.href = "CreateUser.php"
-        }else{
-            window.location.href = "index.php"
-        }
-    });
+//    $('#CreateUser').click(function(){
+//         texty = t('Create NEW User?');
+//        alert(texty);
+////        alert("TODO: Status DOING!");
+//        if(confirm("Create NEW User?")== true){
+//            window.location.href = "CreateUser.php"
+//        }else{
+//            window.location.href = "index.php"
+//        }
+//    });
     
     $("#typ").change(function(){
         var val = $(this).val();
@@ -255,6 +256,21 @@ $(document).ready(function(){
     $("#try").focus();      // Focusig cursor in test.php on answer field
   });
   
+function getTrans1(text, pole){
+    $.ajax({    url:"ajax.admin.php",
+                            datatype: 'json',
+                            type: 'post',
+                            data: {
+                                action: 'trans',
+                                var1:   text
+                            },
+                            success:function(data){
+                                $('#'+pole).html(data);
+                                return data;
+                            }             
+           });    
+}
+
 function getTrans(text, pole){
     $.ajax({    url:"ajax.admin.php",
                             datatype: 'json',

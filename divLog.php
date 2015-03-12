@@ -26,10 +26,14 @@ if(isset($_SESSION['log'])){
     ?><script>//alert ("JEST divlog i jest SESS[log]");</script><?php
     if($_SESSION['log'] == true){
         ?><script>//alert ("JEST divlog i jest SESS[log] == true");</script><?php
-    echo "<div class=divLog>  ".t('Zalogowany jako').": ".$_SESSION['user']." (".$_SESSION['role'].")";//." z hasłem: ". $_SESSION['password'];
-        echo "<span id=zegar></span><br>";
-        echo "<span id=zegar_log style='visibility: block'></span>";
-        echo "<br><button onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
+//    echo "<div class=divLog>  ".t('Zalogowany jako').": ".$_SESSION['user']." (".$_SESSION['role'].")";//." z hasłem: ". $_SESSION['password'];
+    echo "<div class=divLog>  ";//.t('Zalogowany jako').": ".$_SESSION['user']." (".$_SESSION['role'].")";//." z hasłem: ". $_SESSION['password'];
+        echo "<table class='tabl_time'  >";
+        echo "<tr><td><span>".t('Zalogowany jako')."</span>: </td><td><span>".$_SESSION['user']." (".$_SESSION['role'].")</span></td></tr>";
+        echo "<tr><td><span id=zegarText1>".t('obecny czas')."</span>: </td><td><span id=zegar></span></td></tr>";
+        echo "<tr><td><span id=zegarText2>".t('do wylogowania zostało')."</span>: </td><td><span id=zegar_log style='visibility: block'></span></td></tr>";
+        echo "</table>";
+        echo "<button onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
         if(isset($_COOKIE['log'])){
            $tim = $_COOKIE['log']; 
         }else{
@@ -39,7 +43,7 @@ if(isset($_SESSION['log'])){
 //        echo "<input id=log_time type=hidden value='".$tim."'>";
         echo "</div>";
     }else{
-        echo "<div class=divLog>".g("NIE ZALOGOWANY")."</div>";
+        echo "<div class=divLog>".t("NIE ZALOGOWANY")."</div>";
     }
 }
 else{

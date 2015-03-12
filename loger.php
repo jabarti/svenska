@@ -86,7 +86,10 @@ if(!$match){
 
             <tr>
                 <td><?php echo t("Create New User"); ?></td>
-                <td><button id='CreateUser' type="button" ><?php echo t("CreateUser"); ?></button></td>
+    <?php 
+        $DOIT = "javascript:if(confirm(\"".t('Create NEW User?')."\")== true){window.location.href = \"CreateUser.php\"}else{window.location.href = \"index.php\"};";
+        echo "<td><button id='CreateUser' type='button' onclick='".$DOIT."'>".t("CreateUser")."</button></td>";
+     ?>
             </tr>
         </table>
     </form>

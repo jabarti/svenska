@@ -134,10 +134,10 @@ try{
 //    echo "<br>Curr PASs:".$password;
     $classUser->updateDataByUser($imie, $nazwisko, $password, $PublicKey, $PassCrypt, $email, $usr);
 //    echo "<script> window.location.replace('EditUserByUser.php') </script>";
-    $bol = "Dane zmienione";
+    $bol = t("Dane zmienione");
 } catch (Exception $ex) {
     echo "<br>Sorry $ex";
-    $bol = "Nie udało się zmienić danych";
+    $bol = t("Nie udało się zmienić danych");
 }
     echo "<script> window.location.replace('EditUserByUser.php?comm=".$bol."') </script>";
     header("Location: EditUserByUser.php?comm=$bol");
