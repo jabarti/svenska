@@ -196,6 +196,7 @@ try{
     require_once 'Paths.php';
     require_once CLASSES_PATH.'Ord.class.php';
     require_once CLASSES_PATH.'User.class.php';
+    require_once CLASSES_PATH.'Log_Ord.class.php';
     require_once CLASSES_PATH.'Score.class.php';
     require_once CLASSES_PATH.'Random.class.php';
     
@@ -286,3 +287,4 @@ catch(Exception $ex){
 //        echo "ERROR:$ex";
 //    }
 //}
+//var_dump($_SESSION);

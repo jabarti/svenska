@@ -2,7 +2,7 @@
 
 /* * **************************************************
  * Project:     ZZZProba
- * Filename:    test.php
+ * Filename:    test2.php
  * Encoding:    UTF-8
  * Created:     2014-06-26
  *
@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Test';
+$title = 'Svenska | Test2';
 include 'header.php';
 include 'buttons.php';
 
@@ -72,7 +72,7 @@ if(isset($_SESSION[typ_cz_mov])){
 }
 
 $max = count($arr)-1;
-//echo "<br>MAX: ".$max;
+echo "<br>MAX: ".$max;
 //$max = $Word->getLastId(false);
 $rand_index = mt_rand(0, $max); // wybór słowa
 $rand = $arr[$rand_index];
@@ -125,7 +125,7 @@ echo "</form>";
 $method = 'post';
 
 echo "<table class=tab_insert>"
-   . "<form id=testForm1 action=test.php method=".$method.">";
+   . "<form id=testForm1 action=test2.php method=".$method.">";
 echo "<tr>"
                 ."<td>".t("To jest")." ".t(trans($testTab[0]))."</td>"
                 .'<td><textarea rows=1 cols=20 name="'.$testTab[0].'" disabled>'.$testTab[1].'</textarea></td>';

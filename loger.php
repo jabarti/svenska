@@ -85,7 +85,8 @@ if(!$match){
         <?php //echo t("OR"); ?>
 
             <tr>
-                <td><?php echo t("Create New User"); ?></td>
+                <!--<td><?php echo t("Create New User"); ?></td>-->
+                <td></td>
     <?php 
         $DOIT = "javascript:if(confirm(\"".t('Create NEW User?')."\")== true){window.location.href = \"CreateUser.php\"}else{window.location.href = \"index.php\"};";
         echo "<td><button id='CreateUser' type='button' onclick='".$DOIT."'>".t("CreateUser")."</button></td>";
@@ -93,6 +94,21 @@ if(!$match){
             </tr>
         </table>
     </form>
+    <br>
+    <table class='table_log'>
+                    <tr>
+                <td colspan='2'><?php echo t("Mozesz obejrzec prosta wersje logujac sie jako");?>: </td>
+                <!--<td></td>-->
+            </tr>
+            <tr>
+                <td><?php echo t("Użytkownik");?></td>
+                <td><?php echo ": Gosc";?></td>
+            </tr>
+            <tr>
+                <td><?php echo t("hasło");?></td>
+                <td><?php echo ": (".t("puste").")";?></td>
+            </tr>
+    </table>
     
 <?php
 // TODO!!! NIE DZIAŁA NA RAZIE!!!

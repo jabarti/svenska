@@ -162,11 +162,11 @@ class Ord {
 //            }
             $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
             
-//            echo "<br>".$SQL;
+            echo "<br>".$SQL;
             
             $res = mysql_fetch_row(mysql_query($SQL));
             if (mysql_affected_rows()){
-//            echo "<br>res[0]:".$res[0];
+            echo "<br>res[0]:".$res[0];
                 return $res[0];
             }else{
                 echo "<br>ERROR getLastId(false)";
@@ -562,9 +562,28 @@ class Ord {
             return $row;            
         }
         
-        // Zwraca tablicę z ID wszystkich rekordów w bazie w zależności od $type, 
-        // $type = szukany typ (noun, verb etc
-        // $type = false,  wszystkie ID z BD
+        // Zwraca tablicę z ID wszystkich rekordów w bazie
+        public function getQuestionIDsArr(){
+//            echo '<br>TYPE:'.$type.'<br>';
+            $arr = array();
+            $tempSQL = "SELECT id FROM `".$this->table."`;";
+            
+//            echo "<br>".__FILE__.__LINE__.", SQL(getQuestionIDsArr):".$tempSQL;
+            
+            $SQL = sprintf($tempSQL);
+            $mq = mysql_query($SQL);
+            
+            if(mysql_affected_rows()){
+//                echo "<br>".__FILE__.__LINE__.", SQL OK ";
+                while($row = mysql_fetch_assoc($mq)){
+                    array_push($arr, $row['id']);
+                }
+            }else{
+                echo "<br>".__FILE__.__LINE__.", SQL NO OK";
+            }
+            return $arr;
+        }
+        
         public function getQuestionIDsArrByType($type){
 //            echo '<br>TYPE:'.$type.'<br>';
             $arr = array();
@@ -577,7 +596,7 @@ class Ord {
             }else{
                 $tempSQL .= " WHERE `typ` = '".$type."';";
             }
-//            echo "<br>".__FILE__.__LINE__.", SQL:".$tempSQL;
+//            echo "<br>".__FILE__.__LINE__.", SQL(getQuestionIDsArrByType):".$tempSQL;
             
             $SQL = sprintf($tempSQL);
             $mq = mysql_query($SQL);
@@ -602,7 +621,7 @@ class Ord {
             $tempSQL .= " WHERE (`typ`='hjalp_verb' OR `typ`='verb' OR `typ`='modal_verb' OR `typ`='partikelverb' OR `typ`='reflexivaverb') AND `grupa` = \"".$group."\";";            
 //            $tempSQL .= " WHERE `typ` LIKE '%verb' AND `grupa` = '".$group."';"; // ? adverb!
 
-//            echo "<br>".__FILE__.__LINE__.", SQL:".$tempSQL;
+//            echo "<br>".__FILE__.__LINE__.", SQL(getQuestionIDsArrByGroup):".$tempSQL;
             
             $SQL = sprintf($tempSQL);
             $mq = mysql_query($SQL);

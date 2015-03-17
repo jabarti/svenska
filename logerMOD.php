@@ -66,17 +66,19 @@ if(!isset($_GET['action'])){
             if($userLOGMOD->getId($userLoginFORM)){
                 $user_data = $userLOGMOD->getLogDataByUser($userLoginFORM);
 //                echo "<br>DB user data: ";var_dump($user_data);
-                $Usr_name = $user_data[0];                  // user
-                $Usr_pass = $user_data[1];                  // pass
-                $Usr_PubKey = $user_data[2];                // PublicKey
-                $Usr_role = $user_data[3];                  // PublicKey
+                $Usr_name = $user_data[0];                      // user
+                $Usr_pass = $user_data[1];                      // pass
+                $Usr_PubKey = $user_data[2];                    // PublicKey
+                $Usr_role = $user_data[3];                      // PublicKey
+                $Usr_id = $userLOGMOD->getId($userLoginFORM);   // usrId
                 
-                $Usr_mail = $user_data[4];                  // email
+                $Usr_mail = $user_data[4];                      // email
             }else{
                 $Usr_name = 'empty';
                 $Usr_pass = 'empty';
                 $Usr_PubKey = 'empty';
                 $Usr_role = 'empty';
+                $Usr_id = 'empty';
                 $Usr_mail = 'empty';
             }
         } else {
@@ -93,6 +95,7 @@ if(!isset($_GET['action'])){
 //            echo "<br>".__LINE__." /Ustanawiam SESS[log] na true:".var_export($_SESSION['log'], true);
             $_SESSION['user'] = $Usr_name;// ? $_POST['user'] : $_GET['user'];
             $_SESSION['role'] = $Usr_role;
+            $_SESSION['user_id'] = $Usr_id;
             $_SESSION['usr_mail'] = $Usr_mail;
         
             $_SESSION['arrOfAnsw'] = array();
@@ -147,6 +150,7 @@ if(!isset($_GET['action'])){
             $_SESSION['log'] = false; 
             $_SESSION['role'] = '';
             unset($_SESSION['role']);
+            unset($_SESSION['user_id']);      
             unset($_SESSION['usr_mail']);
             unset($_SESSION['user']);
             header("Location: loger.php");
@@ -166,6 +170,7 @@ if(!isset($_GET['action'])){
                 unset($_SESSION['role']);
                 unset($_SESSION['usr_mail']);
                 unset($_SESSION['user']);
+                unset($_SESSION['user_id']);
                 unset($_SESSION['submitLOG']);
                 header("Location: index.php");
 //                exit("<br>".__LINE__."LOGOUT: Location: index.php");

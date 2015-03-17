@@ -52,9 +52,13 @@ if(isset($_POST)){
         $id = '';
         $id_ord = '';
         $Word = new Ord();
+        $Log = new Log_Ord();
+//        $textLog = '';
+//        $textLog .= "\'$k\'=>\'$v\'; ";
         echo  '<br>1) '.$sql_text;
         foreach ($serial as $k=>$v){
 //        echo "<br>".$k."=>".$v;
+//            $textLog .= "\'$k\'=>\'$v\'; ";
             switch($k){
                 case 'edit':
                     break;
@@ -80,6 +84,15 @@ if(isset($_POST)){
         $sql_text .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
         $sql_textPLLH .= " WHERE id='".$id."';";// AND id_ord='".$id_ord."';";
 //        $sql_textPLLH = str_replace($this->table."LH", $this->table, $sql_text);
+        
+        $ID_US=0;
+        IF(ISSET($_SESSION['user_id'])){
+            $ID_US = $_SESSION['user_id'];
+        }ELSE{
+            $ID_US =0;
+        }        
+        
+        $Log->editLog($id, $ID_US, $serial);
         
         echo '<br>line: '.__LINE__.'/ SQL: '.$sql_text;
         echo '<br>line: '.__LINE__.'/ SQL_PLLH: '.$sql_textPLLH;
@@ -163,6 +176,16 @@ if(isset($_POST)){
 
         if( mysql_query($sql_text)){
             ?><script>alert("156 Skasowało");</script><?php
+            
+            $Log = new Log_Ord();
+            $ID_US=0;
+            IF(ISSET($_SESSION['user_id'])){
+                $ID_US = $_SESSION['user_id'];
+            }ELSE{
+                $ID_US =0;
+            }  
+            $Log->deleteLog($id, $ID_US);
+            
             if( mysql_query($sql_textPLLH)){
                 ?><script>alert("158 WESZŁO do PLLH");</script><?php
             }else{

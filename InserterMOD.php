@@ -27,6 +27,14 @@ $id_ord = '';
 if(isset($_POST['submit'])){
     if($_POST['id_ord'] !=''){
         
+//        $text='';
+//        foreach($_POST as $k=>$v){
+////            if($v!='' || $v!='submit'){
+//            if($v!='' AND $k!='submit'){
+//                $text .= "\'$k\'=>\'$v\'; ";
+//            }
+//        }
+        
         $id_ord =               triTrim($_POST['id_ord']);
         $typ =                  triTrim($_POST['typ']);
         $rodzaj =               triTrim($_POST['rodzaj']);
@@ -68,6 +76,7 @@ if(isset($_POST['submit'])){
 //        echo "<br>OTO text: ".$id_ord;
         
         $Word = new Ord();
+        $Log = new Log_Ord();
 //        echo "<br>id of a: ".$Word->getId($id_ord);
         echo "<br>Last index: ".$Word->getLastId(false);
        
@@ -79,6 +88,19 @@ if(isset($_POST['submit'])){
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $glowny, $porzadkowy, $ulamek,
                         $wymowa, $kategoria, $uwagi);
+        
+        $idOrd = $Word->getId($id_ord);
+        
+        $ID_US=0;
+        IF(ISSET($_SESSION['user_id'])){
+            $ID_US = $_SESSION['user_id'];
+        }ELSE{
+            $ID_US =0;
+        }
+        
+        $Log->setData($idOrd, $ID_US, $_POST);
+        
+        
         if ($_SESSION['test_001']=="true"){
             $_SESSION['test_001']=="false";
             $newID = $Word->getId($id_ord);
