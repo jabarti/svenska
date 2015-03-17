@@ -23,8 +23,6 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"UserAdmin.php");
              array_push($allowPages,"try.php");
              array_push($allowPages,"upload.php");
-             array_push($allowPages,"test2.php");
-             array_push($allowPages,"testMOD.php");
          case 'user_plus':
              array_push($allowPages,"Edit.php");
              array_push($allowPages,"try.php");

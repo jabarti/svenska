@@ -30,8 +30,6 @@
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
                     <a href="http://www.bartilevi.pl/translation_interface.php" class="myButton"><?php echo t("Do")." Translation"; ?> </a><br>
-                    <a href="test2.php" class="myButton"><?php echo t("Do")." test2"; ?> </a><br>
-                    <a href="testMOD.php" class="myButton"><?php echo t("Do")." testMOD"; ?> </a><br>
                     =================
                     <a href="try.php" class="myButton"><?php echo t("Do")." Try"; ?> </a><br>
                     =================
