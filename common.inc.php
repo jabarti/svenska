@@ -155,6 +155,29 @@ if (isset($_GET['lang'])||isset($_SESSION['lang'])){
     $_SESSION['lang'] = "pl";
 }
 
+$geoArr =(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])));
+
+if(!isset($_SESSION['lang']) OR $_SESSION['lang'] == false){
+    switch($geoArr['geoplugin_countryName']){
+        case 'Sweden':
+//            echo "<br>LANG:".var_export($_SESSION['lang'], true);
+            $_SESSION['lang'] = 'se';
+            break;
+        case 'Poland':
+//            echo "<br>LANG:".var_export($_SESSION['lang'], true);
+            $_SESSION['lang'] = 'pl';
+            break;
+        case 'England':
+//            echo "<br>LANG:".var_export($_SESSION['lang'], true);
+            $_SESSION['lang'] = 'en';
+            break;
+        default:
+            $_SESSION['lang'] = 'pl';
+            break;
+    }
+}
+
+
 $REMOTE_ADDR = false;
 //echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
 

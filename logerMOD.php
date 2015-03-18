@@ -163,6 +163,11 @@ if(!isset($_GET['action'])){
 //if(isset($_GET['action'])){
         switch($_GET['action']){
             case 'logout':
+                if(isset($_SESSION['good']) OR isset($_SESSION['bad'])){
+                    $score = new Score();
+                    $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
+                    $score->saveScoreData();
+                }
                 setcookie("log", '', time()-3600);
                 $_SESSION['log'] = false;
                 $_SESSION['role'] = '';
@@ -172,7 +177,17 @@ if(!isset($_GET['action'])){
                 unset($_SESSION['user']);
                 unset($_SESSION['user_id']);
                 unset($_SESSION['submitLOG']);
+                
+                foreach($_SESSION as $k => $v){
+//                    echo "<br>\$_SESSION[$k]=$v";
+//                    if($k != 'log'){
+                        ($_SESSION[$k] = false);
+//                    }else{
+//                        echo $k;
+//                    }
+                }
                 header("Location: index.php");
+                echo "<script> window.location.replace('index.php') </script>" ;
 //                exit("<br>".__LINE__."LOGOUT: Location: index.php");
                 break;
             default:

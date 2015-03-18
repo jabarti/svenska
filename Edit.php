@@ -230,7 +230,7 @@ $row1 = mysql_fetch_array($mq1);
 extract($row1);
 //echo "<br>All Ord: ".$all_ord;
 
-if (isset($_POST['ile_onpage']) || isset($_SESSION['ile_onpage'])){
+if ((isset($_POST['ile_onpage']) || isset($_SESSION['ile_onpage'])) AND $_SESSION['ile_onpage'] != FALSE){
     $onpage = (isset($_POST['ile_onpage'])) ? $_POST['ile_onpage'] : $_SESSION['ile_onpage']; //ilość newsów na stronę
     if (isset($_POST['ile_onpage']))
         $_SESSION['ile_onpage'] = $_POST['ile_onpage'];
