@@ -148,7 +148,7 @@ function trans($var){       // działa w test.php do tłumaczenia pytań -dlateg
             break;
         
         default:
-            return "Brak słowa '".$var."' w słowniku!!!funktion.php";
+            return "Brak słowa \"".$var."\" w słowniku!!!";
             break;
     }
 }

@@ -10,7 +10,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | try';
+$title = 'Svenska | '.t('Try');
 include 'header.php';
 include 'buttons.php';
 ?>

@@ -27,6 +27,8 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"Edit.php");
              array_push($allowPages,"try.php");
              array_push($allowPages,"upload.php");
+             array_push($allowPages,"LogShow.php");
+             
          case 'user':
              array_push($allowPages,"motsatsen.php");
              array_push($allowPages,"synonymer.php");

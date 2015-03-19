@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Edit User Data';
+$title = 'Svenska | '.t('Edit User Data');
 include 'header.php';
 include 'buttons.php';
 

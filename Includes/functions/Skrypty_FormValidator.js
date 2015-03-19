@@ -61,8 +61,8 @@ function t2(){
             if(czyWypelnione(this.pass_old)){
                 if(isMinLength (this.pass_new_1, 8)  &&
                     czyWypelnione(this.pass_new_1)  &&
-                    czyWypelnione(this.pass_new_1)  &&
-                    areFieldsEqual(this.pass_new_1, this.pass_new_1) )
+                    czyWypelnione(this.pass_new_2)  &&
+                    areFieldsEqual(this.pass_new_1, this.pass_new_2) )
                 {
                     return true;
                 }else{

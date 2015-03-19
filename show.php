@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Show/printer';
+$title = 'Svenska | '.t("Show/printer");
 include 'header.php';
 include 'buttons.php';
 //echo "rola: ";var_dump($allowPages);

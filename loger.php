@@ -11,12 +11,12 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Logger';
+$title = 'Svenska | '.t("Logger");
 include 'header.php';
 
 if($REMOTE_ADDR){
     echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"]."<br>";
-    echo "<br> ".t("KRAJ").": ".$geoArr['geoplugin_countryName'];
+    echo "<br> ".t("KRAJ").": ".t($geoArr['geoplugin_countryName']);
 }
 
 //$_SESSION['licznik_odw']++;     // dla reloaudu z common.inc.php (złe rozwiązanie!!!)

@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Test';
+$title = 'Svenska | '.t('Test');
 include 'header.php';
 include 'buttons.php';
 

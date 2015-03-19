@@ -1,7 +1,7 @@
 ﻿<?php
 /* * **************************************************
  * Project:     ZZZProba
- * Filename:    index.php
+ * Filename:    InserterMOD.php
  * Encoding:    UTF-8
  * Created:     
  *
@@ -10,7 +10,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Inserter';
+$title = 'Svenska | '.t('InserterMOD');
 include 'header.php';
 //include 'buttons.php';
 
@@ -104,13 +104,18 @@ if(isset($_POST['submit'])){
         if ($_SESSION['test_001']=="true"){
             $_SESSION['test_001']=="false";
             $newID = $Word->getId($id_ord);
+//            echo "<br>LINE:".__LINE__;
             header("Location: index.php?result=OK&transz=".$trans."&newId=$newID");
+//            echo "<script> window.location.replace('index.php?result=OK&transz=".$trans."&newId=".$newID."') </script>" ;
+            exit("heder nie poszedł: ".__LINE__." / file: ".__FILE__);
         }else{
             header("Location: index.php?result=pusty");
+//            echo "<script> window.location.replace('index.php?result=pusty') </script>" ;
         }
 //        header("Location: index.php?result=OK");
     } else {
         header("Location: index.php?result=pusty");
+//        echo "<script> window.location.replace('index.php?result=pusty') </script>" ;
     }
 }else if(isset($_POST['submitHTA'])){       // tutaj robimy inserta dla ew. pustych pól z bazy z help_test_admin.php!
     $SQL = "INSERT INTO `ord` ";
@@ -141,10 +146,13 @@ if(isset($_POST['submit'])){
     if(mysql_affected_rows()){
 //         echo "<br>linia(".__LINE__.") JEST OK";
          header("Location: help_test_admin.php");
+//         echo "<script> window.location.replace('help_test_admin.php') </script>" ;
 //         header("Location: index.php");
     }else{
          header("Location: help_test_admin.php");
+//         echo "<script> window.location.replace('help_test_admin.php') </script>" ;
     }
 }else{
     header("Location: index.php?result=Error");
+//    echo "<script> window.location.replace('index.php?result=Error') </script>" ;
 }

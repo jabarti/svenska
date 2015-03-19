@@ -24,14 +24,7 @@ class User {
     
     private $table = "login";
     
-//        $this->id = $this->getId($user);
-//        $this->user = $user;
-//        $this->password = $sha_password;
-//        $this->data = $data;
-//            
-//      $userArr = array($this->id, $this->user, $this->password, $this->data);
-
-       
+    // us: CreateUserMOD.php = TWORZENIE NOWEGO USERA   
     public function setData($imie, $nazwisko, $user, $password, $email, $publicKey, $PassCrypt){
 //    private function setData($user, $password){
         
@@ -71,6 +64,7 @@ class User {
         }
     }
     
+    // us: UserAdminMOD.php (Change_UsrAdm) = zmiany na koncie usera
     public function updateDataByAdmin_I ($id, $imie, $nazwisko, $rola, $email){
         $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."', `nazwisko`='".$nazwisko."',`rola`='".$rola."',`email`='".$email."' WHERE `id`='".$id."';";
 //        echo "<br>SQL:".$sql;
@@ -83,8 +77,9 @@ class User {
         }
     }
     
+    // us: EditUserByUserMOD.php - EDYCJA DANYCH PRZEZ USERA   
     public function updateDataByUser ($imie, $nazwisko, $password, $PublicKey, $PassCrypt, $email, $usr){
-        echo "<br>wchodze3";
+//        echo "<br>wchodze3";
 //        if($password == ''){
 //            return false;
 //        }
@@ -93,7 +88,7 @@ class User {
         }else{
             $sql = "UPDATE `".$this->table."` SET `imie`='".$imie."',`nazwisko`='".$nazwisko."',`password`='".sha1($password)."',`PublicKey`='".$PublicKey."',`PassCrypt`='".$PassCrypt."',`email`='".$email."' WHERE `user` = '".$usr."';";
         }
-        echo "<br>SQL:".$sql;
+//        echo "<br>SQL:".$sql;
         $mq = mysql_query($sql);
         if(mysql_affected_rows()==1){
 //            echo "UPDATE OK!";
@@ -115,6 +110,7 @@ class User {
         }
     }
     
+    // Jest to również sprawdzane na poziomie wprowadzania danych
     public function comparePassByUser($user, $pass_old, $pass_new_1, $pass_new_2) {
         if($pass_new_1 === $pass_new_2){
             $sql = "SELECT `password` FROM ".$this->table." WHERE `user` = '".$user."';";
@@ -151,8 +147,25 @@ class User {
         return $mr;
     }
     
+    public function getUsrById($id){
+        $SQL = sprintf("SELECT `user` FROM `".$this->table."` WHERE `id`=\"".$id."\";");
+//        echo "<br>SQL:".$SQL;
+        $mq = mysql_query($SQL);
+        if(mysql_affected_rows()==1){
+//            echo '<br>mysql_affected_rows == true';
+            $mr = mysql_result($mq,0);
+        }else{
+//            echo '<br>mysql_affected_rows == true';
+            $mr = false;
+        }
+//        echo "<br>User ID:".$mr;
+        return $mr;
+    }
+    
+    // NIE UŻYTA!!!!
+    /*
     public function getUserByName($user){
-        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE user=\"".$user."\";");
+        $SQL = sprintf("SELECT * FROM `".$this->table."` WHERE `user`=\"".$user."\";");
         $mq = mysql_query($SQL);
         
         if(mysql_affected_rows()){
@@ -163,7 +176,7 @@ class User {
             echo "<br>ERROR: User \"<span class=blue>".$user."</span>\" NOT added.";
             return false;
         }
-    }  
+    }  /**/
     
     public function getLogDataByUser($user){
         $SQL = sprintf("SELECT user, password, PublicKey, rola, email FROM `".$this->table."` WHERE user=\"".$user."\";");
@@ -249,16 +262,13 @@ class User {
     
     public function getUserPassCryptByUserOrMail($param) {
         $sql = "SELECT `email`,`PassCrypt` FROM `".$this->table."` WHERE `user`='".$param."' OR `email`='".$param."';";
-        echo '<br>SQL:'.$sql;
+//        echo '<br>SQL:'.$sql;
         try{
             $mq = mysql_query($sql);
-//            $result = mysql_result($mq, 0);
             $result = mysql_fetch_assoc($mq);
         } catch (Exception $ex) {
             echo "<br>ERROR:".$ex;
         }
         return $result;
     }
-     
-
 }

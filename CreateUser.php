@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | Create New User';
+$title = 'Svenska | '.t("Create New User");
 include 'header.php';
 //include 'buttons.php';
 

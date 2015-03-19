@@ -200,6 +200,22 @@ class Ord {
             return $res;
         }
         
+        public function getOrdNameById($id, $lang){
+            if($lang == 'pl'){
+                $name = 'id_ord';
+            }else{
+                $name = 'trans';
+            }
+            
+            $SQL = sprintf("SELECT `".$name."` FROM `".$this->table."` WHERE id = \"".$id."\";"); 
+//            echo "<br>SQL:".$SQL;
+            $mq = mysql_query($SQL);
+            
+            $res = mysql_result($mq, 0);
+//            print_r($res);
+            return $res;
+        }
+        
         public function getOrdPLById($id){
             $SQL = sprintf("SELECT `id_ord` FROM `".$this->table."` WHERE id = \"".$id."\";"); 
 //            echo "<br>SQL:".$SQL;

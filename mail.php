@@ -11,7 +11,7 @@
 require_once 'common.inc.php';
 include 'DB_Connection.php';
 include 'divLog.php';
-$title = 'Svenska | mail';
+$title = 'Svenska | '.t("Mail");
 include 'header.php';
 include 'buttons.php';
 //echo "<br>Usr_mial:".$_SESSION['usr_mail'];

@@ -39,14 +39,16 @@ class Log_Ord{
         $SQL = "INSERT INTO `".$this->table."`(`id_Ord`, `id_Login`, `data_create`, `Zmiany_log`) 
                 VALUES ('".$id_Ord."','".$id_Login."','".$data_create."','".$Zmiany_log."');";
         
-        echo "<br>SQL_Log_Ord:".$SQL;
+//        echo "<br>SQL_Log_Ord:".$SQL;
         
         $mq = mysql_query($SQL);
         
         if(mysql_affected_rows()){
             echo "OK";
+            return true;
         }else{
             echo "NOT OK";
+            return false;
         }
     }
     
@@ -70,8 +72,10 @@ class Log_Ord{
         
         if(mysql_affected_rows()){
             echo "OK";
+            return true;
         }else{
             echo "NOT OK";
+            return false;
         }
     }
     
@@ -89,8 +93,44 @@ class Log_Ord{
         
         if(mysql_affected_rows()){
             echo "OK";
+            return true;
         }else{
             echo "NOT OK";
+            return false;
+        }
+    }
+    
+    public function getLogByOrdId($id_Ord) {
+        echo "<br>ID_ord:".$id_Ord;
+        $SQL = "SELECT * FROM `".$this->table."` WHERE `id_Ord`='".$id_Ord."' ORDER BY `id_Ord`;";
+        echo "<br>getLogByOrdId($id_Ord): ".$SQL;
+        $mq =  mysql_query($SQL);
+        if($mq){
+            $arr = Array();
+            while($row = mysql_fetch_assoc($mq)){
+                array_push($arr, $row);
+            }
+//            echo "<br>VARDUMP: ";var_dump($arr);
+            return $arr;
+        }else{
+            echo "<br>ERROR line:".__LINE__." / file: ".__FILE__;
+        }
+    }
+    
+    public function getLogByUsrId($id_Login) {
+//        echo "<br>ID_ord:".$id_Ord;
+        $SQL = "SELECT * FROM `".$this->table."` WHERE `id_Login`='".$id_Login."' ORDER BY `id_Ord`;";
+//        echo "<br>getLogByUsrId($id_Login): ".$SQL;
+        $mq =  mysql_query($SQL);
+        if($mq){
+            $arr = Array();
+            while($row = mysql_fetch_assoc($mq)){
+                array_push($arr, $row);
+            }
+//            echo "<br>VARDUMP: ";var_dump($arr);
+            return $arr;
+        }else{
+            echo "<br>ERROR line:".__LINE__." / file: ".__FILE__;
         }
     }
 
