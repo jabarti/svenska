@@ -15,66 +15,68 @@
         switch ($usr_role){
             case 'admin':
                 ?>
-                    <a href="../../" class="myButton">localhost</a><br>
-                    <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a><br>
+                    <!--<a href="../../" class="myButton">localhost</a><br>-->
+                    <a href="../" class="myButton"><?php echo t("Do")." ".t("StronyGłownej_btn");; ?></a><br>
                     =================
-                    <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a><br>
-                    <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a><br>
-                    <a href="help_test_admin.php" class="myButton"><?php echo t("Do"); ?> help_test_admin</a><br>
-                    <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do"); ?> ShowRandomStats</a><br>
-                    <a href="UserAdmin.php" class="myButton"><?php echo t("Do")." ".t("UserAdmin"); ?></a><br>
-                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
-                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>                    
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="index.php" class="myButton"><?php echo t("Do")." ".t("Insertera_btn"); ?></a><br>
+                    <a href="Edit.php" class="myButton"><?php echo t("Do")." ".t("Edycji_btn"); ?></a><br>
+                    <a href="help_test_admin.php" class="myButton"><?php echo t("Do")." ".t("help_test_admin_btn"); ?></a><br>
+                    <a href="ShowRandomStats.php" class="myButton"><?php echo t("Do")." ".t("ShowRandomStats_btn"); ?></a><br>
+                    <a href="UserAdmin.php" class="myButton"><?php echo t("Do")." ".t("UserAdmin_btn"); ?></a><br>
+                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwienstw_btn"); ?></a><br>
+                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimow_btn"); ?></a><br>                    
+                    <a href="test.php" class="myButton"><?php echo t("Do")." ".t("testu_btn"); ?></a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do")." ".t("Show/Printer_btn"); ?></a>
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
-                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
-                    <a href="LogShow.php" class="myButton"><?php echo t("Do")." ".t("Show Logs"); ?> </a><br>
-                    <a href="http://www.bartilevi.pl/translation_interface.php" class="myButton"><?php echo t("Do")." Translation"; ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?></a><br>
+                    <a href="LogShow.php" class="myButton"><?php echo t("Do")." ".t("ShowLogs_btn"); ?></a><br>
+                    <a href="http://www.bartilevi.pl/translation_interface.php" class="myButton"><?php echo t("Do")." ".t("Translation_btn"); ?></a><br>
                     =================
-                    <a href="try.php" class="myButton"><?php echo t("Do")." Try"; ?> </a><br>
+                    <a href="try.php" class="myButton"><?php echo t("Do")." ".t("Try_btn"); ?> </a><br>
                     =================
-                    <a href="check_php_inf.php" class="myButton"><?php echo t("Do")." check_php_inf.php"; ?> </a><br>
+                    <a href="check_php_inf.php" class="myButton"><?php echo t("Do")." ".t("check_php_inf_btn"); ?></a><br>
                     
                 <?php
                 break;
             case 'user_plus':
                 ?>
-                    <a href="../../" class="myButton">localhost</a>
-                    <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>
-                    ====================
-                    <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
-                    <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
-                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwieństw"); ?> </a><br>
-                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimów"); ?> </a><br>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="../" class="myButton"><?php echo t("Do")." ".t("StronyGłownej_btn");; ?></a><br>
+                    =================
+                    <a href="index.php" class="myButton"><?php echo t("Do")." ".t("Insertera_btn"); ?></a><br>
+                    <a href="Edit.php" class="myButton"><?php echo t("Do")." ".t("Edycji_btn"); ?></a><br>
+                    <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwienstw_btn"); ?></a><br>
+                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimow_btn"); ?></a><br>                    
+                    <a href="test.php" class="myButton"><?php echo t("Do")." ".t("testu_btn"); ?></a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do")." ".t("Show/Printer_btn"); ?></a>
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
-                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
-                    <a href="LogShow.php" class="myButton"><?php echo t("Do")." ".t("Show Logs"); ?> </a><br>
-                    <a href="try.php" class="myButton"><?php echo t("Do")." Try"; ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?></a><br>
+                    <a href="LogShow.php" class="myButton"><?php echo t("Do")." ".t("ShowLogs_btn"); ?></a><br>
+                    <a href="http://www.bartilevi.pl/translation_interface.php" class="myButton"><?php echo t("Do")." ".t("Translation_btn"); ?></a><br>
                 <?php
                 break;
             case 'user':
                 ?>
-                    <a href="../../" class="myButton">localhost</a>
-                    <a href="../" class="myButton"><?php echo t("Do"); ?> ParentDir</a>
-                    ====================
-                    <a href="index.php" class="myButton"><?php echo t("Do"); ?> Insertera</a>
-                    <a href="Edit.php" class="myButton"><?php echo t("Do"); ?> Edycji</a>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a><br>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
+                    <a href="../" class="myButton"><?php echo t("Do")." ".t("StronyGłownej_btn");; ?></a><br>
+                    =================
+                    <a href="index.php" class="myButton"><?php echo t("Do")." ".t("Insertera_btn"); ?></a><br>
+                    <a href="Edit.php" class="myButton"><?php echo t("Do")." ".t("Edycji_btn"); ?></a><br> 
+                    <!--<a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwienstw_btn"); ?></a><br>-->
+                    <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimow_btn"); ?></a><br> 
+                    <a href="test.php" class="myButton"><?php echo t("Do")." ".t("testu_btn"); ?></a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do")." ".t("Show/Printer_btn"); ?></a>
                     <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
-                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?></a><br>
                 <?php
                 break;
             
             case 'visitor':
                 ?>
-                    <a href="test.php" class="myButton"><?php echo t("Do"); ?> testu</a>
-                    <a href="show.php" class="myButton"><?php echo t("Do"); ?> Show/Printer</a>
-                    <!--<a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>-->
-                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?> </a><br>
+                    <a href="../" class="myButton"><?php echo t("Do")." ".t("StronyGłownej_btn");; ?></a><br>
+                    =================             
+                    <a href="test.php" class="myButton"><?php echo t("Do")." ".t("testu_btn"); ?></a><br>
+                    <a href="show.php" class="myButton"><?php echo t("Do")." ".t("Show/Printer_btn"); ?></a>
+                    <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
+                    <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?></a><br>
                 <?php
                 break;
         }

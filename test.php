@@ -85,7 +85,8 @@ $rand = $arr[$rand_index];
 //$rand = 694;  // For test - fixed ID of word; 
 
 $testTab = $Word->getQuestAndAnswerById($rand);
-$wordPL = $Word->getOrdPLById($rand);
+//$wordPL = $Word->getOrdPLById($rand);
+//$wordPL = $Word->getOrdNameById($rand, 'pl');
 //echo "<br>WordPL: ".$wordPL;
 
 echo "<form method=post action='testMOD.php'>";

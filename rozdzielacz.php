@@ -23,16 +23,18 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"UserAdmin.php");
              array_push($allowPages,"try.php");
              array_push($allowPages,"upload.php");
+             array_push($allowPages,"motsatsen.php"); // nie dokończone!!! dlatego niżej nie dostępne!
          case 'user_plus':
-             array_push($allowPages,"Edit.php");
+//             array_push($allowPages,"Edit.php");
              array_push($allowPages,"try.php");
              array_push($allowPages,"upload.php");
              array_push($allowPages,"LogShow.php");
              
          case 'user':
-             array_push($allowPages,"motsatsen.php");
+//             array_push($allowPages,"motsatsen.php");
              array_push($allowPages,"synonymer.php");
              array_push($allowPages,"index.php");
+             array_push($allowPages,"Edit.php");
              ?><script>//alert("Bartek lub Anetka") </script><?php
          case 'visitor':
              ?><script>//alert("01. Gosc") </script><?php

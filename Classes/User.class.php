@@ -202,12 +202,9 @@ class User {
         while($us = mysql_fetch_row($mq)){
             array_push($arr, $us['0']);
         }
-                
 //        echo "<br>arr:";
-        var_dump($arr);
-        
+//        var_dump($arr);
 //        echo "<br>Users:".$arr[0]."/".$arr[1];
-        
         return $arr;
     }
     

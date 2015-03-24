@@ -117,7 +117,8 @@ echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 //$rand = 694;  // For test - fixed ID of word; 
 
 $testTab = $Word->getQuestAndAnswerById($rand);
-$wordPL = $Word->getOrdPLById($rand);
+//$wordPL = $Word->getOrdPLById($rand);
+$wordPL = $Word->getOrdNameById($rand, 'pl');
 echo "<br>WordPL: ".$wordPL;
 
 ?>

@@ -20,11 +20,20 @@ $User = new User();
 $Ord = new Ord();
 $arr = '';
 
+echo "<table>";
 echo "<form action='LogShow.php' method='post'>";
-echo "Po id słowa: <input type='text' name='id_ord'>";
-echo "Po id usera: <input type='text' name='id_user'>";
-echo "<input type='submit' name='subm_01' value='submit'>";
+echo "<tr><td>".t("Po id słowa").":</td><td><input type='text' name='id_ord'></td></tr>";
+//echo "Po id usera: <input type='text' name='id_user'><br>";
+echo "<tr><td>".t("Po Userze").":</td><td><select name='id_user' >";
+echo "<option value=''>empty</option>";
+      $names = $User->getUsersNames();
+      foreach ($names as $k=>$v){
+        echo "<option value=".$v.">".$v."</option>";
+      }
+echo"    </select></td></tr>";
+echo "<tr><td colspan=2><input type='submit' name='subm_01' value='".t("submit")."'></td></tr>";
 echo "</form>";
+echo "</table>";
 
 if(isset($_POST['id_ord']) AND $_POST['id_ord'] !='' ){
     $id_ord = $_POST['id_ord'];
@@ -34,13 +43,15 @@ if(isset($_POST['id_ord']) AND $_POST['id_ord'] !='' ){
 }else 
 if(isset($_POST['id_user']) AND $_POST['id_user'] !=''){
 //    $id_ord = false;
-    $id_ord=2653;
+//    $id_ord=2653;
     $id_user = $_POST['id_user'];
+    $id_user = $User->getId($id_user);
     $arr = $LogOrd->getLogByUsrId($id_user);
 //    $UsrName = $User->getUsrById($id_user);
 }else{
     $id_ord=false;
     $id_user=false;
+    $arr = $LogOrd->getAllLog();
 }
 
 //echo "<br>VARDUMP: ";var_dump($arr);

@@ -150,9 +150,9 @@ class Ord {
         }
     }
               
-        public function getId_ord() {
-            return $this->id_ord;
-        }
+//        public function getId_ord() {
+//            return $this->id_ord;
+//        }
         
         public function getLastId($tabLH) {
 //            if( $tabLH!=''){
@@ -201,10 +201,22 @@ class Ord {
         }
         
         public function getOrdNameById($id, $lang){
-            if($lang == 'pl'){
-                $name = 'id_ord';
-            }else{
-                $name = 'trans';
+//            if($lang == 'pl'){
+//                $name = 'id_ord';
+//            }else{
+//                $name = 'trans';
+//            }
+            switch($lang){
+                case 'pl':
+                    $name = 'id_ord';
+                    break;
+                case 'en':
+//                    break;
+                case 'se':
+//                    break;
+                default:
+                    $name = 'trans';
+                    break;
             }
             
             $SQL = sprintf("SELECT `".$name."` FROM `".$this->table."` WHERE id = \"".$id."\";"); 
@@ -216,7 +228,7 @@ class Ord {
             return $res;
         }
         
-        public function getOrdPLById($id){
+/*        public function getOrdPLById($id){ //ta sama funkcjonalność f-cji getOrdNameById
             $SQL = sprintf("SELECT `id_ord` FROM `".$this->table."` WHERE id = \"".$id."\";"); 
 //            echo "<br>SQL:".$SQL;
             $mq = mysql_query($SQL);
@@ -224,7 +236,7 @@ class Ord {
             $res = mysql_result($mq,0);
 //            print_r($res);
             return $res;
-        }
+        }/**/
         
         public function getTypeById($id) {
             $SQL = sprintf("SELECT typ FROM `".$this->table."` WHERE id = \"".$id."\";");
@@ -979,7 +991,7 @@ class Ord {
         }
         
         // tworzy tabelkę 1go rekordów na podst ID == coś nie działa jeszcze
-        public function getTabOrdById($id){
+  /*      public function getTabOrdById($id){
             $SQL = "SELECT * FROM ".$this->table." WHERE `id` = '".$id."';";
             echo __FILE__.__LINE__.$SQL;
             $mq = mysql_query($SQL);
@@ -1064,7 +1076,7 @@ class Ord {
 //            $i++; $id++;
             }
             echo "</div>";      // end of div: edit_tab_contener
-        }
+        }/**/
         
         // tworzy tabelkę rekordów o id_ord podobnym do wprowadzonego słowa 
         public function getSimOrdByIdOrd($text){
