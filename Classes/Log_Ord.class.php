@@ -165,5 +165,21 @@ class Log_Ord{
             echo "<br>ERROR line:".__LINE__." / file: ".__FILE__;
         }
     }
+    public function getAllLogByDateCreate() {
+//        echo "<br>ID_ord:".$id_Ord;
+        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `data_create`;";
+//        echo "<br>getLogByUsrId($id_Login): ".$SQL;
+        $mq =  mysql_query($SQL);
+        if($mq){
+            $arr = Array();
+            while($row = mysql_fetch_assoc($mq)){
+                array_push($arr, $row);
+            }
+//            echo "<br>VARDUMP: ";var_dump($arr);
+            return $arr;
+        }else{
+            echo "<br>ERROR line:".__LINE__." / file: ".__FILE__;
+        }
+    }
 
 }
