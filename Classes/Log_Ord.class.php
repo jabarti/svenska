@@ -25,17 +25,32 @@ class Log_Ord{
     
     public function setData($id_Ord, $id_Login, $Zmiany_arr) {
         
-        foreach($Zmiany_arr as $k => $v){
-            if($v!='' AND $k!='submit' AND $k!='edit' AND $k!='id'){
-                $Zmiany_log .= "\'$k\'=>\'$v\'; ";
-            }
+        $typZM = gettype($Zmiany_arr);
+        
+//        echo "<br> TYP ZMIENNEJ ($Zmiany_arr): ".$typZM;
+        
+        switch($typZM){
+            case 'array':
+                ?><script>//console.log("ARRAY");</script><?php
+                echo "<br>".__LINE__." / ";var_dump($Zmiany_arr);
+                foreach($Zmiany_arr as $k => $v){
+                    if($v!='' AND $k!='submit' AND $k!='submitHTA' AND $k!='edit' AND $k!='id'){
+                        $Zmiany_log .= "\'$k\'=>\'$v\'; ";
+                    }
+                }
+                break;
+            case 'string':
+                ?><script>//console.log("STRING");</script><?php //
+                $Zmiany_log = $Zmiany_arr;
+                break;
+            default:
+                echo "<br>ERROR TYPU!!";
+                break;
         }
         
         $t=time();
         $data_create = date("Y-m-d, H:i:s",$t);
-        
-//        $Zmiany_log = "`id_Ord`=>'".$id_Ord."' `id_Login`=>'".$id_Login."' `data_create`=>'".$data_create."'`DANE:`=>'".$datas."'";
-        
+            
         $SQL = "INSERT INTO `".$this->table."`(`id_Ord`, `id_Login`, `data_create`, `Zmiany_log`) 
                 VALUES ('".$id_Ord."','".$id_Login."','".$data_create."','".$Zmiany_log."');";
         
@@ -44,10 +59,10 @@ class Log_Ord{
         $mq = mysql_query($SQL);
         
         if(mysql_affected_rows()){
-            echo "OK";
+//            echo "OK";
             return true;
         }else{
-            echo "NOT OK";
+//            echo "NOT OK";
             return false;
         }
     }
@@ -136,7 +151,7 @@ class Log_Ord{
     
     public function getAllLog() {
 //        echo "<br>ID_ord:".$id_Ord;
-        $SQL = "SELECT * FROM `".$this->table.";";
+        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `id_Ord`;";
 //        echo "<br>getLogByUsrId($id_Login): ".$SQL;
         $mq =  mysql_query($SQL);
         if($mq){

@@ -23,10 +23,18 @@ include 'header.php';
 //}
 
 
+$ID_US=0;
+IF(ISSET($_SESSION['user_id'])){
+    $ID_US = $_SESSION['user_id'];
+}ELSE{
+    $ID_US =0;
+}
+
 $id_ord = '';
 if(isset($_POST['submit'])){
+    ?><script>//alert("isset POST submit");</script><?php //
     if($_POST['id_ord'] !=''){
-        
+        ?><script>//alert("isset POST id_ord");</script><?php
 //        $text='';
 //        foreach($_POST as $k=>$v){
 ////            if($v!='' || $v!='submit'){
@@ -78,7 +86,7 @@ if(isset($_POST['submit'])){
         $Word = new Ord();
         $Log = new Log_Ord();
 //        echo "<br>id of a: ".$Word->getId($id_ord);
-        echo "<br>Last index: ".$Word->getLastId(false);
+//        echo "<br>PRZED setData Last index: ".$Word->getLastId(false);
        
         
         $Word->setData( $id_ord, $typ, $rodzaj, $grupa, $trans, $infinitive, $presens,$past, 
@@ -90,34 +98,34 @@ if(isset($_POST['submit'])){
                         $wymowa, $kategoria, $uwagi);
         
         $idOrd = $Word->getId($id_ord);
-        
-        $ID_US=0;
-        IF(ISSET($_SESSION['user_id'])){
-            $ID_US = $_SESSION['user_id'];
-        }ELSE{
-            $ID_US =0;
-        }
-        
-        $Log->setData($idOrd, $ID_US, $_POST);
-        
-        
+
         if ($_SESSION['test_001']=="true"){
+            ?><script>//alert("SESSION test_001 == true");</script><?php
             $_SESSION['test_001']=="false";
             $newID = $Word->getId($id_ord);
+            $Log->setData($idOrd, $ID_US, $_POST);
 //            echo "<br>LINE:".__LINE__;
             header("Location: index.php?result=OK&transz=".$trans."&newId=$newID");
-//            echo "<script> window.location.replace('index.php?result=OK&transz=".$trans."&newId=".$newID."') </script>" ;
-            exit("heder nie poszedł: ".__LINE__." / file: ".__FILE__);
+            echo "<script> window.location.replace('index.php?result=OK&transz=".$trans."&newId=".$newID."') </script>" ;
+            exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
         }else{
-            header("Location: index.php?result=pusty");
-//            echo "<script> window.location.replace('index.php?result=pusty') </script>" ;
+            ?><script>//alert("SESSION test_001 == false");</script><?php
+            header("Location: ../../index.php?result=pusty");
+            echo "<script> window.location.replace('../../index.php?result=pusty') </script>" ;
+            exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
         }
-//        header("Location: index.php?result=OK");
+//        header("Location: ../../index.php?result=OK");
     } else {
+        ?><script>alert("isset POST id_ord ELSE");</script><?php
         header("Location: index.php?result=pusty");
-//        echo "<script> window.location.replace('index.php?result=pusty') </script>" ;
+        echo "<script> window.location.replace('index.php?result=pusty') </script>" ;
+        exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
     }
-}else if(isset($_POST['submitHTA'])){       // tutaj robimy inserta dla ew. pustych pól z bazy z help_test_admin.php!
+    
+}else 
+    if(isset($_POST['submitHTA'])){       // tutaj robimy inserta dla ew. pustych pól z bazy z help_test_admin.php!
+    ?><script>//alert("isset POST submitHTA");</script><?php
+    $Zmiany_arr = "";
     $SQL = "INSERT INTO `ord` ";
     $attr = "(";
     $values = " VALUES (";
@@ -130,29 +138,50 @@ if(isset($_POST['submit'])){
 //                $SQL .= "'".$v."');";
                 $attr .= "`$k`)";
                 $values .= "'".triTrim($v)."');";
+                if($v!=''){
+                    $Zmiany_arr .= "\'$k\'=>\'".triTrim($v)."\'; ";
+                }
                 break;
+            case 'id':
+                $attr .= "`$k`,";
+                $values.= "'".triTrim($v)."',";
+                $idOrd = $v;
+                break;                
             default:
                 $attr .= "`$k`,";
                 $values.= "'".triTrim($v)."',";
+                if($v!=''){
+                    $Zmiany_arr .= "\'$k\'=>\'".triTrim($v)."\'; ";
+                }
                 break;                
         }
         
     }
     $SQL .= $attr.$values;
-//    echo "<br>linia(".__LINE__.") SQL:".$SQL;
+//    echo "<br>linia(".__LINE__.") SQL:".$SQL."<br>";
+    
+    $Log = new Log_Ord();
     
     mysql_query($SQL);
     
+//    echo "<br><b>Zmiany_arr</b>: ";var_dump($Zmiany_arr);
+//    echo "<br>POST: ";var_dump($_POST);
+    
     if(mysql_affected_rows()){
-//         echo "<br>linia(".__LINE__.") JEST OK";
+         echo "<br>linia(".__LINE__.") JEST OK";
+         $Log->setData($idOrd, $ID_US, $Zmiany_arr);
          header("Location: help_test_admin.php");
-//         echo "<script> window.location.replace('help_test_admin.php') </script>" ;
+         echo "<script> window.location.replace('help_test_admin.php') </script>" ;
 //         header("Location: index.php");
+         exit("<br>heder nie poszedł: ".__LINE__." / file: ".__FILE__);
     }else{
          header("Location: help_test_admin.php");
 //         echo "<script> window.location.replace('help_test_admin.php') </script>" ;
+         exit("<br>heder nie poszedł: ".__LINE__." / file: ".__FILE__);
     }
 }else{
+    ?><script>alert("isset POST submit ELSE");</script><?php
     header("Location: index.php?result=Error");
 //    echo "<script> window.location.replace('index.php?result=Error') </script>" ;
+    exit("<br>heder nie poszedł: ".__LINE__." / file: ".__FILE__);
 }
