@@ -32,7 +32,7 @@ class Log_Ord{
         switch($typZM){
             case 'array':
                 ?><script>//console.log("ARRAY");</script><?php
-                echo "<br>".__LINE__." / ";var_dump($Zmiany_arr);
+//                echo "<br>".__LINE__." / ";var_dump($Zmiany_arr);
                 foreach($Zmiany_arr as $k => $v){
                     if($v!='' AND $k!='submit' AND $k!='submitHTA' AND $k!='edit' AND $k!='id'){
                         $Zmiany_log .= "\'$k\'=>\'$v\'; ";

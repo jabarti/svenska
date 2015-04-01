@@ -35,6 +35,7 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"synonymer.php");
              array_push($allowPages,"index.php");
              array_push($allowPages,"Edit.php");
+             array_push($allowPages,"EditUserByUser.php");
              ?><script>//alert("Bartek lub Anetka") </script><?php
          case 'visitor':
              ?><script>//alert("01. Gosc") </script><?php
@@ -42,7 +43,6 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"test.php");
              array_push($allowPages,"show.php");
              array_push($allowPages,"mail.php");
-             array_push($allowPages,"EditUserByUser.php");
              array_push($allowPages,"loger.php");
              array_push($allowPages,"logerMOD.php");
 //                 header("Location: test.php");

@@ -106,11 +106,11 @@ class Ord {
                 . "'".$wymowa."', '".$kategoria."', '".$uwagi."');");            
         
             if (mysql_query($SQL)){
-                echo "<br>".t("WSADZONE do ord!!!");
+//                echo "<br>".t("WSADZONE do ord!!!");
                 
                 $id_LH = $this->getLastId(false)+1;
                 $id_LH = $this->getId($id_ord);
-                echo "<br>ID:".$id_LH;
+//                echo "<br>ID:".$id_LH;
             
                 $SQL_PLLH = sprintf("INSERT INTO `".$this->table."LH` "
                     . "(`id`, `id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, "

@@ -75,7 +75,7 @@
                     =================             
                     <a href="test.php" class="myButton"><?php echo t("Do")." ".t("testu_btn"); ?></a><br>
                     <a href="show.php" class="myButton"><?php echo t("Do")." ".t("Show/Printer_btn"); ?></a>
-                    <a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>
+                    <!--<a href="EditUserByUser.php" class="myButton"><?php echo t("Do")." ".t("Edycja danych użytkownika"); ?></a><br>-->
                     <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?></a><br>
                 <?php
                 break;
