@@ -149,9 +149,21 @@ class Log_Ord{
         }
     }
     
-    public function getAllLog() {
-//        echo "<br>ID_ord:".$id_Ord;
-        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `id_Ord`;";
+    public function getAllLog($kierunek) {
+        
+        if($kierunek != ''){
+            if($kierunek == 'down'){
+                $DIR = 'DESC';
+            }else{
+                $DIR = 'ASC';
+            }
+        }else{
+            $DIR = '';
+        }
+        
+//        echo "<br>kierunek:".$kierunek." / DIR:".$DIR;
+        
+        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `id_Ord` $DIR;";
 //        echo "<br>getLogByUsrId($id_Login): ".$SQL;
         $mq =  mysql_query($SQL);
         if($mq){
@@ -165,9 +177,48 @@ class Log_Ord{
             echo "<br>ERROR line:".__LINE__." / file: ".__FILE__;
         }
     }
-    public function getAllLogByDateCreate() {
+    public function getAllLogByDateCreate($kierunek) {
 //        echo "<br>ID_ord:".$id_Ord;
-        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `data_create`;";
+        
+        if($kierunek != ''){
+            if($kierunek == 'down'){
+                $DIR = 'DESC';
+            }else{
+                $DIR = 'ASC';
+            }
+        }else{
+            $DIR = '';
+        }
+        
+        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `data_create` $DIR;";
+//        echo "<br>getLogByUsrId($id_Login): ".$SQL;
+        $mq =  mysql_query($SQL);
+        if($mq){
+            $arr = Array();
+            while($row = mysql_fetch_assoc($mq)){
+                array_push($arr, $row);
+            }
+//            echo "<br>VARDUMP: ";var_dump($arr);
+            return $arr;
+        }else{
+            echo "<br>ERROR line:".__LINE__." / file: ".__FILE__;
+        }
+    }
+    
+    public function getAllLogByDateEdit($kierunek) {
+//        echo "<br>ID_ord:".$id_Ord;
+        
+        if($kierunek != ''){
+            if($kierunek == 'down'){
+                $DIR = 'DESC';
+            }else{
+                $DIR = 'ASC';
+            }
+        }else{
+            $DIR = '';
+        }
+        
+        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `data_edit` $DIR;";
 //        echo "<br>getLogByUsrId($id_Login): ".$SQL;
         $mq =  mysql_query($SQL);
         if($mq){

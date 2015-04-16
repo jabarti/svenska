@@ -187,33 +187,6 @@ if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
     $REMOTE_ADDR = "true";
 }
 
-// INCLUDE FILES - DO NOT TOUCH SEQUENCE
-//die("a");
-/*require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'classes.inc.php');
-require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'pear.inc.php');
-
-require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'db.inc.php');
-
-require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'localization.inc.php');
-
-if (!AUTO_LOGIN) { 
-	require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'auth.inc.php');
-}/**/
-//mysql_query('SET NAMES utf8');
-
-//mb_internal_encoding('UTF-8');
-
-/*** Ed stuff: ***/
-//define('DATA_DIR', BASE_PATH);
-
-
-//initPage();
-
-//require_once(INCLUDE_PATH . DIRECTORY_SEPARATOR . 'identifyImage.php');
-
-//if (!defined('DO_NOT_CLOSE_SESSION')) {
-//	session_write_close();
-//}
 try{
     ?><script>//alert ("common - try");</script><?php
     require_once 'Paths.php';
@@ -240,74 +213,4 @@ catch(Exception $ex){
     echo t("Błędem jest")." :".$ex;
 }
 
-//if(include '../Translations/translacjon.php'){
-//    echo "<br>Translation OK";
-//}else{
-//    echo "<br>Translation ERROR";
-//}
-//echo t('Zalogowany jako');
-//if(isset($_SESSION['log'])){
-//
-//    if($_SESSION['log'] == true){
-//    echo "<div class=divLog>  ".g('Zalogowany jako').": ".$_SESSION['user']."";//." z hasłem: ". $_SESSION['password'];
-//        echo "<span id=zegar></span><br>";
-//        echo "<span id=zegar_log style='visibility: block'></span>";
-//        echo "<br><button onclick=\"window.location.href='loger.php'\">".g("Wyloguj")."</button>";
-//        $tim = $_COOKIE['log'];
-//        echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
-////        echo "<input id=log_time type=hidden value='".$tim."'>";
-//        echo "</div>";
-//    }else{
-//        echo "<div class=divLog>".g("NIE ZALOGOWANY")."</div>";
-//    }
-//}else{
-//    echo "KUPA";
-//}
-
-//if(isset($_COOKIE["test"])){
-//    echo "<br>W isset COOKIE";    
-//    echo "<br>W COOKIE removal:<br>";
-//    foreach ($_COOKIE as $name => $value){
-//       echo "Name: $name => Value: $value <br />";
-//    }
-//
-//    unset($_COOKIE['test']);
-//    unset($_COOKIE['user']);
-//    unset($_COOKIE['time']);
-//    unset($_COOKIE['log']);
-//    
-//    if(isset($_COOKIE['test'])){
-//        echo "<br>1) cookie dalej siedzi";
-//        
-//    }else{
-//        echo "<br>1) cookie wycięte";
-//    }
-//    setcookie('test','',  time()-7200);
-//    setcookie('user','',  time()-7200);
-//    setcookie('time','',  time()-7200);
-//    setcookie('log','',  time()-7200);
-//    if(isset($_COOKIE['test'])){
-//        echo "<br>2) cookie dalej siedzi";
-//    }else{
-//        echo "<br>2) cookie wycięte";
-//    }
-//}else{
-//    echo "<br>W ELSE isset COOKIE";
-//    try{
-//        $usr_name = $_SESSION['user']?$_SESSION['user']:"Noname!";
-////        $czas = date("y-m-d; H:i:s");
-////        echo "Czas: $czas";
-//        setcookie("test", $usr_name, time()+60*10);
-//        setcookie("log", $usr_name, time()+60*10);
-//        try{
-//            setcookie("time", date("y-m-d; H:i:s"), time()+60*10);
-//        }catch(Exception $ex){
-//            echo "<br>ERROR $ex";
-//        }
-////        setcookie("user", "Barti Levi", time()+7200);
-//        echo "<br>COOKIES SET!!";
-//    }catch(Exception $ex){
-//        echo "ERROR:$ex";
-//    }
-//}
 //var_dump($_SESSION);

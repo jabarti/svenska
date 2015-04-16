@@ -36,19 +36,42 @@ echo "</form>";
 echo "</table>";
 
 if(isset($_POST['id_ord']) AND $_POST['id_ord'] !='' ){
+    ?><script>//alert (1)</script><?php
     $id_ord = $_POST['id_ord'];
     $id_user = false;
-    $arr = $LogOrd->getLogByOrdId($id_ord);
-    
+    $arr = $LogOrd->getLogByOrdId($id_ord);   
 }else 
 if(isset($_POST['id_user']) AND $_POST['id_user'] !=''){
+    ?><script>//alert (2)</script><?php
 //    $id_ord = false;
 //    $id_ord=2653;
     $id_user = $_POST['id_user'];
     $id_user = $User->getId($id_user);
     $arr = $LogOrd->getLogByUsrId($id_user);
 //    $UsrName = $User->getUsrById($id_user);
+}else
+if(isset($_GET['id_Ord_DIR']) AND $_GET['id_Ord_DIR'] !=''){
+    ?><script>//alert (3)</script><?php
+    $id_ord = false;
+    $id_user = false;
+    $arr = $LogOrd->getAllLog($_GET['id_Ord_DIR']);
+    
+}else
+if(isset($_GET['data_create_DIR']) AND $_GET['data_create_DIR'] !=''){
+    ?><script>//alert (3)</script><?php
+    $id_ord = false;
+    $id_user = false;
+    $arr = $LogOrd->getAllLogByDateCreate($_GET['data_create_DIR']);
+    
+}else
+if(isset($_GET['data_edit_DIR']) AND $_GET['data_edit_DIR'] !=''){
+    ?><script>//alert (3)</script><?php
+    $id_ord = false;
+    $id_user = false;
+    $arr = $LogOrd->getAllLogByDateEdit($_GET['data_edit_DIR']);
+    
 }else{
+    ?><script>//alert (4)</script><?php
     $id_ord=false;
     $id_user=false;
     $arr = $LogOrd->getAllLog();
@@ -69,8 +92,17 @@ foreach ($arr as $ar){
             switch($v){
                 case 'id':
                     break;
+                case 'id_Ord':
+                case 'data_create':
+                case 'data_edit':
+                    echo "<th>".t($v);
+                    echo "<button name='".$v."_DIR' value='up' >&#8593;</button>";
+//                    echo "<button type='button' id='".$v."_up'>&#8593;</button>";
+                    echo "<button name='".$v."_DIR' value='down' >&#8595;</button></th>";
+//                    echo "<button type='button' id='".$v."_down'>&#8595;</button></th>";
+                    break;
                 default:
-                    echo "<th>$v</th>";
+                    echo "<th>".t($v)."</th>";
                     break;
             }
         }
