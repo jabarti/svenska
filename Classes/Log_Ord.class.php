@@ -181,16 +181,18 @@ class Log_Ord{
 //        echo "<br>ID_ord:".$id_Ord;
         
         if($kierunek != ''){
+            $WHERE = ' WHERE `data_create` IS NOT NULL ';
             if($kierunek == 'down'){
                 $DIR = 'DESC';
             }else{
                 $DIR = 'ASC';
             }
         }else{
+            $WHERE = '';
             $DIR = '';
         }
         
-        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `data_create` $DIR;";
+        $SQL = "SELECT * FROM `".$this->table."`  $WHERE ORDER BY `data_create` $DIR;";
 //        echo "<br>getLogByUsrId($id_Login): ".$SQL;
         $mq =  mysql_query($SQL);
         if($mq){
@@ -209,16 +211,19 @@ class Log_Ord{
 //        echo "<br>ID_ord:".$id_Ord;
         
         if($kierunek != ''){
+            $WHERE = ' WHERE `data_edit` IS NOT NULL ';
             if($kierunek == 'down'){
+                
                 $DIR = 'DESC';
             }else{
                 $DIR = 'ASC';
             }
         }else{
+            $WHERE = '';
             $DIR = '';
         }
         
-        $SQL = "SELECT * FROM `".$this->table."` ORDER BY `data_edit` $DIR;";
+        $SQL = "SELECT * FROM `".$this->table."` $WHERE ORDER BY `data_edit` $DIR;";
 //        echo "<br>getLogByUsrId($id_Login): ".$SQL;
         $mq =  mysql_query($SQL);
         if($mq){

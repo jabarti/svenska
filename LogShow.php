@@ -31,7 +31,7 @@ echo "<option value=''>empty</option>";
         echo "<option value=".$v.">".$v."</option>";
       }
 echo"    </select></td></tr>";
-echo "<tr><td colspan=2><input type='submit' name='subm_01' value='".t("submit")."'></td></tr>";
+echo "<tr style='text-align: right;'><td></td><td ><input type='submit' name='subm_01' value='".t("submit")."'></td></tr>";
 echo "</form>";
 echo "</table>";
 
@@ -96,9 +96,11 @@ foreach ($arr as $ar){
                 case 'data_create':
                 case 'data_edit':
                     echo "<th>".t($v);
-                    echo "<button name='".$v."_DIR' value='up' >&#8593;</button>";
+//                    echo "<button name='".$v."_DIR' value='up' >&#8593;</button>";
+                    echo "<button name='".$v."_DIR' value='up' >&#8657;</button>";
 //                    echo "<button type='button' id='".$v."_up'>&#8593;</button>";
-                    echo "<button name='".$v."_DIR' value='down' >&#8595;</button></th>";
+//                    echo "<button name='".$v."_DIR' value='down' >&#8595;</button></th>";
+                    echo "<button name='".$v."_DIR' value='down' >&#8659;</button></th>";
 //                    echo "<button type='button' id='".$v."_down'>&#8595;</button></th>";
                     break;
                 default:
