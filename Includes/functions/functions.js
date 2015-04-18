@@ -65,7 +65,7 @@ setInterval(function() {
 //var spolgl = new Array('b');
 //
 
-// Index.php = oczątkowy wygląd tabelki
+// Index.php = początkowy wygląd tabelki
 function start(){
     $("#czasownik").hide();
     $("#rzeczownik").hide();
@@ -74,7 +74,7 @@ function start(){
     $("#liczebnik").hide();
 }
 
-$(document).ready(function(){
+ $(document).ready(function(){
 //    $('#CreateUser').click(function(){
 //         texty = t('Create NEW User?');
 //        alert(texty);
@@ -85,6 +85,26 @@ $(document).ready(function(){
 //            window.location.href = "index.php"
 //        }
 //    });
+
+    /* Używane w BUTTON.php do ukrycia i odsłaniania buttonów w sekcjach */
+    
+    $("#core").hide();
+    $("#admin").hide();
+    $("#usrAdmin").hide();    
+        
+    $("#coreButt").bind("click", function(){
+        $("#core").toggle();
+    });
+    
+    $("#admButt").bind("click", function(){
+        $("#admin").toggle();
+    });
+    
+    $("#usrAdmButt").bind("click", function(){
+        $("#usrAdmin").toggle();
+    });
+    
+    /* KONIEC SEKCJI do Button.php */
     
     $("#typ").change(function(){
         var val = $(this).val();
