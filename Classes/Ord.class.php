@@ -54,6 +54,9 @@ class Ord {
     private $uwagi;
     
     private $table = "ord";
+    private $prezentuj = 20;      // określa ilość prezentowanych wynikó dla: 
+                                //  getSimOrdByIdOrd($text); 
+                                //  getSimOrdByTrans($text);
     
     private $group =    array(  '',
 //                                'verb_ar','verb_er','verb_er_ptks','starka_verb','kortverben','irregular',
@@ -1080,11 +1083,20 @@ class Ord {
         
         // tworzy tabelkę rekordów o id_ord podobnym do wprowadzonego słowa 
         public function getSimOrdByIdOrd($text){
-            $SQL = "SELECT id, id_ord, typ, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%';";
+            
+            $ileSlow = $this->getCountSimOrdByIdOrd($text, false);
+            
+            $SQL = "SELECT id, id_ord, typ, rodzaj, trans FROM ".$this->table." WHERE `id_ord` like '%".$text."%' LIMIT 0,".$this->prezentuj.";";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
-            $mq = mysql_query($SQL);
+            $mq = mysql_query($SQL); 
             echo "<table>";
-            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$this->getCountSimOrdByIdOrd($text, false)."</span> ".t('podobnych wyników').":<th><tr>";
+            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$ileSlow."</span> ".t('podobnych wyników').":<th><tr>";
+            
+            if($this->prezentuj < $ileSlow)
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";
+            else
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>";
+            
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
@@ -1115,11 +1127,20 @@ class Ord {
         
         // tworzy tabelkę rekordów o trans podobnym do wprowadzonego słowa 
         public function getSimOrdByTrans($text){
-            $SQL = "SELECT id, rodzaj, trans, typ, id_ord FROM ".$this->table." WHERE `trans` like '%".$text."%';";
+            
+            $ileSlow = $this->getCountSimOrdByIdOrd($text, false);
+            
+            $SQL = "SELECT id, rodzaj, trans, typ, id_ord FROM ".$this->table." WHERE `trans` like '%".$text."%' LIMIT 0,".$this->prezentuj.";";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
             $mq = mysql_query($SQL);
             echo "<table>";
-            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$this->getCountSimOrdByIdOrd($text, 'trans')."</span> ".t('podobnych wyników').":<th><tr>";
+            echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$ileSlow."</span> ".t('podobnych wyników').":<th><tr>";
+            
+            if($this->prezentuj < $ileSlow)
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";
+            else
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>";
+            
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
                 foreach($row as $k => $v){
