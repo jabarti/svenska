@@ -12,7 +12,7 @@ require_once "common.inc.php";
 include 'DB_Connection.php';
 $title = 'Svenska | Eraser';
 include 'header.php';
-include 'flag.php';
+//include 'flag.php';
 include 'buttons.php';
 //include 'rozdzielacz.php';
 

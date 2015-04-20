@@ -77,7 +77,7 @@ switch ($usr_role){
 ?>                 
         <a href="../" class="myButton"><?php echo t("Do")." ".t("StronyGłownej_btn");; ?></a><br>
 <!--        =================-->
-        <a href="#" class="myButton2" id="coreButt"><?php echo t("coreButton");; ?></a><br>
+        <a href="#" class="myButton2" id="coreButt"><?php echo t("coreButton")."&#8628;"; ?></a><br>
         <div id="core">
             <a href="index.php" class="myButton"><?php echo t("Do")." ".t("Insertera_btn"); ?></a><br>
             <a href="Edit.php" class="myButton"><?php echo t("Do")." ".t("Edycji_btn"); ?></a><br>

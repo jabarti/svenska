@@ -86,22 +86,85 @@ function start(){
 //        }
 //    });
 
+
     /* Używane w BUTTON.php do ukrycia i odsłaniania buttonów w sekcjach */
     
     $("#core").hide();
     $("#admin").hide();
-    $("#usrAdmin").hide();    
+    $("#usrAdmin").hide(); 
+//    $('#coreButtArrow').remove();
+    $('#coreButt').append('<span id="coreButtArrow">&#10549;</span>');
+    $('#admButt').append('<span id="adminButtArrow">&#10549;</span>');
+    $('#usrAdmButt').append('<span id="usrAdmArrow">&#10549;</span>');
         
-    $("#coreButt").bind("click", function(){
-        $("#core").toggle();
+//    $("#coreButt").bind("click", function(){
+    $("#coreButt").click(function(){
+        $("#admin").hide();
+        $("#usrAdmin").hide();
+        
+        if ($('#coreButtArrow').text() == '⤵'){
+            $("#core").show();
+            
+            $('#coreButtArrow').remove();
+            $('#adminButtArrow').remove();
+            $('#usrAdmArrow').remove();
+            
+            $('#coreButt').append('<span id="coreButtArrow">&#10548;</span>');
+            $('#admButt').append('<span id="adminButtArrow">&#10549;</span>');
+            $('#usrAdmButt').append('<span id="usrAdmArrow">&#10549;</span>');
+        }else{
+            $("#core").hide();
+            $('#coreButtArrow').remove();
+            $('#coreButt').append('<span id="coreButtArrow">&#10549;</span>');
+        }
     });
     
-    $("#admButt").bind("click", function(){
-        $("#admin").toggle();
+//    $("#admButt").bind("click", function(){
+    $("#admButt").click(function(){
+        $("#core").hide();
+        $("#usrAdmin").hide();
+//        $("#admin").toggle();
+        
+        if ($('#adminButtArrow').text() == '⤵'){
+            $("#admin").show();
+            
+            $('#coreButtArrow').remove();
+            $('#adminButtArrow').remove();
+            $('#usrAdmArrow').remove();
+            
+            $('#coreButt').append('<span id="coreButtArrow">&#10549;</span>');
+            $('#admButt').append('<span id="adminButtArrow">&#10548;</span>');
+            $('#usrAdmButt').append('<span id="usrAdmArrow">&#10549;</span>');
+        }else{
+            $("#admin").hide();
+            $('#adminButtArrow').remove();
+            $('#admButt').append('<span id="adminButtArrow">&#10549;</span>');
+        }        
+        
     });
     
-    $("#usrAdmButt").bind("click", function(){
-        $("#usrAdmin").toggle();
+//    $("#usrAdmButt").bind("click", function(){
+    $("#usrAdmButt").click(function(){
+        $("#core").hide();
+        $("#admin").hide();
+//        $("#usrAdmin").toggle();
+
+        if ($('#usrAdmArrow').text() == '⤵'){
+            $("#usrAdmin").show();
+            
+            $('#coreButtArrow').remove();
+            $('#adminButtArrow').remove();
+            $('#usrAdmArrow').remove();
+            
+            $('#coreButt').append('<span id="coreButtArrow">&#10549;</span>');
+            $('#admButt').append('<span id="adminButtArrow">&#10549;</span>');
+            $('#usrAdmButt').append('<span id="usrAdmArrow">&#10548;</span>');
+        }else{
+            $("#usrAdmin").hide();
+            $('#usrAdmArrow').remove();
+            $('#usrAdmButt').append('<span id="usrAdmArrow">&#10549;</span>');
+        }
+
     });
     
     /* KONIEC SEKCJI do Button.php */
