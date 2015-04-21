@@ -1092,7 +1092,7 @@ class Ord {
             echo "<table>";
             echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$ileSlow."</span> ".t('podobnych wyników').":<th><tr>";
             
-            if($this->prezentuj < $ileSlow)
+            if($this->prezentuj < $ileSlow) 
                 echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";
             else
                 echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>";

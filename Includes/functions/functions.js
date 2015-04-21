@@ -966,6 +966,15 @@ function autoVerb(trans, group) {
     }
 }
 
+// GENERAL FUNCTION simmilar to PHP's "inArray()"
+function inArray(needle, haystack) {
+    var length = haystack.length;
+    for(var i = 0; i < length; i++) {
+        if(haystack[i] == needle) return true;
+    }
+    return false;
+}
+
 function autoNoun(trans, group, rodzaj) {
     trans = trans.trim();           // obcina białe znaki!!
     var OBSI = trans;
@@ -974,7 +983,6 @@ function autoNoun(trans, group, rodzaj) {
     if(ostLett == 'a'){
             var indA = trans.lastIndexOf("a");
             var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego a
-//            ostLettIMPER = trans.slice(trans.length-1);
     }
 
     var konVal = false;
@@ -990,26 +998,74 @@ function autoNoun(trans, group, rodzaj) {
         konVal = true;
         konc = 0;
     }
-    transPL = trans;
+    var transPL = trans;
     var koncPL = '';
     
     switch(group){
         case "1":
-
+            console.log("Algorytm dla gr1 działa OK!");
+            
             group = 'or';
-            konc = 'en';
+            rodzaj = 'en';
             koncPL = 'na';
+            konc = 'n';
+
+            switch (ostLett){
+                case 'a':
+                    konc = 'an';
+                    break;
+                case 'o':
+                    group = 'r';
+                    break
+                default:
+                    console.log ("ERROR in functions.js autoNoun: #AuNo0001, ost litera: "+ostLett)
+                    break;
+            }
+
             if(konVal==true) 
                 $('#rodzaj option[value=en]').attr('selected','selected');
+//                $('#typ option[value=noun]').attr('selected','selected');
         break;
         case '2':
+            console.log("Algorytm dla gr2 działa OK!");
             group = 'ar';
+            rodzaj = 'en';
             konc = 'en';
             koncPL = 'na';
+            
+            var spolgloski = new Array('n');
+            var samogloski = new Array('å');
+            var treOstLett = new Array('kel','gel','gon','ter','ger','ber');
+            
+            var ost3Lett = trans.slice(trans.length-3)
+//            alert (ost3Lett)
+            
+            if(inArray(ost3Lett,treOstLett)){
+                len = trans.length
+                var trans3l = trans.slice(0,len-3); // ostateczny kształt "tematu słowa" - bez końcowych 3 liter
+                var kon = trans.slice(len-3)
+//                alert(trans3l + " /1: "+kon)   
+                kon = kon.slice(0,1)+kon.slice(2)
+//                alert(trans3l + " /2: "+kon)
+                transPL = trans3l+kon
+                
+                if(inArray(ostLett, spolgloski)){
+                    konc = 'en';
+                }else{
+                    konc = 'n';
+                }
+            }
+            
+            if(ostLett == 'å'){
+                konc = 'n';
+                group = 'r';
+            }
+            
             if(konVal==true) 
                 $('#rodzaj option[value=en]').attr('selected','selected');
         break;
         case '3':
+            console.log("Algorytm dla gr3 działa prawie OK! Brak obcięcia e z en dla końców -n!");
             group = 'er';
             konc = 'en';
             koncPL = 'na';
@@ -1054,7 +1110,7 @@ function autoNoun(trans, group, rodzaj) {
             koncPL='';
         break;
     }
-    console.log('trans: '+trans+'/ngroup: '+group+'/nkonc: '+konc);
+    console.log('trans: '+trans+' / transPL: '+transPL+' / ngroup: '+group+'/nkonc: '+konc);
     
     $('#S_indefinite').val(rodzaj+" "+OBSI);
     $('#S_definite').val(trans+konc);
