@@ -9,7 +9,9 @@
  ***************************************************/
 $file = trim(strrchr($_SERVER['PHP_SELF'],'/'),'/');
 
-?><script>//alert('FILE:<?php echo $file?>')</script><?php
+?>
+    <!--<script>alert('FILE:<?php //echo $file?>')</script>-->
+<?php
 //echo "<script> console.log('rozdzielacz.php') </script>";
 
 $allowPages = Array();
@@ -48,11 +50,15 @@ if(isset($_SESSION['role'])){
 //                 header("Location: test.php");
              break;
          default:
-             ?><script>//alert("04. Defałlt") </script><?php
+             ?>
+                <!--<script>//alert("04. Defałlt") </script>-->
+            <?php
              break;
      }
  }else{
-     ?><script>//alert("05. Nie ma $_SESSION['role']") </script><?php
+     ?>
+        <!--<script>alert("05. Nie ma $_SESSION['role']") </script>-->
+     <?php
  }
 
 //echo "<br>REF:".$ref;
@@ -61,8 +67,11 @@ if(isset($_SESSION['role'])){
 if(!in_array($file,$allowPages)){
 //    echo "<BR><br>NIE JEST na liście allowPages";
     if($file != 'test.php'){
-        ?><script>//alert("przed location")</script><?php
-        ?><script>//alert('TESTER:<?php //echo $tester; ?>')</script><?php
+        ?>
+        <script>
+//            alert("przed location")
+//            alert('TESTER:<?php //echo $tester; ?>')
+        </script><?php
         header("Location: test.php");
     }
 }/*

@@ -24,7 +24,7 @@ if($REMOTE_ADDR){
 //echo "<script> console.log('loger.php') </script>";
 
 $match = strpos($_SERVER['HTTP_REFERER'], "loger.php");
-////echo "<br>Macz: ".$match."<br>";
+//echo "<br>Macz: ".$match."<br>";
 
 if(!$match){
 //        echo '<br>$_SESSION[ref]:'.$_SESSION['ref'];
@@ -32,7 +32,7 @@ if(!$match){
     }else{
 //        echo '<br>$_SESSION[ref]'.$_SESSION['ref'];
         $_SESSION['ref'] = "index.php";
-    }
+}
 //    
 //echo "<span>".t('Przybywasz z: <br><span class=red>').$_SESSION['ref']."</span></span>";
 

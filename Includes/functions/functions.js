@@ -976,6 +976,7 @@ function inArray(needle, haystack) {
 }
 
 function autoNoun(trans, group, rodzaj) {
+//    alert(trans + " / " + group + " / "+rodzaj)
     trans = trans.trim();           // obcina białe znaki!!
     var OBSI = trans;
     var ostLett = trans.slice(trans.length-1)
@@ -996,6 +997,7 @@ function autoNoun(trans, group, rodzaj) {
         konc = 'et'
     }else{
         konVal = true;
+        rodzaj = "en"
         konc = 0;
     }
     var transPL = trans;
@@ -1006,7 +1008,7 @@ function autoNoun(trans, group, rodzaj) {
             console.log("Algorytm dla gr1 działa OK!");
             
             group = 'or';
-            rodzaj = 'en';
+//            rodzaj = 'en';
             koncPL = 'na';
             konc = 'n';
 
@@ -1029,7 +1031,7 @@ function autoNoun(trans, group, rodzaj) {
         case '2':
             console.log("Algorytm dla gr2 działa OK!");
             group = 'ar';
-            rodzaj = 'en';
+//            rodzaj = 'en';
             konc = 'en';
             koncPL = 'na';
             
@@ -1065,7 +1067,7 @@ function autoNoun(trans, group, rodzaj) {
                 $('#rodzaj option[value=en]').attr('selected','selected');
         break;
         case '3':
-            console.log("Algorytm dla gr3 działa prawie OK! Brak obcięcia e z en dla końców -n!");
+            console.log("Algorytm dla gr3 działa prawie OK!");
             group = 'er';
             konc = 'en';
             koncPL = 'na';
@@ -1079,6 +1081,7 @@ function autoNoun(trans, group, rodzaj) {
                 $('#rodzaj option[value=ett]').attr('selected','selected');
         break;
         case '5':
+            alert ("TODO: przy 'en' dodaje za dużo samogłosek")
             group = '';
             if(rodzaj == "en")
                 koncPL = 'na';

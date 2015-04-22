@@ -20,15 +20,21 @@ if(!isset($_SESSION)){
 
 
 if(isset($_POST)){
-    ?><script>//alert ("Jest POST!!");</script><?php
+    ?>
+    <!--<script>alert ("Jest POST!!");</script>-->
+    <?php
     if(isset($_POST['submitLOG'])){
-//        ?><script>//alert ("Jest POST[submitLOG]!!");</script><?php
+        ?>
+        <!--<script>alert ("Jest POST[submitLOG]!!");</script>-->
+        <?php
         // to to co przeszło z logera, jeszcze nie wiadomo czy jest taki user!!
         $_SESSION['submitLOG']['user'] = $_POST['user'];
         $_SESSION['submitLOG']['password'] = sha1($_POST['password']);
         unset($_POST['submitLOG']);
     }else{
-//        ?><script>//alert ("NIE MA POST[submitLOG]!!");</script><?php
+        ?>
+            <!--<script>//alert ("NIE MA POST[submitLOG]!!");</script>-->
+        <?php
 //        unset($_SESSION['submitLOG']);
     }
 }
@@ -38,7 +44,9 @@ $log_min = 60*57;
 
 if(isset($_GET['kuki'])){
 //    var_dump($_GET);
-    ?><script>//console.log("Jest GET['kuki']!!: <?php echo $_GET['kuki'] ?>");</script><?php
+    ?>
+    <!--<script>console.log("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?>");</script>-->
+    <?php
     switch($_GET['kuki']){       
         case 'NOT_OK':
             ?><script>//alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script><?php
@@ -61,7 +69,9 @@ if(isset($_GET['kuki'])){
             }
             break;
         case 'NOT_OKW':
-            ?><script>//alert ("Jest GET['kuki']!!: <?php echo $_GET['kuki'] ?> ||");</script><?php
+            ?>
+            <!--<script>alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script>-->
+            <?php
             $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
             $time_str = date($time);
             try{
@@ -90,11 +100,15 @@ if(isset($_GET['kuki'])){
             
             break;
         default:
-            ?><script>//alert ("DEFAULT: Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script><?php 
+            ?>
+            <!--<script>alert ("DEFAULT: Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script>-->
+            <?php 
             break;
     }
 }else{
-    ?><script>//alert ("NIE ma GET[kuki]!!");</script><?php
+    ?>
+        <!--<script>alert ("NIE ma GET[kuki]!!");</script>-->
+    <?php
 }
 
 
@@ -150,7 +164,9 @@ if(isset($_GET['kuki'])){
 if (isset($_GET['lang'])||isset($_SESSION['lang'])){
     if(isset($_GET['lang']))
         $_SESSION['lang'] = $_GET['lang'];
-        ?><script>//alert ("SESSION LANG!!");</script><?php
+        ?>
+                <!--<script>alert ("SESSION LANG!!");</script>-->
+        <?php
 } else {
     $_SESSION['lang'] = "pl";
 }
@@ -188,7 +204,9 @@ if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
 }
 
 try{
-    ?><script>//alert ("common - try");</script><?php
+    ?>
+    <!--<script>//alert ("common - try");</script>-->
+    <?php
     require_once 'Paths.php';
     require_once CLASSES_PATH.'Ord.class.php';
     require_once CLASSES_PATH.'User.class.php';
@@ -196,20 +214,46 @@ try{
     require_once CLASSES_PATH.'Score.class.php';
     require_once CLASSES_PATH.'Random.class.php';
     
+//    require 'header.php';
+    
     require_once FUNCTIONS_PATH.'functions.php';
     if(isset($_SESSION['server'])){
-        ?><script>//alert ("isset($_SESSION['server'])");</script><?php
+        ?>
+        <!--<script>//alert ("isset($_SESSION['server'])");</script>-->
+        <?php
         if($_SESSION['server']=='server'){
-            ?><script>//alert ("isset($_SESSION['server']) == 'server");</script><?php
+            ?>
+<!--            <script>
+//                alert ("isset($_SESSION['server']) == 'server");
+            </script>-->
+            <?php
             include BL_TRANSLATION_PATH.'translacjon.php';
             include BL_TRANSLATION_PATH.'flag.php';
         }else{  // poza serwerem bartilevi nie widoczna będzie zawartość /translation
+            try{
+                include BL_TRANSLATION_PATH.'translacjon.php';
+            } catch (Exception $ex) {
+                ?>
+                <script>
+                    console.log("ERROR w include translation.php");
+                </script>
+                <?php
+            }
             function t($var){ return $var; }
             function g($var){ return $var; }
         }
+    }else{
+//        echo "<br>isset(SESSION[server] IS NOT SET)";   
+        function t($var){ return $var; }
+        function g($var){ return $var; }
     }
 }
 catch(Exception $ex){
+    ?>
+<!--    <script>
+                alert ("ERROR");
+    </script>-->
+    <?php
     echo t("Błędem jest")." :".$ex;
 }
 

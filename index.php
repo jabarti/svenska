@@ -367,7 +367,7 @@ if (isset($_GET['result'])){
 //            echo "<br>$tempID";
 //            echo "<br>";
             
-            echo t('Wstawione do BD!')." SV: <a target='_blank' href='Edit.php?sercz_id=$tempID'>".$_GET['transz']."</a>";
+            echo t('Wstawione do BD!').", ".t("słowo SE").": <a target='_blank' href='Edit.php?sercz_id=$tempID'>".$_GET['transz']."</a>";
             
             break;
         case 'Error':
