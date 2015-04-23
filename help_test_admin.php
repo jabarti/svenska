@@ -48,7 +48,7 @@ if($Word = new Ord()){
                 <td><input id='id_ord' name='id_ord'></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
-                    <select id=typ name='typ'>
+                    <select id=typ name='typ' class='optionInsert'>
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
@@ -82,7 +82,7 @@ if($Word = new Ord()){
                 <td colspan="4"></td>
                 <td class='label'><?php echo t("lab_grupa"); ?></td>
                 <td>
-                    <select id=grupa name='grupa'>
+                    <select id=grupa name='grupa' class='optionInsert'>
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getGroupOfOrd();

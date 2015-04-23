@@ -1,0 +1,350 @@
+﻿body
+{
+background-color:#d0e4fe;
+width: 85%;
+/*allign: center;*/
+}
+table {
+    border: #003AD9 thin solid;
+    border-collapse: collapse;
+    vertical-align: center;
+}
+
+.table_log {
+    background:cadetblue;
+    vertical-align: center;
+    margin-left: auto; 
+    margin-right: auto;
+    allign: center;
+    border-collapse: collapse;
+    border: none;
+}
+
+.tabl_time{
+    /*color:red;*/
+    font-size: 10px;
+    text-height: 6px;
+    border-style: hidden;
+    
+}
+
+.UsrAdm_grey {
+/*    background: seashell;
+    background: #d0e4fe;*/
+    background: antiquewhite;
+}
+
+.uwagi_ta{
+    background: lemonchiffon;
+    /*vertical-align: middle;*/
+    width: 100%;
+    height: 2em;
+/*    columns: 160;*/
+    
+}
+
+/* klasa dla insertów rozwijanych niektórych*/
+.optionInsert{
+    /*color: red;*/
+    max-width: 70%; /* to daje widoczność 70% tekstu z inserta*/
+}
+
+/*tabela podstawowa edycji i insertera*/
+.tab_insert {       
+    background: deepskyblue;
+    width: 96%;
+}
+
+.tab_insert td{
+    /*width: 10%;*/ 
+    text-align: left;
+    /*border: 1px solid #003AD9;*/
+}
+.tab_insert td.label{ 
+    text-align: right;
+    font-size: 12px;
+    border-bottom: 1px solid chartreuse;
+    border-top: 1px solid chartreuse;
+}
+
+/*.table2 td{
+    background: red;
+    border: 1px solid black;
+    width: 20%;
+    height: 50px;
+}
+.table2 a{
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.table2 a:hover{
+    font-weight: bold;
+    text-decoration: underline;
+}*/
+
+tbody {
+    /*background: red;*/
+    border: 1px solid #003AD9;
+}
+
+tbody.wew {
+    border: 1px solid greenyellow;
+}
+
+.edit_tab_contener {
+    /*background: red;*/
+    position: absolute;
+    /*background: deepskyblue;*/
+    /*width:75%;*/
+    /*opacity: 0.1;*/
+/*    text-align: center;
+    margin-right: auto; 
+    margin-left: auto; */
+    /*float: right;*/
+    /*margin-left: 10%;*/
+}
+
+.edit_table {
+    background: deepskyblue;
+    width:96%;
+}
+
+.error {
+	display:block; color: yellow; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrBlu {
+	display:block; color: blue; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrYel {
+	display:block; color: yellow; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrRed {
+	display:block; color: red; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+.fileldDescrOra {
+	display:block; color: orange; /*color:#C21216*/; 
+        font-family:Arial, Helvetica, sans-serif; 
+        font-size:11px;
+}
+
+/*Do paginacji #nav*/
+#nav ul {       
+    /*background: red;*/
+        list-style-type:none;  
+        float:left; 
+        position:fixed; 
+        left:37%;
+        top: -10px;
+        /*background: red;*/
+}
+#nav li {
+        float:left; 
+        margin:0 5px; 
+        position:relative; 
+        right:50%; 
+        background: lightgrey;
+        opacity: 1;
+}
+#nav li.current a{
+        color:#F00;    
+}
+
+div.clear {
+        clear:both;
+}
+
+/* Położenie flag*/
+div#translacje {
+    background: red;
+    position: fixed;
+    bottom: -80px;
+    right: 0px;
+    /*width: 11.4%;*/
+    background-clip: red;     
+    border: 1px solid black;
+    margin-left: auto;
+    margin-left: auto;
+    text-align: left;
+    z-index: 999;
+}
+
+div.floating_button_div{
+    background: red;
+    position: fixed;
+    top: 10px;
+    right: 180px;
+    height:24px;
+}
+
+div.flag {
+    position: relative;
+    bottom: 5px;
+    right:5px;
+    /*background-color: silver;*/
+    /*padding: 2px;*/
+    /*border: 1px solid #263666;*/
+}
+
+div.flag a{
+    width: 110px;
+    /*height: 25px;*/
+    /*border: 1px solid black;*/
+}
+
+.print {
+    background: white;
+    width: 84%;
+    /*border-collapse: collapse;*/
+}
+.print td, .print th{
+    /*border-collapse: collapse;*/
+    border-bottom: 1px black solid;
+    border-left: 1px #003AD9 dotted;
+    /*border-collapse: collapse;*/
+    /*border: 0.5px #003AD9 solid;*/
+    /*border: 1px 2px 3px 4px black solid;*/
+}
+.print th{
+    background: silver;
+}
+
+.nobordtop {
+    border-top: 0px solid #003AD9 ;
+    /*border: 3px solid #003AD9;*/
+}
+.nobordbottom {
+    border-bottom: 0px solid #003AD9 ;
+    /*border: 3px solid #003AD9;*/
+}
+
+div.cleaner {
+clear: both;
+
+}
+
+p.red {
+color:red;
+}
+p.blue {
+color:blue;
+}
+p.green {
+color:green;
+}
+span.red {
+color:red;
+}
+span.blue {
+color:blue;
+}
+span.green {
+color:green;
+}
+
+div.divLog {
+    background: whitesmoke;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 5px;
+    border: 1px #516ca3 solid;
+    padding: 5px;
+    width:180px;
+    height:110px;
+    font-size: 11px;
+    
+}
+
+div.DBConn{
+    position: fixed;
+    bottom:140px;
+    right: 5px;
+    width: 180px;
+    min-height: 50px;
+    background: greenyellow;
+    font-size: 10px;
+    opacity: 0.3;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #00cccc;
+    -moz-box-shadow: 0px 0px 6px #88a;
+    -webkit-box-shadow: 0px 0px 6px #88a;
+    box-shadow: 0px 0px 6px #88a; 
+}
+div.DBConn:hover{
+    opacity: 1;
+}
+        
+div.movingsearch {
+    background: whitesmoke;
+    opacity: 0.6;
+    position: fixed;
+    bottom: 140px;
+    right: 5px;
+    border-radius: 5px;
+    border: 1px #516ca3 solid;
+    padding: 5px;
+    width:180px;
+    font-size: 7px;
+    z-index:950;
+}
+div.movingsearch input {
+    font-size: 7px;
+}
+div.movingsearch select {
+    font-size: 7px;
+}
+
+div.movingsearch:hover{
+    opacity: 1;
+/*    top: 5px;
+    left: 5px;*/
+    font-size: 14px;
+    width:350px;
+}
+div.movingsearch:hover input {
+    font-size: 14px;
+}
+div.movingsearch:hover select {
+    font-size: 14px;
+}
+div.tab_info {
+    /*background: gainsboro;*/
+    /*float: left;*/
+    width: 50%;
+}
+div.tab_info2 {
+    background: red;
+    /*float: left;*/
+    /*width: 50%;*/
+    position: fixed;
+    top:5px;
+    right: 180px;   
+}
+
+div.tab_stat {
+    /*background: gainsboro;*/
+    float: left;
+    width: 15%;
+}
+
+div .box {
+float: left;
+width: 15%;
+height: auto;
+border: 2px solid grey;
+}
+
+div .wisp1 {
+float: left;
+width: 40%;
+}

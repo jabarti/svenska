@@ -111,6 +111,9 @@ switch ($usr_role){
         </div>
 <?php          
     break;
+        if($_MOBILE){
+            echo "<br><span class=red>".t("WERSJA MOBILNA W BUDOWIE")."</span><br>";
+        }
 } // END switch
 
 if(isset($_SESSION['role'])){      

@@ -66,7 +66,7 @@ if(!isset($_GET['copy_id'])){
                 <td><input id='id_ord' name='id_ord' value="<?php echo (isset($mfa['id_ord']))?$mfa['id_ord']:''; ?>"></td>
                 <td class='label'><?php echo t("część mowy"); ?></td>
                 <td>
-                    <select id=typ name='typ'>
+                    <select id=typ name='typ' class='optionInsert'>
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getTypesOfOrd();
@@ -107,7 +107,7 @@ if(!isset($_GET['copy_id'])){
                 <td colspan="4"></td>
                 <td class='label'><?php echo t("lab_grupa"); ?></td>
                 <td>
-                    <select id=grupa name='grupa'>
+                    <select id=grupa name='grupa' class='optionInsert'>
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getGroupOfOrd();

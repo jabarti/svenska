@@ -299,7 +299,7 @@ while($row = mysql_fetch_assoc($mq)){
         
         if($k == 'typ'){
             echo "<td>".t($k)."</td><td>";
-            echo "<select name='".$k."'>";
+            echo "<select name='".$k."' class='optionInsert'>";
                     if($v != '')
                        echo" <option id='ord_types_".$curr_word_id."' value=".$v.">".t($v)." ( ".t("zapisane")." )</option>";  
           
@@ -336,7 +336,7 @@ while($row = mysql_fetch_assoc($mq)){
 //            echo "<td>".t($k)."</td><td>";
             echo "<td>".t("lab_grupa")."</td><td>";
         
-            echo "      <select id='grupa_".$curr_word_id."' name='grupa'>";
+            echo "      <select id='grupa_".$curr_word_id."' name='grupa' class='optionInsert'>";
                     if($v != '')
                         echo "<option value='".$v."'>".t($v)." (".t("zapisane").")</option>";
                     

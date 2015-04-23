@@ -34,6 +34,9 @@ if(isset($_SESSION['log'])){
         echo "<tr><td><span id=zegarText2>".t('do wylogowania zostało')."</span>: </td><td><span id=zegar_log style='visibility: block'></span></td></tr>";
         echo "</table>";
         echo "<button onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
+        if($_MOBILE){
+            echo "<br><span class=red>".t("WERSJA MOBILNA W BUDOWIE")."</span><br>";
+        }      
         if(isset($_COOKIE['log'])){
            $tim = $_COOKIE['log']; 
         }else{

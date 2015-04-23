@@ -1,8 +1,9 @@
 ﻿body
 {
 background-color:#d0e4fe;
-width: 84%;
-/*allign: center;*/
+width: 100%;
+allign: center;
+font-size: 28px;
 }
 table {
     border: #003AD9 thin solid;
@@ -12,18 +13,21 @@ table {
 
 .table_log {
     background:cadetblue;
+    /*background:red;*/
     vertical-align: center;
     margin-left: auto; 
     margin-right: auto;
     allign: center;
     border-collapse: collapse;
     border: none;
+    font-size: 28px;
 }
 
 .tabl_time{
     /*color:red;*/
     font-size: 10px;
-    text-height: 6px;
+    font-size: 28px;
+    /*text-height: 6px;*/
     border-style: hidden;
     
 }
@@ -38,15 +42,21 @@ table {
     background: lemonchiffon;
     /*vertical-align: middle;*/
     width: 450px;
-    height: 2em;
+    height: 12em;
 /*    columns: 160;*/
     
 }
 
+/* klasa dla insertów rozwijanych niektórych*/
+.optionInsert{
+    color: red;
+}
+
 /*tabela podstawowa edycji i insertera*/
 .tab_insert {       
-    background: deepskyblue;
-    width: 90%;
+    background: red;
+    width: 45%;
+    font-size: 28px;
 }
 
 .tab_insert td{
@@ -56,7 +66,7 @@ table {
 }
 .tab_insert td.label{ 
     text-align: right;
-    font-size: 12px;
+    font-size: 32px;
     border-bottom: 1px solid chartreuse;
     border-top: 1px solid chartreuse;
 }
@@ -98,32 +108,33 @@ tbody.wew {
 
 .edit_table {
     background: deepskyblue;
+    width:95%;
 }
 
 .error {
 	display:block; color: yellow; /*color:#C21216*/; 
         font-family:Arial, Helvetica, sans-serif; 
-        font-size:11px;
+        font-size:31px;
 }
 .fileldDescrBlu {
 	display:block; color: blue; /*color:#C21216*/; 
         font-family:Arial, Helvetica, sans-serif; 
-        font-size:11px;
+        font-size:21px;
 }
 .fileldDescrYel {
 	display:block; color: yellow; /*color:#C21216*/; 
         font-family:Arial, Helvetica, sans-serif; 
-        font-size:11px;
+        font-size:21px;
 }
 .fileldDescrRed {
 	display:block; color: red; /*color:#C21216*/; 
         font-family:Arial, Helvetica, sans-serif; 
-        font-size:11px;
+        font-size:21px;
 }
 .fileldDescrOra {
 	display:block; color: orange; /*color:#C21216*/; 
         font-family:Arial, Helvetica, sans-serif; 
-        font-size:11px;
+        font-size:21px;
 }
 
 
@@ -180,7 +191,7 @@ div.flag {
 }
 
 div.flag a{
-    width: 110px;
+    width: 120%;
     /*height: 25px;*/
     /*border: 1px solid black;*/
 }
@@ -243,9 +254,9 @@ div.divLog {
     border-radius: 5px;
     border: 1px #516ca3 solid;
     padding: 5px;
-    width:180px;
-    height:110px;
-    font-size: 11px;
+    width:25%;
+    height:20%;
+    font-size: 31px;
     
 }
 
@@ -256,6 +267,7 @@ div.DBConn{
     width: 180px;
     min-height: 50px;
     background: greenyellow;
+    background: red;
     font-size: 10px;
     opacity: 0.3;
     padding: 5px;
@@ -278,29 +290,29 @@ div.movingsearch {
     border-radius: 5px;
     border: 1px #516ca3 solid;
     padding: 5px;
-    width:180px;
-    font-size: 7px;
+    width:25%;
+    font-size: 31px;
     z-index:950;
 }
 div.movingsearch input {
-    font-size: 7px;
+    font-size: 31px;
 }
 div.movingsearch select {
-    font-size: 7px;
+    font-size: 31px;
 }
 
 div.movingsearch:hover{
     opacity: 1;
 /*    top: 5px;
     left: 5px;*/
-    font-size: 14px;
+    font-size: 31px;
     width:350px;
 }
 div.movingsearch:hover input {
     font-size: 14px;
 }
 div.movingsearch:hover select {
-    font-size: 14px;
+    font-size: 31px;
 }
 div.tab_info {
     /*background: gainsboro;*/
@@ -333,94 +345,3 @@ div .wisp1 {
 float: left;
 width: 40%;
 }
-
-div.guziki {
-position:fixed;
-top:5;
-right:5px;
-/*background: red;*/
-background: whitesmoke;
-background: #97B7B1;
-width:150px;
-padding:5px;
-border:2px solid black;
-z-index: 999;
-}
-	
-.myButton {
-        
-        -moz-box-shadow: 4px 3px 0px 0px #284470;
-        -webkit-box-shadow: 4px 3px 0px 0px #284470;
-        box-shadow: 4px 3px 0px 0px #284470;
-        
-        background-color:#415989;
-        /*background-color:#386A61;*/
-        
-        -moz-border-radius:18px;
-        -webkit-border-radius:18px;
-        border-radius:18px;
-        
-        border:1px solid #1f2f47;
-        
-        display:inline-block;
-        color:#ffffff;
-        font-family:arial;
-        font-size:11px;
-        font-weight:normal;
-        padding:2px 15px;
-        width: 110px;
-        /*width: auto;*/
-        text-decoration:none;
-        
-        text-shadow:0px 3px 0px #263666;
-        
-    }
-.myButton:hover {     
-        background-color:#516ca3;
-        /*background-color:#365555;*/
-    }
-    
-.myButton:active {
-        position:relative;
-        top:1px;
-    }
-    
-.myButton2 {
-        
-        -moz-box-shadow: 4px 3px 0px 0px #284470;
-        -webkit-box-shadow: 4px 3px 0px 0px #284470;
-        box-shadow: 4px 3px 0px 0px #284470;
-        
-        background-color:#415900;
-        /*background-color:#586A67;*/
- 
-        -moz-border-radius:18px;
-        -webkit-border-radius:18px;
-        border-radius:18px;
-        
-        border:1px solid #1f2f47;
-        
-        display:inline-block;
-        color:#ffffff;
-        font-family:arial;
-        font-size:11px;
-        font-weight:normal;
-        padding:2px 15px;
-        width: 110px;
-        /*width: auto;*/
-        text-decoration:none;
-        
-        text-shadow:0px 3px 0px #263666;
-        
-    }
-    
-.myButton2:hover {
-        
-        background-color:#516ca3;
-        /*background-color:#555860;*/
-    }
-.myButton2:active {
-        position:relative;
-        top:1px;
-    }
-	/**/

@@ -10,9 +10,21 @@
         <!--<script src="Includes/functions/functions.js"></script>-->
         <link rel="shortcut icon" href="Resources/img/favicon_no_euro.ico" type="image/x-icon"/><!---->
         <link rel="Stylesheet" type="text/css" href="../Translations/translation.css" />
-        <link rel="Stylesheet" type="text/css" href="Resources/CSS/style.css" />
+        <?php if(!$_MOBILE){
+            ?>
+            <link rel="Stylesheet" type="text/css" href="Resources/CSS/PC/style.css" />
+            <link rel="Stylesheet" type="text/css" href="Resources/CSS/PC/styleButton.css" />
+            <?php    
+        }else{
+            ?>
+            <link rel="Stylesheet" type="text/css" href="Resources/CSS/Mobile/styleMobile.css" />
+            <link rel="Stylesheet" type="text/css" href="Resources/CSS/Mobile/styleMobileButton.css" />
+            <?php
+            
+        }?>
         <meta http-equiv="refresh" content="10801"/>   <!-- Odświeżanie loger: Cookie log =  18h, header (odświerzanie!): 18h01m-->
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!--FROM: https://developers.google.com/webmasters/mobile-sites/mobile-seo/configurations/responsive-design?hl=pl-->
             
         <link rel="stylesheet" type="text/css" href="../ExternSources/dropdown-check-list.1.4/lib/jquery-ui-1.8.13.custom.css">
         <link rel="stylesheet" type="text/css" href="../ExternSources/dropdown-check-list.1.4/lib/ui.dropdownchecklist.themeroller.css">
