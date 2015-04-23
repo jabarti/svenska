@@ -107,7 +107,7 @@ tbody.wew {
 
 .edit_table {
     background: deepskyblue;
-    width:96%;
+    width:99%;
 }
 
 .error {
@@ -174,7 +174,7 @@ div#translacje {
     margin-left: auto;
     margin-left: auto;
     text-align: left;
-    z-index: 999;
+    z-index: 960;
 }
 
 div.floating_button_div{
@@ -259,9 +259,16 @@ div.divLog {
     border: 1px #516ca3 solid;
     padding: 5px;
     width:180px;
+    width:13%;
     height:110px;
     font-size: 11px;
-    
+    z-index:955;  
+}
+
+
+button.loggOutBtn{
+    /*background-color: red;*/
+    z-index:999;
 }
 
 div.DBConn{
@@ -269,6 +276,7 @@ div.DBConn{
     bottom:140px;
     right: 5px;
     width: 180px;
+    width:13%;
     min-height: 50px;
     background: greenyellow;
     font-size: 10px;
@@ -294,6 +302,7 @@ div.movingsearch {
     border: 1px #516ca3 solid;
     padding: 5px;
     width:180px;
+    width:13%;
     font-size: 7px;
     z-index:950;
 }
