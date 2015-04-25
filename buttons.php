@@ -111,10 +111,10 @@ switch ($usr_role){
         </div>
 <?php          
     break;
-        if($_MOBILE){
-            echo "<br><span class=red>".t("WERSJA MOBILNA W BUDOWIE")."</span><br>";
-        }
 } // END switch
+if($REMOTE_ADDR){
+    echo "<br><span style='font-size:10px'>mobile useragent1: ".$useragent."</span>";
+}
 
 if(isset($_SESSION['role'])){      
 ?>

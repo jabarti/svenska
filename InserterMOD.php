@@ -110,11 +110,11 @@ if(isset($_POST['submit'])){
             exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
         }else{
             ?><script>//alert("SESSION test_001 == false");</script><?php
-            header("Location: ../../index.php?result=pusty");
+            header("Location: index.php?result=pusty");
             echo "<script> window.location.replace('../../index.php?result=pusty') </script>" ;
             exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
         }
-//        header("Location: ../../index.php?result=OK");
+//        header("Location: index.php?result=OK");
     } else {
         ?><script>alert("isset POST id_ord ELSE");</script><?php
         header("Location: index.php?result=pusty");
@@ -168,7 +168,7 @@ if(isset($_POST['submit'])){
 //    echo "<br>POST: ";var_dump($_POST);
     
     if(mysql_affected_rows()){
-         echo "<br>linia(".__LINE__.") JEST OK";
+//         echo "<br>linia(".__LINE__.") JEST OK";
          $Log->setData($idOrd, $ID_US, $Zmiany_arr);
          header("Location: help_test_admin.php");
          echo "<script> window.location.replace('help_test_admin.php') </script>" ;

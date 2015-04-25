@@ -133,7 +133,7 @@ class Ord {
                     . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($kategoria)."','".$this->setSQLstringToCode($uwagi)."');");
 //                 echo "<br>INSERT: ".$SQL_PLLH;
                 if (mysql_query($SQL_PLLH)){
-                    echo "<br>".t("WSADZONE do ordLH!!!");
+//                    echo "<br>".t("WSADZONE do ordLH!!!");
                 }else{
 //                    echo "<br>ERROR wsadu";
                     echo "<br>".__FILE__.__LINE__.t("ERROR wsadu");
@@ -165,11 +165,11 @@ class Ord {
 //            }
             $SQL = sprintf("SELECT max(id) FROM `".$this->table.$tabLH."`;");
             
-            echo "<br>".$SQL;
+//            echo "<br>".$SQL;
             
             $res = mysql_fetch_row(mysql_query($SQL));
             if (mysql_affected_rows()){
-            echo "<br>res[0]:".$res[0];
+//            echo "<br>res[0]:".$res[0];
                 return $res[0];
             }else{
                 echo "<br>ERROR getLastId(false)";

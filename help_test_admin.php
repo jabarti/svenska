@@ -350,7 +350,7 @@ if($Word = new Ord()){
     $arr3 = $Word->getQuestionIDsArrByType("hjalp_verb");       
     $arr4 = $Word->getQuestionIDsArrByType(false);      
      
-    var_dump($arr4);
+//    var_dump($arr4);
     $max = count($arr4)-1;
     $rand_index = mt_rand(0, $max);
     $rand = $arr4[$rand_index];
@@ -360,10 +360,10 @@ if($Word = new Ord()){
 //    $rand = rand($arr2);
 //    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
     
-    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
+//    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
 //    $rand = rand($arr4);
 //    echo "<br>".__FILE__.__LINE__." rand: ".$rand;
-    echo "<br>";
+//    echo "<br>";
     //UŻYWAĆ OSTROŻNIE!!!!
 //    $Word->copyFromOrdLHToOrd();
     //$str4 = $Word->getSimOrdByTrans("ok");

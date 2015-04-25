@@ -33,10 +33,16 @@ if(isset($_SESSION['log'])){
         echo "<tr><td><span id=zegarText1>".t('obecny czas')."</span>: </td><td><span id=zegar></span></td></tr>";
         echo "<tr><td><span id=zegarText2>".t('do wylogowania zostało')."</span>: </td><td><span id=zegar_log style='visibility: block'></span></td></tr>";
         echo "</table>";
-        echo "<button class='loggOutBtn' onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
+        
+        
         if($_MOBILE){
-            echo "<br><span class=red>".t("WERSJA MOBILNA W BUDOWIE")."</span><br>";
-        }      
+            echo "<span class='red small'>".t("WERSJA MOBILNA W BUDOWIE")."</span><br>";
+        }else{
+            echo "<span class='red small'>".t("WERSJA PC")."</span><br>";
+        }
+        
+        echo "<button class='loggOutBtn' onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
+        
         if(isset($_COOKIE['log'])){
            $tim = $_COOKIE['log']; 
         }else{

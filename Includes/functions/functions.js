@@ -1029,7 +1029,7 @@ function autoNoun(trans, group, rodzaj) {
 //                $('#typ option[value=noun]').attr('selected','selected');
         break;
         case '2':
-            console.log("Algorytm dla gr2 działa OK!");
+            console.log("Algorytm dla noun:gr2 działa OK!");
             group = 'ar';
 //            rodzaj = 'en';
             konc = 'en';
@@ -1037,7 +1037,7 @@ function autoNoun(trans, group, rodzaj) {
             
             var spolgloski = new Array('n');
             var samogloski = new Array('å');
-            var treOstLett = new Array('kel','gel','gon','ter','ger','ber');
+            var treOstLett = new Array('kel','gel','pel','gon','ter','ger','ber');
             
             var ost3Lett = trans.slice(trans.length-3)
 //            alert (ost3Lett)
@@ -1068,8 +1068,13 @@ function autoNoun(trans, group, rodzaj) {
         break;
         case '3':
             console.log("Algorytm dla gr3 działa prawie OK!");
-            group = 'er';
-            konc = 'en';
+            if(ostLett=='e'){
+                group = 'r';
+                konc = 'n';
+            }else{
+                group = 'er';
+                konc = 'en';
+            }
             koncPL = 'na';
             if(konVal==true) 
                 $('#rodzaj option[value=en]').attr('selected','selected');
@@ -1081,7 +1086,7 @@ function autoNoun(trans, group, rodzaj) {
                 $('#rodzaj option[value=ett]').attr('selected','selected');
         break;
         case '5':
-            alert ("TODO: przy 'en' dodaje za dużo samogłosek")
+            console.log ("TODO: przy 'en' dodaje za dużo samogłosek")
             group = '';
             if(rodzaj == "en")
                 koncPL = 'na';

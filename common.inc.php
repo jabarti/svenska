@@ -287,13 +287,13 @@ if(isset($_SERVER['HTTP_USER_AGENT'])){
                     . '|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto'
                     . '|zte\-/i',substr($useragent,0,4))){
         $_MOBILE = TRUE;
-        if($REMOTE_ADDR){
-            echo "<br>mobile useragent: ".$useragent."<br><br>";
-        }
+//        if($REMOTE_ADDR){
+//            echo "<br>mobile useragent1: ".$useragent."<br><br>";
+//        }
     }else{
         $_MOBILE = FALSE;
-        if($REMOTE_ADDR){
-            echo "<br>Desktop useragent: ".$useragent."<br><br>";
-        }
+//        if($REMOTE_ADDR){
+//            echo "<div><br>Desktop useragent2: ".$useragent."<br><br></div>";
+//        }
     }
 }
