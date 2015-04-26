@@ -294,7 +294,7 @@ if(!isset($_GET['copy_id'])){
                 <td class='label'><?php echo t("uwagi"); ?></td>
                 <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"><?php echo (isset($mfa['uwagi']))?$mfa['uwagi']:''; ?></textarea></td>
                 <td class='label'><?php echo t("kategoria"); ?> </td>
-                <td colspan='2'>
+                <td colspan='1'>
                     <!--<select id=kategoria name='kategoria'>-->
                     <select id=kategoria_ins  multiple="multiple" name='kategoria'>                        
                         <?php

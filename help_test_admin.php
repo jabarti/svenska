@@ -450,3 +450,29 @@ setInterval(function() {
     }
  echo "<br> MULTIPLIKATION:";
     include_once 'mul.php';
+    
+    ?>
+
+                        <div class="btn-group">
+                      <button type='button' data-toggle="dropdown" class="btn dropdown-toggle"  data-placeholder="Please select">Checked option <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><input type="checkbox" id="ID1"><label for="ID1" name="NAME" value="VALUE">Label1</label></li>
+                          <li><input type="checkbox" id="ID2"><label for="ID2" name="NAME" value="VALUE">Label2</label></li>
+                          <li><input type="checkbox" id="ID3"><label for="ID3" name="NAME" value="VALUE">Label2</label></li>
+                          <li><input type="checkbox" id="ID4"><label for="ID4" name="NAME" value="VALUE">Label2</label></li>
+                          <li><input type="checkbox" id="ID5"><label for="ID5" name="NAME" value="VALUE">Label2</label></li>
+                          <!-- Other items -->
+                        </ul>
+                    </div>
+    <BR>
+    <div class="btn-group">
+  <button class="btn btn-primary">Checked option</button>
+  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" data-placeholder="false"><span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><input type="checkbox" id="ID" name="NAME" value="VALUE"><label for="ID">Label</label></li>
+      <li><input type="checkbox" id="ID" name="NAME" value="VALUE"><label for="ID">Label</label></li>
+      <li><input type="checkbox" id="ID" name="NAME" value="VALUE"><label for="ID">Label</label></li>
+      <li><input type="checkbox" id="ID" name="NAME" value="VALUE"><label for="ID">Label</label></li>
+      <!-- Other items -->
+    </ul>
+</div>

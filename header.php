@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
 	<title><?php echo (isset($title) ? t($title)  : 'My Page'); ?></title>
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!--<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
         <script type="text/javascript" src="<?php echo FUNCTIONS2_PATH."functions.js";?>"></script>
         <script type="text/javascript" src="<?php echo FUNCTIONS2_PATH."Skrypty.js";?>"></script>
         <script type="text/javascript" src="<?php echo FUNCTIONS2_PATH."Skrypty_FormValidator.js";?>"></script>
@@ -24,14 +25,20 @@
         }?>
         <meta http-equiv="refresh" content="10801"/>   <!-- Odświeżanie loger: Cookie log =  18h, header (odświerzanie!): 18h01m-->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!--FROM: https://developers.google.com/webmasters/mobile-sites/mobile-seo/configurations/responsive-design?hl=pl-->
             
+        <!-- DO BOOTSRAPA -->    
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+        <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+        <!--<script type="text/javascript" src="<?php echo FUNCTIONS2_PATH."dropdowns-enhancement.js";?>"></script>-->
+        <!--<link rel="stylesheet" href="Resources/CSS/dropdowns-enhancement.css">-->
+            
+            
+        <!--for CHECKLISTY W INSERT I EDIT-->    
         <link rel="stylesheet" type="text/css" href="../ExternSources/dropdown-check-list.1.4/lib/jquery-ui-1.8.13.custom.css">
         <link rel="stylesheet" type="text/css" href="../ExternSources/dropdown-check-list.1.4/lib/ui.dropdownchecklist.themeroller.css">
         <script type="text/javascript"          src="../ExternSources/dropdown-check-list.1.4/lib/jquery-1.6.1.min.js"></script>
         <script type="text/javascript"          src="../ExternSources/dropdown-check-list.1.4/lib/jquery-ui-1.8.13.custom.min.js"></script>
         <script type="text/javascript"          src="../ExternSources/dropdown-check-list.1.4/lib/ui.dropdownchecklist-1.4-min.js"></script>    
-        
-        <script type="text/javascript" src="<?php echo FUNCTIONS2_PATH."dropdowns-enhancement.js";?>"></script>
-        <link rel="stylesheet" href="Resources/CSS/dropdowns-enhancement.css">
 </head>
