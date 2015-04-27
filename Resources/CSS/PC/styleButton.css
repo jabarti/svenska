@@ -1,3 +1,27 @@
+#submitLOG {
+  /*background-color: red;*/
+  /*text-align: left;*/
+  /*border-left: 2px solid #0063A3;*/
+  /*border-right: none;*/
+  /*background-image: url("Resources/img/key.png");*/
+/*  background-position: -3px center;
+  background-repeat: no-repeat;*/
+  /*padding: 0 0 0 20px;*/
+  /*border-radius: 0;*/
+/*font-size: 15px;*/
+text-align: right;
+}
+
+#imgLogButt{
+    position: relative;
+    /*background-color: red;*/
+    border-right: 1px solid #0063A3;
+    padding-right: 3px;
+    top: 2px;
+    text-align: left;
+}
+
+
 ﻿div.floating_button_div{
     background: red;
     position: fixed;

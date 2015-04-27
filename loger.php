@@ -74,7 +74,7 @@ if(!$match){
             </tr>-->
             <tr>
                 <td></td>
-                <td><input id='submitLOG' name="submitLOG" type="submit" value="<?php echo t("Zaloguj"); ?>"></td>
+                <td><button id='submitLOG' name="submitLOG" type="submit" ><img id='imgLogButt' src="Resources/img/key.png"> </img><?php echo t("Zaloguj"); ?></button></td>
             </tr>
             <tr>
                 <td></td>
