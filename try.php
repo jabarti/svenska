@@ -9,10 +9,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t('Try');
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 ?>
 
 <!--<form action="upload.php" method="post" enctype="multipart/form-data">

@@ -12,11 +12,11 @@ ob_start(); // żeby sie dało reloadeować
 
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t("Edit");
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
-//include 'rozdzielacz.php';
+include 'divLog.php';
 
 //foreach($_POST as $k => $v){
 //    echo "POST[$k]=".$v.", ";

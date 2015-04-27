@@ -10,10 +10,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t("Create New User");
+include 'title.php';
 include 'header.php';
-//include 'buttons.php';
+include 'buttons.php';
+include 'divLog.php';
 
 //$REMOTE_ADDR = false; // Do testów!!!! false oznacza zewnętrznego (normalnego) usera!!!
 

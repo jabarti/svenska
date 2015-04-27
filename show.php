@@ -10,10 +10,11 @@
  * ************************************************* */
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t("Show/printer");
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 //echo "rola: ";var_dump($allowPages);
 //var_dump($_SESSION);
 if(isset($_SESSION['role']) && ($_SESSION['role']=='visitor' or $_SESSION['role']=='user')){

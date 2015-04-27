@@ -11,10 +11,11 @@
 // Tu trafiają dane z CreateUser.php
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | Create New User MOD';
+include 'title.php';
 include 'header.php';
 //include 'buttons.php';
+include 'divLog.php';
 
 //foreach($_SESSION as $k => $v){
 //    echo "<br>SESSION[$k] => $v";

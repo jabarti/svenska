@@ -11,10 +11,10 @@
 require_once "common.inc.php";
 include 'DB_Connection.php';
 $title = 'Svenska | Eraser';
+include 'title.php';
 include 'header.php';
-//include 'flag.php';
 include 'buttons.php';
-//include 'rozdzielacz.php';
+include 'divLog.php';
 
 foreach($_POST as $k => $v){
     echo "<br>POST['$k']=".$v;

@@ -10,10 +10,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t("Mail");
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 //echo "<br>Usr_mial:".$_SESSION['usr_mail'];
 ?>
 <p id="textTitle" style="color: black;"><?php echo t("NAPISZ DO MNIE"); ?></p>

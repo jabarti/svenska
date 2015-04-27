@@ -10,10 +10,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t('upload');
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 
 echo "POST:";
 foreach ($_POST as $k => $v){

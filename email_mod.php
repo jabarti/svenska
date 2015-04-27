@@ -10,10 +10,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | mailMOD';
+include 'title.php';
 include 'header.php';
 //include 'buttons.php';
+include 'divLog.php';
 
 echo "<br>POST:";var_dump($_POST);
 

@@ -10,10 +10,11 @@
  * ************************************************* */
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t('Test');
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 
 //if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 if($_SESSION['log'] == true ){

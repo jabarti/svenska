@@ -8,12 +8,6 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-//require_once "common.inc.php";
-//include 'DB_Connection.php';
-//$title = '';
-//include 'header.php';
-//include 'flag.php';
-//include 'buttons.php';
 $isEdit = strrpos($_SERVER['PHP_SELF'], "Edit.php");
 
 if($isEdit){

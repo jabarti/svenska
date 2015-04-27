@@ -10,9 +10,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t("Logger");
+include 'title.php';
 include 'header.php';
+//include 'buttons.php';
+include 'divLog.php';
 
 if($REMOTE_ADDR){
     echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"]."<br>";

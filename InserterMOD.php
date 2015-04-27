@@ -9,10 +9,11 @@
  * ************************************************* */
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t('InserterMOD');
+include 'title.php';
 include 'header.php';
 //include 'buttons.php';
+//include 'divLog.php';
 
 //foreach($_POST as $k => $v){
 //    echo "POST['$k']=".$v.", ";

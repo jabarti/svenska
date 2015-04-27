@@ -10,10 +10,11 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | '.t('Edit User Data');
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 
 //foreach ($_SESSION as $k => $v){
 //    echo "<br>$k => $v";

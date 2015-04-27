@@ -12,10 +12,11 @@ ob_start(); // żeby sie dało reloadeować
 
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
 $title = 'Svenska | Edit';
+include 'title.php';
 include 'header.php';
 include 'buttons.php';
+include 'divLog.php';
 
 // Wyniki!!??? z sercza
 //echo "<div id=p3 class=\"tab_info2\"></div>";
