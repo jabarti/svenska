@@ -30,3 +30,5 @@ if($_SESSION['log'] == true ){
         echo "<br>NIE ZALOGOWANY";
     }
 }
+
+echo '<br> TODO!!! koniec pliku';

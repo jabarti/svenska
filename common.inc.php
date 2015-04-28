@@ -50,6 +50,7 @@ if(isset($_GET['kuki'])){
     switch($_GET['kuki']){       
         case 'NOT_OK':
             ?><script>//alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script><?php
+            // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php
             $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
             $time_str = date($time);
             try{
@@ -72,6 +73,7 @@ if(isset($_GET['kuki'])){
             ?>
             <!--<script>alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script>-->
             <?php
+            // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php
             $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
             $time_str = date($time);
             try{

@@ -153,8 +153,8 @@ if(!isset($_GET['action'])){
             unset($_SESSION['user_id']);      
             unset($_SESSION['usr_mail']);
             unset($_SESSION['user']);
-            header("Location: loger.php");
-//            exit("<br>".__LINE__."Location: loger.php");
+//            header("Location: loger.php");
+            exit("<br>".__LINE__."Location: loger.php");
         }
     } else{
 //        echo "<br>Brakisset(SESSION['submitLOG'] !!"."| File:".__FILE__.", line:".__LINE__;
@@ -168,7 +168,36 @@ if(!isset($_GET['action'])){
                     $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
                     $score->saveScoreData();
                 }
+                
+                // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php
                 setcookie("log", '', time()-3600);
+                setcookie("log", '', time()-3600, '/');
+            
+//        $past = time() - 3600;
+//        foreach ( $_COOKIE as $key => $value )
+//        {
+//            $value = null;
+//            setcookie( $key, $value, $past );
+//            setcookie( $key, $value, $past, '/' );
+//            echo "<br>COKI[ $key, $value, $past ]";
+//        }
+            
+        ?>
+<!--            <script>
+                createCookie('pipi','value',1)
+                var b = readCookie('pipi')
+                alert (b)
+                eraseCookie('pipi')
+                
+                createCookie('log','val',1)
+                
+                var a = readCookie('log')
+                alert (a)
+                eraseCookie('log')
+//                alert (a)
+            </script>-->
+            <?php
+            
                 $_SESSION['log'] = false;
                 $_SESSION['role'] = '';
                 $_SESSION['licznik_odw'] = 0;

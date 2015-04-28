@@ -37,9 +37,10 @@ if(isset($_SESSION['log'])){
         echo "<button class='loggOutBtn' onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
         
         if(isset($_COOKIE['log'])){
-           $tim = $_COOKIE['log']; 
+           $tim = $_COOKIE['log'];      // PROBLEM Z KASOWANIEM TEGO COOKI PRZY LOGOUT!
+           $tim = time()+60*60-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
         }else{
-            $tim = time()+60*60;
+            $tim = time()+60*60-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
         }
         echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
 //        echo "<input id=log_time type=hidden value='".$tim."'>";
