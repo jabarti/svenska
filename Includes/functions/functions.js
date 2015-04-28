@@ -60,7 +60,8 @@ setInterval(function() {
      
 }, 1000);
 
-
+/* FUNKCJE W logerMOD.php do kasowania COOKIE z poziomy js. DZIAŁAJĄ ale nie na cooi 'log' ;( */
+/*
 function createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();
@@ -90,7 +91,7 @@ function eraseCookie(name) {
         alert(ex)
     }
 }
-
+/**/
 
 //var samogl = new Array('a','å','e','i','o','u','y','ä','ö');  //A, E, I, O, U, Y, Å, Ä och Ö
 //var spolgl = new Array('b');
