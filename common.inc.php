@@ -47,23 +47,28 @@ if(isset($_GET['kuki'])){
     ?>
     <!--<script>console.log("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?>");</script>-->
     <?php
+    
+    // PROBLEM ZE SKASOWANIEM TEGO COOKIE['log']. ZOSTAJE TO POMINIĘTE W divLog.php
+    $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
+    $time = time()+60*60*2.5;    // loger: Cookie log =  2.5h, header (odświerzanie!): 10min
+    $time_str = date($time);
+    
+    
     switch($_GET['kuki']){       
         case 'NOT_OK':
             ?><script>//alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script><?php
-            // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php
-            $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
-            $time_str = date($time);
             try{
-                if(setcookie("log", $time_str, $time)){
-//                    echo "<br>".__LINE__." / COOKIE (USTAWIONE!:".var_export($_COOKIE['log'], true);
+                // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php         
+//                if(setcookie("log", $time_str, $time)){
+                if($_SESSION['APPTIME'] = array($time_str, $time)){      
+                    ?>
+                        <!--<script>alert ("$_SESSION['APPTIME']): <?php echo ($_SESSION['APPTIME'][0])."/räknad: ".(60*60*$log_hours+$log_min) ?> || ");");</script>-->
+                    <?php         
                 }else{
-//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
-                }
-                if(isset($_COOKIE['log'])){
-//                    echo "<br>".__LINE__." / COOKIE (USTAWIONE!:".var_export($_COOKIE['log'], true);
-                }else{
-//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
-                }                  
+                    ?>
+                        <!--<script>alert ("$_SESSION['APPTIME'] Error)</script>-->
+                    <?php 
+                }                 
             } catch (Exception $ex) {
                 echo "error: $ex";
 //                    echo "<br>COOKIE (ERROR: nie ustawione, czemu???:".var_export($_COOKIE['log'], true);                    
@@ -73,20 +78,18 @@ if(isset($_GET['kuki'])){
             ?>
             <!--<script>alert ("Jest GET['kuki']!!: <?php //echo $_GET['kuki'] ?> ||");</script>-->
             <?php
-            // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php
-            $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
-            $time_str = date($time);
             try{
-                if(setcookie("log", $time_str, $time)){
-//                    echo "<br>".__LINE__." / COOKIE (USTAWIONE!:".var_export($_COOKIE['log'], true);
+                // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php              
+//                if(setcookie("log", $time_str, $time)){
+                if($_SESSION['APPTIME'] = array($time_str, $time)){
+                    ?>
+                        <!--<script>alert ("$_SESSION['APPTIME']): <?php echo ($_SESSION['APPTIME'][0])."/räknad: ".(60*60*$log_hours+$log_min) ?>")</script>-->
+                    <?php                
                 }else{
-//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
-                }
-                if(isset($_COOKIE['log'])){
-//                    echo "<br>".__LINE__." / COOKIE USTAWIONE!:".var_export($_COOKIE['log'], true);
-                }else{
-//                    echo "<br>".__LINE__." / common.php COOKIE (nie ustawione, czemu???):";
-                }                  
+                    ?>
+                        <!--<script>alert ("$_SESSION['APPTIME'] Error)</script>-->
+                    <?php 
+                }                      
             } catch (Exception $ex) {
                 echo "error: $ex";
 //                    echo "<br>COOKIE (ERROR: nie ustawione, czemu???:".var_export($_COOKIE['log'], true);                    
@@ -98,8 +101,6 @@ if(isset($_GET['kuki'])){
             }else{
 //                echo "brak Session licznik";
             }
-
-            
             break;
         default:
             ?>

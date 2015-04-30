@@ -144,11 +144,14 @@ if(!isset($_GET['action'])){
             }
         } else{
 //            echo "<br>// faktyczne wylogowanie!!!!!!!!!!!! Bo złe hasło....";
-            ?><script>//alert ("WYLOG 1");</script><?php
+            ?>
+                <script>alert ("WYLOG 1");</script>
+            <?php
             unset($_SESSION['log']);
-            setcookie("log", '', time()-3600);
+//            setcookie("log", '', time()-3600);
             $_SESSION['log'] = false; 
             $_SESSION['role'] = '';
+            unset($_SESSION['APPTIME']);
             unset($_SESSION['role']);
             unset($_SESSION['user_id']);      
             unset($_SESSION['usr_mail']);
@@ -163,6 +166,9 @@ if(!isset($_GET['action'])){
 //if(isset($_GET['action'])){
         switch($_GET['action']){
             case 'logout':
+                ?>
+                <!--<script>alert ("WYLOG 2");</script>-->
+                <?php
                 if(isset($_SESSION['good']) OR isset($_SESSION['bad'])){
                     $score = new Score();
                     $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
@@ -170,8 +176,16 @@ if(!isset($_GET['action'])){
                 }
                 
                 // PROBLEM ZE SKASOWANIEM TEGO COOKIE. ZOSTAJE TO POMINIĘTE W divLog.php
-                setcookie("log", '', time()-3600);
-                setcookie("log", '', time()-3600, '/');
+                if(setcookie("log", '', time()-3600) or setcookie("log", '', time()-3600, '/')){
+                    ?>
+                <!--<script>alert ("WYLOG 2a OK");</script>-->
+                    <?php
+                }else{
+                    ?>
+                <!--<script>alert ("WYLOG 2b NOT WORKING");</script>-->
+                    <?php
+                }
+//                setcookie("log", '', time()-3600, '/');
             
 //        $past = time() - 3600;
 //        foreach ( $_COOKIE as $key => $value )
@@ -206,6 +220,7 @@ if(!isset($_GET['action'])){
                 unset($_SESSION['user']);
                 unset($_SESSION['user_id']);
                 unset($_SESSION['submitLOG']);
+                unset($_SESSION['APPTIME']);
                 
                 foreach($_SESSION as $k => $v){
 //                    echo "<br>\$_SESSION[$k]=$v";

@@ -36,14 +36,29 @@ if(isset($_SESSION['log'])){
         
         echo "<button class='loggOutBtn' onclick=\"window.location.href='logerMOD.php?action=logout'\">".t("Wyloguj")."</button>";
         
-        if(isset($_COOKIE['log'])){
-           $tim = $_COOKIE['log'];      // PROBLEM Z KASOWANIEM TEGO COOKI PRZY LOGOUT!
-           $tim = time()+60*60-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
+        $tim = '';
+//        if(isset($_COOKIE['log'])){
+        if(isset($_SESSION['APPTIME'])){
+            
+            if(time()<$_SESSION['APPTIME'][0]){
+//              $tim = $_COOKIE['log'];      // PROBLEM Z KASOWANIEM TEGO COOKI PRZY LOGOUT!
+                $tim = $_SESSION['APPTIME'][0];
+            }else{
+                $tim = 'ERROR';             // to ustawia NIE LICZBĘ w polu <span id="log_time" style="visibility: hidden;">xxxx</span> co powoduje że Skrypty.js wylogowuje
+            }
+//           $tim = time()+60*60-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
+//           $tim = time()+60*0.5;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
+            ?>
+            <!--<script>alert ("isset($_SESSION['APPTIME']): <?php echo($_SESSION['APPTIME'][0]) ?> ||");</script>-->
+            <?php 
         }else{
-            $tim = time()+60*60-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
+            $tim = time()+60*20-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!! 20min
+            $tim = time()+60*5;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
+            ?>
+            <!--<script>alert ("NIE!! isset($_SESSION['APPTIME']])");</script>-->
+            <?php 
         }
-        echo "<span id=log_time style='visibility: hidden;'>".$tim."</span>";
-//        echo "<input id=log_time type=hidden value='".$tim."'>";
+        echo "<span id='log_time' style='visibility: hidden;'>".$tim."</span>";      
         echo "</div>";
     }else{
         echo "<div class=divLog>".t("NIE ZALOGOWANY")."</div>";

@@ -16,6 +16,14 @@ function getTime()
 
 function logTime(){
     var log_tim_took = document.getElementById("log_time").innerHTML;
+    
+    if (isNaN(log_tim_took)){      // jeśli nie jest liczbą, czyli nie ma ustawionego limitu czasu
+//        alert("Ide do logout");
+        window.location.href = "logerMOD.php?action=logout"
+    }else{
+//        alert("To jest poprawny format: "+log_tim_took);
+    }
+    
     a = parseInt(log_tim_took *1000);
     var log_tim = new Date(a);
     var log_tim2 = new Date(log_tim) ;
