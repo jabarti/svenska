@@ -127,16 +127,17 @@ echo "</form>";
 $method = 'post';
 
 echo "<table class=tab_insert>"
-   . "<form id=testForm1 action=test.php method=".$method.">";
+   . "<form id='testForm1' action='test.php' method=".$method.">";
 echo "<tr>"
                 ."<td>".t("To jest")." ".t(trans($testTab[0]))."</td>"
                 .'<td><textarea rows=1 cols=20 name="'.$testTab[0].'" disabled>'.$testTab[1].'</textarea></td>';
         echo    "<td>".t("Podaj")." ".t(trans($testTab[2]))."</td>"
                 ."<td>"
-                . "<input type=hidden name=quest_p1 value='".$testTab[2]."'>"       // pytanie
-                . "<input type=hidden name=quest_p2 value='".$testTab[1]."'>"       // słowo
-                . "<input type=hidden name=quest_p3 value='".$testTab[0]."'>"       // to jest.. 
-                . "<input type=hidden name=quest_p4 value='".$wordPL."'>";          // słowo PL
+                . "<input type='hidden' name='quest_p1' value='".$testTab[2]."'>"       // pytanie
+                . "<input type='hidden' name='quest_p2' value='".$testTab[1]."'>"       // słowo
+                . "<input type='hidden' name='quest_p3' value='".$testTab[0]."'>"       // to jest.. 
+                . "<input type='hidden' name='quest_p4' value='".$wordPL."'>"          // słowo PL
+                . "<input type='hidden' name='id_of_WORD' value='".$rand."'>";          // słowo PL
         if ($testTab[2] == "typ"){
             echo "<select name='try'>";
                         $Word = new Ord();
@@ -152,7 +153,7 @@ echo "<tr>"
         }else{
             echo      "<textarea id=try rows=1 cols=20 name=try></textarea>";
         }
-            echo      "<input id=check type=hidden name=check value='".$testTab[3]."'>"
+            echo      "<input id='check' type='hidden' name='check' value='".$testTab[3]."'>"
                     ."</td>"
                     ."<td></td>"
                 ."</tr>";
@@ -223,7 +224,7 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
     }
     
 //    echo "<br>ta tablica:";
-    $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], $_POST['try'], $temp_scor );
+    $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], $_POST['try'], $temp_scor, $_POST['id_of_WORD'] );
 //    array_push($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
     array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
 //    var_dump($_SESSION['arrOfAnsw']);
@@ -235,7 +236,7 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
 else if(isset($_POST['avoid'])){
 //    echo "<br>JEST AVOID!!!";
     $temp_scor = t("BRAK ODPOWIEDZI")."!!!";
-    $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], "-", $temp_scor );
+    $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], "-", $temp_scor, $_POST['id_of_WORD'] );
     array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
 }
 
@@ -266,17 +267,24 @@ $score->setScoreData($_SESSION['user'], $_SESSION['good'], $_SESSION['bad']);
 // ".t('')."
     // Prezentacja wyników już osiągnietych!
     echo "<h3> ".t('Twoje dotychczasowe odpowiedzi').": </h3>";
-
+    echo "<div id='testAnswers'>";
     foreach ($_SESSION['arrOfAnsw'] as $key) {
         echo "<p>";     
 //        echo "Pytanie: Do ".trans($key[0])." ( ".$key[1]." ) podaj ".trans($key[2]).", Odp.: <span class=red>\"".$key[3]."\"</span> / Twoja odp: <span class=blue> \"".$key[4]."\"</span>";
-        if(trans($key[1])!= 'słowo PL')
+        if(trans($key[1])!= 'słowo PL'){
             echo t('Pytanie').": ".t('To jest')." ".t(trans($key[1]))." ( <span class=green>".$key[2]."</span> : <span class=green>".$key[0]."</span>) ".t('podaj')." ".t(trans($key[3])).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
-        else
+        
+//            echo "<td>  / ".t('CLICK TO SHOW').": <a id='testOrdSvar_".$key[7]."' href='show.php#ordAnchor_".$key[7]."' target='_BLANK'>=></a></td>";
+        }else{
             echo t('Pytanie').": ".t('To jest')." ".t(trans($key[1]))." ( <span class=green>".$key[2]."</span> ) ".t('podaj')." ".t(trans($key[3])).", ".t('Odp.').": \"<span class=red>".$key[4]."</span>\" / ".t('Twoja odp').": \"<span class=blue>".$key[5]."</span>\" ".t('czyli').": <b>$key[6]</b>.";
-            echo "</p>";
+//            echo "<td>  / ".t('CLICK TO SHOW').": <a class='ordAnchor' id='testOrdSvar_".$key[7]."' href='show.php#ordAnchor_".$key[7]."' target='_BLANK'>=></a></td>";
+        }
+//        echo "<td>  / ".t('CLICK TO SHOW').": <a class='ordAnchor' id='testOrdSvar_".$key[7]."' href='show.php#ordAnchor_".$key[7]."' target='_BLANK'><span class='podpowiedz' >=><span id='dymek".$key[7]."'>TODO: tu ma być podpowiedź</span></span></a></td>";
+        echo "<td>  / ".t('CLICK TO SHOW').": <a class='ordAnchor' id='testOrdSvar_".$key[7]."' href='show.php#ordAnchor_".$key[7]."' target='_BLANK'><span class='podpowiedz' >=><span class='rbtooltip' id='dymek".$key[7]."'>TODO: tu ma być podpowiedź</span></span></a></td>";
+//        echo "<td>  / ".t('CLICK TO SHOW').": <a class='ordAnchor' id='testOrdSvar_".$key[7]."' href='show.php#ordAnchor_".$key[7]."' target='_BLANK'>=></a></td>";
+        echo "</p>";
     }
-
+    echo "</div>";
 } else {
     require 'loger.php';
 }

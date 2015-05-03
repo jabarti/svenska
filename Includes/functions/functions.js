@@ -209,6 +209,48 @@ function start(){
     
     /* KONIEC SEKCJI do Button.php */
     
+    
+    
+    /* Do TEST.php bind to each => button w odpowiedzi */
+    
+    $('#testAnswers').each(function(index){
+//        $('.ordAnchor', this).hover(function(){
+        $('.ordAnchor', this).mouseenter(function(){
+//            var value = $(this).attr("href");
+            var id = $(this).attr("id");
+//            console.log($('a:href',this));
+//            console.log("href: "+value);
+            console.log("id: "+id);
+            
+            var pos = id.indexOf('_');
+            var num = id.slice((pos+1))
+            console.log("num: "+num);
+            
+            $.ajax({    url:"ajax.admin.php",
+                            datatype: 'json',
+                            type: 'post',
+                            data: {
+                                action: 'getOrdInfo',
+                                var1:   num
+                            },
+                            success:function(data){
+//                                alert('dymek'+num)
+                                $('#dymek'+num).empty();
+                                $('#dymek'+num).html(data);
+//                                alert(valtem)
+//                                console.log(data);
+                                return data;
+                            }             
+           }); 
+            
+            
+            
+            
+        });
+    });
+    
+    /* KONIEC sekcji: Do TEST.php bind to each => button w odpowiedzi */
+    
     $("#typ").change(function(){
         var val = $(this).val();
         $("#ang_cz_m").html(val); // przypisanie tego czerwonego tlumaczenia nazwy części mowy

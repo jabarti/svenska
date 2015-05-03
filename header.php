@@ -20,6 +20,13 @@
             ?>
             <link rel="Stylesheet" type="text/css" href="Resources/CSS/Mobile/styleMobile.css" />
             <link rel="Stylesheet" type="text/css" href="Resources/CSS/Mobile/styleMobileButton.css" />
+                    <!-- DO BOOTSRAPA -->    
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="<?php echo FUNCTIONS2_PATH."dropdowns-enhancement.js";?>"></script>
+            <link rel="stylesheet" href="Resources/CSS/dropdowns-enhancement.css">
             <?php
             
         }?>

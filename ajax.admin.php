@@ -35,8 +35,18 @@ switch($_REQUEST['action']){
         break;
     case 'del_rand_stats':
         $rand = new Random();
-        $rand->deleteAllRecords();
-        
+        $rand->deleteAllRecords();      
+        break;
+    case 'getOrdInfo':
+//        echo 'TODO: TEST.php - "ordAnchor" button. Dane jeszcze nie utworzone:';
+//        echo 'TODO: TEST.php - "ordAnchor" button. Dane jeszcze nie utworzone ID_ord: '.$_REQUEST['var1'];
+        $arr = $Word->getOrdById($_REQUEST['var1']);
+        foreach($arr as $k => $v){
+            if($v != ''){
+                echo t($k)." => $v<br>";
+            }
+        }
+//        var_dump($arr);
         break;
     default:
         break;

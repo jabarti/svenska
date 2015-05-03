@@ -39,8 +39,8 @@ if(isset($_POST)){
     }
 }
 
-$log_hours = 23;
-$log_min = 60*57;
+$log_hours = 2;
+$log_min = 60*30;
 
 if(isset($_GET['kuki'])){
 //    var_dump($_GET);
@@ -50,7 +50,6 @@ if(isset($_GET['kuki'])){
     
     // PROBLEM ZE SKASOWANIEM TEGO COOKIE['log']. ZOSTAJE TO POMINIĘTE W divLog.php
     $time = time()+60*60*$log_hours+$log_min;    // loger: Cookie log =  18h, header (odświerzanie!): 10min
-    $time = time()+60*60*2.5;    // loger: Cookie log =  2.5h, header (odświerzanie!): 10min
     $time_str = date($time);
     
     

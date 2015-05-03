@@ -142,7 +142,7 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                    $id = $v;
 //                   if(!$flat)
                    if($sum)
-                        echo "<td><a href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
+                        echo "<td><a name='ordAnchor_".$id."' href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
                    echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
                }else{
                 echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
