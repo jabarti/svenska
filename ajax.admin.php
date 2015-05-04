@@ -11,6 +11,18 @@
 require_once "common.inc.php";
 include 'DB_Connection.php';
 
+if(isset($_SESSION['role'])){
+    switch($_SESSION['role']){
+        case 'admin':
+        case 'user_plus':
+            $upraw = true;
+            break;
+        default:
+            $upraw = false;
+            break;
+    }
+}
+
 $Word = new Ord();
 switch($_REQUEST['action']){
     case 'trans':
@@ -43,7 +55,19 @@ switch($_REQUEST['action']){
         $arr = $Word->getOrdById($_REQUEST['var1']);
         foreach($arr as $k => $v){
             if($v != ''){
-                echo t($k)." => $v<br>";
+                switch($k){
+                    case 'id':
+                        if($upraw){
+                            echo "<a href='Edit.php?sercz_id=".$v."' target='_blank'>".t($k)." => $v</a><br>";
+                        }else{
+                            echo t($k)." => $v<br>";
+                        }
+                        break;
+                    default:
+                        echo t($k)." => $v<br>";
+                        break;
+                        
+                }
             }
         }
 //        var_dump($arr);
