@@ -460,8 +460,8 @@ if($navnum > $allpages){
 
 echo "<div class=floating_button_div>"
 //        . "<form id='edit_all' method=post action=EditAllMod.php target='_blank'>"
-        . "<form id='edit_all' method=post action=EditAllMod.php >"
-        . "<button id=floating_button>".t('Edytuj wszystkie')."</button>"
+        . "<form id='edit_all' method='post' action='EditAllMod.php' >"
+        . "<button id='floating_button'>".t('Edytuj wszystkie')."</button>"
         ."</form>"
    . "</div>";
 

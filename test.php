@@ -138,20 +138,33 @@ echo "<tr>"
                 . "<input type='hidden' name='quest_p3' value='".$testTab[0]."'>"       // to jest.. 
                 . "<input type='hidden' name='quest_p4' value='".$wordPL."'>"          // słowo PL
                 . "<input type='hidden' name='id_of_WORD' value='".$rand."'>";          // słowo PL
-        if ($testTab[2] == "typ"){
-            echo "<select name='try'>";
-                        $Word = new Ord();
-                        $OrdCat = $Word->getTypesOfOrd();
-                            echo "<option>".t("część mowy")."</option>";
-                        foreach($OrdCat as $k){
-                            if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
-                                echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
-                            else
-                                echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
+
+        switch ($testTab[2]){
+            case 'typ':            
+                echo "<select name='try'>";
+                    $Word = new Ord();
+                    $OrdCat = $Word->getTypesOfOrd();
+                    echo "<option>".t("część mowy")."</option>";
+                    foreach($OrdCat as $k){
+                        if(strlen(t($k)) > 14 || strlen(tl($k, "en")) > 14)
+                            echo "<option value=$k>".substr(t($k),0,14)." ( ".substr(tl($k,"en"),0,14)." ) </option>";
+                        else
+                            echo "<option value=$k>".t($k)." ( ".tl($k,"en")." )</option>";
                         }   
-            echo "</select>";
-        }else{
-            echo      "<textarea id=try rows=1 cols=20 name=try></textarea>";
+                echo "</select>";   
+                break;
+            case 'grupa':
+                echo "<select id=try name='try'>";
+                    $Word = new Ord();
+                    $OrdGru = $Word->getGroupOfOrd();
+                    foreach($OrdGru as $key => $v){
+                        echo "<option value='".$v."'>".t($v)."</option>";
+                    }
+                echo "</select>";
+                break;
+            default:
+                echo  "<textarea id=try rows=1 cols=20 name=try></textarea>";
+                break;
         }
             echo      "<input id='check' type='hidden' name='check' value='".$testTab[3]."'>"
                     ."</td>"

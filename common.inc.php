@@ -39,8 +39,23 @@ if(isset($_POST)){
     }
 }
 
-$log_hours = 2;
-$log_min = 60*30;
+$REMOTE_ADDR = false;
+//echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
+
+$ServerList = array("81.234.110.249", "85.202.150.195"); //(Mullsjö,OBR11/90)
+if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
+//    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
+    $REMOTE_ADDR = "true";
+}
+
+/*Ustalenie innego czasu logu dla serwera "wlasnego" i dla "zewnętrznego"*/
+if($REMOTE_ADDR){
+    $log_hours = 22;
+    $log_min = 60*30;    
+}else{
+    $log_hours = 0;
+    $log_min = 60*45;
+}
 
 if(isset($_GET['kuki'])){
 //    var_dump($_GET);
@@ -195,15 +210,14 @@ if(!isset($_SESSION['lang']) OR $_SESSION['lang'] == false){
     }
 }
 
-
-$REMOTE_ADDR = false;
-//echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
-
-$ServerList = array("81.234.110.249", "85.202.150.195"); //(Mullsjö,OBR11/90)
-if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
-//    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
-    $REMOTE_ADDR = "true";
-}
+//$REMOTE_ADDR = false;
+////echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
+//
+//$ServerList = array("81.234.110.249", "85.202.150.195"); //(Mullsjö,OBR11/90)
+//if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
+////    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
+//    $REMOTE_ADDR = "true";
+//}
 
 try{
     ?>

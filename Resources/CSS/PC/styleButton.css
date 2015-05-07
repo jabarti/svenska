@@ -22,7 +22,8 @@ text-align: right;
 }
 
 
-﻿div.floating_button_div{
+.floating_button_div{
+    
     background: red;
     position: fixed;
     top: 10px;
@@ -30,6 +31,14 @@ text-align: right;
     right: 15%;
     height:24px;
 }
+
+/*.floating_button_div button{
+    position: fixed;
+    background: red;
+    top: 10px;
+    right: 15%;
+    height:24px;
+}*/
 
 div.guziki {
 position:fixed;

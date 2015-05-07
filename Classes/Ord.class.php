@@ -1246,6 +1246,19 @@ class Ord {
             return $vals;
         }
         
+        public function getGrupaOfOrd(){
+//            $sql = "SELECT distinct `grupa` FROM `ord` group by `grupa` DESC LIMIT 0, 30 ";
+            $sql = "SELECT distinct `grupa` FROM `".$this->table."` GROUP BY `grupa` DESC;";
+//            echo '<br>SQL:'.$sql.'<br>';
+            $mq = mysql_query($sql);
+            $arr = Array();
+            while($row = mysql_fetch_assoc($mq)){
+                array_push($arr, $row);
+            }
+//            echo "<br>row:"; var_dump($arr);
+            return $arr;
+        }
+        
         public function getGroupOfOrd(){
             return $this->group;
         }

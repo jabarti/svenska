@@ -16,6 +16,8 @@ include 'header.php';
 include 'buttons.php';
 include 'divLog.php';
 
+echo "LEPSZY SZYFR!!!: ".hash('sha256', "ala")."<br>";
+
 if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();
     echo "<br>line(".__LINE__.") Empty_records: ";var_dump($empty_rec);
@@ -476,3 +478,31 @@ setInterval(function() {
       <!-- Other items -->
     </ul>
 </div>
+
+<?php
+$Word = new Ord();
+$OrdGru = $Word->getGrupaOfOrd();
+var_dump($OrdGru);
+
+echo "<table class=tab_insert>"
+   . "<form id='testForm1' action='help_test_admin.php' method=post>";
+echo "<tr>";
+                echo "<select name='try'>";
+
+//                    $OrdGru = $Word->getGroupOfOrd();
+                    echo "<option>".t("grupa")."</option>";
+                    foreach($OrdGru as $key){
+                        foreach($key as $k => $v){
+                            if($v == ''){
+                                
+                            }else{
+                                echo "<option value=$v>".$v."</option>";
+                            }
+                        }
+                    }
+                echo "</select>";
+   echo "</form>";
+   echo "</table>";
+   
+   
+   

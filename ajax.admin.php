@@ -65,8 +65,7 @@ switch($_REQUEST['action']){
                         break;
                     default:
                         echo t($k)." => $v<br>";
-                        break;
-                        
+                        break;     
                 }
             }
         }
