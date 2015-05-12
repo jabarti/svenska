@@ -1,7 +1,7 @@
 ﻿body
 {
 background-color:#d0e4fe;
-width: 85%;
+width: 84%;
 /*allign: center;*/
 }
 table {
@@ -37,22 +37,16 @@ table {
 .uwagi_ta{
     background: lemonchiffon;
     /*vertical-align: middle;*/
-    width: 100%;
+    width: 450px;
     height: 2em;
 /*    columns: 160;*/
     
 }
 
-/* klasa dla insertów rozwijanych niektórych*/
-.optionInsert{
-    /*color: red;*/
-    max-width: 70%; /* to daje widoczność 70% tekstu z inserta*/
-}
-
 /*tabela podstawowa edycji i insertera*/
 .tab_insert {       
     background: deepskyblue;
-    width: 96%;
+    width: 90%;
 }
 
 .tab_insert td{
@@ -67,24 +61,22 @@ table {
     border-top: 1px solid chartreuse;
 }
 
-/*.table2 td{
-    background: red;
+.table2 td{
     border: 1px solid black;
     width: 20%;
     height: 50px;
 }
 .table2 a{
-    font-weight: bold;
+    /*font-weight: bold;*/
     text-decoration: none;
 }
 
 .table2 a:hover{
-    font-weight: bold;
+    /*font-weight: bold;*/
     text-decoration: underline;
-}*/
+}
 
 tbody {
-    /*background: red;*/
     border: 1px solid #003AD9;
 }
 
@@ -93,9 +85,7 @@ tbody.wew {
 }
 
 .edit_tab_contener {
-    /*background: red;*/
     position: absolute;
-    width:85%;
     /*background: deepskyblue;*/
     /*width:75%;*/
     /*opacity: 0.1;*/
@@ -108,7 +98,6 @@ tbody.wew {
 
 .edit_table {
     background: deepskyblue;
-    width:99%;
 }
 
 .error {
@@ -137,131 +126,8 @@ tbody.wew {
         font-size:11px;
 }
 
-/* DYMKI z podpowiedzią w test.php*//*
-.podpowiedz span {
-    display: none;
-    padding: 2px 3px;
-    margin-left: 8px;
-    width: 130px;
-}
-img {
-	border: none;
-}
-.podpowiedz:hover span{
-    display: inline;
-    position: absolute;
-	margin: 15px 0 0 5px;
-    background: #dddddd;
-    border: 1px solid #b30000;
-    color: #000000;
-	-moz-opacity: 0.8;
-	opacity:.80;
-	filter: alpha(opacity=80);
-	text-align: center;
-}
-/**/
 
-/* Stylish CSS Tooltip By RealcomBiz.com */
-a:link,
-a:visited {
-position:relative;
-}
-.rbtooltip {
-width:300px;
-position:absolute;
-bottom:100%;
-margin:0 0 7px 0;
-padding:5px;
-font-family:Verdana,sans-serif;
-font-size:13px;
-font-weight:normal;
-font-style:normal;
-text-align:left;
-text-decoration:none;
-text-shadow:0 1px 0 rgba(255,255,255,0.3);
-line-height:1.5;
-border:solid 1px;
--moz-border-radius:7px;
--webkit-border-radius:7px;
-border-radius:7px;
--moz-box-shadow:
-0 1px 2px rgba(0,0,0,0.3),
-0 1px 2px rgba(255,255,255,0.5) inset;
--webkit-box-shadow:
-0 1px 2px rgba(0,0,0,0.3),
-0 1px 2px rgba(255,255,255,0.5) inset;
-box-shadow:
-0 1px 2px rgba(0,0,0,0.3),
-0 1px 2px rgba(255,255,255,0.5) inset;
-cursor:default;
-display:block;
-visibility:hidden;
-opacity:0;
-z-index:999;
--moz-transition:all 0.4s linear;
--webkit-transition:all 0.4s linear;
--o-transition:all 0.4s linear;
-transition:all 0.4s linear;
-color:#2B2B2B;
-background:#C0C0C0;
-background:-moz-linear-gradient(top,rgba(192,192,192,0.8),rgba(192,192,192,1));
-background:-webkit-gradient(linear,left top,left bottom,from(rgba(192,192,192,0.8)),to(rgba(192,192,192,1)));
-border-color:#999999;
-}
-.rbtooltip:before,
-.rbtooltip:after
-{
-width:0;
-height:0;
-position:absolute;
-bottom:0;
-margin:0 0 -20px -10px;
-border:solid 10px;
-border-color:transparent;
-display:table-cell;
-content:"";
-}
-.rbtooltip:before
-{
-margin:0 0 -24px -12px;
-border:solid 12px;
-border-color:transparent;
-z-index:-1;
-}
-a:hover .rbtooltip
-{
-text-decoration:none;
-visibility:visible;
-opacity:1;
--moz-transition:all 0.2s linear;
--webkit-transition:all 0.2s linear;
--o-transition:all 0.2s linear;
-transition:all 0.2s linear;
-}
-.rbtooltip,
-.rbtooltip.left {
-left:0;
-right:0;
-}
-.rbtooltip:before,
-.rbtooltip:after,
-.rbtooltip.left:before,
-.rbtooltip.left:after {
-left:40px;
-right:auto;
-}
-.rbtooltip:before {
-border-top-color:#999999;
-}
-.rbtooltip:after {
-border-top-color:#C0C0C0;
-}
-/* Stylish CSS Tooltip By RealcomBiz.com */
-
-
-/*Do paginacji #nav*/
-#nav ul {       
-    /*background: red;*/
+#nav ul {
         list-style-type:none;  
         float:left; 
         position:fixed; 
@@ -284,22 +150,25 @@ border-top-color:#C0C0C0;
 div.clear {
         clear:both;
 }
-
-/* Położenie flag*/
 div#translacje {
-    background: red;
     position: fixed;
     bottom: -80px;
     right: 0px;
-    /*width: 11.4%;*/
-    background-clip: red;     
-    border: 1px solid black;
+    width: 11.4%;
+    /*background-clip: red;*/     
+    /*border: 1px solid black;*/
     margin-left: auto;
     margin-left: auto;
     text-align: left;
-    z-index: 960;
+    z-index: 999;
 }
-
+div.floating_button_div{
+    background: red;
+    position: fixed;
+    top: 10px;
+    right: 180px;
+    height:24px;
+}
 
 div.flag {
     position: relative;
@@ -375,21 +244,9 @@ div.divLog {
     border: 1px #516ca3 solid;
     padding: 5px;
     width:180px;
-    width:13%;
     height:110px;
     font-size: 11px;
-    z-index:955;  
-}
-
-button.loggOutBtn{
-    /*background-color: red;*/
-    z-index:999;
-    /*font-size:10px;*/
-    /*margin-left:30%;*/
-}
-
-.small{
-    font-size:9px;
+    
 }
 
 div.DBConn{
@@ -397,7 +254,6 @@ div.DBConn{
     bottom:140px;
     right: 5px;
     width: 180px;
-    width:13%;
     min-height: 50px;
     background: greenyellow;
     font-size: 10px;
@@ -423,7 +279,6 @@ div.movingsearch {
     border: 1px #516ca3 solid;
     padding: 5px;
     width:180px;
-    width:13%;
     font-size: 7px;
     z-index:950;
 }
@@ -478,3 +333,94 @@ div .wisp1 {
 float: left;
 width: 40%;
 }
+
+div.guziki {
+position:fixed;
+top:5;
+right:5px;
+/*background: red;*/
+background: whitesmoke;
+background: #97B7B1;
+width:150px;
+padding:5px;
+border:2px solid black;
+z-index: 999;
+}
+	
+.myButton {
+        
+        -moz-box-shadow: 4px 3px 0px 0px #284470;
+        -webkit-box-shadow: 4px 3px 0px 0px #284470;
+        box-shadow: 4px 3px 0px 0px #284470;
+        
+        background-color:#415989;
+        /*background-color:#386A61;*/
+        
+        -moz-border-radius:18px;
+        -webkit-border-radius:18px;
+        border-radius:18px;
+        
+        border:1px solid #1f2f47;
+        
+        display:inline-block;
+        color:#ffffff;
+        font-family:arial;
+        font-size:11px;
+        font-weight:normal;
+        padding:2px 15px;
+        width: 110px;
+        /*width: auto;*/
+        text-decoration:none;
+        
+        text-shadow:0px 3px 0px #263666;
+        
+    }
+.myButton:hover {     
+        background-color:#516ca3;
+        /*background-color:#365555;*/
+    }
+    
+.myButton:active {
+        position:relative;
+        top:1px;
+    }
+    
+.myButton2 {
+        
+        -moz-box-shadow: 4px 3px 0px 0px #284470;
+        -webkit-box-shadow: 4px 3px 0px 0px #284470;
+        box-shadow: 4px 3px 0px 0px #284470;
+        
+        background-color:#415900;
+        /*background-color:#586A67;*/
+ 
+        -moz-border-radius:18px;
+        -webkit-border-radius:18px;
+        border-radius:18px;
+        
+        border:1px solid #1f2f47;
+        
+        display:inline-block;
+        color:#ffffff;
+        font-family:arial;
+        font-size:11px;
+        font-weight:normal;
+        padding:2px 15px;
+        width: 110px;
+        /*width: auto;*/
+        text-decoration:none;
+        
+        text-shadow:0px 3px 0px #263666;
+        
+    }
+    
+.myButton2:hover {
+        
+        background-color:#516ca3;
+        /*background-color:#555860;*/
+    }
+.myButton2:active {
+        position:relative;
+        top:1px;
+    }
+	/**/

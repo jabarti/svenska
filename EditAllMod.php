@@ -30,7 +30,7 @@ if(isset($_POST)){
     $str = '';
     $test = false;          // ma sprawdzać czy była jakaś zmiana dokonana!, jeśli tak ma być tru!
     
-    foreach ($_POST as $k0 => $v0){        
+    foreach ($_POST as $k0 => $v0){       
         $SQL = "UPDATE `ord` SET ";
         $arr_fin = array();
         if($v0 != ''){
@@ -96,15 +96,21 @@ if(isset($_POST)){
             $len = count($arr_fin);
   
             for($i=0; $i<$len; $i++){
-                if($i == 0)
+                if($i == 0){
                     $id = $arr_fin[$i][1];
-                else if($i == $len-1)
+                }
+                else if($i == $len-1){
                     $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."' ";
-                else if($i == $len-2)   // blokada nadpisywania kategorii!!!
+                    $zmiana .= "`".$arr_fin[$i][0]."`=>'".$arr_fin[$i][1]."', ";
+                }
+                else if($i == $len-2){   // blokada nadpisywania kategorii!!!
 //                    $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."' ";
                     continue;
-                else
+                }
+                else{
                     $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."', ";
+                    $zmiana .= "`".$arr_fin[$i][0]."`=>'".$arr_fin[$i][1]."', ";
+                }
             }
             $urls .= "$id,";
             $SQL .= "WHERE `id` = '$id';";
@@ -118,9 +124,29 @@ if(isset($_POST)){
            echo "<br>LOCATION: ";
 //           echo("Location: Edit.php?urls='".$urls."'"); // !!!!!!!!!!!!!!!!!!!!
 
-            mysql_query($SQL);
+            mysql_query($SQL);  // Faktyczne wrzucenie zmian do bazy
+            
+            /* Jak zmiany OK, to wrzucamy do log_ord, poniżej: */
             if(mysql_affected_rows()){
+                $Log = new Log_Ord();
+                $ID_US=0;
+                IF(ISSET($_SESSION['user_id'])){
+                    $ID_US = $_SESSION['user_id'];
+                }ELSE{
+                    $ID_US =0;
+                }        
         
+                if($Log->editLog($id, $ID_US, $zmiana)){
+                    ?>
+                        <!--<script>alert("Weszło");</script>-->
+                    <?php
+//                    quit();
+                }else{
+                    ?>
+                        <!--<script>alert("ERROR");</script>-->
+                    <?php
+//                    quit();
+                }
 //            if(true){
                ?><script>//alert("Weszło");</script><?php
 //                  header("Location: Edit.php?urls='".$urls."'");        
@@ -144,9 +170,11 @@ if(isset($_POST)){
         }
         echo "<br>".__LINE__."STAN TESTu: ".(bool)$test;
         if($test){  // False = NIE było zmain, True = BYŁY zmiany
+//            quit(__LINE__);
             echo("<br>".__LINE__."TRUE Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!    
             header("Location: Edit.php?urls=".rtrim($urls,",")."");    // !!!!!!!!!!!!    
         }else{
+//            quit(__LINE__);
             echo("<br>".__LINE__."FALSE Location: Edit.php?urls=".rtrim($urls_EMPT,",").""); //!!!!!!!!!!!
             header("Location: Edit.php?urls=".rtrim($urls_EMPT,",").""); //!!!!!!!!!!!
         }

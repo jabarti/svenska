@@ -26,6 +26,8 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"try.php");
              array_push($allowPages,"upload.php");
              array_push($allowPages,"motsatsen.php"); // nie dokończone!!! dlatego niżej nie dostępne!
+             array_push($allowPages,"EditAllMod.php"); // nie dokończone!!! dlatego niżej nie dostępne!
+             
          case 'user_plus':
 //             array_push($allowPages,"Edit.php");
              array_push($allowPages,"try.php");

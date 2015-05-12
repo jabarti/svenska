@@ -64,7 +64,7 @@ class Ord {
                                 'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel',
 //                                'noun_or','noun_ar','noun_er','noun__');
                                 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
-                                'noun:gr4_n+a','noun:gr5___+en/na','noun:b.lm.','noun:nieregularny',
+                                'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
                                 'mer/mest', 'nieodmienny','bez stopniowania');
 
     private $group_verb =   array(  '',
@@ -891,6 +891,22 @@ class Ord {
             }
             
             return $empty_record;
+        }
+        
+        public function findEmptyNOUN_GROUPOrdId(){
+//            $SQL = sprintf("SELECT `id` FROM ".$this->table." ORDER BY `id` ASC;");
+            $SQL = sprintf("SELECT `id` FROM ".$this->table." WHERE `typ` = 'noun' AND `grupa` = '' limit 1,20;");
+            echo $SQL;
+            $mq = mysql_query($SQL);
+            
+            $empty_record = array();
+            
+            while($row = mysql_fetch_row($mq)){
+//                        array_push($empty_record, $row[0]);
+                        echo "<br><a href='Edit.php?sercz_id=".$row[0]."' target='_blank'>link_to_".$row[0]."</a>";
+            }
+            
+//            return $empty_record;
         }
         
         public function getOrdArrByType($typ){

@@ -20,8 +20,7 @@ echo "LEPSZY SZYFR!!!: ".hash('sha256', "ala")."<br>";
 
 if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();
-    echo "<br>line(".__LINE__.") Empty_records: ";var_dump($empty_rec);
-    
+ 
     foreach($empty_rec as $k => $v){
         echo "<br>K: $k => V: $v";
         ?>
@@ -293,6 +292,9 @@ if($Word = new Ord()){
         <?php
     }
 }
+echo '<br> Rzeczowniki bez grupy, lista:<br>';
+$Word->findEmptyNOUN_GROUPOrdId();
+echo '<br>';
 
 if(isset($_SESSION['log'])&& isset($_COOKIE['log'])){
     if($_SESSION['log'] == true){
@@ -503,6 +505,11 @@ echo "<tr>";
                 echo "</select>";
    echo "</form>";
    echo "</table>";
+   
+   
+   $sql = "SELECT * FROM `ord` WHERE `typ` = \'noun\' AND `grupa` = \'\'";
+   
+   
    
    
    

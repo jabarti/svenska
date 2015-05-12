@@ -69,10 +69,16 @@ class Log_Ord{
     
     public function editLog($id_Ord, $id_Login, $Zmiany_arr) {
         
-        foreach($Zmiany_arr as $k => $v){
-            if($v!='' AND $k!='submit' AND $k!='edit' AND $k!='id'){
-                $Zmiany_log .= "\'$k\'=>\'$v\'; ";
+        if(is_array($Zmiany_arr)){
+            foreach($Zmiany_arr as $k => $v){
+                if($v!='' AND $k!='submit' AND $k!='edit' AND $k!='id'){
+                    $Zmiany_log .= "\'$k\'=>\'$v\'; ";
+                }
             }
+        }else{
+//            $Zmiany_log = $Zmiany_arr;
+            $Zmiany_log = str_replace("'","\"",$Zmiany_arr);
+//            echo "<br>ZMIANY: ".$Zmiany_log;
         }
          
         $t=time();
