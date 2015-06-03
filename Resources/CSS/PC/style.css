@@ -34,6 +34,16 @@ table {
     background: antiquewhite;
 }
 
+.TRYdiv {
+    background: red;
+    /*position: relative;*/
+    /*position: absolute;*/
+    /*position: static;*/
+    position: fixed;
+    top: 40%;
+    right: 2%;
+}
+
 .uwagi_ta{
     background: lemonchiffon;
     /*vertical-align: middle;*/

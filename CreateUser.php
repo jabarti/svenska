@@ -8,7 +8,7 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
-require_once 'common.inc.php';
+require_once 'common.inc.php'; 
 include 'DB_Connection.php';
 $title = 'Svenska | '.t("Create New User");
 include 'title.php';
@@ -43,9 +43,9 @@ include 'divLog.php';
   <tr>
         <?php if($REMOTE_ADDR){ ?>
     <td><?php echo t("login");?></td>
-    <td><input type="text" id="Login" name="login" value='Al'></td> 
+    <td><input type="text" id="Login" name="login" value='Alibaba3'></td> 
     <td><?php echo t("email");?></td>
-    <td><input type="text" id="Email" name="email" value='AlekGruzl@wp.pl'></td> 
+    <td><input type="text" id="Email" name="email" value='AlekGruzl@wppp.pl'></td> 
         <?php }else{ ?>
     <td><?php echo t("login");?></td>
     <td><input type="text" id="Login" name="login" value=''></td> 
@@ -62,9 +62,9 @@ include 'divLog.php';
   <tr>
         <?php if($REMOTE_ADDR){ ?>
     <td><?php echo t("hasło");?></td>
-    <td><input type="password" id="Haslo" name="haslo" value='AlekGruzl'></td> 
+    <td><input type="password" id="Haslo" name="haslo" value='dudyTt5647ASDAD'></td> 
     <td><?php echo t("powtórz hasło");?></td>
-    <td><input type="password" id="Haslo2" name="haslo2" value='AlekGruzl'></td> 
+    <td><input type="password" id="Haslo2" name="haslo2" value='dudyTt5647ASDAD'></td> 
         <?php }else{ ?>
     <td><?php echo t("hasło");?></td>
     <td><input type="password" id="Haslo" name="haslo" value=''></td> 

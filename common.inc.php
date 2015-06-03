@@ -42,7 +42,11 @@ if(isset($_POST)){
 $REMOTE_ADDR = false;
 //echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
 
-$ServerList = array("81.234.110.249", "85.202.150.195"); //(Mullsjö,OBR11/90)
+$ServerList = array(
+                    "81.234.110.249",   // Mullsjö, Grindgatan
+                    "85.202.150.195",   // Częstochowa, Obr.Westerplatte 11
+                    "85.202.149.116"    //Częstochowa, Nałkowskiej
+                    );  
 if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
 //    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
     $REMOTE_ADDR = "true";
@@ -312,4 +316,12 @@ if(isset($_SERVER['HTTP_USER_AGENT'])){
 //            echo "<div><br>Desktop useragent2: ".$useragent."<br><br></div>";
 //        }
     }
+}
+$patt = 'TRY';
+if(strpos(BASE_PATH, $patt)){
+    echo "<div class='TRYdiv'><h2>TRY SERVER</h2></div>";
+    $TRY = 'TRY';
+}else{
+//    echo "<br>NIE TRY<br>";
+    $TRY = '';
 }

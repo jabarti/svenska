@@ -11,7 +11,7 @@
 
 ?>
 <head>
-    <title><?php echo (isset($title)?$title  : 'My Page'); ?></title>   
+    <title><?php echo (isset($title) ? $title." / ".$TRY : 'My Page'); ?></title>   
 </head>
 
 

@@ -9,7 +9,7 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php';
+include 'divLog.php'; 
 $title = 'Svenska | loggerMOD';
 include 'header.php';
 //include 'buttons.php';

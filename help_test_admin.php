@@ -18,8 +18,31 @@ include 'divLog.php';
 
 echo "LEPSZY SZYFR!!!: ".hash('sha256', "ala")."<br>";
 
+    $sumM = 0;
+    $sumZ = 0;
+    
+for($i=1; $i<100; $i++){
+    $random = rand(1,2);
+//    echo "<br>wynik:".$random;
+    if($random == 1){
+        $sumZ++; 
+    }else{
+        $sumM++;
+    }
+}
+
+if($sumZ > $sumM){
+    $win = 'Zuzanna';
+}else{
+    $win = 'Maciek'; 
+}
+
+echo "<br>Wygrywa: ".$win.' i siedzi przy oknie przy starcie<br><br>';
+
 if($Word = new Ord()){
     $empty_rec = $Word->findEmptyOrdId();
+    
+    $val = $Word->getTypesOfOrd();
  
     foreach($empty_rec as $k => $v){
         echo "<br>K: $k => V: $v";

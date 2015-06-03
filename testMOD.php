@@ -14,9 +14,72 @@ include 'divLog.php';
 //$title = 'Svenska | TestMOD';
 //include 'header.php';
 //include 'buttons.php';
-
+//
 //echo"POST: ";var_dump($_POST);
 //echo"<br>SESSION: ";var_dump($_POST);
+
+if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
+//        echo "<br>".__LINE__."OK";
+        $patern = '/\.|\?|\!|\_|\\s/';               // uwala "..." i ?
+
+        $arr = explode(', ',$_POST['check']);
+
+        $str_tr = strtolower(trim($_POST['try']));        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku! A potem do małych liter!
+        $try = preg_replace($patern, '', $str_tr);
+
+        $wordInArr = false;
+
+        for($i=0; $i<count($arr); $i++){
+//            echo "<br>try   : ".$try;
+//            echo "<br>arr[i]: ".$arr[$i];
+
+            $str_ch = (string)$arr[$i];
+            $str_ch = strtolower(trim($str_ch));        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku! A potem do małych liter!
+            $check = preg_replace($patern, '', $str_ch);
+//            echo "<br>Czy jest?:".strcmp($try, $try2);
+
+            if(strcmp($try, $check) == 0){
+//                echo "<br>Pasuje!";
+                $wordInArr = true;
+
+            }else{
+//                echo "<br>Nie pasuje!";       
+            }
+        }
+
+        $temp_scor = '';
+        if($wordInArr){
+//            echo "<br>".t('POPRAWNA ODPOWIEDŹ')."!!!!!";
+            $_SESSION['good']++;
+            $temp_scor = "OK"; 
+        }else{
+//            echo "<br>".t('ŻLE')." - ".t('POPRAWNA ODPOWIEDŹ').": ".t('na pytanie').":<br>".t('Podaj')." ".t($_POST['quest_p1']). " ".t('do')." \"<span class=red>".$_POST['quest_p2']."</span>\". ".t('Odpowiedź to').":"
+//            . " <span class=red><b>".$_POST['check']."</b></span><br>, ".t('a Twoja odpowiedź').": \"".$_POST['try']."\"";
+             $_SESSION['bad']++;
+             $temp_scor = t("błąd");
+        }
+
+    //    echo "<br>ta tablica:";
+        $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], $_POST['try'], $temp_scor, $_POST['id_of_WORD'] );
+    //    array_push($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
+        array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
+    //    var_dump($_SESSION['arrOfAnsw']);
+
+    //    echo "<br>Po tablicy";
+
+        unset($_POST['test']);
+        echo "<script> window.location.replace('test.php') </script>" ;
+}      
+else if(isset($_POST['avoid'])){
+    //    echo "<br>JEST AVOID!!!";
+//        $temp_scor = t("BRAK ODPOWIEDZI")."!!!";
+        $tempArrOfAnsw = array($_POST['quest_p4'],$_POST['quest_p3'],$_POST['quest_p2'],$_POST['quest_p1'],$_POST['check'], "-", $temp_scor, $_POST['id_of_WORD'] );
+        array_unshift($_SESSION['arrOfAnsw'],$tempArrOfAnsw);
+        echo "<script> window.location.replace('test.php') </script>" ;
+}
+
+
+
 
 $case = 0;
 

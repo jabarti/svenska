@@ -17,16 +17,16 @@ include 'header.php';
 
 if(isset($_POST)){
     foreach($_POST as $k =>$v){
-        echo "<br>$k=>$v";
+//        echo "<br>$k=>$v";
     }
     
     $RestorPassQuest = $_POST['RestorPassQuest'];
 
     $usrMail = new User();
     $usrData = $usrMail->getUserPassCryptByUserOrMail($RestorPassQuest);
-    var_dump($usrData);
-    echo "<br>UsrData[mail]: ".$usrData['email'];
-    echo "<br>UsrData[PassCrypt]: ".$usrData['PassCrypt'];
+//    var_dump($usrData);
+//    echo "<br>UsrData[mail]: ".$usrData['email'];
+//    echo "<br>UsrData[PassCrypt]: ".$usrData['PassCrypt'];
     
         $headers =  'From: svenska@bartilevi.pl' . "\r\n";
 //        $headers .= 'Bcc: jabarti@wp.pl' . "\r\n";    //'bartosz.lewinski@bartilevi.pl';
@@ -42,16 +42,20 @@ if(isset($_POST)){
         $boolka = mail($usrData['email'], t("Przypomnienie hasła(zaszyfrowane kluczem publicznym - algorytm RSA)"),  $text,$headers);
         
         if($boolka){
-            echo "<br>działa";
-            echo "<br>HEADERS: $headers";
+//            echo "<br>działa";
+//            echo "<br>HEADERS: $headers";
         }else{
-            echo "<br>NIE działa";
-            echo "<br>HEADERS: $headers";
+//            echo "<br>NIE działa";
+//            echo "<br>HEADERS: $headers";
         }
     } catch (Exception $ex) {
-        echo("MAil nie poszedł");
+//        echo("MAil nie poszedł");
     }
+//    echo "<br>".__LINE__."/ przd header";
     header("Location: index.php");
+    echo "<script> window.location.replace('index.php') </script>" ;
+}else{
+    echo "<br>".__LINE__."/ przd header";
 }
 ?>
 <br>

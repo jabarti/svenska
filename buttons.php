@@ -10,7 +10,7 @@ if(isset($_SESSION['role'])){
 //        echo "<br>".__FILE__.__LINE__." ROLE:".$_SESSION['role'];
 //        echo "<br>user:".$_SESSION['user'];
 //        echo "<br>userRole:".$usr_role;
-if(!$_MOBILE){        
+if(!$_MOBILE){      
     switch ($usr_role){
         case 'admin':
         ?>                 

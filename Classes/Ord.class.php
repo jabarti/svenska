@@ -595,7 +595,7 @@ class Ord {
         
         // Zwraca tablicę z ID wszystkich rekordów w bazie
         public function getQuestionIDsArr(){
-//            echo '<br>TYPE:'.$type.'<br>';
+//            echo "<br>ORD.CLASS OK/ getQuestionIDsArr(): ".__LINE__;
             $arr = array();
             $tempSQL = "SELECT id FROM `".$this->table."`;";
             
@@ -1226,7 +1226,7 @@ class Ord {
             $type = $row['1'];
 //            echo '<br>type:'.$type;
             preg_match('/enum\(\'(.*)\'\)$/', $type, $matches);
-//            echo "<br>matches";var_dump ($matches);
+//            echo "<br>matches: ".$matches."<br>";var_dump ($matches);
 //            echo "<br>matches1: ".$matches[1];
             $vals = explode('\',\'', $matches[1]);
 //            echo "<br>Vals: ";var_dump ($vals);

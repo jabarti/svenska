@@ -27,7 +27,7 @@ class User {
     // us: CreateUserMOD.php = TWORZENIE NOWEGO USERA   
     public function setData($imie, $nazwisko, $user, $password, $email, $publicKey, $PassCrypt){
 //    private function setData($user, $password){
-        
+//        echo "<br>SET DATA!!!";
         $t=time();
         $data = date("Y-m-d, H:i:s",$t);
         $sha_password = sha1($password);
@@ -40,26 +40,32 @@ class User {
 
             $SQL = sprintf("INSERT INTO `".$this->table."` (`id`, `imie`, `nazwisko`, `user`, `password`, `PublicKey`,`PassCrypt`,`email`, `data`)
                                                     VALUES (NULL, '".$imie."','".$nazwisko."','".$user."', '".$sha_password."','".$publicKey."','".$PassCrypt."','".$email."', '".$data."');");
-            echo "<br>SQL INSERT user: ".$SQL;
+//            echo "<br>SQL INSERT user: ".$SQL;
 //            $mq = mysql_query($SQL);
             
             try{
                 $mq = mysql_query($SQL);
+                if(mysql_affected_rows()==1){
+                    return true;
+                }else{
+                    return false;
+                }
             } catch (Exception $ex) {
                 echo "<br>ERROR: $ex";
+                return false;
             }
             
             
 //            echo "<br>mysql_affected_rows():".mysql_affected_rows();
-            if(mysql_affected_rows()==1){
-//                echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" added.";
-                return true;
-            }else{
-                echo "<br>ERROR mysql_affected_rows()!=1";
-                return false;
-            }
+//            if(mysql_affected_rows()==1){
+////                echo "<br>SUCCESS: User \"<span class=blue>".$user."</span>\" added.";
+//                return true;
+//            }else{
+//                echo "<br>".__FILE__."ERROR mysql_affected_rows()!=1";
+//                return false;
+//            }
         }else{
-            echo "<br>User like \"<span class=red>".$user."</span>\" exists.";
+            echo "<br>User like \"<span class=red>".$user."</span>\" already exists.";
             return false;
         }
     }
