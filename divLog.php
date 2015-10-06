@@ -52,7 +52,7 @@ if(isset($_SESSION['log'])){
             <!--<script>alert ("isset($_SESSION['APPTIME']): <?php echo($_SESSION['APPTIME'][0]) ?> ||");</script>-->
             <?php 
         }else{
-            $tim = time()+60*20-8;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!! 20min
+            $tim = time()+60*20-8;     // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!! 20min
             $tim = time()+60*5;        // FAKTYCZNY CZAS PRACY BEZ DZIAŁANIA!!!
             ?>
             <!--<script>alert ("NIE!! isset($_SESSION['APPTIME']])");</script>-->

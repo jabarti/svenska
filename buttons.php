@@ -21,7 +21,7 @@ if(!$_MOBILE){
                 <a href="index.php" class="myButton"><?php echo t("Do")." ".t("Insertera_btn"); ?></a><br>
                 <a href="Edit.php" class="myButton"><?php echo t("Do")." ".t("Edycji_btn"); ?></a><br>
                 <a href="motsatsen.php" class="myButton"><?php echo t("Do")." ".t("Przeciwienstw_btn"); ?></a><br>
-                <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimow_btn"); ?></a><br>                    
+                <a href="synonymer.php" class="myButton"><?php echo t("Do")." ".t("Synonimow_btn"); ?></a><br>     <!---->               
                 <a href="test.php" class="myButton"><?php echo t("Do")." ".t("testu_btn"); ?></a><br>
                 <a href="show.php" class="myButton"><?php echo t("Do")." ".t("Show/Printer_btn"); ?></a>
             </div>
@@ -37,6 +37,12 @@ if(!$_MOBILE){
                 <a href="try.php" class="myButton"><?php echo t("Do")." ".t("Try_btn"); ?> </a><br>
             =================
                 <a href="check_php_inf.php" class="myButton"><?php echo t("Do")." ".t("check_php_inf_btn"); ?></a><br>            
+            =================
+            <?php if(!$TRY){ ?>
+            <a href="../SvenskaTRY/" class="myButton"><?php echo t("Do")." SvenskaTRY";?></a><br>  
+            <?php }else{ ?>
+            <a href="../Svenska/" class="myButton"><?php echo t("Do")." Svenska";?></a><br> 
+            <?php } ?>
             </div>
 
             <a href="#" class="myButton2" id="usrAdmButt"><?php echo t("usrAdmButton");; ?></a><br>

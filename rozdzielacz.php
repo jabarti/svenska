@@ -25,6 +25,7 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"UserAdmin.php");
              array_push($allowPages,"try.php");
              array_push($allowPages,"upload.php");
+             array_push($allowPages,"SynonymerMOD.php");
              array_push($allowPages,"motsatsen.php"); // nie dokończone!!! dlatego niżej nie dostępne!
              array_push($allowPages,"EditAllMod.php"); // nie dokończone!!! dlatego niżej nie dostępne!
              
@@ -75,6 +76,7 @@ if(!in_array($file,$allowPages)){
 //            alert('TESTER:<?php //echo $tester; ?>')
         </script><?php
         header("Location: test.php");
+        echo "<script> window.location.replace('test.php') </script>";
     }
 }/*
 else{

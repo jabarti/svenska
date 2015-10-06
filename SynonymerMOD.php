@@ -24,19 +24,24 @@ echo "<br>";
 //}
 
 if(isset($_POST['submit'])){
-    echo "Jest POST{submit}";
+    echo "Jest POST{submit}<br>";
     
     if($_POST['sercz_synonym_nr']!=''){
+//        echo "Location: synonymer.php?sercz_synonym_nr=".$_POST['sercz_synonym_nr'];
         header("Location: synonymer.php?sercz_synonym_nr=".$_POST['sercz_synonym_nr']);
+//        $address = "synonymer.php?sercz_synonym_nr=".$_POST['sercz_synonym_nr'];
+//        echo '<script>window.location="'.$address.'";</script>';
     }else
     if($_POST['sercz_synonym_ord']!=''){
+        echo "Location: synonymer.php?sercz_synonym_nr=".$_POST['sercz_synonym_nr']; 
         header("Location: synonymer.php?sercz_synonym_ord=".$_POST['sercz_synonym_ord']);
     }else{
+        echo "Location: synonymer.php";
         header("Location: synonymer.php");
     }
 
 }else{
     echo " NIe ma POST{submit}";
-//         header("Location: help_test_admin.php");
+         header("Location: help_test_admin.php");
 }
 

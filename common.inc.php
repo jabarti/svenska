@@ -43,9 +43,11 @@ $REMOTE_ADDR = false;
 //echo "REMOTE ADDR:".$_SERVER["REMOTE_ADDR"];//=> string(14) "81.234.110.249";
 
 $ServerList = array(
-                    "81.234.110.249",   // Mullsjö, Grindgatan
                     "85.202.150.195",   // Częstochowa, Obr.Westerplatte 11
-                    "85.202.149.116"    //Częstochowa, Nałkowskiej
+                    "85.202.149.116",    //Częstochowa, Nałkowskiej
+                    "92.32.53.158",      //Mullsjö, felixplace
+                    "78.72.219.220",      //Mullsjö, Tomtebovägen
+                    "217.160.168.247"      //Mullsjö, Tomtebovägen ??
                     );  
 if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
 //    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];
@@ -82,6 +84,7 @@ if(isset($_GET['kuki'])){
                     ?>
                         <!--<script>alert ("$_SESSION['APPTIME']): <?php echo ($_SESSION['APPTIME'][0])."/räknad: ".(60*60*$log_hours+$log_min) ?> || ");");</script>-->
                     <?php         
+                    
                 }else{
                     ?>
                         <!--<script>alert ("$_SESSION['APPTIME'] Error)</script>-->
@@ -325,3 +328,6 @@ if(strpos(BASE_PATH, $patt)){
 //    echo "<br>NIE TRY<br>";
     $TRY = '';
 }
+
+// Do testów!!!! false oznacza zewnętrznego (normalnego) usera!!!
+//$REMOTE_ADDR = false;

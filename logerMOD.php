@@ -9,7 +9,7 @@
  ***************************************************/
 require_once 'common.inc.php';
 include 'DB_Connection.php';
-include 'divLog.php'; 
+include 'divLog.php';
 $title = 'Svenska | loggerMOD';
 include 'header.php';
 //include 'buttons.php';
@@ -42,7 +42,7 @@ if(!isset($_GET['action'])){
     }else{
 //        echo '<br>$_SESSION[ref]'.$_SESSION['ref'];
 //        echo "<br>!match:".var_export(!$match, !true);
-        $_SESSION['ref'] = "index.php";
+        $_SESSION['ref'] = "index.php"; 
     }
     
 //    echo "<br><span>".t('Przybywasz z: ').$_SESSION['ref']."</span>";
@@ -156,7 +156,7 @@ if(!isset($_GET['action'])){
             unset($_SESSION['user_id']);      
             unset($_SESSION['usr_mail']);
             unset($_SESSION['user']);
-//            header("Location: loger.php");
+            header("Location: loger.php");
             exit("<br>".__LINE__."Location: loger.php");
         }
     } else{

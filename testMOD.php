@@ -19,15 +19,20 @@ include 'divLog.php';
 //echo"<br>SESSION: ";var_dump($_POST);
 
 if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
+
+//        $_SESSION['APPTIME'][0] = $_SESSION['APPTIME'][0] + 60;
+    
 //        echo "<br>".__LINE__."OK";
         $patern = '/\.|\?|\!|\_|\\s/';               // uwala "..." i ?
 
         $arr = explode(', ',$_POST['check']);
+        $str_uwagi = $_POST['check_uw'];
 
         $str_tr = strtolower(trim($_POST['try']));        // to jest udzielona odp, pozbawiona b.znaków na końcu i początku! A potem do małych liter!
         $try = preg_replace($patern, '', $str_tr);
 
         $wordInArr = false;
+        $wordInArrUwagi = false;
 
         for($i=0; $i<count($arr); $i++){
 //            echo "<br>try   : ".$try;
@@ -39,19 +44,26 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
 //            echo "<br>Czy jest?:".strcmp($try, $try2);
 
             if(strcmp($try, $check) == 0){
-//                echo "<br>Pasuje!";
+                echo "<br>Pasuje!";
                 $wordInArr = true;
-
             }else{
-//                echo "<br>Nie pasuje!";       
+                if(strpos($patern, $str_uwagi)){
+                    $wordInArrUwagi = true;     // tzn. ze odpowiedz jest w uwagach (czyli pewnie po == (czy też po <>????)
+                }
+                echo "<br>Nie pasuje!";       
             }
         }
 
         $temp_scor = '';
-        if($wordInArr){
+        if($wordInArr || $wordInArrUwagi){
 //            echo "<br>".t('POPRAWNA ODPOWIEDŹ')."!!!!!";
-            $_SESSION['good']++;
-            $temp_scor = "OK"; 
+            if($wordInArrUwagi == false){
+                $_SESSION['good']++;
+                $temp_scor = "OK"; 
+            }else{
+                $_SESSION['good'] = $_SESSION['good']+0.5;
+                $temp_scor = "1/2 OK";
+            }
         }else{
 //            echo "<br>".t('ŻLE')." - ".t('POPRAWNA ODPOWIEDŹ').": ".t('na pytanie').":<br>".t('Podaj')." ".t($_POST['quest_p1']). " ".t('do')." \"<span class=red>".$_POST['quest_p2']."</span>\". ".t('Odpowiedź to').":"
 //            . " <span class=red><b>".$_POST['check']."</b></span><br>, ".t('a Twoja odpowiedź').": \"".$_POST['try']."\"";

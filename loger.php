@@ -17,7 +17,33 @@ include 'header.php';
 include 'divLog.php';
 
 if($REMOTE_ADDR){
-    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"]."<br>";
+//    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"]."<br>";
+//    echo "<br> ".t("KRAJ").": ".t($geoArr['geoplugin_countryName']);
+    $ADDRES = $_SERVER["REMOTE_ADDR"];
+    
+    switch($_SERVER["REMOTE_ADDR"]){
+        case "85.202.150.195":
+            $ADDRES .= " / (Częstochowa, Obr.Westerplatte)";
+            break;
+        case "85.202.149.116":
+            $ADDRES .= " / (Częstochowa, Nałkowskiej)";
+            break;
+        case "92.32.53.158":
+            $ADDRES .= " / (Mullsjö, felixplace)";
+            break;
+        case "78.72.219.220":
+            $ADDRES .= " / (Mullsjö, Tomtebovägen)";
+            break;
+        case "217.160.168.247":
+            $ADDRES .= " / (Germany ????)";
+            break;
+        default:
+            break;
+    }
+
+    
+//    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"]."<br>";
+    echo "Admin IP Address: ".$ADDRES."<br>";
     echo "<br> ".t("KRAJ").": ".t($geoArr['geoplugin_countryName']);
 }
 

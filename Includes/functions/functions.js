@@ -68,6 +68,12 @@ setInterval(function() {
      
 }, 1000);
 
+
+function addTimeScan(){
+    tid2 = document.getElementById("add_time_after_click").innerHTML;
+    console.log(tid2);
+};
+
 /* FUNKCJE W logerMOD.php do kasowania COOKIE z poziomy js. DZIAŁAJĄ ale nie na cooi 'log' ;( */
 /*
 function createCookie(name,value,days) {
@@ -1063,10 +1069,17 @@ function autoNoun(trans, group, rodzaj) {
     var OBSI = trans;
     var ostLett = trans.slice(trans.length-1)
 //    alert(ostLett)
+//    if(inArray(ostLett, sam)){
     if(ostLett == 'a'){
+        console.log("here")
             var indA = trans.lastIndexOf("a");
             var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego a
     }
+//    if(ostLett == 'e'){
+//        console.log("here")
+//            var indA = trans.lastIndexOf("e");
+//            var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego e
+//    }
 
     var konVal = false;
     console.log('trans: '+trans+'\ngroup: '+group+'\rodzaj: '+rodzaj);
@@ -1162,6 +1175,15 @@ function autoNoun(trans, group, rodzaj) {
                 $('#rodzaj option[value=en]').attr('selected','selected');
         break;
         case '4':
+            console.log ("TODO 4: przy 'en' i 'ett' dodaje za dużo samogłosek");
+            
+            if(ostLett=='e'){
+                if(rodzaj == "ett"){
+                    konc = 't'
+                }else{
+                    konc = 'n'
+                }
+            }
             group = 'n';
             koncPL = 'a';
             if(konVal==true) 

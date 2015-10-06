@@ -18,7 +18,9 @@ include 'divLog.php';
 
 //if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 if($_SESSION['log'] == true ){
-//    echo "<br>OK:".__LINE__;
+//    echo "<br>OK:".__LINE__." / ".$_SESSION['APPTIME'][0];
+    echo "<span id='add_time_after_click' hidden = 'hidden'>AAA!!!!</span>";
+//    echo "<span id='add_time_after_click' >BBB!!!!</span>";
 //    include 'Search.php';
     if(!isset($_SESSION['good']) && !isset($_SESSION['bad'])){
 //        echo "<br>OK:".__LINE__;
@@ -193,7 +195,9 @@ if($_SESSION['log'] == true ){
                     echo  "<textarea id=try rows=1 cols=20 name=try></textarea>";
                     break;
             }
-                echo      "<input id='check' type='hidden' name='check' value='".$testTab[3]."'>"
+//                echo      "<input id='check' type='hidden' name='check' value='".$testTab[3]."'>"
+                echo      "<input id='check' type='hidden' name='check' value='".$testTab[3]."'>".
+                          "<input id='check_uw' type='hidden' name='check_uw' value='".$testTab[4]."'>"
                         ."</td>"
                         ."<td></td>"
                     ."</tr>";

@@ -15,7 +15,7 @@ include 'header.php';
 include 'buttons.php';
 include 'divLog.php';
 
-//var_dump($_SESSION);
+//var_dump($_SESSION); 
 //var_dump($_COOKIE);
 $mfa = array();
 //if($_SESSION['log'] == true && isset($_COOKIE['log'])){

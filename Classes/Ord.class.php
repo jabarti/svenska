@@ -77,7 +77,7 @@ class Ord {
                                 'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka','sztuka',
                                 'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
-                                'gramatyka','pytajnik','idiom','zart','wulgarne','potoczne','uzupelnic');
+                                'gramatyka','pytajnik','idiom','przysłowie','zart','wulgarne','potoczne','uzupelnic');
     
 
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
@@ -732,7 +732,8 @@ class Ord {
         }
         
         public function getQuestAndAnswerById($id){
-            
+//            $id = 299;
+//            $id = 2897;
             $quest = $this->getQuestionById($id);
             
             $tab_All = $this->getPropAnsTabById($id);
@@ -785,11 +786,23 @@ class Ord {
             $mq = mysql_query($SQL);
             $RESULT_2 = mysql_result($mq, 0);
             
+            
+            // tu pobiera UWAGI !!!!!!!!!!!!!!!!
+            $SQL = sprintf("SELECT `uwagi` FROM `".$this->table."` WHERE id = \"".$id."\";");
+            $mq = mysql_query($SQL);
+            $RESULT_3 = mysql_result($mq, 0);
+            
+            if(strpos($RESULT_3, "==")){
+                $RESULT_3 = $RESULT_3;
+            }else{
+                $RESULT_3 = 0;
+            }
+            
 //            echo "<br>============ RESULTS: ============<br>";
 //            echo "RESULT_1: ".$RESULT_1." => RESULT_2: ".$RESULT_2;
 //            echo "<br>========================<br>";
             
-            $res = array($quest[0], $quest[1], $RESULT_1, $RESULT_2);
+            $res = array($quest[0], $quest[1], $RESULT_1, $RESULT_2, $RESULT_3);
             
 //            echo "<br>============ RETURNS: ============<br>";
 //            echo "RESULT: ";var_dump($res);

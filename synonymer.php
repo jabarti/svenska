@@ -50,7 +50,7 @@ if($_SESSION['log'] == true ){
             echo "<br>NIE ISSET GET!!!";
             $i = 1655;
         }
-//        for($i=1;$i<$MAX;$i++){
+        for($i=1;$i<$MAX;$i++){
             
             $SQL = "SELECT id_ord FROM `ord` WHERE id='".$i."';";
         
@@ -59,7 +59,7 @@ if($_SESSION['log'] == true ){
             $mq = mysql_query($SQL);
             
             if(mysql_affected_rows()){
-                $text = mysql_fetch_array($mq);
+//                $text = mysql_fetch_array($mq);
                 $text = mysql_result($mq, 0);
 //                echo "<br>TEXT: ".$text;
                 $arr = explode(', ',$text);
@@ -90,7 +90,7 @@ if($_SESSION['log'] == true ){
                 }
             }
             
-//        }  
+        }  
     }else{
         echo "<br>NIE ZALOGOWANY";
     }
