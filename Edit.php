@@ -373,7 +373,7 @@ while($row = mysql_fetch_assoc($mq)){
             echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
                 echo "<td>".t($k)."</td>";
                 echo "<td colspan=7>";
-                    echo "<textarea id='uwagi_ta_".$curr_word_id."' class=uwagi_ta name=".$k." >".$v."</textarea>";
+                    echo "<textarea id='uwagi_ta_".$curr_word_id."' class='uwagi_ta' name=".$k." >".$v."</textarea>";
                 echo "</td>";
             echo "</tr>";
             break;
@@ -408,6 +408,9 @@ while($row = mysql_fetch_assoc($mq)){
               <tr><td colspan=8><textarea hidden form='edit_all' rows=5 cols=80 id='ta_ser_".$curr_word_id."' name='edit_all_".$curr_word_id."'></textarea></td></tr>
         </form>";
 echo "</table>";  
+echo "<button class='butt_insert_znakiEdit' id='butt_another'  value=' ≠ _".$curr_word_id."'>\"<span class='red'>≠</span>\" ".t("inne znaczenia podobnych wyrazów")."</button>";
+echo "<button class='butt_insert_znakiEdit' id='butt_antonym'  value=' <=> _".$curr_word_id."'>\"<span class='red'><=></span>\" ".t("wyrazy o przeciwnych znaczeniach (antonimy)")."</button>";
+echo "<button class='butt_insert_znakiEdit' id='butt_synonym'  value=' == _".$curr_word_id."'>\"<span class='red'>==</span>\" ".t("wyrazy o podobnych znaczeniach (synonimy)")."</button>";
         
         
     $i++; //$id++;<tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>
@@ -457,6 +460,7 @@ if($navnum > $allpages){
         if($forstart - 1 < $allpages) echo "<li><a href=\"".$script_name."?page=".$allpages."\">[".$allpages."]</a></li>";
         if($page < $allpages) echo "<li><a href=\"".$script_name."?page=".$next."\">".t("Następna")."</a></li>";
         echo "</ul></div><div class=\"clear\"></div>";
+        
 
 echo "<div class=floating_button_div>"
 //        . "<form id='edit_all' method=post action=EditAllMod.php target='_blank'>"

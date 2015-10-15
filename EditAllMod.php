@@ -38,7 +38,7 @@ if(isset($_POST)){
             echo "<br>OTO: $k0 => $v0";
 //            $SQL .= $v;
 //            $arr = unserialize($v);  /// to idzie z seralize js! nie czyta tego php
-//            var_dump($arr);
+            var_dump($arr);
             
             $arr1 = explode("&",$v0); //id_ord=jedzenie%2C+pokarm%2C+potrawa%2C+po%C5%BCywienie%2C+%C5%BCywno%C5%9B%C4%87
                
@@ -83,6 +83,7 @@ if(isset($_POST)){
                 
                 $v1 = str_replace('%C3%A5','å' , $v1);
                 $v1 = str_replace('%C3%85','Å' , $v1);
+                $v1 = str_replace('%E2%89%A0','≠' , $v1);
                 
                 $arr2 = explode("|!|!|",$v1);
 

@@ -1251,6 +1251,32 @@ $(document).ready(function(){
         $("#try").focus();                  // PRZYWRÓCENIE FOCUSA NA TEXTAREA!
     });
     
+    // Działa w insert  do dodania znaków "≠", "<=>" i "=="
+    $('button.butt_insert_znaki').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
+        var letter = $(this).attr('value')  // pobranie vartości klawisza klikniętego (literka np.: ą, ć itd
+//        alert(letter);
+        temp = $('#uwagi_ta').val()+letter;      // pobranie wartośi wprowadzanych i dodanie literki
+//        alert(temp);
+        $('#uwagi_ta').val(temp);                // PRZEPISANIE WARTOŚCI
+        $("#uwagi_ta").focus();                  // PRZYWRÓCENIE FOCUSA NA TEXTAREA!
+    });
+    
+        // Działa w  edit do dodania znaków "≠", "<=>" i "=="
+    $('button.butt_insert_znakiEdit').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
+        var letter = $(this).attr('value')  // pobranie vartości klawisza klikniętego (literka np.: ą, ć itd
+        var stoper = letter.indexOf('_');
+        var text = letter.substr(0,stoper)
+        var index = letter.substr(stoper+1);
+//        alert(stoper);
+//        alert(index);
+//        alert(text);
+        temp = $('#uwagi_ta_'+index).val()+text;      // pobranie wartośi wprowadzanych i dodanie literki
+//        alert(temp);
+        $('#uwagi_ta_'+index).val(temp);                // PRZEPISANIE WARTOŚCI
+        $('#CBedit_'+index).prop('checked', true);               // PRZEPISANIE WARTOŚCI
+        $("#uwagi_ta_"+index).focus();                  // PRZYWRÓCENIE FOCUSA NA TEXTAREA!
+    });
+    
     var NrGrupy = 1;
     $('#typ').change(function(){        // Po zmianie typu nastepuje m.in. powiązanie różnych autouzupełnienć do pola "trans"
 //        $('#resetFormIndex').click();

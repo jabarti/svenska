@@ -503,7 +503,7 @@ setInterval(function() {
       <!-- Other items -->
     </ul>
 </div>
-
+<div id="fb-root"></div><script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return;  js = d.createElement(s); js.id = id;  js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.3";  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script><div class="fb-video" data-allowfullscreen="1" data-href="/1427680617534122/videos/vb.1427680617534122/1485919158376934/?type=3"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/1427680617534122/videos/1485919158376934/"><a href="https://www.facebook.com/1427680617534122/videos/1485919158376934/"></a><p>Czas spojrzeć prawdzie w oczy. Jesteśmy wymierającą rasą i jeśli czegoś z tym nie zrobimy, to za sto, a może trochę więcej lat będziemy tylko historią. Ważną rolę w przyśpieszaniu naszego wymierania, spełnia rasizm i poprawność polityczna skierowana przeciwko nam.</p>Posted by <a href="https://www.facebook.com/pages/Polska-Potrzebuje-Nowych-Elit/1427680617534122">Polska Potrzebuje Nowych Elit</a> on 13 października 2015</blockquote></div></div>
 <?php
 $Word = new Ord();
 $OrdGru = $Word->getGrupaOfOrd();

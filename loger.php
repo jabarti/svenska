@@ -35,7 +35,10 @@ if($REMOTE_ADDR){
             $ADDRES .= " / (Mullsjö, Tomtebovägen)";
             break;
         case "217.160.168.247":
-            $ADDRES .= " / (Germany ????)";
+            $ADDRES .= " / (Germany1 ????)";
+            break;
+        case "217.160.165.170":
+            $ADDRES .= " / (Germany2 ????)";
             break;
         default:
             break;

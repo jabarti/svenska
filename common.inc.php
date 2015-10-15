@@ -47,7 +47,8 @@ $ServerList = array(
                     "85.202.149.116",    //Częstochowa, Nałkowskiej
                     "92.32.53.158",      //Mullsjö, felixplace
                     "78.72.219.220",      //Mullsjö, Tomtebovägen
-                    "217.160.168.247"      //Mullsjö, Tomtebovägen ??
+                    "217.160.168.247",      //Germany 1
+                    "217.160.165.170"      //Germany 2
                     );  
 if(in_array($_SERVER["REMOTE_ADDR"],$ServerList)){
 //    echo "Admin IP Address: ".$_SERVER["REMOTE_ADDR"];

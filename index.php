@@ -292,11 +292,11 @@ if(!isset($_GET['copy_id'])){
             </tr>
             <tr>
                 <td class='label'><?php echo t("uwagi"); ?></td>
-                <td colspan="3"><textarea id=uwagi_ta class=uwagi_ta name="uwagi" rows="1"  style="height: 2em;"><?php echo (isset($mfa['uwagi']))?$mfa['uwagi']:''; ?></textarea></td>
+                <td colspan="3"><textarea id='uwagi_ta' class='uwagi_ta' name="uwagi" rows="1"  style="height: 2em;"><?php echo (isset($mfa['uwagi']))?$mfa['uwagi']:''; ?></textarea></td>
                 <td class='label'><?php echo t("kategoria"); ?> </td>
                 <td colspan='1'>
                     <!--<select id=kategoria name='kategoria'>-->
-                    <select id=kategoria_ins  multiple="multiple" name='kategoria'>                        
+                    <select id='kategoria_ins'  multiple="multiple" name='kategoria'>                        
                         <?php
                         if(isset($_GET['copy_id'])){
                             echo "<option value='".$mfa['kategoria']."'>".t($mfa['kategoria'])."</option>";
@@ -327,6 +327,11 @@ if(!isset($_GET['copy_id'])){
     
         </table>
     </form>
+
+    <button class="butt_insert_znaki"id="butt_another"  value=' ≠ '>"<span class="red">≠</span>" <?php echo t("inne znaczenia podobnych wyrazów"); ?></button>
+    <button class="butt_insert_znaki"id="butt_antonym"  value=' <=> '>"<span class="red"><=></span>" <?php echo t("wyrazy o przeciwnych znaczeniach (antonimy)"); ?></button>
+    <button class="butt_insert_znaki"id="butt_synonym"  value=' == '>"<span class="red">==</span>" <?php echo t("wyrazy o podobnych znaczeniach (synonimy)"); ?></button>
+    
 <!--</div>    // end of div: edit_tab_contener-->
 
     
@@ -371,7 +376,7 @@ if (isset($_GET['result'])){
             
             break;
         case 'Error':
-            echo t("ERROR!!!!");
+            echo t("ERROR!!!!").__FILE__;
             break;
         default:
             echo t('Nic się nie dzieje!');

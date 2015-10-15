@@ -364,7 +364,7 @@ if (isset($_GET['result'])){
             
             break;
         case 'Error':
-            echo t("ERROR!!!!");
+            echo t("ERROR!!!!").__FILE__;
             break;
         default:
             echo t('Nic się nie dzieje!');
