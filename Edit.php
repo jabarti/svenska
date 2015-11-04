@@ -411,6 +411,8 @@ echo "</table>";
 echo "<button class='butt_insert_znakiEdit' id='butt_another'  value=' ≠ _".$curr_word_id."'>\"<span class='red'>≠</span>\" ".t("inne znaczenia podobnych wyrazów")."</button>";
 echo "<button class='butt_insert_znakiEdit' id='butt_antonym'  value=' <=> _".$curr_word_id."'>\"<span class='red'><=></span>\" ".t("wyrazy o przeciwnych znaczeniach (antonimy)")."</button>";
 echo "<button class='butt_insert_znakiEdit' id='butt_synonym'  value=' == _".$curr_word_id."'>\"<span class='red'>==</span>\" ".t("wyrazy o podobnych znaczeniach (synonimy)")."</button>";
+echo "<button class='butt_insert_znakiEdit' id='butt_transit'  value='transitivt; _".$curr_word_id."'>\"<span class='red'>transitivt</span>\" ".t("czasownik przechodni np.: jag dödar någon")."</button>";
+echo "<button class='butt_insert_znakiEdit' id='butt_intrans'  value='intransitivt; _".$curr_word_id."'>\"<span class='red'>intransitivt</span>\" ".t("czasownik nieprzechodni np.: Jag dör")."</button>";
         
         
     $i++; //$id++;<tr><td colspan=8><textarea hidden rows=5 cols=80 id='ta_ser_".$curr_word_id."'></textarea></td></tr>

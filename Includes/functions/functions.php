@@ -107,6 +107,9 @@ function trans($var){       // działa w test.php do tłumaczenia pytań -dlateg
         case 'reflexivaverb':
             return "czas. zwrotny";
             break;
+//        case 'deponensverb':
+//            return "czas. bierny";
+//            break;
         case 'adjective':
             return "przymiotnik";
             break;

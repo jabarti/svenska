@@ -276,6 +276,7 @@ function start(){
             case 'modal_verb':
             case 'partikelverb':
             case 'reflexivaverb':
+//            case 'deponensverb':
             case 'verb':
                 $("#czasownik").show();
                 $("#rzeczownik").hide();
@@ -354,6 +355,12 @@ function start(){
                 text1 = "jest to cz.mowy mówiąca o...hjalp verb";
                 getTr(text1);
                 break;
+                
+//            case 'deponensverb':
+//                $('#coto').empty();
+//                text1 = "jest to cz.mowy mówiąca o...deponens verb";
+//                getTr(text1);
+//                break;
                 
             case 'verb':        // czasownik
                 $('#coto').empty();
@@ -691,6 +698,7 @@ function autoVerb(trans, group) {
 //            sig = 'sig'
 //    }
     var gr4='';
+    var depon = '';
     
     if (OrdGrup.indexOf("stark") >= 0){
 //        alert(OrdGrup+'1');
@@ -700,6 +708,13 @@ function autoVerb(trans, group) {
 //        alert(OrdGrup+'1');
         gr4 = 'oregel';
     }
+//    
+//    if (OrdGrup.indexOf("deponens") >= 0){
+//        alert(OrdGrup+'deponens1'); 
+//        depon = 'deponens';
+//    }else{
+//        //alert(OrdGrup+'deponens2');
+//    }
 //    if (OrdGrup.contains("stark") >= 0){
 //        alert(OrdGrup+'2');
 //    }
@@ -738,7 +753,7 @@ function autoVerb(trans, group) {
     trans = trans.trim();           // obcina białe znaki!!
        
     transVB = trans.split(" ");     // np.: gå ner - partikelverb!!!
-//    trans = transVB[0];             // goły verb
+//    trans = transVB[0];           // goły verb
     var temat = transVB[0];         // goły verb
     var infi = temat;               // zachowane dla infinitiv
 
@@ -749,7 +764,9 @@ function autoVerb(trans, group) {
             }else{
                 ogon2 += transVB[i]; // stworzenie "ogona": tagen upp -> upptagen
             }
-            ogon += " "+transVB[i]; // stworzenie "ogona": på till över itp
+//            ogon += " "+transVB[i]; // stworzenie "ogona": på till över itp
+            if(ogon2 != '')
+                ogon = " "+ogon2; // stworzenie "ogona": på till över itp
         }
     }
     
@@ -782,28 +799,39 @@ function autoVerb(trans, group) {
                 validA = 'a';
             }
             
+            if(ostLett == 'e'){
+                alert("ost lett: e")
+            }
+            
             Kpres = 'r';
             Kpret = 'de';
             Ksupi = 't';
             
-            OrdInfi = Kinfi+infi+ogon;
-            OrdPresens = temat+validA+Kpres+ogon;
-            OrdPreterite = temat+validA+Kpret+ogon;
-            OrdSupine = temat+validA+Ksupi+ogon;
-            OrdImperative = temat+validA+ogon+Kimpe;
+//            OrdInfi = Kinfi+infi+ogon+sig +'/ OGON:'+ogon;
+            OrdInfi = Kinfi+infi+ogon+sig;
+            OrdPresens = temat+validA+Kpres+ogon+sig;
+            OrdPreterite = temat+validA+Kpret+ogon+sig;
+            OrdSupine = temat+validA+Ksupi+ogon+sig;
+            OrdImperative = temat+validA+ogon+sig+Kimpe;
             OrdPresParticip = ogon2+temat+Kprespart+sig+', '+ogon2+temat+Kprespart+Kpassiv+sig;
             
             Kpretpart1 = 'd'; 
             Kpretpart2 = 't'; 
             Kpretpart3 = 'de'; 
-            OrdPerfParticip = temat+validA+Kpretpart1+ogon+', ';
-            OrdPerfParticip += temat+validA+Kpretpart2+ogon+', ';
-            OrdPerfParticip += temat+validA+Kpretpart3+ogon;
             
-            OrdPasInfinite = temat+validA+Kpassiv+ogon;
-            OrdPasPresens = temat+validA+Kpassiv+ogon+Kpas_presens;
-            OrdPasPreterite = temat+validA+Kpret+Kpassiv+ogon;
-            OrdPasSupine = temat+validA+Ksupi+Kpassiv+ogon;
+            // perfect particip för partikelverb
+//            OrdPerfParticip = temat+validA+Kpretpart1+ogon+', ';
+//            OrdPerfParticip += temat+validA+Kpretpart2+ogon+', ';
+//            OrdPerfParticip += temat+validA+Kpretpart3+ogon;
+
+            OrdPerfParticip = ogon2+temat+validA+Kpretpart1+sig+', ';
+            OrdPerfParticip += ogon2+temat+validA+Kpretpart2+sig+', ';
+            OrdPerfParticip += ogon2+temat+validA+Kpretpart3+sig;
+            
+            OrdPasInfinite = temat+validA+Kpassiv+ogon+sig;
+            OrdPasPresens = temat+validA+Kpassiv+ogon+Kpas_presens+sig;
+            OrdPasPreterite = temat+validA+Kpret+Kpassiv+ogon+sig;
+            OrdPasSupine = temat+validA+Ksupi+Kpassiv+ogon+sig;
 
             break;
             
@@ -826,24 +854,24 @@ function autoVerb(trans, group) {
             Ksupi = 't';
             Kpretpart = 'd'; 
             
-            OrdInfi = Kinfi+infi+ogon;      // att + köra + på sig
-            OrdPresens = temat+Kpres+ogon;
-            OrdPreterite = temat+Kpret+ogon;
-            OrdSupine = temat+Ksupi+ogon;
-            OrdImperative = temat+ogon+Kimpe;
+            OrdInfi = Kinfi+infi+ogon+sig;      // att + köra + på sig
+            OrdPresens = temat+Kpres+ogon+sig;
+            OrdPreterite = temat+Kpret+ogon+sig;
+            OrdSupine = temat+Ksupi+ogon+sig;
+            OrdImperative = temat+ogon+sig+Kimpe;
             OrdPresParticip = ogon2+temat+Kprespart+sig+', '+ogon2+temat+Kprespart+Kpassiv+sig;
             
             Kpretpart1 = 'd'; 
             Kpretpart2 = 't'; 
             Kpretpart3 = 'da';     
-            OrdPerfParticip = temat+Kpretpart1+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart2+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart3+ogon;
+            OrdPerfParticip = ogon2+temat+Kpretpart1+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart2+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart3+sig;
             
-            OrdPasInfinite = temat+validA+Kpassiv+ogon;
-            OrdPasPresens = temat+Kpassiv+ogon+', '+temat+'e'+Kpassiv+ogon;;
-            OrdPasPreterite = temat+Kpret+Kpassiv+ogon;
-            OrdPasSupine = temat+Ksupi+Kpassiv+ogon;
+            OrdPasInfinite = temat+validA+Kpassiv+ogon+sig;
+            OrdPasPresens = temat+Kpassiv+ogon+sig+', '+temat+'e'+Kpassiv+ogon+sig;
+            OrdPasPreterite = temat+Kpret+Kpassiv+ogon+sig;
+            OrdPasSupine = temat+Ksupi+Kpassiv+ogon+sig;
             
             break;
             
@@ -859,25 +887,25 @@ function autoVerb(trans, group) {
             Ksupi = 't';
             Kpretpart = 't'; 
             
-            OrdInfi = Kinfi+infi+ogon;      // att + köpa + på sig
-            OrdPresens = temat+Kpres+ogon;
-            OrdPreterite = temat+Kpret+ogon;
-            OrdSupine = temat+Ksupi+ogon;
-            OrdImperative = temat+ogon+Kimpe;
+            OrdInfi = Kinfi+infi+ogon+sig;      // att + köpa + på sig
+            OrdPresens = temat+Kpres+ogon+sig;
+            OrdPreterite = temat+Kpret+ogon+sig;
+            OrdSupine = temat+Ksupi+ogon+sig;
+            OrdImperative = temat+ogon+sig+Kimpe;
             OrdPresParticip = ogon2+temat+Kprespart+sig+', '+ogon2+temat+Kprespart+Kpassiv+sig;
             
             Kpretpart1 = 't'; 
             Kpretpart2 = 't'; 
             Kpretpart3 = 'ta'; 
             
-            OrdPerfParticip = temat+Kpretpart1+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart2+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart3+ogon;
+            OrdPerfParticip = ogon2+temat+Kpretpart1+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart2+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart3+sig;
             
-            OrdPasInfinite = temat+validA+Kpassiv+ogon;
-            OrdPasPresens = temat+Kpassiv+ogon+', '+temat+'e'+Kpassiv+ogon;;
-            OrdPasPreterite = temat+Kpret+Kpassiv+ogon;
-            OrdPasSupine = temat+Ksupi+Kpassiv+ogon;
+            OrdPasInfinite = temat+validA+Kpassiv+ogon+sig;
+            OrdPasPresens = temat+Kpassiv+ogon+sig+', '+temat+'e'+Kpassiv+ogon+sig;
+            OrdPasPreterite = temat+Kpret+Kpassiv+ogon+sig;
+            OrdPasSupine = temat+Ksupi+Kpassiv+ogon+sig;
             
             break;
             
@@ -897,24 +925,24 @@ function autoVerb(trans, group) {
             Ksupi = 'tt';
             Kpretpart = 'dd'; 
        
-            OrdInfi = Kinfi+infi+ogon;      // att + köpa + på sig
-            OrdPresens = temat+Kpres+ogon;
-            OrdPreterite = temat+Kpret+ogon;
-            OrdSupine = temat+Ksupi+ogon;
-            OrdImperative = temat+ogon+Kimpe;
+            OrdInfi = Kinfi+infi+ogon+sig;      // att + köpa + på sig
+            OrdPresens = temat+Kpres+ogon+sig;
+            OrdPreterite = temat+Kpret+ogon+sig;
+            OrdSupine = temat+Ksupi+ogon+sig;
+            OrdImperative = temat+ogon+sig+Kimpe;
             OrdPresParticip = ogon2+temat+Kprespart+sig+', '+ogon2+temat+Kprespart+Kpassiv+sig;
             
             Kpretpart1 = 'dd'; 
             Kpretpart2 = 'tt'; 
             Kpretpart3 = 'dda'; 
-            OrdPerfParticip = temat+Kpretpart1+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart2+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart3+ogon;
+            OrdPerfParticip = ogon2+temat+Kpretpart1+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart2+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart3+sig;
             
-            OrdPasInfinite = temat+Kpassiv+ogon;
-            OrdPasPresens = temat+Kpassiv+ogon;//+', '+temat+'e'+Kpassiv+ogon;;
-            OrdPasPreterite = temat+Kpret+Kpassiv+ogon;
-            OrdPasSupine = temat+Ksupi+Kpassiv+ogon;
+            OrdPasInfinite = temat+Kpassiv+ogon+sig;
+            OrdPasPresens = temat+Kpassiv+ogon+sig;//+', '+temat+'e'+Kpassiv+ogon;;
+            OrdPasPreterite = temat+Kpret+Kpassiv+ogon+sig;
+            OrdPasSupine = temat+Ksupi+Kpassiv+ogon+sig;
             
             break;
             
@@ -972,25 +1000,74 @@ function autoVerb(trans, group) {
 //                $('#pas_preterite').val(past+'s');
 //            });
             
-            OrdInfi = Kinfi+infi+ogon;      // att + köpa + på sig
-            OrdPresens = temat+Kpres+ogon;
-            OrdPreterite = temat+Kpret+ogon;
-            OrdSupine = temat+Ksupi+ogon;
-            OrdImperative = temat+ogon+Kimpe;
+            OrdInfi = Kinfi+infi+ogon+sig;      // att + köpa + på sig
+            OrdPresens = temat+Kpres+ogon+sig;
+            OrdPreterite = temat+Kpret+ogon+sig;
+            OrdSupine = temat+Ksupi+ogon+sig;
+            OrdImperative = temat+ogon+sig+Kimpe;
             OrdPresParticip = ogon2+temat+Kprespart+sig+', '+ogon2+temat+Kprespart+Kpassiv+sig;
             
-            OrdPerfParticip = temat+Kpretpart1+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart2+ogon+', ';
-            OrdPerfParticip += temat+Kpretpart3+ogon;
+            OrdPerfParticip = ogon2+temat+Kpretpart1+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart2+sig+', ';
+            OrdPerfParticip += ogon2+temat+Kpretpart3+sig;
             
-            OrdPasInfinite = temat+validA+Kpassiv+ogon;
-            OrdPasPresens = temat+Kpassiv+ogon+', '+temat+'e'+Kpassiv+ogon;;
-            OrdPasPreterite = temat+Kpret+lettE+Kpassiv+ogon;
-            OrdPasSupine = temat+Ksupi+Kpassiv+ogon;
+            OrdPasInfinite = temat+validA+Kpassiv+ogon+sig;
+            OrdPasPresens = temat+Kpassiv+ogon+sig+', '+temat+'e'+Kpassiv+ogon+sig;
+            OrdPasPreterite = temat+Kpret+lettE+Kpassiv+ogon+sig;
+            OrdPasSupine = temat+Ksupi+Kpassiv+ogon+sig;
             
             break;
+        case '5':
+            valider = 1;
+//            alert ("os lett: "+ostLettIMPER)
+//            alert ("temat:   "+infi)
+            var temUtanS = temat.slice(0,temat.length-1)   // ostatnia litera gołego verba
+//            alert("tem:   "+temUtanS)
+            
+            
+            var ostLett = temUtanS.slice(temUtanS.length-1)
+            temUtanAS = '';
+            
+            switch(ostLett){
+                case 'a':
+//                    temUtanAS = temat.slice(0,temat.length-2)
+                    Kprespart = 'nde'
+                    break;
+                default:
+//                    temUtanAS = temUtanS
+                    break;
+            }
+            
+            var s = 's';
+            Kpres = '';
+            Kpret = 'de';
+            Ksupi = 't';
+//            Kpretpart = 'dd'; 
+       
+            OrdInfi = Kinfi+temUtanS+s+ogon;      // att + köpa + på sig
+            OrdPresens = temUtanS+Kpres+s+ogon;
+            OrdPreterite = temUtanS+Kpret+s+ogon;
+            OrdSupine = temUtanS+Ksupi+s+ogon;
+            OrdImperative = temUtanS+s+ogon+Kimpe;
+            OrdPresParticip = ogon2+temUtanS+Kprespart+sig+', '+ogon2+temUtanS+Kprespart+Kpassiv+sig;
+            
+//            Kpretpart1 = 'dd'; 
+//            Kpretpart2 = 'tt'; 
+//            Kpretpart3 = 'dda'; 
+//            OrdPerfParticip = temUtanS+Kpretpart1+ogon+', ';
+//            OrdPerfParticip += temUtanS+Kpretpart2+ogon+', ';
+//            OrdPerfParticip += temUtanS+Kpretpart3+ogon;
+            
+//            OrdPasInfinite = temUtanS
+//            OrdPasPresens = temUtanS
+//            OrdPasPreterite = temUtanS
+//            OrdPasSupine = temUtanS
+            
+            break;
+        
         default:
             valider = 0;
+            alert("default: "+group);
             break;
     }
     
@@ -1255,7 +1332,15 @@ $(document).ready(function(){
     $('button.butt_insert_znaki').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
         var letter = $(this).attr('value')  // pobranie vartości klawisza klikniętego (literka np.: ą, ć itd
 //        alert(letter);
-        temp = $('#uwagi_ta').val()+letter;      // pobranie wartośi wprowadzanych i dodanie literki
+        if(letter == "transitivt; " || letter == "intransitivt; "){
+//            alert("is trans: "+letter)
+            temp = letter + $('#uwagi_ta').val();      // pobranie wartośi wprowadzanych i dodanie literki
+        }else{
+//            alert("is NOT trans: "+letter)
+            temp = $('#uwagi_ta').val()+letter;      // pobranie wartośi wprowadzanych i dodanie literki
+        }
+
+        //temp = $('#uwagi_ta').val()+letter;      // pobranie wartośi wprowadzanych i dodanie literki
 //        alert(temp);
         $('#uwagi_ta').val(temp);                // PRZEPISANIE WARTOŚCI
         $("#uwagi_ta").focus();                  // PRZYWRÓCENIE FOCUSA NA TEXTAREA!
@@ -1270,7 +1355,12 @@ $(document).ready(function(){
 //        alert(stoper);
 //        alert(index);
 //        alert(text);
-        temp = $('#uwagi_ta_'+index).val()+text;      // pobranie wartośi wprowadzanych i dodanie literki
+        if(text == "transitivt; " || text == "intransitivt; "){
+                temp = text + $('#uwagi_ta_'+index).val();      // pobranie wartośi wprowadzanych i dodanie literki
+        }else{
+            temp = $('#uwagi_ta_'+index).val()+text;      // pobranie wartośi wprowadzanych i dodanie literki
+        }
+//        temp = $('#uwagi_ta_'+index).val()+text;      // pobranie wartośi wprowadzanych i dodanie literki
 //        alert(temp);
         $('#uwagi_ta_'+index).val(temp);                // PRZEPISANIE WARTOŚCI
         $('#CBedit_'+index).prop('checked', true);               // PRZEPISANIE WARTOŚCI
@@ -1282,14 +1372,44 @@ $(document).ready(function(){
 //        $('#resetFormIndex').click();
         $('#trans').unbind();
         $('#grupa').unbind();
+        var grupAll             = ['verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
+                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel','verb:gr5_deponens',
+                                'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
+                                'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
+                                'mer/mest', 'nieodmienny','bez stopniowania'];
+                            
+        var grupNotAdjective    = ['verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
+                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel','verb:gr5_deponens',
+                                'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
+                                'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
+                                ];
+                            
+        var grupNotVerb         = [ 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
+                                    'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
+                                    'mer/mest', 'nieodmienny','bez stopniowania'];
+
+        var grupNotNoun         = ['verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
+                                'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel','verb:gr5_deponens',
+                                'mer/mest', 'nieodmienny','bez stopniowania']                     
+                                
         var typ_val = $('#typ').val();
         console.log("TYP: "+typ_val);
         switch(typ_val){
+            case 'deponens':
+                alert('deponens')
             case 'hjalp_verb':
             case 'modal_verb':
             case 'partikelverb':
             case 'reflexivaverb':
             case 'verb':
+                
+                // Wyłącza opcje w polu grupy dla innych niż czasowniki
+                for (i=0; i < grupAll.length; i++){
+                    $('#grupa option[value="'+grupAll[i]+'"]').show();
+                }
+                for (i=0; i < grupNotVerb.length; i++){
+                    $('#grupa option[value="'+grupNotVerb[i]+'"]').hide();
+                }
 
                 $('#grupa').bind({
                     change:function(){
@@ -1306,27 +1426,19 @@ $(document).ready(function(){
                     }
                 });
                 
-//                $('#trans').bind({
-//                    'change':function(){  // AUTOUZUPEŁNIANIE pól 
-//                        var trans = $('#trans').val();
-////                        autoVerb(trans, NrGrupy) 
-//                        },
-//                    'keyup': function(){  // AUTOUZUPEŁNIANIE pól 
-//                        var trans = $('#trans').val();
-////                        var grouppa = $('#grupa :selected').val();
-////                        var NrGrupy = locateGroup(grouppa);
-////                        alert(trans+NrGrupy)
-////                        autoVerb(trans, NrGrupy) 
-//                    }
-//                });
-////                $('#trans').change(function(){
-////                    trans = $('#trans').val();
-////                })
                 $('#rodzaj').val('att');
 
                 break;
                 
             case 'noun':    // tutaj robimy (NIE SKOŃCZONE!!!) obsługę autouzupełniania.
+
+                // Wyłącza opcje w polu grupy dla innych niż rzeczowniki
+                for (i=0; i < grupAll.length; i++){
+                    $('#grupa option[value="'+grupAll[i]+'"]').show();
+                }
+                for (i=0; i < grupNotNoun.length; i++){
+                    $('#grupa option[value="'+grupNotNoun[i]+'"]').hide();
+                }                
                 
                 $('#grupa').change(function(){
                     var grouppa = $('#grupa :selected').val();
@@ -1334,7 +1446,7 @@ $(document).ready(function(){
                     var rodzaj = $('#rodzaj').val();
                     NrGrupy = locateGroup(grouppa); 
                     typOrd = locateOrdTyp(grouppa);
-                    
+                                                 
                     if(typOrd == "noun"){       // sprawdza część mowy
 //                        alert("NOUN")
                         if (trans != ""){       // jak jest puste żeby nie robił bez sensu końcówek
@@ -1450,7 +1562,16 @@ $(document).ready(function(){
                  });  
                 
                 break; // KONIEC NOUN!!!!
+                
             case 'adjective':
+                
+                // Wyłącza/Włącza opcje w polu grupy dla innych niż przymiotniki
+                for (i=0; i < grupAll.length; i++){
+                    $('#grupa option[value="'+grupAll[i]+'"]').show();
+                }
+                for (i=0; i < grupNotAdjective.length; i++){
+                    $('#grupa option[value="'+grupNotAdjective[i]+'"]').hide();
+                }                 
                 console.log('typ_val:'+typ_val);
                 
                  // to działa od razu jak sie zmieni TYP na adjektiv
@@ -1485,6 +1606,10 @@ $(document).ready(function(){
                 });
                 break;
             default:
+                // Wyłącza/Włącza opcje w polu grupy dla innych niż przymiotniki
+                for (i=0; i < grupAll.length; i++){
+                    $('#grupa option[value="'+grupAll[i]+'"]').show();
+                }                
                 $('#rodzaj').val('');
                 $('#trans').unbind();
                 break;
