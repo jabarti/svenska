@@ -330,7 +330,7 @@ if($_SESSION['log'] == true ){
         }
         echo "</div>";
 } else { // koniec if($_SESSION['log'] == true )
-    echo "<br>NOT OK:".__LINE__;
+//    echo "<br>NOT OK:".__LINE__;
     require 'loger.php';
 }
 

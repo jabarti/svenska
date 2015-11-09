@@ -137,9 +137,13 @@ if(!$_MOBILE){
         <div id="usrAdmin">  
             <a href="mail.php" class="myButton"><?php echo t("Mail do Admina"); ?></a><br>
         </div>
+        <input type="hidden" id="session_lang" value='<?php echo $_SESSION['lang']; ?>'></input>
     <?php  
 }
-
+?>
+        <!--Parametr lang do funkcji javaScript z functions.js = getSessionLangValue()-->
+        <input type="hidden" id="session_lang" value='<?php echo $_SESSION['lang']; ?>'></input>
+<?php
 if(isset($_SESSION['role'])){      
 ?>
 </div>

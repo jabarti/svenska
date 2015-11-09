@@ -33,3 +33,37 @@ File
 <input name="submit" type="submit" value="Upload File" /><br>
 </form>
 
+<script>
+    
+function escapeRegExp(string){
+//  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function tryMe(){
+    var text = document.getElementById("input_01").value
+    
+//    var regExPattern = /[a-z,A-Z]*([a|e][n|m|l|k|p]|[e])/g
+    var regExPattern = /(?:ett|en)/
+    var regExPattern2 = /([a-z,A-Z,ö,å,ä,Ö,Ä,Å]*)([e(?=l|r)|o(?=r)|?e])/
+
+    pat = new RegExp(regExPattern)
+    pat2 = new RegExp(regExPattern2)
+    
+    rodz = pat.exec(text)
+    
+    kon = 'et'
+//    text = pat.exec(text)
+    text = text.replace(pat2,("$2"+kon))
+    
+ 
+//    alert("text: "+text)
+    document.getElementById("input_02").value = (rodz + text)
+}    
+    
+    
+</script>
+
+<input type="text" id="input_01" value="abborre upp sig"></input>
+<input type="text" id="input_02"></input>
+
+<button id='button_01' type="button" onclick="tryMe();">KLIK!!!</button>

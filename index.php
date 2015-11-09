@@ -86,7 +86,7 @@ if(!isset($_GET['copy_id'])){
                 </td>
                 <td class='label'><?php echo t("rodzaj"); ?></td>
                 <td>
-                    <select id=rodzaj name='rodzaj'>
+                    <select id='rodzaj' name='rodzaj'>
                         <?php
                         $Word = new Ord();
                         $OrdCat = $Word->getRodzOfOrd();
@@ -94,8 +94,8 @@ if(!isset($_GET['copy_id'])){
                             echo "<option value='".$mfa['rodzaj']."'>".$mfa['rodzaj']."</option>";
                         }
                         foreach($OrdCat as $k){
-                            echo "<option value=$k>".$k."</option>";
-                        }
+                                echo "<option value=$k>".$k."</option>";
+                            }
                         ?>
                     </select>
                 </td>
@@ -321,7 +321,7 @@ if(!isset($_GET['copy_id'])){
             </tr>
             <tr>
                 <td colspan='5'></td>
-                <td colspan='2'><input id=resetFormIndex type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
+                <td colspan='2'><input id='resetFormIndex' type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
                 <td><input type='submit' name=submit id='but1' value='<?php echo t("Zapisz do Bazy"); ?>'></input></td>
             </tr>
     

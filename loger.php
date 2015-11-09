@@ -127,21 +127,31 @@ if(!$match){
         </table>
     </form>
     <br>
+    <form action="logerMOD.php" method="post">
+            <input id=user type="hidden" name="user" value='Gosc'>
+            <input id="pass" type="hidden" name="password" value=''>
     <table class='table_log'>
-                    <tr>
-                <td colspan='2'><?php echo t("Mozesz obejrzec prosta wersje logujac sie jako");?>: </td>
+        
+            <tr>
+                <td ><?php echo t("Mozesz obejrzec prosta wersje bez logowania");?>: </td>
+                <td ><button id='submitLOG' name="submitLOG" type="submit" ><?php echo t("Zaloguj"); ?></button></td>
                 <!--<td></td>-->
             </tr>
-            <tr>
+<!--            <tr >
+
+                <td rowspan="2"><button id='submitLOG' name="submitLOG" type="submit" style="vertical-align: inherit;"><?php echo t("Zaloguj"); ?></button></td>
+
+            </tr>-->
+<!--            <tr>
                 <td><?php echo t("Użytkownik");?></td>
                 <td><?php echo ": Gosc";?></td>
             </tr>
             <tr>
                 <td><?php echo t("hasło");?></td>
                 <td><?php echo ": (".t("puste").")";?></td>
-            </tr>
+            </tr>-->
     </table>
-    
+    </form>
 <?php
 // TODO!!! NIE DZIAŁA NA RAZIE!!!
 if(isset($_SESSION['communicate'])){

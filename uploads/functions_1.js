@@ -121,17 +121,6 @@ function start(){
 }
 
  $(document).ready(function(){
-//    $('#CreateUser').click(function(){
-//         texty = t('Create NEW User?');
-//        alert(texty);
-////        alert("TODO: Status DOING!");
-//        if(confirm("Create NEW User?")== true){
-//            window.location.href = "CreateUser.php"
-//        }else{
-//            window.location.href = "index.php"
-//        }
-//    });
-
 
     /* Używane w BUTTON.php do ukrycia i odsłaniania buttonów w sekcjach */
     
@@ -1143,7 +1132,7 @@ function inArray(needle, haystack) {
 function autoNoun(trans, group, rodzaj) {
 //    alert(trans + " / " + group + " / "+rodzaj)
     trans = trans.trim();           // obcina białe znaki!!
-    var OBSI = trans;
+    var OBSI = trans;               // zachowuje ORGINALNY kształt słowo bez białych znaków
     var ostLett = trans.slice(trans.length-1)
 //    alert(ostLett)
 //    if(inArray(ostLett, sam)){
@@ -1152,11 +1141,6 @@ function autoNoun(trans, group, rodzaj) {
             var indA = trans.lastIndexOf("a");
             var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego a
     }
-//    if(ostLett == 'e'){
-//        console.log("here")
-//            var indA = trans.lastIndexOf("e");
-//            var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego e
-//    }
 
     var konVal = false;
     console.log('trans: '+trans+'\ngroup: '+group+'\rodzaj: '+rodzaj);
@@ -1171,10 +1155,10 @@ function autoNoun(trans, group, rodzaj) {
         konVal = true;
         rodzaj = "en"
         konc = 0;
-    }
+        }
     var transPL = trans;
     var koncPL = '';
-    
+
     switch(group){
         case "1":
             console.log("Algorytm dla gr1 działa OK!");
@@ -1218,7 +1202,7 @@ function autoNoun(trans, group, rodzaj) {
                 len = trans.length
                 var trans3l = trans.slice(0,len-3); // ostateczny kształt "tematu słowa" - bez końcowych 3 liter
                 var kon = trans.slice(len-3)
-//                alert(trans3l + " /1: "+kon)   
+//                alert(trans3l + " /1: "+kon) 
                 kon = kon.slice(0,1)+kon.slice(2)
 //                alert(trans3l + " /2: "+kon)
                 transPL = trans3l+kon
@@ -1251,6 +1235,7 @@ function autoNoun(trans, group, rodzaj) {
             if(konVal==true) 
                 $('#rodzaj option[value=en]').attr('selected','selected');
         break;
+        
         case '4':
             console.log ("TODO 4: przy 'en' i 'ett' dodaje za dużo samogłosek");
             
@@ -1266,6 +1251,7 @@ function autoNoun(trans, group, rodzaj) {
             if(konVal==true) 
                 $('#rodzaj option[value=ett]').attr('selected','selected');
         break;
+        
         case '5':
             console.log ("TODO: przy 'en' dodaje za dużo samogłosek")
             group = '';
@@ -1290,6 +1276,7 @@ function autoNoun(trans, group, rodzaj) {
 //            $('#rodzaj').val("ett");
             koncPL='na/an';
         break;
+        
         default:
 //            alert("TUTUTUTU!! 8")
             $('#rodzaj select').val("ett");
@@ -1315,6 +1302,7 @@ $(document).ready(function(){
 //    }),
     
     $('#resetFormIndex').click(function(){  // po kliknięciu "Wyczyść formularz usówa powiązania (bind)
+//        alert("resetFormIndex")
         $('#trans').unbind();
         $('#grupa').unbind();
         $('#past').unbind();
@@ -1452,6 +1440,7 @@ $(document).ready(function(){
                         if (trans != ""){       // jak jest puste żeby nie robił bez sensu końcówek
                             if(rodzaj != ""){
                                 console.log("NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
+                                alert("1444. NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
 //                                autoNoun(trans, NrGrupy);
                                 autoNoun(trans, NrGrupy, rodzaj)
                             }else{
@@ -1466,6 +1455,7 @@ $(document).ready(function(){
                 });
                    
                  $('#rodzaj2').change(function(){
+                     alert("rodzaj 2 - linia1543")
                      var rodzaj_val = $('#rodzaj').val().toString();
                      var S_indefinite = $('#S_indefinite').val().toString();
                      var trans = $('#trans').val();
@@ -1477,7 +1467,7 @@ $(document).ready(function(){
                      switch(rodzaj_val){
                          case 'en':
                              if(S_indefinite == ''){
-//                                 alert("1. Case EN, S_indefinite == ''");
+                                 alert("1. Case EN, S_indefinite == ''");
                                 $('#S_indefinite').val('en ');
                                 var grouppa = $('#grupa :selected').val();
                                 NrGrupy = locateGroup(grouppa);
@@ -1485,7 +1475,7 @@ $(document).ready(function(){
                                 autoNoun(trans, rodzaj_val, NrGrupy);
                                 
                              }else{
-//                                 alert("2. Case EN, S_indefinite != ''");
+                                 alert("2. Case EN, S_indefinite != ''");
                                 var arr = S_indefinite.split(' ')
                                 switch(arr[0]){     // sprawdzanie czy już cos nie stoii tam jako rodzajnik!
                                     case 'ett':

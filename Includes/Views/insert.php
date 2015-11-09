@@ -314,7 +314,7 @@ if(!isset($_GET['copy_id'])){
             </tr>
             <tr>
                 <td colspan='5'></td>
-                <td colspan='2'><input id=resetFormIndex type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
+                <td colspan='2'><input id='resetFormIndex' type="reset" value="<?php echo t("Wyczyść formularz"); ?>"></td>
                 <td><input type='submit' name=submit id='but1' value='<?php echo t("Zapisz do Bazy"); ?>'></input></td>
             </tr>
     

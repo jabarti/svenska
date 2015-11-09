@@ -68,7 +68,6 @@ setInterval(function() {
      
 }, 1000);
 
-
 function addTimeScan(){
     tid2 = document.getElementById("add_time_after_click").innerHTML;
     console.log(tid2);
@@ -120,18 +119,14 @@ function start(){
     $("#liczebnik").hide();
 }
 
- $(document).ready(function(){
-//    $('#CreateUser').click(function(){
-//         texty = t('Create NEW User?');
-//        alert(texty);
-////        alert("TODO: Status DOING!");
-//        if(confirm("Create NEW User?")== true){
-//            window.location.href = "CreateUser.php"
-//        }else{
-//            window.location.href = "index.php"
-//        }
-//    });
+// index.php pobiera bierzący język aplikacji z Session['lang']
+function getSessionLangValue(){
+        var lang = $('#session_lang').val();
+//        alert("status lang: "+lang);
+        return lang;
+}
 
+ $(document).ready(function(){
 
     /* Używane w BUTTON.php do ukrycia i odsłaniania buttonów w sekcjach */
     
@@ -1131,7 +1126,7 @@ function autoVerb(trans, group) {
     }
 }
 
-// GENERAL FUNCTION simmilar to PHP's "inArray()"
+// GENERAL FUNCTION similar to PHP's "inArray()"
 function inArray(needle, haystack) {
     var length = haystack.length;
     for(var i = 0; i < length; i++) {
@@ -1143,46 +1138,96 @@ function inArray(needle, haystack) {
 function autoNoun(trans, group, rodzaj) {
 //    alert(trans + " / " + group + " / "+rodzaj)
     trans = trans.trim();           // obcina białe znaki!!
-    var OBSI = trans;
+    var OBSI = trans;               // zachowuje ORGINALNY kształt słowo bez białych znaków
     var ostLett = trans.slice(trans.length-1)
 //    alert(ostLett)
 //    if(inArray(ostLett, sam)){
     if(ostLett == 'a'){
         console.log("here")
-            var indA = trans.lastIndexOf("a");
-            var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego a
+        var indA = trans.lastIndexOf("a");
+        var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego a
     }
-//    if(ostLett == 'e'){
-//        console.log("here")
-//            var indA = trans.lastIndexOf("e");
-//            var trans = trans.slice(0,indA); // ostateczny kształt "tematu słowa" - bez końcowego e
-//    }
 
-    var konVal = false;
-    console.log('trans: '+trans+'\ngroup: '+group+'\rodzaj: '+rodzaj);
+//    var konVal = false;
+//    console.log('trans: '+trans+'\ngroup: '+group+'\rodzaj: '+rodzaj);
     
+    // Utawia końcówkę w zależności od rodzajnika
     if(rodzaj == "en"){
         console.log("konc=en")
         konc = rodzaj;
     }else if(rodzaj == "ett"){
         console.log("konc=ett")
         konc = 'et'
-    }else{
-        konVal = true;
-        rodzaj = "en"
-        konc = 0;
+    }else{      // jeśli nie ustawiony rodzajnik, tutaj jest ustawiane tłumaczenie dla wyskakującego okienka CONFIRM
+        var lang = getSessionLangValue()
+        switch(lang){
+            case 'pl':
+                confirmMessage01 = "Automatyczne";
+                break;
+            case 'se':
+                confirmMessage01 = "Automatisk";
+                break;
+            case 'en':
+                confirmMessage01 = "Automatic";
+                break;
+            default:
+                confirmMessage01 = "Automatyczne/Automatisk/Automatic";
+                break;
+        }
+//        konVal = true;
+//        rodzaj = "en"
+//        
+        // Automatyczne ustawienie en/ett jeśli nie ustawione
+        switch(group){
+            case '1':
+            case '2':
+                    $('#rodzaj').val('en')
+                    konc = 'en'
+                    rodzaj = 'en'
+                break;
+            case '4':
+            case '5':
+                if(confirm(confirmMessage01+" 'ett'?")){
+                    $('#rodzaj').val('ett')
+                    konc = 'et'
+                    rodzaj = 'ett'
+                }else{
+                    $('#rodzaj').val('en')
+                    konc = 'en'
+                    rodzaj = 'en'
+                }
+                break;  
+            default:
+                if(confirm(confirmMessage01+" 'en'?")){
+                    $('#rodzaj').val('en')
+                    konc = 'en'
+                    rodzaj = 'en'
+                }else{
+                    $('#rodzaj').val('ett')
+                    konc = 'et'
+                    rodzaj = 'ett'
+                }
+                break;  
+        }
+//        alert("konc:"+konc+"\nrodzaj:"+rodzaj+"\ngrupa:"+group)
     }
     var transPL = trans;
     var koncPL = '';
-    
     switch(group){
-        case "1":
-            console.log("Algorytm dla gr1 działa OK!");
+        case "1":       // Algorytm dla NOUN:gr1, SUBS:gr1
+            console.log ("Algorytm dla NOUN:gr1, SUBS:gr1 - status OK!")
+            
+            if(rodzaj=='en'){
+//                alert("gr 1 en")
+                konc = 'n';
+            }else{
+                alert("gr 1 ett?????")
+                konc = 'et';
+            }
             
             group = 'or';
 //            rodzaj = 'en';
             koncPL = 'na';
-            konc = 'n';
 
             switch (ostLett){
                 case 'a':
@@ -1196,29 +1241,35 @@ function autoNoun(trans, group, rodzaj) {
                     break;
             }
 
-            if(konVal==true) 
-                $('#rodzaj option[value=en]').attr('selected','selected');
+//            if(konVal==true) 
+//                $('#rodzaj option[value=en]').attr('selected','selected');
+//                $('#rodzaj option[value=en]').attr('selected','selected');
 //                $('#typ option[value=noun]').attr('selected','selected');
         break;
-        case '2':
-            console.log("Algorytm dla noun:gr2 działa OK!");
+        
+        case '2':       // Algorytm dla NOUN:gr2, SUBS:gr2
+            console.log ("Algorytm dla NOUN:gr2, SUBS:gr2 - status OK!")         
             group = 'ar';
 //            rodzaj = 'en';
-            konc = 'en';
+//            konc = 'en';
             koncPL = 'na';
             
+            // brak: apostel , aposteln
+            
             var spolgloski = new Array('n');
-            var samogloski = new Array('å');
-            var treOstLett = new Array('kel','gel','pel','gon','ter','ger','ber');
+//            var samogloski = new Array('å','e');
+            var treOstLett = new Array('kel','gel','pel','gon','ter','ger','ber'); // zmianie końcówke na 1+3+n gel-> gln
+//            var treOstLett2 = new Array('sel','xel','ver');                         // zmianie końcówke na 1+3+n gel-> gln
             
             var ost3Lett = trans.slice(trans.length-3)
 //            alert (ost3Lett)
             
             if(inArray(ost3Lett,treOstLett)){
+//                alert("3 litery!")
                 len = trans.length
-                var trans3l = trans.slice(0,len-3); // ostateczny kształt "tematu słowa" - bez końcowych 3 liter
+                var trans3l = trans.slice(0,len-3);             // ostateczny kształt "tematu słowa" - bez końcowych 3 liter
                 var kon = trans.slice(len-3)
-//                alert(trans3l + " /1: "+kon)   
+//                alert(trans3l + " /1: "+kon) 
                 kon = kon.slice(0,1)+kon.slice(2)
 //                alert(trans3l + " /2: "+kon)
                 transPL = trans3l+kon
@@ -1231,28 +1282,52 @@ function autoNoun(trans, group, rodzaj) {
             }
             
             if(ostLett == 'å'){
+//            if(inArray(ostLett,samogloski)){
                 konc = 'n';
                 group = 'r';
+            }else if(ostLett == 'e'){   // np.: abborre -> abborren ! abborreen
+                konc = 'n';
+                len = transPL.length
+                transPL = transPL.slice(0,len-1)
+                group = 'ar';                
             }
             
-            if(konVal==true) 
-                $('#rodzaj option[value=en]').attr('selected','selected');
+//            if(konVal==true) 
+//                $('#rodzaj option[value=en]').attr('selected','selected');
         break;
-        case '3':
-            console.log("Algorytm dla gr3 działa prawie OK!");
+        
+        case '3':       // Algorytm dla NOUN:gr3, SUBS:gr3
+            console.log ("Algorytm dla NOUN:gr3, SUBS:gr3 - status OK!")
+            
             if(ostLett=='e'){
+                if(rodzaj=='en'){
+    //                alert("gr 3 en")
+                    konc = 'n';
+                }else{
+//                    alert("gr 3 ett")
+                    konc = 't';
+                }
                 group = 'r';
-                konc = 'n';
+//                konc = 'n';
             }else{
+                if(rodzaj=='en'){
+    //                alert("gr 3 en")
+                    konc = 'n';
+                }else{
+//                    alert("gr 3 ett")
+                    konc = 'et';
+                }
+                
                 group = 'er';
-                konc = 'en';
+//                konc = 'en';
             }
             koncPL = 'na';
-            if(konVal==true) 
-                $('#rodzaj option[value=en]').attr('selected','selected');
+//            if(konVal==true) 
+//                $('#rodzaj option[value=en]').attr('selected','selected');
         break;
-        case '4':
-            console.log ("TODO 4: przy 'en' i 'ett' dodaje za dużo samogłosek");
+        
+        case '4':       // Algorytm dla NOUN:gr4, SUBS:gr4
+            console.log ("Algorytm dla NOUN:gr4, SUBS:gr4 - status OK!")
             
             if(ostLett=='e'){
                 if(rodzaj == "ett"){
@@ -1263,35 +1338,82 @@ function autoNoun(trans, group, rodzaj) {
             }
             group = 'n';
             koncPL = 'a';
-            if(konVal==true) 
-                $('#rodzaj option[value=ett]').attr('selected','selected');
+//            if(konVal==true) 
+//                $('#rodzaj option[value=ett]').attr('selected','selected');
         break;
-        case '5':
-            console.log ("TODO: przy 'en' dodaje za dużo samogłosek")
+        
+        case '5':       // Algorytm dla NOUN:gr5, SUBS:gr5
+            console.log ("Algorytm dla NOUN:gr5, SUBS:gr5 - status OK!")
             group = '';
-            if(rodzaj == "en")
+            if(rodzaj == "en"){
                 koncPL = 'na';
-            else
+                if(ostLett=='e'){
+                    konc = 'n'
+                }else{
+                    konc = 'en'
+                }
+            }else{
                 koncPL = 'en';
-            
-            if(konVal==true) 
-                $('#rodzaj option[value=ett]').attr('selected','selected');
+                if(ostLett=='e'){
+                    konc = 't'
+                }else{
+                    konc = 'et'
+                }
+            }
         break;
+        
+        case "lm":       // Algorytm dla NOUN:b.lm., SUBS:b.lm. utan plural
         case "b.lm.":
-//            alert("TUTUTUTU!! 6")
+//            alert("TUTUTUTU!! 6"+ group)
+            console.log("TUTUTUTU!! 6"+ group)
+//            alert("OBSI: "+OBSI + " / trans: "+trans)
+            
+            var regExPattern = /[a-z,A-Z,ö,å,ä,Ö,Ä,Å]*[e(?=l|r)|o(?=r)|?e]/
+//            var regExPattern2 = /[a-z,A-Z,ö,å,ä,Ö,Ä,Å]*[e(?=l|r)|o(?=r)|?e]/
+//            var regExPattern2 = regExPattern
+
+            pat = new RegExp(regExPattern,'g')
+            pat2 = new RegExp(regExPattern, 'g')
+                    
+            te1 = pat.exec(OBSI)
+            te2 = pat2.test(OBSI)
+            
+            alert(te1+ " / test: "+ te2 )
+            
+            var testText = OBSI.replace(regExPattern, "Ala")
+            alert (testText +" / " + OBSI)
+
             group = '';
-            konc = '';
+//            konc = '';
 //            $('#rodzaj').val("ett");
-            koncPL='an/na';
+//            koncPL='an/na';
+            
+            transPL='';
+            group='';
+            koncPL='';
+            
         break;
-        case "oregelbund":
-//            alert("TUTUTUTU!! 7")
+        
+        case "l.poj":       // Algorytm dla NOUN:l.poj., SUBS:l.poj. utan singular
+            console.log("TUTUTUTU!! 7"+group)
+//            alert("TUTUTUTU!! 7"+group)
             group = '';
 //            $('#rodzaj').val("ett");
             koncPL='na/an';
         break;
-        default:
-//            alert("TUTUTUTU!! 8")
+        
+        case "oregelbund":       // Algorytm dla NOUN:nieregularny, SUBS:oregelbung
+        case "eregularn":
+//            alert("TUTUTUTU!! 8"+group)
+            console.log("TUTUTUTU!! 8"+group)
+            group = '';
+//            $('#rodzaj').val("ett");
+            koncPL='na/an';
+        break;
+        
+        default:       // Algorytm dla NOUN:default, SUBS:default
+//            alert("DEFALUT TUTUTUTU!! 9"+group)
+            console.log("DEFALUT TUTUTUTU!! 9"+group)
             $('#rodzaj select').val("ett");
             $('#form1.rodzaj select').val("ett");
             transPL='';
@@ -1299,12 +1421,19 @@ function autoNoun(trans, group, rodzaj) {
             koncPL='';
         break;
     }
-    console.log('trans: '+trans+' / transPL: '+transPL+' / ngroup: '+group+'/nkonc: '+konc);
+//    console.log('trans: '+trans+' / transPL: '+transPL+' / ngroup: '+group+'/nkonc: '+konc);
     
     $('#S_indefinite').val(rodzaj+" "+OBSI);
     $('#S_definite').val(trans+konc);
     $('#P_indefinite').val(transPL+group);
     $('#P_definite').val(transPL+group+koncPL);
+    
+    rodzaj = '';
+    transPL = ''
+    group = ''
+    koncPL = ''
+    trans = ''
+    group = ''
 }
 
 $(document).ready(function(){ 
@@ -1315,10 +1444,13 @@ $(document).ready(function(){
 //    }),
     
     $('#resetFormIndex').click(function(){  // po kliknięciu "Wyczyść formularz usówa powiązania (bind)
+//        alert("resetFormIndex")
         $('#trans').unbind();
         $('#grupa').unbind();
         $('#past').unbind();
         $('#supine').unbind();
+        $('#rodzaj').val('');
+//        $('#rodzaj option[selected]').removeAttr("selected"); 
     }),
     
     $('button.butt_diak').click(function(){ // Akcja po kliknięciu klawiszy literek w TEST.php
@@ -1452,6 +1584,7 @@ $(document).ready(function(){
                         if (trans != ""){       // jak jest puste żeby nie robił bez sensu końcówek
                             if(rodzaj != ""){
                                 console.log("NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
+                                alert("NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
 //                                autoNoun(trans, NrGrupy);
                                 autoNoun(trans, NrGrupy, rodzaj)
                             }else{
@@ -1466,6 +1599,7 @@ $(document).ready(function(){
                 });
                    
                  $('#rodzaj2').change(function(){
+                     alert("rodzaj 2 - linia1543")
                      var rodzaj_val = $('#rodzaj').val().toString();
                      var S_indefinite = $('#S_indefinite').val().toString();
                      var trans = $('#trans').val();
@@ -1477,7 +1611,7 @@ $(document).ready(function(){
                      switch(rodzaj_val){
                          case 'en':
                              if(S_indefinite == ''){
-//                                 alert("1. Case EN, S_indefinite == ''");
+                                 alert("1. Case EN, S_indefinite == ''");
                                 $('#S_indefinite').val('en ');
                                 var grouppa = $('#grupa :selected').val();
                                 NrGrupy = locateGroup(grouppa);
@@ -1485,7 +1619,7 @@ $(document).ready(function(){
                                 autoNoun(trans, rodzaj_val, NrGrupy);
                                 
                              }else{
-//                                 alert("2. Case EN, S_indefinite != ''");
+                                 alert("2. Case EN, S_indefinite != ''");
                                 var arr = S_indefinite.split(' ')
                                 switch(arr[0]){     // sprawdzanie czy już cos nie stoii tam jako rodzajnik!
                                     case 'ett':
