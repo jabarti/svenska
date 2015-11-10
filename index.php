@@ -362,7 +362,7 @@ foreach($arr as $k){
 echo "</table>
          </div>";
 
-echo "<div id=p2 class=\"tab_info\"></div>";
+echo "<div id='p2' class='tab_inf'></div>";
 
 if (isset($_GET['result'])){
     switch($_GET['result']){ //Edit.php?sercz_id=$_GET['newId']

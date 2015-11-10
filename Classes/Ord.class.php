@@ -54,7 +54,7 @@ class Ord {
     private $uwagi;
     
     private $table = "ord";
-    private $prezentuj = 20;      // określa ilość prezentowanych wynikó dla: 
+    private $prezentuj = 20;    // określa ilość prezentowanych wyników dla:  LIMIT 0, $prezentuj
                                 //  getSimOrdByIdOrd($text); 
                                 //  getSimOrdByTrans($text);
     
@@ -1125,9 +1125,9 @@ class Ord {
             echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$ileSlow."</span> ".t('podobnych wyników').":<th><tr>";
             
             if($this->prezentuj < $ileSlow) 
-                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";  //C
             else
-                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>";
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>";  // $this->prezentuj.">".$ileSlow
             
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
@@ -1160,7 +1160,7 @@ class Ord {
         // tworzy tabelkę rekordów o trans podobnym do wprowadzonego słowa 
         public function getSimOrdByTrans($text){
             
-            $ileSlow = $this->getCountSimOrdByIdOrd($text, false);
+            $ileSlow = $this->getCountSimOrdByIdOrd($text, "trans");
             
             $SQL = "SELECT id, rodzaj, trans, typ, id_ord FROM ".$this->table." WHERE `trans` like '%".$text."%' LIMIT 0,".$this->prezentuj.";";
 //            echo '<br>getCountSimOrdByIdOrd SQL: '.$SQL;
@@ -1169,9 +1169,9 @@ class Ord {
             echo "<tr><th colspan=4>".t('Jest')." <span class=red>".$ileSlow."</span> ".t('podobnych wyników').":<th><tr>";
             
             if($this->prezentuj < $ileSlow)
-                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$this->prezentuj." ".t('rezultatów')." )</span><th><tr>";  //$this->prezentuj."<".$ileSlow
             else
-                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>";
+                echo "<tr><th colspan=4><span class='fileldDescrRed'> ( ".t('poniżej pierwsze')." ".$ileSlow." ".t('rezultatów')." )</span><th><tr>"; //$this->prezentuj.">".$ileSlow
             
             while($row = mysql_fetch_assoc($mq)){
                 echo "<tr>";
