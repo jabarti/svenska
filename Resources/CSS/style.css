@@ -430,3 +430,7 @@ z-index: 999;
         top:1px;
     }
 	/**/
+.narrow_button{
+    width: 2px;
+    background-color: red;
+}

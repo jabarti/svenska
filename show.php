@@ -65,25 +65,73 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
 //    }
 }else{
     
-if(isset($_SESSION['cz_mov'])){
-    ?><script>//alert("SESSION SET!");</script><?php
-    if($_SESSION['cz_mov'] == true){
-        ?><script>//alert("SESSION SET == TRUE!");</script><?php
-        $mr = $word->getDBAllOrdByTyp();
-        $SQL = sprintf("SELECT * FROM `ord` ORDER BY `typ`, `id_ord`;");
-        $czek = 'checked';
+    if(isset($_SESSION['cz_mov'])){
+        ?><script>//alert("SESSION SET!");</script><?php
+        if($_SESSION['cz_mov'] == true){
+            ?><script>//alert("SESSION SET == TRUE!");</script><?php
+            $mr = $word->getDBAllOrdByTyp();
+            $SQL = sprintf("SELECT * FROM `ord` ORDER BY `typ`, `id_ord`;");
+            $czek = 'checked';
+        }else{
+            ?><script>//alert("SESSION SET == FALSE!");</script><?php
+            $mr = $word->getDBAll();
+
+            // Tworzenie obsługi sortowania
+            $DESC = "";
+            if(isset($_GET['PLOrd_DIR']) AND $_GET['PLOrd_DIR'] !='' ){
+                    ?><script> //alert ("<?php //echo $_GET['PLOrd_DIR'];?>") </script><?php
+                    if ($_GET['PLOrd_DIR'] == "up"){
+                        $DESC = "ORDER BY `id_ord` DESC";
+                    }else{
+                        $DESC = "ORDER BY `id_ord` ASC";
+                    }
+            }else 
+            if(isset($_GET['TYP_DIR']) AND $_GET['TYP_DIR'] !='' ){
+                    if ($_GET['TYP_DIR'] == "up"){
+                        $DESC = "ORDER BY `typ` DESC";
+                    }else{
+                        $DESC = "ORDER BY `typ` ASC";
+                    }        
+            }else 
+            if(isset($_GET['GRUP_DIR']) AND $_GET['GRUP_DIR'] !='' ){
+                    if ($_GET['GRUP_DIR'] == "up"){
+                        $DESC = "ORDER BY `grupa` DESC";
+                    }else{
+                        $DESC = "ORDER BY `grupa` ASC";
+                    }        
+            }else 
+            if(isset($_GET['SEOrd_DIR']) AND $_GET['SEOrd_DIR'] !='' ){
+                    if ($_GET['SEOrd_DIR'] == "up"){
+                        $DESC = "ORDER BY `trans` DESC";
+                    }else{
+                        $DESC = "ORDER BY `trans` ASC";
+                    }        
+            }else 
+            if(isset($_GET['ID_DIR']) AND $_GET['ID_DIR'] !='' ){
+                    if ($_GET['ID_DIR'] == "up"){
+                        $DESC = "ORDER BY `id` DESC";
+                    }else{
+                        $DESC = "ORDER BY `id` ASC";
+                    }        
+            }else{
+                    ?><script> //alert ("<?php //echo "ERRR";?>") </script><?php
+            }
+            
+            unset($_GET);
+
+    
+            // Główny SQL dla SHOW!!!
+            $SQL = sprintf("SELECT * FROM `ord` $DESC;");
+//            $SQL = sprintf("SELECT * FROM `ord` WHERE `id` BETWEEN 10 AND 19 $DESC LIMIT 0 , 30;");
+            ?><script> //alert ("<?php //echo $SQL;?>") </script><?php
+    //        $czek ='';
+        }
     }else{
-        ?><script>//alert("SESSION SET == FALSE!");</script><?php
+        ?><script>//alert("SESSION NOT SET!");</script><?php
         $mr = $word->getDBAll();
-        $SQL = sprintf("SELECT * FROM `ord` ;");
-//        $czek ='';
+        $SQL = sprintf("SELECT * FROM `ord`;");
+    //    $czek ='';
     }
-}else{
-    ?><script>//alert("SESSION NOT SET!");</script><?php
-    $mr = $word->getDBAll();
-    $SQL = sprintf("SELECT * FROM `ord`;");
-//    $czek ='';
-}
 
 } // end of if (SESSION[irreg] -> else
 
@@ -121,16 +169,78 @@ echo "  <tr>";
 
 $sum = (!$flat and !$gosc);     // ograniczenie: jak jest gość nie ma linków!!!
 
-if($sum)
-echo "      <th >".t("Link")."</th>";
-echo "      <th >".t("L.p.")."</th>
-            <th >".t("Słowo PL")."</th>
-            <th >".t("Część mowy")."</th>
-            <th >".t("Rodz.")."</th>
-            <th >".t("Grupa")."</th>
-            <th >".t("Słowo SE")."</th>
+echo "<form id='form_up_down' name='form_up_down'>";      // początek formy do góra, dół - przyciski w nagłówku tabeli
+//<th style='min-width:75px;'>".t("L.p.")."
+//                    <input type='image' name='ID_DIR' value='up' src='Resources/img/arrow_up.png' style='height:15px;width:15px;' alt='&#8657;'/>
+//                    <input type='image' name='ID_DIR' value='down' src='Resources/img/arrow_down.png' style='height:15;width:15;' alt='&#8659;'/>  
+//                    <button class='narrow_button' name='ID_DIR' value='up' >&#8657; </button>
+//                    <button class='narrow_button' name='ID_DIR' value='down' >&#8659; </button> <img id='imgLogButt' src='Resources/img/arrow_up.png' style='height:15px;width:15px;'>
+//                                        <form>
+//                    <input type='hidden' name='ID_DIR' value='up'/>
+//                    <button type='submit' style='background:none;'><image src='Resources/img/arrow_up.png' style='height:15;width:15;' alt='&#8659;'/></button> 
+//                    </form>
+//                    <form>
+//                    <input type='submit' name='ID_DIR' value='down' src='Resources/img/arrow_up.png' style='height:15;width:15;'/>
+//            </th>
+//                    <button class='narrow_button' name='ID_DIR' value='up' >&#8657;</button>
+
+//                    <button type='submit' name='ID_DIR' value='up' class='narrow_button'>
+//                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+//                    </button>
+//                    <button type='submit' name='ID_DIR' value='down' class='narrow_button'>
+//                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+//                    </button>
+
+
+if($sum){
+    echo "  <th >".t("Link")."</th>";  // <button name='".$v."_DIR' value='up' >&#8657;</button>
+}
+    echo "  <th style='min-width:75px;'>".t("L.p.")." 
+
+                    <button type='submit' name='ID_DIR' value='down' class='narrow_button'>
+                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+                    </button>
+                    <button type='submit' name='ID_DIR' value='up' class='narrow_button'>
+                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+                    </button>
+            </th>
+            <th >".t("Słowo PL")." 
+                    <button type='submit' name='PLOrd_DIR' value='down' class='narrow_button'>
+                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+                    </button>
+                    <button type='submit' name='PLOrd_DIR' value='up' class='narrow_button'>
+                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+                    </button>                    
+                </th>
+            <th style='min-width:105px;'>".t("Część mowy")." 
+                    <button type='submit' name='TYP_DIR' value='down' class='narrow_button'>
+                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+                    </button>   
+                    <button type='submit' name='TYP_DIR' value='up' class='narrow_button'>
+                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+                    </button>                    
+                </th>
+            <th >".t("Rodz.")."
+                </th>
+            <th >".t("Grupa")."
+                    <button type='submit' name='GRUP_DIR' value='down' class='narrow_button'>
+                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+                    </button> 
+                    <button type='submit' name='GRUP_DIR' value='up' class='narrow_button'>
+                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+                    </button>                    
+                </th>
+            <th style='min-width:95px;'>".t("Słowo SE")."
+                    <button type='submit' name='SEOrd_DIR' value='down' class='narrow_button'>
+                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+                    </button>      
+                    <button type='submit' name='SEOrd_DIR' value='up' class='narrow_button'>
+                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+                    </button>
+                </th>
             <th >".t("Formy")."</th>
         </tr>" ; 
+//echo "</form>";
             
 while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
 //     echo "<tr><td colspan=6>";var_dump($row);echo "</td></tr>";
@@ -141,11 +251,12 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                if($attr == 0){
                    $id = $v;
 //                   if(!$flat)
-                   if($sum)
+                   if($sum){
                         echo "<td><a name='ordAnchor_".$id."' href='Edit.php?sercz_id=".$id."' target=\"_blank\">=></a></td>";
+                   }
                    echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
                }else{
-                echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
+                   echo "<td id=norm>".$v."</td>";         // wypełnia kolumny L.p., słowoPL itd
                }
            }else{
                 if($attr==6 && $v!=''){

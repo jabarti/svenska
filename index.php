@@ -15,25 +15,19 @@ include 'header.php';
 include 'buttons.php';
 include 'divLog.php';
 
-//var_dump($_SESSION); 
-//var_dump($_COOKIE);
 $mfa = array();
-//if($_SESSION['log'] == true && isset($_COOKIE['log'])){
 if($_SESSION['log'] == true ){
     include 'Search.php';
-if(isset($_GET['copy_id'])){    
-//    echo "GET COPY =".$_GET['copy_id'];
-    $copy_ord_id = $_GET['copy_id'];
-    $CopySQL = "SELECT * FROM `ord` WHERE `id` = '".$copy_ord_id."';";
-//    echo "<br>SQL: $CopySQL";
-    
-    $mqCopy = mysql_query($CopySQL);
-    
-    if(mysql_affected_rows()){
-        $mfa = mysql_fetch_assoc($mqCopy);
+    if(isset($_GET['copy_id'])){   
+        $copy_ord_id = $_GET['copy_id'];
+        $CopySQL = "SELECT * FROM `ord` WHERE `id` = '".$copy_ord_id."';";
+
+        $mqCopy = mysql_query($CopySQL);
+
+        if(mysql_affected_rows()){
+            $mfa = mysql_fetch_assoc($mqCopy);
+        }
     }
-}else{
-}
 
 if(!isset($_GET['copy_id'])){
 ?>
@@ -304,13 +298,6 @@ if(!isset($_GET['copy_id'])){
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
 
-                         // NIE DZIAŁA!!! 
-//                        foreach($OrdCat as $k =>$v){
-//                            echo "<br>OrdCat[$k]=$v ===>> ";
-//                            $OrdCat[$k] = t($v);
-//                            echo "PO <OrdCat[$k]=$v";
-//                        }
-
                         foreach($OrdCat as $k){
                             echo "<option value=$k>".t($k)."</option>";
                         }
@@ -342,20 +329,9 @@ $arr = $Word->getTypesOfOrd();
 
 echo "<div class=tab_stat>
         <table>";
+// Tworzy tabelkę ze statystyką na dole po lewej w inserterze
 foreach($arr as $k){
-    switch($k){
-        case'???':
-        case'wyrazenie':
-            echo "<tr><td>".t($k).": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
-            break;
-        case'hjalp_verb':
-            echo "<tr><td>".t("czasowników posiłkowych").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
-            break;
-        default:
-            echo "<tr><td>".t($k).t("ów").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>";
-            break;
-    }
-    
+    echo "<tr><td>".t($k."_insertStats").": </td><td>".$Word->howManyOrdByPartOfSpeech($k)."</td></tr>"; 
 }
     echo "<tr><td></td><td>------</td></tr>";
     echo "<tr><td>".t("Razem").": </td><td>".$Word->howManyOrd()."</td></tr>";
@@ -367,10 +343,7 @@ echo "<div id='p2' class='tab_inf'></div>";
 if (isset($_GET['result'])){
     switch($_GET['result']){ //Edit.php?sercz_id=$_GET['newId']
         case 'OK':
-//            echo t('Wstawione do BD!')." SV: <a href=#>".$_GET['transz']."</a>";
             $tempID =  $_GET['newId'];
-//            echo "<br>$tempID";
-//            echo "<br>";
             
             echo t('Wstawione do BD!').", ".t("słowo SE").": <a target='_blank' href='Edit.php?sercz_id=$tempID'>".$_GET['transz']."</a>";
             

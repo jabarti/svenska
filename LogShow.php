@@ -56,7 +56,6 @@ if(isset($_GET['id_Ord_DIR']) AND $_GET['id_Ord_DIR'] !=''){
     $id_ord = false;
     $id_user = false;
     $arr = $LogOrd->getAllLog($_GET['id_Ord_DIR']);
-    
 }else
 if(isset($_GET['data_create_DIR']) AND $_GET['data_create_DIR'] !=''){
     ?><script>//alert (3)</script><?php
@@ -96,13 +95,23 @@ foreach ($arr as $ar){
                 case 'id_Ord':
                 case 'data_create':
                 case 'data_edit':
-                    echo "<th>".t($v);
+                    echo "<th>".t($v)." ";
 //                    echo "<button name='".$v."_DIR' value='up' >&#8593;</button>";
-                    echo "<button name='".$v."_DIR' value='up' >&#8657;</button>";
+//                    echo "<button class='narrow_button' name='".$v."_DIR' value='up' >&#8657;</button>";
 //                    echo "<button type='button' id='".$v."_up'>&#8593;</button>";
 //                    echo "<button name='".$v."_DIR' value='down' >&#8595;</button></th>";
-                    echo "<button name='".$v."_DIR' value='down' >&#8659;</button></th>";
+//                    echo "<button class='narrow_button' name='".$v."_DIR' value='down' >&#8659;</button></th>";
 //                    echo "<button type='button' id='".$v."_down'>&#8595;</button></th>";
+                    
+                    echo "
+                    <button type='submit' name='".$v."_DIR' value='down' class='narrow_button'>
+                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
+                    </button>
+                    <button type='submit' name='".$v."_DIR' value='up' class='narrow_button'>
+                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
+                    </button>
+                    </th>";                  
+                    
                     break;
                 default:
                     echo "<th>".t($v)."</th>";

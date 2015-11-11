@@ -1145,7 +1145,7 @@ class Ord {
                             $id=$v;
                             break;
                         case 'typ':
-                            echo "<td>(".substr($v,0,4).")</td";
+                            echo "<td>(".t(substr($v,0,4)."_4bokst").")</td";
                             break;  
                         default:
                             echo "<td>$v</td>";
@@ -1184,7 +1184,7 @@ class Ord {
                             echo "$v</td>";
                             break;
                         case 'typ':
-                            echo "<td>(".substr($v,0,4).")</td>";
+                            echo "<td>(".t(substr($v,0,4)."_4bokst").")</td>";
                             break;
                         case 'id_ord':
                             echo "<td> => $v</td>";

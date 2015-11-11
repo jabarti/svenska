@@ -159,9 +159,9 @@ class Log_Ord{
         
         if($kierunek != ''){
             if($kierunek == 'down'){
-                $DIR = 'DESC';
-            }else{
                 $DIR = 'ASC';
+            }else{
+                $DIR = 'DESC';
             }
         }else{
             $DIR = '';
@@ -189,9 +189,9 @@ class Log_Ord{
         if($kierunek != ''){
             $WHERE = ' WHERE `data_create` IS NOT NULL ';
             if($kierunek == 'down'){
-                $DIR = 'DESC';
-            }else{
                 $DIR = 'ASC';
+            }else{
+                $DIR = 'DESC';
             }
         }else{
             $WHERE = '';
@@ -220,9 +220,9 @@ class Log_Ord{
             $WHERE = ' WHERE `data_edit` IS NOT NULL ';
             if($kierunek == 'down'){
                 
-                $DIR = 'DESC';
-            }else{
                 $DIR = 'ASC';
+            }else{
+                $DIR = 'DESC';
             }
         }else{
             $WHERE = '';
