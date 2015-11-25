@@ -314,11 +314,25 @@ if(!isset($_GET['copy_id'])){
     
         </table>
     </form>
-        <button class="butt_insert_znaki" id="butt_another"  value=' ≠ '>"<span class="red">≠</span>" <?php echo t("inne znaczenia podobnych wyrazów"); ?></button>
-        <button class="butt_insert_znaki" id="butt_antonym"  value=' <=> '>"<span class="red"><=></span>" <?php echo t("wyrazy o przeciwnych znaczeniach (antonimy)"); ?></button>
-        <button class="butt_insert_znaki" id="butt_synonym"  value=' == '>"<span class="red">==</span>" <?php echo t("wyrazy o podobnych znaczeniach (synonimy)"); ?></button>
-        <button class="butt_insert_znaki" id="butt_transit"  value='transitivt; '>"<span class="red">transitivt</span>" <?php echo t("czasownik przechodni np.: jag dödar någon"); ?></button>
-        <button class="butt_insert_znaki" id="butt_intrans"  value='intransitivt; '>"<span class="red">intransitivt</span>" <?php echo t("czasownik nieprzechodni np.: Jag dör"); ?></button>
+        <table class='visaButtonInsert'>
+            <tr>
+                <td><button class="butt_insert_znaki" id="butt_another"  value=' ≠ '>"<span class="red">≠</span>" <?php echo t("inne znaczenia podobnych wyrazów"); ?></button></td>
+                <td><button class="butt_insert_znaki" id="butt_antonym"  value=' <=> '>"<span class="red"><=></span>" <?php echo t("wyrazy o przeciwnych znaczeniach (antonimy)"); ?></button></td>
+                <td><button class="butt_insert_znaki" id="butt_synonym"  value=' == '>"<span class="red">==</span>" <?php echo t("wyrazy o podobnych znaczeniach (synonimy)"); ?></button></td>
+            </tr>
+            <tr>
+                <td><button class="butt_insert_znaki" id="butt_zobacz"  value=' => '>"<span class="red">=></span>" <?php echo t("zobacz też"); ?></button></td>
+                <td><button class="butt_insert_znaki" id="butt_transit"  value='transitivt; '>"<span class="red">transitivt</span>" <?php echo t("czasownik przechodni np.: jag dödar någon"); ?></button></td>
+                <td><button class="butt_insert_znaki" id="butt_intrans"  value='intransitivt; '>"<span class="red">intransitivt</span>" <?php echo t("czasownik nieprzechodni np.: Jag dör"); ?></button></td>
+            </tr>
+
+<!--            <button class="butt_insert_znaki" id="butt_another"  value=' ≠ '>"<span class="red">≠</span>" <?php echo t("inne znaczenia podobnych wyrazów"); ?></button>
+            <button class="butt_insert_znaki" id="butt_antonym"  value=' <=> '>"<span class="red"><=></span>" <?php echo t("wyrazy o przeciwnych znaczeniach (antonimy)"); ?></button>
+            <button class="butt_insert_znaki" id="butt_synonym"  value=' == '>"<span class="red">==</span>" <?php echo t("wyrazy o podobnych znaczeniach (synonimy)"); ?></button>
+            <button class="butt_insert_znaki" id="butt_zobacz"  value=' => '>"<span class="red">=></span>" <?php echo t("zobacz też"); ?></button>
+            <button class="butt_insert_znaki" id="butt_transit"  value='transitivt; '>"<span class="red">transitivt</span>" <?php echo t("czasownik przechodni np.: jag dödar någon"); ?></button>
+            <button class="butt_insert_znaki" id="butt_intrans"  value='intransitivt; '>"<span class="red">intransitivt</span>" <?php echo t("czasownik nieprzechodni np.: Jag dör"); ?></button>-->
+        </table>
 <!--</div>    // end of div: edit_tab_contener-->
 
     
@@ -336,7 +350,7 @@ foreach($arr as $k){
     echo "<tr><td></td><td>------</td></tr>";
     echo "<tr><td>".t("Razem").": </td><td>".$Word->howManyOrd()."</td></tr>";
 echo "</table>
-         </div>";
+     </div>";
 
 echo "<div id='p2' class='tab_inf'></div>";
 

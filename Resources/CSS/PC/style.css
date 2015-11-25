@@ -28,6 +28,54 @@ table {
     
 }
 
+.visaButtonInsert{
+    background-color: #00EF00;
+    position:relative;
+    /*position:absolute;*/
+    /*position:static;*/
+    left: 17%;
+    top:-9;
+/*    margin-left: auto;
+    margin-right: auto;*/
+    border-radius: 4px;
+}
+.visaButtonInsert button{
+    width: 100%;
+    /*width: 300px;*/
+    height: auto;
+    text-align: left;
+}
+
+.visaButtonEdit{
+    background-color: #00EF00;
+    position:relative;
+    /*position:absolute;*/
+    /*position:static;*/
+    left: 20%;
+    /*top:-9;*/
+/*    margin-left: auto;
+    margin-right: auto;*/
+    border-radius: 4px;
+}
+.visaButtonEdit button{
+    width: 100%;
+    /*width: 300px;*/
+    height: auto;
+    text-align: left;
+}
+
+.UsrAdm_grey {
+/*    background: seashell;
+    background: #d0e4fe;*/
+    background: antiquewhite;
+}
+.visaButtonInsert button{
+    width: 100%;
+    /*width: 300px;*/
+    height: auto;
+    text-align: left;
+}
+
 .UsrAdm_grey {
 /*    background: seashell;
     background: #d0e4fe;*/
@@ -473,6 +521,8 @@ div.tab_info2 {
 
 div.tab_stat {
     /*background: gainsboro;*/
+    position: relative;
+    top: -65;
     float: left;
     width: 15%;
 }

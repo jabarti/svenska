@@ -623,58 +623,108 @@ function autoAdjectiv(trans,group) {
     var ost1Lett = trans.slice(trans.length-1);
     var ost2Lett = trans.slice(trans.length-2);
     
-//    alert(ost2Lett);
+    var AdjNeut = '';
+    var AdjMasc = '';
+    var AdjPlur = '';
+    var AdjRown = '';
+    var AdjWyzs = '';
+    var AdjNajw = '';
 
-//    if(ost1Lett == 'd'){   // np: deprimerad => NIE deprimeradt => deprimerat.
-//        trans1 = trans.slice(0,trans.length-1);     
-//    }else {
-//        trans1 = trans;
-//    }
     switch(ost2Lett){
-        case 'en':          // np: besviken => besvikne, besvikna osv.
+        case 'en':          // np: besviken => besvikne, besvikna osv. upptagen //SELECT * FROM `ord` WHERE `typ` = "adjective" and `trans` LIKE "%en"
+//            alert("Adj 01");
             trans2 = trans.slice(0,trans.length-2)+'n';  
+            trans2a = trans.slice(0,trans.length-2)+'';  
+            AdjNeut = trans2a+'et';
+            AdjMasc = trans2+'e'
+            AdjPlur = trans2+'a'
+            AdjRown = trans;
+            AdjWyzs = trans;
+            AdjNajw = trans;
             break;
-        case 'am':
+        case 'am': // 	pratsam
+//            alert("Adj 02");
             trans2 = trans.slice(0,trans.length-2)+'amm'; 
+            AdjNeut = trans;
+            AdjMasc = trans2+'e'
+            AdjPlur = trans2+'a'
+            AdjRown = trans;
+            AdjWyzs = trans;
+            AdjNajw = trans;
             break;
         default:
             trans2 = trans; 
+//            alert("Adj 03");
+            switch(ost1Lett){
+                case 'a':
+//                    alert("case A: "+trans+" / "+trans2);
+                    trans2 = trans.slice(0,trans.length-1); 
+                    AdjNeut = trans+'t';
+                    AdjMasc = trans2+'e'
+                    AdjPlur = trans;
+                    AdjRown = trans2;
+                    AdjWyzs = trans2;
+                    AdjNajw = trans2;
+                    break;
+                case 'e':  // mästrande // SELECT * FROM `ord` WHERE `typ` = "adjective" and `trans` LIKE "%e"
+//                    alert("case e: "+trans+" / "+trans2);
+                    trans2 = trans.slice(0,trans.length-1); 
+                    AdjNeut = trans+'t';
+                    AdjMasc = trans
+                    AdjPlur = trans2+'a'
+                    AdjRown = trans2;
+                    AdjWyzs = trans2;
+                    AdjNajw = trans2;
+                    break;
+                case 'd': // förvirrad
+//                    alert("case d: "+trans+" / "+trans2);
+                    trans2 = trans.slice(0,trans.length-1); 
+                    AdjNeut = trans2+'t';
+                    AdjMasc = trans
+                    AdjPlur = trans+'a'
+                    AdjRown = trans;
+                    AdjWyzs = trans;
+                    AdjNajw = trans;
+                    break;
+                default:
+//                    alert("default: "+trans+" / "+trans2);
+                    AdjNeut = trans+'t';
+                    AdjMasc = trans+'e'
+                    AdjPlur = trans+'a'
+                    AdjRown = trans;
+                    AdjWyzs = trans;
+                    AdjNajw = trans;
+                    break;
+            }
+            
             break;
     }
     
+//    $('#neuter').val(trans+'t');
+    $('#neuter').val(   AdjNeut);
+    $('#masculin').val( AdjMasc);
+    $('#plural').val(   AdjPlur);
+    
     switch(group){
-        case 'bez stopniowania':
-            $('#neuter').val(trans+'t');
-            $('#masculin').val(trans2+'e');
-            $('#plural').val(trans2+'a');
-//            $('#st_rowny').val(trans)
-            $('#st_rowny').val('');
-            $('#st_wyzszy').val('');
-            $('#st_najwyzszy').val('');
-            break;
         case 'nieodmienny':
             $('#neuter').val('');
             $('#masculin').val('');
             $('#plural').val('');
+        case 'bez stopniowania':
+//            alert("Adj bez stopniowania");
             $('#st_rowny').val('');
             $('#st_wyzszy').val('');
             $('#st_najwyzszy').val('');
             break;
         case 'mer/mest':
-            $('#neuter').val(trans+'t');
-            $('#masculin').val(trans2+'e');
-            $('#plural').val(trans2+'a');
             $('#st_rowny').val(trans);
             $('#st_wyzszy').val('mer '+trans);
             $('#st_najwyzszy').val('mest '+trans);
             break;
         default:
-            $('#neuter').val(trans+'t');
-            $('#masculin').val(trans2+'e');
-            $('#plural').val(trans2+'a');
-            $('#st_rowny').val(trans);
-            $('#st_wyzszy').val(trans2+'are');
-            $('#st_najwyzszy').val(trans2+'aste, '+trans2+'ast');
+            $('#st_rowny').val(     AdjRown);
+            $('#st_wyzszy').val(    AdjWyzs +'are');
+            $('#st_najwyzszy').val( AdjNajw +'aste, '+AdjNajw+'ast');
             break;
     }
 }
@@ -1297,7 +1347,7 @@ function autoNoun(trans, group, rodzaj) {
         break;
         
         case '3':       // Algorytm dla NOUN:gr3, SUBS:gr3
-            console.log ("Algorytm dla NOUN:gr3, SUBS:gr3 - status OK!")
+            console.log ("Algorytm dla NOUN:gr3, SUBS:gr3 - status not OK!")
             
             if(ostLett=='e'){
                 if(rodzaj=='en'){
@@ -1312,7 +1362,7 @@ function autoNoun(trans, group, rodzaj) {
             }else{
                 if(rodzaj=='en'){
     //                alert("gr 3 en")
-                    konc = 'n';
+                    konc = 'en';
                 }else{
 //                    alert("gr 3 ett")
                     konc = 'et';
@@ -1378,10 +1428,10 @@ function autoNoun(trans, group, rodzaj) {
             te1 = pat.exec(OBSI)
             te2 = pat2.test(OBSI)
             
-            alert(te1+ " / test: "+ te2 )
+//            alert(te1+ " / test: "+ te2 )
             
             var testText = OBSI.replace(regExPattern, "Ala")
-            alert (testText +" / " + OBSI)
+//            alert (testText +" / " + OBSI)
 
             group = '';
 //            konc = '';
@@ -1528,7 +1578,7 @@ $(document).ready(function(){
         console.log("TYP: "+typ_val);
         switch(typ_val){
             case 'deponens':
-                alert('deponens')
+//                alert('deponens')
             case 'hjalp_verb':
             case 'modal_verb':
             case 'partikelverb':
@@ -1584,7 +1634,7 @@ $(document).ready(function(){
                         if (trans != ""){       // jak jest puste żeby nie robił bez sensu końcówek
                             if(rodzaj != ""){
                                 console.log("NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
-                                alert("NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
+//                                alert("NIE PUSTE:\ngroupa:"+grouppa+"\nNrGrupy:"+NrGrupy+"\ntrans:"+trans+"\nrodzaj:"+rodzaj)
 //                                autoNoun(trans, NrGrupy);
                                 autoNoun(trans, NrGrupy, rodzaj)
                             }else{
@@ -1599,7 +1649,7 @@ $(document).ready(function(){
                 });
                    
                  $('#rodzaj2').change(function(){
-                     alert("rodzaj 2 - linia1543")
+                     alert("rodzaj 2 - linia1602")
                      var rodzaj_val = $('#rodzaj').val().toString();
                      var S_indefinite = $('#S_indefinite').val().toString();
                      var trans = $('#trans').val();

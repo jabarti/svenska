@@ -75,7 +75,7 @@ class Ord {
     private $category = array(  'abstr.','mitologia',
                                 'ludzie','rodzina','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia', 
                                 'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka','prawo','sztuka',
-                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła',
+                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła','konie','filozofia',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
                                 'gramatyka','pytajnik','idiom','przysłowie','zart','wulgarne','potoczne','uzupelnic');
     

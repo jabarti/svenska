@@ -113,6 +113,11 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
                     }else{
                         $DESC = "ORDER BY `id` ASC";
                     }        
+            }else 
+            if(isset($_GET['SortKat']) AND $_GET['SortKat'] !='' ){
+
+                        $DESC = "WHERE `kategoria` = '".$_GET['SortKat']."';";
+ 
             }else{
                     ?><script> //alert ("<?php //echo "ERRR";?>") </script><?php
             }
@@ -142,13 +147,14 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
 //echo "<br>SQL: $SQL";
 $mq = mysql_query($SQL);
 
-
 ?>
+<a name='first_th' /></a>
+    
 <form action="" method="post">
     <input type="checkbox" name="flat" value="flat"><?php echo t("płaskie"); ?>?
     <br><?php
-    echo '<input type="checkbox" name="cz_mov" value="cz_mov" '.$czek.'>'.t("części mowy").'?';
-    echo '<br><input type="checkbox" name="irreg" value="irreg" '.$irreg.'>'.t("tylko czasowniki nieregularne").'?';
+//    echo '<input type="checkbox" name="cz_mov" value="cz_mov" '.$czek.'>'.t("części mowy").'?';
+//    echo '<br><input type="checkbox" name="irreg" value="irreg" '.$irreg.'>'.t("tylko czasowniki nieregularne").'?';
     ?>
     <input type="submit" name=sub_flat value="<?php echo t("zobacz"); ?>">
 
@@ -164,40 +170,33 @@ if(isset($_POST['sub_flat'])){
     }
 }
 
-echo "<table class=print>";
+echo "<a href='#first_th' class='ButtonShowUpToTop' style='position:fixed; top:15.5%; right:17%'><button >".t("up")."</button></a>";
+
+//echo '<div id="dialogoverlay"></div>
+//<div id="dialogbox">
+//  <div>
+//    <div id="dialogboxhead"></div>
+//    <div id="dialogboxbody"></div>
+//    <div id="dialogboxfoot"></div>
+//  </div>
+//</div>';
+
+//echo "<button style='position:fixed; top:19.5%; right:17%' onclick=\"Confirm.render('Delete Post?','delete_post','post_1')\">Delete</button>";
+
+
+echo "<table class='print' >";
+echo "<thead>";
 echo "  <tr>";
 
 $sum = (!$flat and !$gosc);     // ograniczenie: jak jest gość nie ma linków!!!
 
 echo "<form id='form_up_down' name='form_up_down'>";      // początek formy do góra, dół - przyciski w nagłówku tabeli
-//<th style='min-width:75px;'>".t("L.p.")."
-//                    <input type='image' name='ID_DIR' value='up' src='Resources/img/arrow_up.png' style='height:15px;width:15px;' alt='&#8657;'/>
-//                    <input type='image' name='ID_DIR' value='down' src='Resources/img/arrow_down.png' style='height:15;width:15;' alt='&#8659;'/>  
-//                    <button class='narrow_button' name='ID_DIR' value='up' >&#8657; </button>
-//                    <button class='narrow_button' name='ID_DIR' value='down' >&#8659; </button> <img id='imgLogButt' src='Resources/img/arrow_up.png' style='height:15px;width:15px;'>
-//                                        <form>
-//                    <input type='hidden' name='ID_DIR' value='up'/>
-//                    <button type='submit' style='background:none;'><image src='Resources/img/arrow_up.png' style='height:15;width:15;' alt='&#8659;'/></button> 
-//                    </form>
-//                    <form>
-//                    <input type='submit' name='ID_DIR' value='down' src='Resources/img/arrow_up.png' style='height:15;width:15;'/>
-//            </th>
-//                    <button class='narrow_button' name='ID_DIR' value='up' >&#8657;</button>
-
-//                    <button type='submit' name='ID_DIR' value='up' class='narrow_button'>
-//                        <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
-//                    </button>
-//                    <button type='submit' name='ID_DIR' value='down' class='narrow_button'>
-//                        <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
-//                    </button>
-
 
 if($sum){
-    echo "  <th >".t("Link")."</th>";  // <button name='".$v."_DIR' value='up' >&#8657;</button>
+    echo "  <th>".t("Link")."</th>";  // <button name='".$v."_DIR' value='up' >&#8657;</button>
 }
-    echo "  <th style='min-width:75px;'>".t("L.p.")." 
-
-                    <button type='submit' name='ID_DIR' value='down' class='narrow_button'>
+    echo "  <th style='min-width:45px;'>".t("L.p.")." 
+                    <br><button type='submit' name='ID_DIR' value='down' class='narrow_button'>
                         <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
                     </button>
                     <button type='submit' name='ID_DIR' value='up' class='narrow_button'>
@@ -205,15 +204,15 @@ if($sum){
                     </button>
             </th>
             <th >".t("Słowo PL")." 
-                    <button type='submit' name='PLOrd_DIR' value='down' class='narrow_button'>
+                    <br><button type='submit' name='PLOrd_DIR' value='down' class='narrow_button'>
                         <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
                     </button>
                     <button type='submit' name='PLOrd_DIR' value='up' class='narrow_button'>
                         <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
                     </button>                    
                 </th>
-            <th style='min-width:105px;'>".t("Część mowy")." 
-                    <button type='submit' name='TYP_DIR' value='down' class='narrow_button'>
+            <th style='/*min-width:105px;*/'>".t("Część mowy")." 
+                    <br><button type='submit' name='TYP_DIR' value='down' class='narrow_button'>
                         <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
                     </button>   
                     <button type='submit' name='TYP_DIR' value='up' class='narrow_button'>
@@ -223,25 +222,28 @@ if($sum){
             <th >".t("Rodz.")."
                 </th>
             <th >".t("Grupa")."
-                    <button type='submit' name='GRUP_DIR' value='down' class='narrow_button'>
+                    <br><button type='submit' name='GRUP_DIR' value='down' class='narrow_button'>
                         <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
                     </button> 
                     <button type='submit' name='GRUP_DIR' value='up' class='narrow_button'>
                         <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
                     </button>                    
                 </th>
-            <th style='min-width:95px;'>".t("Słowo SE")."
-                    <button type='submit' name='SEOrd_DIR' value='down' class='narrow_button'>
+            <th style='/*min-width:95px;*/'>".t("Słowo SE")."
+                    <br><button type='submit' name='SEOrd_DIR' value='down' class='narrow_button'>
                         <img src='Resources/img/arrow_down.png'  alt='&#8659;' />
                     </button>      
                     <button type='submit' name='SEOrd_DIR' value='up' class='narrow_button'>
                         <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
                     </button>
                 </th>
-            <th >".t("Formy")."</th>
+            <th >".t("Formy").
+                "<br><button type='submit' class='btnKategory' name='SortKat' value=''>".t('Clean Categories')."</button>
+            </th>
         </tr>" ; 
 //echo "</form>";
-            
+echo "</thead>";
+          
 while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
 //     echo "<tr><td colspan=6>";var_dump($row);echo "</td></tr>";
        echo "<tr>";
@@ -274,7 +276,15 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                 elseif($v!='' && $k !='wymowa'){
                     if(!$flat){
                         if ( $k == "kategoria"){
-//                            echo substr($k,0,6).": <span class=blue>$v</span>,<br>";
+                            
+                            echo substr($k,0,6).": ";
+                            $arrKat = split(';', $v);
+                            foreach($arrKat as $kat){
+                                echo "<button type='submit' class='btnKategory' name='SortKat' value='".$kat."'>".$kat."</button>";  
+                            }
+                            echo "<br>";
+//                            echo ": <span class=blue>$v</span>,<br>";
+                            
                             continue;
                         }else{
                             echo substr($k,0,6).": <span class=red>$v</span>,<br>";
@@ -289,8 +299,8 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                             continue;
                         }
                     }
-                }
-                else {
+                }else {
+                    
                     continue;
                 }
             }

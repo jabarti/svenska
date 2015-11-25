@@ -67,3 +67,36 @@ function tryMe(){
 <input type="text" id="input_02"></input>
 
 <button id='button_01' type="button" onclick="tryMe();">KLIK!!!</button>
+
+
+<div id="dialogoverlay"></div>
+<div id="dialogbox">
+  <div>
+    <div id="dialogboxhead"></div>
+    <div id="dialogboxbody"></div>
+    <div id="dialogboxfoot"></div>
+  </div>
+</div>
+<p id="post_1">
+  Today is a lovely day ...
+  <button onclick="Confirm.render('Delete Post?','delete_post','post_1')">Delete</button>
+</p>
+<p id="post_2">
+  I like pickles ... 
+  <button onclick="Confirm.render('Delete Post?','delete_post','post_2')">Delete</button>
+</p>
+<button onclick="Alert.render('Hello World')">Custom Alert</button>
+<br>
+
+<select id="demo1" multiple="multiple">
+  <option value="one" data-section="top" selected="selected" data-index="3">One</option>
+  <option value="two" data-section="top" selected="selected" data-index="1">Two</option>
+  <option value="three" data-section="top" selected="selected" data-index="2" data-description="A natural number">Three</option>
+  <option value="four" data-section="top">Four</option>
+  <option value="wow" data-section="top/inner/this/is/really/nested">Wow</option>
+</select>
+
+<script>
+var options = { sortable: true };
+$("select#demo1").treeMultiselect(options);
+</script>
