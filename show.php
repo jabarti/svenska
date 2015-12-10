@@ -147,28 +147,58 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
 //echo "<br>SQL: $SQL";
 $mq = mysql_query($SQL);
 
+$flat = false;
+$cz_mov = false;
+
+//if(isset($_POST['sub_flat'])){
+if(isset($_POST['sub_flat_plaskie']) || isset($_POST['sub_flat_pelne'])){
+//    echo "SET POST"; echo " / POST flat = ".$_POST['sub_flat_plaskie'];
+//    echo "SET POST"; echo " / POST flat = ".$_POST['sub_flat_pelne'];
+    if($_POST['sub_flat_plaskie']){
+        $flat = true;
+//        $flat_checked = "checked";
+        $_SESSION['flat'] = true;
+    }else if($_POST['sub_flat_pelne']){
+        $flat = false;
+//        $flat_checked = "";
+        $_SESSION['flat'] = false;
+    }
+}else if($_SESSION['flat'] == true){
+    $flat = true;
+//    $flat_checked = "checked";
+}else{
+    $flat = false;
+    $flat_checked = "";    
+}
+
 ?>
 <a name='first_th' /></a>
     
 <form action="" method="post">
-    <input type="checkbox" name="flat" value="flat"><?php echo t("płaskie"); ?>?
+    <!--<input type="checkbox" name="flat" value="flat" <?php //echo $flat_checked; ?>><?php //echo t("płaskie").$flat; ?>?-->
     <br><?php
-//    echo '<input type="checkbox" name="cz_mov" value="cz_mov" '.$czek.'>'.t("części mowy").'?';
-//    echo '<br><input type="checkbox" name="irreg" value="irreg" '.$irreg.'>'.t("tylko czasowniki nieregularne").'?';
     ?>
-    <input type="submit" name=sub_flat value="<?php echo t("zobacz"); ?>">
+    <!--<input type="submit" name=sub_flat value="<?php echo t("zobacz"); ?>">-->
+    <?php
+    if(!$flat){
+        echo "<input type='submit' name='sub_flat_plaskie' value='".t("Zobacz płaskie")."'>";
+    }else{
+        echo "<input type='submit' name='sub_flat_pelne' value='".t("Zobacz pełne")."'>";
+    }
+    ?>
+    
 
 </form>    
 <?php
-$flat = false;
-$cz_mov = false;
-
-if(isset($_POST['sub_flat'])){
-//    echo "SET POST"; echo " / POST flat = ".$_POST['flat'];
-    if($_POST['flat']=='flat'){
-        $flat = true;
-    }
-}
+//$flat = false;
+//$cz_mov = false;
+//
+//if(isset($_POST['sub_flat'])){
+////    echo "SET POST"; echo " / POST flat = ".$_POST['flat'];
+//    if($_POST['flat']=='flat'){
+//        $flat = true;
+//    }
+//}
 
 echo "<a href='#first_th' class='ButtonShowUpToTop' style='position:fixed; top:15.5%; right:17%'><button >".t("up")."</button></a>";
 
@@ -237,9 +267,11 @@ if($sum){
                         <img src='Resources/img/arrow_up.png'  alt='&#8657;' />
                     </button>
                 </th>
-            <th >".t("Formy").
-                "<br><button type='submit' class='btnKategory' name='SortKat' value=''>".t('Clean Categories')."</button>
-            </th>
+            <th >".t("Formy");
+                if(!$flat){
+                    echo "<br><button type='submit' class='btnKategory' name='SortKat' value=''>".t('Clean Categories')."</button>";
+                }
+           echo " </th>
         </tr>" ; 
 //echo "</form>";
 echo "</thead>";
@@ -280,7 +312,8 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                             echo substr($k,0,6).": ";
                             $arrKat = split(';', $v);
                             foreach($arrKat as $kat){
-                                echo "<button type='submit' class='btnKategory' name='SortKat' value='".$kat."'>".$kat."</button>";  
+                                // wyświetla w SHOW, buttony kategorii do sortowania w kolumnie FORMY/FORMARNA
+                                echo "<button type='submit' class='btnKategory' name='SortKat' value='".$kat."'>".t($kat)."</button>";  
                             }
                             echo "<br>";
 //                            echo ": <span class=blue>$v</span>,<br>";

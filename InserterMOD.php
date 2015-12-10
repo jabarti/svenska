@@ -106,14 +106,21 @@ if(isset($_POST['submit'])){
             $newID = $Word->getId($id_ord);
             $Log->setData($idOrd, $ID_US, $_POST);
 //            echo "<br>LINE:".__LINE__;
-            header("Location: index.php?result=OK&transz=".$trans."&newId=$newID");
-            echo "<script> window.location.replace('index.php?result=OK&transz=".$trans."&newId=".$newID."') </script>" ;
+//            header("Location: index.php?result=OK&transz=".$trans."&newId=$newID&try001=001");
+            echo "<script> window.location.replace('index.php?result=OK&transz=".$trans."&newId=".$newID."&try001=002') </script>" ;
             exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
         }else{
-            ?><script>//alert("SESSION test_001 == false");</script><?php
-            header("Location: index.php?result=pusty");
-            echo "<script> window.location.replace('../../index.php?result=pusty') </script>" ;
-            exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);
+            if($_SESSION['test_002']=="true"){
+                ?><script>//alert("SESSION test_001 == false; SESSION test_002 == true");</script><?php
+//                header("Location: index.php?result=pusty&try001=003");
+                echo "<script> window.location.replace('index.php?result=pusty&try001=004') </script>" ;
+                exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);                
+            }else{
+                ?><script>//alert("SESSION test_001 == false; SESSION test_002 == false");</script><?php
+//                header("Location: index.php?result=pusty&try001=005");
+                echo "<script> window.location.replace('index.php?result=pusty&try001=006') </script>" ;
+                exit("heder/window.location nie poszedł: ".__LINE__." / file: ".__FILE__);                
+            }
         }
 //        header("Location: index.php?result=OK");
     } else {

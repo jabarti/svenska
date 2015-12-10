@@ -75,7 +75,7 @@ class Ord {
     private $category = array(  'abstr.','mitologia',
                                 'ludzie','rodzina','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia', 
                                 'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka','prawo','sztuka',
-                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła','konie','filozofia',
+                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła','konie','filozofia','literatura',
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
                                 'gramatyka','pytajnik','idiom','przysłowie','zart','wulgarne','potoczne','uzupelnic');
     
@@ -146,10 +146,11 @@ class Ord {
             }
             $_SESSION['test_001']="true";        
             return true;
-                }else{
-                    $_SESSION['test_001']="false";
-                    echo "<br>ERROR W bazie jest!!";
-                    return false;
+        }else{
+            $_SESSION['test_001']="false";
+            $_SESSION['test_002']="true";
+//            echo "<br>".__LINE__."ERROR W bazie jest!!";
+            return false;
         }
     }
               
