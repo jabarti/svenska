@@ -7,7 +7,7 @@
  *
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  * ************************************************* */
-require_once 'common.inc.php';
+require_once 'common.inc.php'; 
 include 'DB_Connection.php';
 $title = 'Svenska | '.t('InserterMOD');
 include 'title.php';
@@ -36,13 +36,6 @@ if(isset($_POST['submit'])){
     ?><script>//alert("isset POST submit");</script><?php //
     if($_POST['id_ord'] !=''){
         ?><script>//alert("isset POST id_ord");</script><?php
-//        $text='';
-//        foreach($_POST as $k=>$v){
-////            if($v!='' || $v!='submit'){
-//            if($v!='' AND $k!='submit'){
-//                $text .= "\'$k\'=>\'$v\'; ";
-//            }
-//        }
         
         $id_ord =               triTrim($_POST['id_ord']);
         $typ =                  triTrim($_POST['typ']);
@@ -80,7 +73,7 @@ if(isset($_POST['submit'])){
         
         $kategoria =            triTrim($_POST['kategoria']);
         $uwagi =                triTrim($_POST['uwagi']);
-
+        
         ?><script>//one();</script><?php
 //        echo "<br>OTO text: ".$id_ord;
         
@@ -88,15 +81,21 @@ if(isset($_POST['submit'])){
         $Log = new Log_Ord();
 //        echo "<br>id of a: ".$Word->getId($id_ord);
 //        echo "<br>PRZED setData Last index: ".$Word->getLastId(false);
-       
-        
+//        try {
+//            $linki = $Word->MakeLinkToTextarea($uwagi);
+//        } catch (Exception $ex) {
+//            ?><script>//alert("<?php //echo "ERROR with Word->MakeLinkToTextarea(uwagi);" ?>")</script><?php 
+//        }
+        $linki = $Word->MakeLinkToTextarea($uwagi);
+//        
+        //setDataFakeForTest
         $Word->setData( $id_ord, $typ, $rodzaj, $grupa, $trans, $infinitive, $presens,$past, 
                         $supine, $imperative, $present_participle, $past_participle, 
                         $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
                         $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                         $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                         $glowny, $porzadkowy, $ulamek,
-                        $wymowa, $kategoria, $uwagi);
+                        $wymowa, $kategoria, $uwagi, $linki); 
         
         $idOrd = $Word->getId($id_ord);
 

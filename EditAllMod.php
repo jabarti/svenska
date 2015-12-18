@@ -95,12 +95,17 @@ if(isset($_POST)){
             var_dump($arr_fin);   
   
             $len = count($arr_fin);
-  
+            
+            // trzeba zrobić obsługę nowego pola 'linki' na podst pola 'uwagi' WAZNE!!!
+            
             for($i=0; $i<$len; $i++){
                 if($i == 0){
                     $id = $arr_fin[$i][1];
                 }
                 else if($i == $len-1){
+                    
+//                    if($arr_fin[$i][0] == 'uwagi'??????)
+                    
                     $SQL .= "`".$arr_fin[$i][0]."` = '".$arr_fin[$i][1]."' ";
                     $zmiana .= "`".$arr_fin[$i][0]."`=>'".$arr_fin[$i][1]."', ";
                 }

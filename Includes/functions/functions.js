@@ -1059,6 +1059,7 @@ function autoVerb(trans, group) {
             OrdPasInfinite = temat+validA+Kpassiv+ogon+sig;
             OrdPasPresens = temat+Kpassiv+ogon+sig+', '+temat+'e'+Kpassiv+ogon+sig;
             OrdPasPreterite = temat+Kpret+lettE+Kpassiv+ogon+sig;
+//            alert("temat: "+temat+"\nKpret: "+Kpret+"\nlettE: "+lettE+"\nKpassiv: "+Kpassiv+"\nogon: "+ogon+"\nsig: "+sig)
             OrdPasSupine = temat+Ksupi+Kpassiv+ogon+sig;
             
             break;

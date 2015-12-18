@@ -1,0 +1,435 @@
+<?php 
+//public function MakeLinkToTextarea($uwagi){
+//        ?><script>//alert("<?php //echo "001"; ?>")</script><?php 
+//        
+//        $arrUwagi = explode("=>",$uwagi);
+//        $i=0;
+//        foreach ($arrUwagi as $key) {
+////            ?><script>//alert("<?php //echo "wyr $i:(".$key.")"; ?>")</script><?php 
+//            if(strlen($key)==0){
+//                $arrUwagi[$i] = $key;
+//            }else{
+//                $arrUwagi[$i] = "=>".$key;
+//            }
+//            $str .= $arrUwagi[$i];
+//            $i++;
+//        }
+//        echo "<br><br>Uwagi($uwagi)";
+//        echo "<br>arrUwagi("; var_dump($arrUwagi); echo ")";
+//        echo "<br>va_duSTR("; var_dump($str); echo ")";
+//        echo "<br>STR($str)<br>";
+//        
+//
+//            $subject = $uwagi;
+//
+//            $pattern1 = "/(?=^[=>])|(?=^[ =>])/";  /// => jest na oczątku co daje strpos = 0!!!
+//
+//    //        => kina; kina;  <=> kina;  == kina;
+//
+//            $bool = preg_match($pattern1, $subject);
+//
+//    //        if($bool){
+//    //            ?><script>//alert("<?php //echo "Pattern bra"; ?>")</script><?php 
+    //            
+    //        }else{
+    //            ?><script>//alert("<?php //echo "Pattern EJ bra"; ?>")</script><?php
+//    //        }
+//
+//            $czyStrzal = stripos($uwagi,"=>");
+//
+//            if(strpos($uwagi,";",$czyStrzal)){
+//                ?><script>//alert("<?php echo "002"; ?>")</script><?php 
+//                $czyKoniec = strpos($uwagi,";",$czyStrzal); // link kończy ';' np.: => koza;
+//            }else if (strpos($uwagi,"=",$czyStrzal)){
+//                $czyKoniec = strpos($uwagi,"=",$czyStrzal); // link konczy '=' np.: => koza =
+//                ?><script>//alert("<?php echo "003"; ?>")</script><?php 
+//            }else{
+//                $czyKoniec = strlen($uwagi);    // Brak zakończenia po => np.: => koza
+//                ?><script>alert("<?php echo "Brak zakończenia po =>"; ?>")</script><?php 
+//            }
+//
+//            $lengthLink = $czyKoniec-$czyStrzal;
+//            $LinkSlowo = substr($uwagi,$czyStrzal+3,$lengthLink-3);
+//
+//            //rrr <=> rrr;  == ;; r;r ;  => gå igenom  ;  KONIEC == r
+//
+//            ?><script>//alert("<?php echo "czy strzal = ".$czyStrzal; ?>")</script><?php 
+//            ?><script>//alert("<?php echo "czy koniec  = ".$czyKoniec; ?>")</script><?php 
+//            ?><script>//alert("<?php echo "lengthLink = ".$lengthLink; ?>")</script><?php 
+//            ?><script>//alert("<?php echo "LinkSlowo = ".$LinkSlowo; ?>")</script><?php 
+//
+//            if($czyStrzal||$bool){
+//
+//                $LinkSlowo= triTrim($LinkSlowo);
+//
+//                $IDofWordByTrans = $this->getIdsByTrans($LinkSlowo);
+//
+//                if($IDofWordByTrans){   // czy jest słowo w słowniku w ogóle!!!
+//
+//    //                echo "<br>ID=".$IDofWordByTrans."<br>";
+//
+//                    ?><script>//alert("<?php echo "IDofWordByTrans = ".$IDofWordByTrans; ?>")</script><?php
+//
+//                    $linkShow = "<a href=#ordAnchor_".$IDofWordByTrans."\>".$LinkSlowo."</a>";
+//
+//                    ?><script>//alert("<?php echo "0= ".$uwagi.", n1=".$czyStrzal.", \\n2=".$czyKoniec.", \\nsł=".$LinkSlowo.", \\nlink:".$linkShow; ?>")</script><?php 
+//        //            echo "<br>0= ".$uwagi.", <br>n1=".$czyStrzal.", <br>2=".$czyKoniec.", <br>sł=".$LinkSlowo.", <br>link:".$linkShow;
+//    //                echo "<br>uwagi: ".$uwagi;
+//
+//                    $tail = substr($uwagi,$czyKoniec);
+//
+//                    // Jeśli w "ogonie" będzie też jakiś link, to "ogarnie" kolejne
+//                    $tail = $this->MakeLinkToTextarea($tail);
+//
+//    //                $uwagi2 = substr_replace($uwagi, $linkShow, $lengthLink);
+//                    $uwagi2 = substr_replace($uwagi, $linkShow, $czyStrzal+3);
+//
+//                    ?><script>//alert("<?php echo "<br>Final= ".$uwagi2; ?>")</script><?php 
+//                    ?><script>//alert("<?php echo "tail= ".$tail; ?>")</script><?php 
+//
+//                    $uwagi3 = $uwagi2.$tail;
+//
+//                    $uwagi = $uwagi3;
+//
+//            //        $uwagi = htmlspecialchars($uwagi);
+//
+//                    ?><script>//alert("<?php echo "<br>uwagi:(".$uwagi.")"; ?>")</script><?php
+//                }else{
+//                   $uwagi = $uwagi;
+//                    // tu trzeba dopisać funkcę dla przykładu:
+//    //                $link4 = $Word->MakeLinkToTextarea("Ala ma kota => dristighet; <==> dupa => 	samtidigt; => rower; => härifrån;");
+//    //                link , link, brak słowa (wchodzi tu), i znowu link(jako $tail)    
+//                }
+//
+//                // ERRORS!!
+//    //            dla: 
+//    //                härifrån: 1) => därifrån = stamtąd;
+//            }
+//        return $uwagi;
+ 
+        
+//public function MakeLinkToTextarea2($uwagi){
+//        $pattern1 = "/(?=^[=>])|(?=^[ =>])/";                       /// => jest na oczątku co daje strpos = 0!!!
+////        $pattern1 = "/(?=^[=>])|(?=^[ =>])[a-zA-Z0-9]\;|<|>|=/";  /// => jest na oczątku co daje strpos = 0!!!
+////        echo "<br>PIERWOTNY:".$uwagi."<br>";
+//        
+//        $arrUwagi = explode("=>",$uwagi);
+////        $x = count($arrUwagi);
+////        echo "<br>długość array:".$x."<br>";
+////        echo "<br>";var_dump( $arrUwagi);
+//        
+//        $spac = "";
+//        $currentSubString = $arrUwagi[$key];        // dla uproszczenie, kopia elem tablicy
+//        $bool = true;                               // domyślnie traktuje że substring spełnia schemat '=> słowo;'
+//        $trzy=0;                                    // do obcięcia znaków;            
+////        $arrUwagi = preg_split("/[=>]/",$uwagi,0,PREG_SPLIT_DELIM_CAPTURE);
+//        $i=0;
+//        foreach ($arrUwagi as $key => $val) {
+////            echo "<br><br>KEY:($key) => VAL:($val)";
+//
+//            
+//            if($key == 0 && $val == ""){                // String nie zawierał '=>' i jest pusty na poczatku
+////                echo "<br>String ($key)($val)nie zawierał '=>' i jest pusty na poczatku";
+//                $currentSubString = $val;
+//                $bool = false;
+//            }else if($key == 0 && $val != ""){          // String ($val) nie zawierał '=>' ale nie jest pusty; NIE dodaję '=>' na poczatku!!!
+//                $currentSubString = $val;
+////                echo "<br>String ($key)($val) nie zawierał '=>' ale nie jest pusty; NIE dodaję '=>' na poczatku!!!";
+//            }else if($key != 0){                        // String ($val) zawierał '=>' i nie jest pusty; dodanie '=>' na poczatku
+//                $currentSubString = "=>".$val;
+////                echo "<br>String ($key)($val) zawierał '=>' i nie jest pusty; dodanie '=>' na poczatku";
+//                $trzy = 3;                              // do obięcia potem poczatkowego '=> '
+//            }
+//            
+////            $bool = preg_match($pattern1, $arrUwagi[$key]);     //sprawdza czy na początku znajduje się => (dodać w if powyżej???)
+////            $czyStrzal = stripos($currentSubString,"=>");         // sprawdza numer pozycji stringa (zawsze 0??? To substringi!!!)
+//
+//            if(strpos($currentSubString,";",3) || strpos($currentSubString,"=",3)){           // link kończy ';' np.: => koza;
+////                echo "<br>currentSubString=".$currentSubString;
+//                ?><script>////alert("<?php //echo "link ($currentSubString)kończy ';' np.: => koza;"; ?>")</script><?php 
+////                $czyKoniec = strpos($currentSubString,";");
+////                echo "<br>String ('".$currentSubString."' ?? '$val'?(".(($currentSubString==$val) ? 'true' : 'false').")) kończy się ';";
+////                
+//                ?><script>//alert("<?php //echo "link ($currentSubString)kończy ';' lub '=' np.: '=> koza;' lub '=> koza = mydło;'"; ?>")</script><?php 
+////                $czyKoniec = ((strpos($currentSubString,"="))<(strpos($currentSubString,";")&&(strpos($currentSubString,"=")>0;echo "<br>weszło '='";))) ? (strpos($currentSubString,"=")) : (strpos($currentSubString,";"));
+////                echo "<br>strpos(currentSubString,'=')=".strpos($currentSubString,"=",3);
+////                echo "<br>strpos(currentSubString,';')=".strpos($currentSubString,";",3);
+//                $rown = strpos($currentSubString,"=",3);
+//                $sred = strpos($currentSubString,";",3);
+//                
+////                if((strpos($currentSubString,"=")<strpos($currentSubString,";"))&&(strpos($currentSubString,"=")>0)){
+//                if(($rown<$sred)&&($rown>0)){
+//                    $czyKoniec = strpos($currentSubString,"=",3);
+////                    echo "<br>weszło '='";
+//                    $spac = " ";
+//                }else{
+//                    $czyKoniec = strpos($currentSubString,";",3);
+////                    echo "<br>weszło ';'";
+//                }
+//                
+//            }else if (strpos($currentSubString,"=")){             // link konczy '=' np.: => koza =
+//                $czyKoniec = strpos($currentSubString,"=");
+//                ?><script>//alert("<?php echo "link ($currentSubString)kończy '=' np.: => koza ="; ?>")</script><?php 
+////                echo "<br>String ('".$currentSubString."' ?? '$val'?(".(($currentSubString==$val) ? 'true' : 'false').")) kończy się '='";
+//            }else{                                                 // Brak zakończenia po => np.: => koza
+//                $czyKoniec = strlen($currentSubString);
+//                ?><script>//alert("<?php echo "link ($currentSubString) brak zakończenia po =>"; ?>")</script><?php 
+////                echo "<br>String ('".$currentSubString."' ?? '$val'?(".(($currentSubString==$val) ? 'true' : 'false').")) kończy się BEZ ZNAKU";
+//            }
+//            
+////            $lengthLink = $czyKoniec;
+//            $LinkSlowo = substr($currentSubString,$trzy,$czyKoniec-$trzy);     // wycięcie samego słowa / słów, które sa sprawdzane potem w bazie
+//            
+////            echo "<br> SubString (".$currentSubString.") i ma param:"
+////                    . "<br>[czyKon:$czyKoniec]"
+////                    . "<br>[LinkSlowo:$LinkSlowo]";
+//            
+//            if($bool){                      // jeśli subString spełnia warunki linku
+////                echo "<br> wchodzę do BOOL";
+//                $LinkSlowo= triTrim($LinkSlowo);
+//
+//                $IDofWordByTrans = $this->getIdsByTrans($LinkSlowo);        // użycie funkcji wyszukującej słowo w bazie (resource/false)
+//
+//                if($IDofWordByTrans){   // czy jest słowo w słowniku w ogóle!!!
+//                    
+//                    $linkShow = "<a href=#ordAnchor_".$IDofWordByTrans."\>".$LinkSlowo."</a>".$spac;      // tworzenie linku (show.php)
+//                    $tail = substr($currentSubString,$czyKoniec);                                   // określenie reszty, ogona poza słowem
+//                    $currentSubString = substr_replace($currentSubString, $linkShow, $trzy).$tail;  //tworzenie gotowego fragmentu z linkiem
+//
+////                    echo "<br>CURR SUBS:($currentSubString)";
+//                }
+//            }else{
+////                echo "<br> BOOL == FALSE!!!!!!";
+//                ?><script>//alert("<?php //echo "BOOL == FALSE!!!!!!"; ?>")</script><?php
+//            }
+//            
+//            // łączenie stringu
+////            $arrUwagi[i] = $currentSubString;             // niepotrzebne faktycznie
+//            $str .= $currentSubString;                      // zapis fragmentu na zewnątrz
+//            $i++;
+//        }
+//        
+////        echo "<br><br>Uwagi($uwagi)";
+////        echo "<br>arrUwagi("; var_dump($arrUwagi); echo ")";
+////        echo "<br>va_duSTR("; var_dump($str); echo ")";
+////        echo "<br>STR($str)<br>";
+//        
+//        $uwagi = $str;                                      // ostateczne przypisanie
+//        
+//        return $uwagi;
+//    }    
+
+    public function MakeLinkToTextarea($uwagi){
+        
+        $pregLink = "/<a href=\"([^\"]*)\">(.*)<\/a>/iU";
+        $pregLink = "/<a\s[^>]*href=\"([^\"]*)\"[^>]*>(.*)<\/a>/siU";
+        $sven = "öäåÖÄÅ";
+        $pols = "ąćęłńóśżźĆŁŚŹŻ";
+        $preg0 = "[a-zA-Z$sven$pol:,\(\)\\n]";
+        $preg1 = "(=>)* ((\s)*($preg0)*(\s)*)*(;|\s)";                     // => słowo takie lub takie;
+        $preg2 = "(<=>)*((\s)*$preg0*(\s)*)*(;|\s)";                    // <=> słowo takie lub takie;
+        $preg3 = "(==)* ((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+        $preg4 = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+//        $preg5 = "(\s)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+        $pregX = "($preg0*(\s)*)*(;|\s)";                               // słowo takie lub takie;
+        
+        preg_match_all("/$preg1|$preg2|$preg3|$preg4/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+//        preg_match_all("/$preg2/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+        
+//        echo "========================";
+////        var_dump($matches[0]);
+//        foreach($matches[0] as $key => $val){
+//            echo "<br>[$key] => ($val)";
+//        }
+//        echo "<br>========================<br>";
+        
+        foreach($matches[0] as $value){
+//            if(strpos($value,"=>")!==false ||strpos($value, "==")!==false){      // jełsi w SubStringu jest => lub == !== false bo ==0 nie działa (może być na miejscu 0
+                preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
+//                echo "<br>========================<br>";
+//                    foreach($word[0] as $key => $val){
+//                        echo "<br>[$key] => ($val)";
+//                    }
+//                echo "<br>========================<br>";
+                
+                foreach($word[0] as $val){
+                    if(strlen($val)!=0){                                        // jeśli string ma zawartość
+                        $val_ord = trim(substr($val,0,-1));
+//                        echo "<br>VAL-1:".$val_ord;
+                        $val = trim($val);
+                        
+                        $IDofWordByTrans = $this->getIdsByTrans($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
+//                        echo "<br>VAL:(".$val.")";
+//                        echo "<br>VAL_ORD:(".$val_ord.")";
+//                        echo "<br>IDofWordByTrans:(".$IDofWordByTrans.")";
+                        if($IDofWordByTrans){                   
+//                            echo "<br>(".$val.")";
+                            $where=strpos($value,$val);                         // liczba wskazuje koniec pozycji wyrazu w pierwotnym stringu
+//                            echo "where:$where<br>";
+//                            echo "<a href='".$val_ord."' >".$val."</a>";
+//                            if(strpos($val,";")){
+////                                $t = "<a href='".$val_ord."' >".$val."</a>;";
+                                $linkShow = "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+//                                $t = substr_replace($value,$linkShow,$where);
+//                            }else{
+//                                $t = "<a href='".$val_ord."' >".$val."</a>";
+//                                $linkShow = "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a> ";
+//                                $t = substr_replace($value,$linkShow,$where);
+//                            }
+                                //            $linki .= $t;
+                    //            if(!strpos($linki, $val_ord)){
+                                  echo "<br>========================<br>";  
+                                  echo "<br>val_ord:     ".$val_ord;
+                                  echo "<br>strpos:     ".strpos($linki, $val_ord);
+                                  echo "<br>LINKI:     ".htmlspecialchars($linki);
+                                  echo "<br>LINKIbież: ".htmlspecialchars($linkShow);
+                                  if(!strpos($linki, $val_ord)){
+                                        $linki .= $linkShow;
+                                        echo "<br>WESZŁO!";
+                                  }else{
+                                        echo "<br>NIE WESZŁO!";
+                                  }
+                                  echo "<br>========================<br>";
+                            
+                        }else{
+//                            $t = $value;
+                        }
+                    }else{} // if(strlen($val)!=0){   
+                }
+//            }else{
+//                echo "<br>VALUE: $value";
+//                $t= "$value";
+//            }
+//            $linki .= $t;
+//            if(!strpos($linki, $val_ord)){
+//              echo "<br>========================<br>";  
+//              echo "<br>val_ord:     ".$val_ord;
+//              echo "<br>strpos:     ".strpos($linki, $val_ord);
+//              echo "<br>LINKI:     ".htmlspecialchars($linki);
+//              echo "<br>LINKIbież: ".htmlspecialchars($linkShow);
+//              if(!strpos($linki, $val_ord)){
+//                    $linki .= $linkShow;
+//                    echo "<br>WESZŁO!";
+//              }else{
+//                    echo "<br>NIE WESZŁO!";
+//              }
+//              echo "<br>========================<br>";
+        }
+        return $linki;
+    }   
+     
+    public function MakeLinkToTextarea2($uwagi){
+        $pattern1 = "/(?=^[=>])|(?=^[ =>])/";                       /// => jest na oczątku co daje strpos = 0!!!
+//        $pattern1 = "/(?=^[=>])|(?=^[ =>])[a-zA-Z0-9]\;|<|>|=/";  /// => jest na oczątku co daje strpos = 0!!!
+//        echo "<br>PIERWOTNY:".$uwagi."<br>";
+        
+        $arrUwagi = explode("=>",$uwagi);
+//        $x = count($arrUwagi);
+//        echo "<br>długość array:".$x."<br>";
+//        echo "<br>";var_dump( $arrUwagi);
+        
+        $spac = "";
+        $currentSubString = $arrUwagi[$key];        // dla uproszczenie, kopia elem tablicy
+        $bool = true;                               // domyślnie traktuje że substring spełnia schemat '=> słowo;'
+        $trzy=0;                                    // do obcięcia znaków;            
+//        $arrUwagi = preg_split("/[=>]/",$uwagi,0,PREG_SPLIT_DELIM_CAPTURE);
+        $i=0;
+        $str = '';
+        foreach ($arrUwagi as $key => $val) {
+//            echo "<br><br>KEY:($key) => VAL:($val)";
+
+            
+            if($key == 0 && $val == ""){                // String nie zawierał '=>' i jest pusty na poczatku
+//                echo "<br>String ($key)($val)nie zawierał '=>' i jest pusty na poczatku";
+                $currentSubString = $val;
+                $bool = false;
+            }else if($key == 0 && $val != ""){          // String ($val) nie zawierał '=>' ale nie jest pusty; NIE dodaję '=>' na poczatku!!!
+                $currentSubString = $val;
+//                echo "<br>String ($key)($val) nie zawierał '=>' ale nie jest pusty; NIE dodaję '=>' na poczatku!!!";
+            }else if($key != 0){                        // String ($val) zawierał '=>' i nie jest pusty; dodanie '=>' na poczatku
+                $currentSubString = "=>".$val;
+//                echo "<br>String ($key)($val) zawierał '=>' i nie jest pusty; dodanie '=>' na poczatku";
+                $trzy = 3;                              // do obięcia potem poczatkowego '=> '
+            }
+            
+//            $bool = preg_match($pattern1, $arrUwagi[$key]);     //sprawdza czy na początku znajduje się => (dodać w if powyżej???)
+//            $czyStrzal = stripos($currentSubString,"=>");         // sprawdza numer pozycji stringa (zawsze 0??? To substringi!!!)
+
+            if(strpos($currentSubString,";",3) || strpos($currentSubString,"=",3)){           // link kończy ';' np.: => koza;
+//                echo "<br>currentSubString=".$currentSubString;
+                ?><script>////alert("<?php //echo "link ($currentSubString)kończy ';' np.: => koza;"; ?>")</script><?php 
+//                $czyKoniec = strpos($currentSubString,";");
+//                echo "<br>String ('".$currentSubString."' ?? '$val'?(".(($currentSubString==$val) ? 'true' : 'false').")) kończy się ';";
+//                
+                ?><script>//alert("<?php //echo "link ($currentSubString)kończy ';' lub '=' np.: '=> koza;' lub '=> koza = mydło;'"; ?>")</script><?php 
+//                $czyKoniec = ((strpos($currentSubString,"="))<(strpos($currentSubString,";")&&(strpos($currentSubString,"=")>0;echo "<br>weszło '='";))) ? (strpos($currentSubString,"=")) : (strpos($currentSubString,";"));
+//                echo "<br>strpos(currentSubString,'=')=".strpos($currentSubString,"=",3);
+//                echo "<br>strpos(currentSubString,';')=".strpos($currentSubString,";",3);
+                $rown = strpos($currentSubString,"=",3);
+                $sred = strpos($currentSubString,";",3);
+                
+//                if((strpos($currentSubString,"=")<strpos($currentSubString,";"))&&(strpos($currentSubString,"=")>0)){
+                if(($rown<$sred)&&($rown>0)){
+                    $czyKoniec = strpos($currentSubString,"=",3);
+//                    echo "<br>weszło '='";
+                    $spac = " ";
+                }else{
+                    $czyKoniec = strpos($currentSubString,";",3);
+//                    echo "<br>weszło ';'";
+                }
+                
+            }else if (strpos($currentSubString,"=")){             // link konczy '=' np.: => koza =
+                $czyKoniec = strpos($currentSubString,"=");
+                ?><script>//alert("<?php echo "link ($currentSubString)kończy '=' np.: => koza ="; ?>")</script><?php 
+//                echo "<br>String ('".$currentSubString."' ?? '$val'?(".(($currentSubString==$val) ? 'true' : 'false').")) kończy się '='";
+            }else{                                                 // Brak zakończenia po => np.: => koza
+                $czyKoniec = strlen($currentSubString);
+                ?><script>//alert("<?php echo "link ($currentSubString) brak zakończenia po =>"; ?>")</script><?php 
+//                echo "<br>String ('".$currentSubString."' ?? '$val'?(".(($currentSubString==$val) ? 'true' : 'false').")) kończy się BEZ ZNAKU";
+            }
+            
+//            $lengthLink = $czyKoniec;
+            $LinkSlowo = substr($currentSubString,$trzy,$czyKoniec-$trzy);     // wycięcie samego słowa / słów, które sa sprawdzane potem w bazie
+            
+//            echo "<br> SubString (".$currentSubString.") i ma param:"
+//                    . "<br>[czyKon:$czyKoniec]"
+//                    . "<br>[LinkSlowo:$LinkSlowo]";
+            
+            if($bool){                      // jeśli subString spełnia warunki linku
+//                echo "<br> wchodzę do BOOL";
+                $LinkSlowo= triTrim($LinkSlowo);
+
+                $IDofWordByTrans = $this->getIdsByTrans($LinkSlowo);        // użycie funkcji wyszukującej słowo w bazie (resource/false)
+
+                if($IDofWordByTrans){   // czy jest słowo w słowniku w ogóle!!!
+                    
+                    $linkShow = "<a href=#ordAnchor_".$IDofWordByTrans."\>".$LinkSlowo."</a>".$spac;      // tworzenie linku (show.php)
+                    $tail = substr($currentSubString,$czyKoniec);                                   // określenie reszty, ogona poza słowem
+                    $currentSubString = substr_replace($currentSubString, $linkShow, $trzy).$tail;  //tworzenie gotowego fragmentu z linkiem
+
+//                    echo "<br>CURR SUBS:($currentSubString)";
+                }
+            }else{
+//                echo "<br> BOOL == FALSE!!!!!!";
+                ?><script>//alert("<?php //echo "BOOL == FALSE!!!!!!"; ?>")</script><?php
+            }
+            
+            // łączenie stringu
+             
+            
+//            $arrUwagi[i] = $currentSubString;             // niepotrzebne faktycznie
+//            $str .= $currentSubString;                      // zapis fragmentu na zewnątrz
+            if(!strpos($str,$linkShow))
+                $str .= $linkShow."; ";                              // zapis fragmentu na zewnątrz
+            $i++;
+        }
+        
+//        echo "<br><br>Uwagi($uwagi)";
+//        echo "<br>arrUwagi("; var_dump($arrUwagi); echo ")";
+//        echo "<br>va_duSTR("; var_dump($str); echo ")";
+//        echo "<br>STR($str)<br>";
+        
+        $linki = $str;                                      // ostateczne przypisanie
+
+        return $linki;
+    }    

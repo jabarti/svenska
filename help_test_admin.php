@@ -14,7 +14,7 @@ $title = 'Svenska | '.t("Help Test Admin");
 include 'title.php';
 include 'header.php';
 include 'buttons.php';
-include 'divLog.php';
+include 'divLog.php'; 
 
 echo "LEPSZY SZYFR!!!: ".hash('sha256', "ala")."<br>";
 
@@ -39,8 +39,112 @@ if($sumZ > $sumM){
 
 echo "<br>Wygrywa: ".$win.' i siedzi przy oknie przy starcie<br><br>';
 
+//$string = "abcdefghijbklmnopioqrsbtuwxyzb1234567890";
+//echo preg_match("/abc/", $string);
+//
+//if(preg_match("/^aBc/i",$string)){          // i for insensitive for case
+//    echo '<br>true'.__LINE__;
+//    if(preg_match("/^aBc|90\z/i",$string)){
+//        echo '<br>true'.__LINE__;
+//    }else{
+//        echo '<br>false'.__LINE__;
+//    }
+//}else{
+//    echo '<br>false';
+//}
+//
+//preg_match_all("/[^b]/",$string,$matches);
+//
+//foreach ($matches as $key => $value) {
+//    echo "<br>$key => $value";
+//}
+
+echo "<br>===================================================";
 if($Word = new Ord()){
+    $IDofWordByTrans = $Word->getIdsByTrans("gå");
+    echo "<br>ID=".$IDofWordByTrans."<br>";
     $empty_rec = $Word->findEmptyOrdId();
+    echo "<br>====================================<br>";
+//    $string = "Ala ma kota =>           leende; <=> dupa;";
+//    echo "<br>BAZA: ".$string."<br><br>";
+//    $link0a = $Word->MakeLinkToTextarea($string);  
+//    $link0b = $Word->MakeLinkToTextarea2($string);  
+//    echo "<br>link0a__: ".$link0a;
+//    echo "<br>link0b__: ".$link0b;
+//    echo "<br>====================================<br>";
+    
+//    $string = "=>           leende; <=> dupa;";
+//    echo "<br>BAZA: ".$string."<br><br>";
+//    $link1a = $Word->MakeLinkToTextarea($string);  
+//    $link1b = $Word->MakeLinkToTextarea2($string);  
+//    echo "<br>link1a__: ".$link1a;
+//    echo "<br>link1b__: ".$link1b;
+//    echo "<br>====================================<br>";
+    
+//    $string = "Ala ma kota =>        stam; <=> dupa;";
+//    echo "<br>BAZA: ".$string."<br><br>";
+//    $link2a = $Word->MakeLinkToTextarea($string);
+//    $link2b = $Word->MakeLinkToTextarea2($string);
+//    echo "<br>link2a__: ".$link2a;
+//    echo "<br>link2b__: ".$link2b;
+//    echo "<br>====================================<br>";
+//    
+//    $string = "Ala ma kota => dristighet; <=> dupa;";
+//    echo "<br>BAZA: ".$string."<br><br>";
+//    $link3a = $Word->MakeLinkToTextarea($string);
+//    $link3b = $Word->MakeLinkToTextarea2($string);
+//    echo "<br>link3a__: ".$link3a;
+//    echo "<br>link3b__: ".$link3b;
+//    echo "<br>====================================<br>";
+    
+//    $string = "Ala ma kota => dristighet; => 	samtidigt => rower; <=> dupa; => härifrån;";
+//    echo "<br>BAZA: ".$string."<br><br>";
+//    $link4a = $Word->MakeLinkToTextarea($string);
+//    $link4b = $Word->MakeLinkToTextarea2($string);
+//    echo "<br>link4a__: ".$link4a;
+//    echo "<br>link4b__: ".$link4b;
+//    echo "<br>====================================<br>";
+    
+    $string = "Ala ma kota => dristighet; => 	samtidigt => rower; <=> dupa; => härifrån;";
+    echo "<br>BAZA: ".$string."<br><br>";
+    $link5a = $Word->MakeLinkToTextarea($string);
+//    $link5b = $Word->MakeLinkToTextarea2($string);
+    echo "<br>link5a__: ".$link5a;
+    echo "<br>link5b__: ".$link5b;
+    echo "<br>====================================<br>";
+        
+    $string = "gramatyczne formy: supinum (gångit), passiv supinum (gångits); gå in <=> gå ut; gå ner <=> gå upp;
+                gå med     = przystąpić, wstąpić, przystępować, wstępować;
+                gå över    = kończyć, przerywać;
+                gå ut med  = spotykać się z, wyjść z;
+                gå förbi   = przechodzić obok, wyprzedzać;
+                gå åt      = zużyć, pójść na coś  (det har gått åt 5kg = poszło na to 5 kg);
+                gå sönder  = połamać się, rozbić się, uszkodzić się;
+                gå under   = kończyć się, umierać, dobiec końca, upaść, zginąć;
+                gå upp     = przybrać na wadze;
+                gå igenom  = przejść przez coś, poradzić sobie czymś, spenetrować;";
+    echo "<br>BAZA: ".$string."<br><br>";
+    $link6a = $Word->MakeLinkToTextarea($string);
+//    $link6b = $Word->MakeLinkToTextarea2($string);
+    echo "<br>link6a__: ".$link6a;
+    echo "<br>link6b__: ".$link6b;
+    echo "<br>====================================<br>";
+    
+//    $string = "=> därifrån;"; 
+//    echo "<br>BAZA: ".$string."<br><br>";   
+//    $link7a = $Word->MakeLinkToTextarea($string);
+//    $link7b = $Word->MakeLinkToTextarea2($string);
+//    echo "<br>link7a__: ".$link7a;
+//    echo "<br>link7b__: ".$link7b;
+//        echo "<br>";
+    
+    $string = "Ala ma kota => dristighet; => 	samtid?igt => rower; <=> dupa; => härifrån == brev;";    
+    echo "<br>BAZA: ".$string."<br><br>";
+    $link8a = $Word->MakeLinkToTextarea($string);
+//    $link8b = $Word->MakeLinkToTextarea2($string);
+    echo "<br>link8a__: ".$link8a;
+    echo "<br>link8b__: ".$link8b;
+        echo "<br>";    
     
     $val = $Word->getTypesOfOrd();
  

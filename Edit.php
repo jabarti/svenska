@@ -283,7 +283,7 @@ echo "<form action='' method=post>"
 //tworzenie tabelek
 $method='post';
 //$id = 0;
-echo "<div id=div_edit class=edit_tab_contener>";
+echo "<div id='div_edit' class='edit_tab_contener'>";
 while($row = mysql_fetch_assoc($mq)){
     
     $curr_word_id = $row['id'];
@@ -374,6 +374,16 @@ while($row = mysql_fetch_assoc($mq)){
                 echo "<td>".t($k)."</td>";
                 echo "<td colspan=7>";
                     echo "<textarea id='uwagi_ta_".$curr_word_id."' class='uwagi_ta' name=".$k." >".$v."</textarea>";
+                echo "</td>";
+            echo "</tr>";
+//            break;
+        }
+        elseif($k == 'linki'){
+            echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
+//                echo "<td>".g($k)."</td>";
+                echo "<td colspan=7>";
+                    echo "<input type='hidden' name='linki'></input>";;
+//                    echo "<span id='linki_ta_".$curr_word_id."' class='linki_ta'  readonly>".$v."</span>";
                 echo "</td>";
             echo "</tr>";
             break;

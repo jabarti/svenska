@@ -9,6 +9,7 @@
  * Author       Bartosz M. Lewiński <jabarti@wp.pl>
  ***************************************************/
 $isEdit = strrpos($_SERVER['PHP_SELF'], "Edit.php");
+$isShow = strrpos($_SERVER['PHP_SELF'], "show.php");  
 
 if($isEdit){
     $isEdit = '';
@@ -63,25 +64,40 @@ echo "<div id=movingsearch class=movingsearch>";
 //        
 //echo "  <input type=submit name=wher_sub value='".t('wybierz')."'></input>
 //      </form>";
+if($isShow){
+    echo "<form action='Edit.php' ".$isEdit." method=post>
+            <p>SHOW MUST GO ON!!!</p>
+            <input id='sercz'     type='text' name='sercz' >".
+            "<input id='sercz_btn' type='submit' value='".t("Szukaj podobnych")."'></input>
+            <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
+            <br>  ".t("Tip: use")." '%' ".t("for string of unknown symbols/letters")."</span>
+          </form>";
+    echo "<form action='Edit.php' ".$isEdit." method=post> 
+            <input id='sercz_dok'     type='text' name='sercz_dok' >".
+            "<input id='sercz_dok_btn' type='submit' value='".t("Szukaj dokładnie")."'></input>
+            <!--input id='resetFormIndex' type='reset' value='".t("Wyczyść wszystko")."'></input-->
+          </form>";
+    echo "</div>";
+}else{
 
-echo "<form action='Edit.php' ".$isEdit." method=post>
-        <input id='sercz'     type='text' name='sercz' >".
-//        "<!--value='".$_SESSION['serczCONST']."'-->".
-        "<input id='sercz_btn' type='submit' value='".t("Szukaj podobnych")."'></input>
-        <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
-        <br>  ".t("Tip: use")." '%' ".t("for string of unknown symbols/letters")."</span>
-      </form>";
-echo "<form action='Edit.php' ".$isEdit." method=post> 
-        <input id='sercz_dok'     type='text' name='sercz_dok' >".
-//        "<!--value='".$_SESSION['serczCONST_dok']."'--> ".
-        "<input id='sercz_dok_btn' type='submit' value='".t("Szukaj dokładnie")."'></input>
-        <!--input id='resetFormIndex' type='reset' value='".t("Wyczyść wszystko")."'></input-->
-      </form>";
-//echo "<form action='Eraser.php' ".$isEdit." method=post>
-//        <input id='erase_btn' type='submit' value='".t("Wyczyść wszystko")."'></input>
-//      </form>";
-//echo "<form action='Edit.php' method=post>
-//        <input id='erase_btn' type='submit' name='erase' value='".t("Wyczyść wszystko")."'></input>
-//      </form>";
-echo "</div>";
-
+    echo "<form action='Edit.php' ".$isEdit." method=post>
+            <input id='sercz'     type='text' name='sercz' >".
+    //        "<!--value='".$_SESSION['serczCONST']."'-->".
+            "<input id='sercz_btn' type='submit' value='".t("Szukaj podobnych")."'></input>
+            <br><span> ".t("Tip: use")." '_' ".t("for unknown symbol/letter")."
+            <br>  ".t("Tip: use")." '%' ".t("for string of unknown symbols/letters")."</span>
+          </form>";
+    echo "<form action='Edit.php' ".$isEdit." method=post> 
+            <input id='sercz_dok'     type='text' name='sercz_dok' >".
+    //        "<!--value='".$_SESSION['serczCONST_dok']."'--> ".
+            "<input id='sercz_dok_btn' type='submit' value='".t("Szukaj dokładnie")."'></input>
+            <!--input id='resetFormIndex' type='reset' value='".t("Wyczyść wszystko")."'></input-->
+          </form>";
+    //echo "<form action='Eraser.php' ".$isEdit." method=post>
+    //        <input id='erase_btn' type='submit' value='".t("Wyczyść wszystko")."'></input>
+    //      </form>";
+    //echo "<form action='Edit.php' method=post>
+    //        <input id='erase_btn' type='submit' name='erase' value='".t("Wyczyść wszystko")."'></input>
+    //      </form>";
+    echo "</div>";
+}

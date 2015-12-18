@@ -28,6 +28,7 @@ if(isset($_SESSION['role'])){
              array_push($allowPages,"SynonymerMOD.php");
              array_push($allowPages,"motsatsen.php"); // nie dokończone!!! dlatego niżej nie dostępne!
              array_push($allowPages,"EditAllMod.php"); // nie dokończone!!! dlatego niżej nie dostępne!
+             array_push($allowPages,"EditMod.php"); // nie dokończone!!! dlatego niżej nie dostępne!
              
          case 'user_plus':
 //             array_push($allowPages,"Edit.php");

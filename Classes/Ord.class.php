@@ -52,7 +52,8 @@ class Ord {
     private $wymowa;
     private $kategoria;
     private $uwagi;
-    
+    private $linki;
+
     private $table = "ord";
     private $prezentuj = 20;    // określa ilość prezentowanych wyników dla:  LIMIT 0, $prezentuj
                                 //  getSimOrdByIdOrd($text); 
@@ -79,14 +80,84 @@ class Ord {
                                 'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
                                 'gramatyka','pytajnik','idiom','przysłowie','zart','wulgarne','potoczne','uzupelnic');
     
+    public function setDataFakeForTest($id_ord, $typ, $rodzaj, $grupa, $trans, 
+                            $infinitive, $presens, $past, $supine, $imperative, $present_participle, $past_participle, 
+                            $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
+                            $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
+                            $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
+                            $glowny, $porzadkowy,$ulamek,
+                            $wymowa, $kategoria, $uwagi, $linki){
+        
+//            if(!$this->getId($id_ord)){ // blokada ponownego dodania rekordu o takim samym kluczu słownym
+            
+            $SQL = "INSERT INTO `".$this->table."` "
+                . "(`id_ord`, `typ`, `rodzaj`, `grupa`, `trans`, "
+                . "`infinitive`, `presens`, `past`, `supine`, `imperative`, `present_participle`, `past_participle`, "
+                . "`pas_infinitive`, `pas_presens`, `pas_preterite`, `pas_supine`, `pas_imperative`, "
+                . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
+                . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
+                . "`glowny`, `porzadkowy`, `ulamek`,"
+                . "`wymowa`, `kategoria`, `uwagi`,`linki`) "
+                . "VALUES "
+                . "('".$id_ord."','".$typ."','".$rodzaj."','".$grupa."','".$trans."',"
+                . "'".$infinitive."','".$presens."','".$past."','".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
+                . "'".$pas_infinitive."','".$pas_presens."','".$pas_preterite."','".$pas_supine."','".$pas_imperative."',"
+                . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
+                . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
+                . "'".$glowny."','".$porzadkowy."','".$ulamek."',"
+                . "'".$wymowa."', '".$kategoria."','".$uwagi."','".$linki."');";            
+        
+                ?><script>alert("<?php echo $SQL; ?>")</script><?php
+             
+//            }
+        }
+        
+//  Funkcja do robienia LINKU w uwadze. na podstawie słowa między => a SŁOWO ; => id
+//  i przetworzenie na link postaci: <a href="#ordAnchor_4044">klä upp sig</a> (widoczne w show)  
+    
+    public function MakeLinkToTextarea($uwagi){
+        
+//        $pregLink = "/<a href=\"([^\"]*)\">(.*)<\/a>/iU";
+//        $pregLink = "/<a\s[^>]*href=\"([^\"]*)\"[^>]*>(.*)<\/a>/siU";
+        
+        $sven = "öäåÖÄÅ";
+        $pols = "ąćęłńóśżźĆŁŚŹŻ";
+        $preg0 = "[a-zA-Z$sven$pol:,\(\)\\n]";
+        $preg1 = "(=>)* ((\s)*($preg0)*(\s)*)*(;|\s)";                     // => słowo takie lub takie;
+        $preg2 = "(<=>)*((\s)*$preg0*(\s)*)*(;|\s)";                    // <=> słowo takie lub takie;
+        $preg3 = "(==)* ((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+        $preg4 = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+//        $preg5 = "(\s)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+        $pregX = "($preg0*(\s)*)*(;|\s)";                               // słowo takie lub takie;
+        
+        preg_match_all("/$preg1|$preg2|$preg3|$preg4/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+ 
+        foreach($matches[0] as $value){
+            preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
+                
+            foreach($word[0] as $val){
+                if(strlen($val)!=0){                                        // jeśli string ma zawartość
+                    $val_ord = trim(substr($val,0,-1));
 
+                    $IDofWordByTrans = $this->getIdsByTrans($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
+                    
+                    if($IDofWordByTrans && !strpos($linki, $val_ord)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
+                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+                    }else{ } //if($IDofWordByTrans){   
+                }else{} // if(strlen($val)!=0){   
+            }
+        }
+        return $linki;
+    }   
+
+    
     public function setData($id_ord, $typ, $rodzaj, $grupa, $trans, 
                             $infinitive, $presens, $past, $supine, $imperative, $present_participle, $past_participle, 
                             $pas_infinitive, $pas_presens, $pas_preterite, $pas_supine, $pas_imperative,
                             $S_indefinite, $S_definite, $P_indefinite, $P_definite, 
                             $neuter, $masculin, $plural, $st_rowny, $st_wyzszy, $st_najwyzszy, 
                             $glowny, $porzadkowy,$ulamek,
-                            $wymowa, $kategoria, $uwagi){
+                            $wymowa, $kategoria,$uwagi,$linki){
         
         if(!$this->getId($id_ord)){ // blokada ponownego dodania rekordu o takim samym kluczu słownym
 //        if(true){
@@ -98,7 +169,7 @@ class Ord {
                 . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                 . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                 . "`glowny`, `porzadkowy`, `ulamek`,"
-                . "`wymowa`, `kategoria`, `uwagi`) "
+                . "`wymowa`, `kategoria`,`uwagi`,`linki`) "
                 . "VALUES "
                 . "('".$id_ord."','".$typ."','".$rodzaj."','".$grupa."','".$trans."',"
                 . "'".$infinitive."','".$presens."','".$past."','".$supine."','".$imperative."','".$present_participle."','".$past_participle."',"
@@ -106,7 +177,7 @@ class Ord {
                 . "'".$S_indefinite."','".$S_definite."','".$P_indefinite."','".$P_definite."',"
                 . "'".$neuter."','".$masculin."','".$plural."','".$st_rowny."','".$st_wyzszy."','".$st_najwyzszy."',"
                 . "'".$glowny."','".$porzadkowy."','".$ulamek."',"
-                . "'".$wymowa."', '".$kategoria."', '".$uwagi."');");            
+                . "'".$wymowa."', '".$kategoria."', '".$uwagi."', '".$linki."');");            
         
             if (mysql_query($SQL)){
 //                echo "<br>".t("WSADZONE do ord!!!");
@@ -122,7 +193,7 @@ class Ord {
                     . "`S_indefinite`, `S_definite`, `P_indefinite`, `P_definite`, "
                     . "`neuter`, `masculin`, `plural`,`st_rowny`, `st_wyzszy`, `st_najwyzszy`, "
                     . "`glowny`, `porzadkowy`,`ulamek`, "
-                    . "`wymowa`, `kategoria`, `uwagi`) "
+                    . "`wymowa`, `kategoria`, `uwagi`, `linki`) "
                     . "VALUES "
                     . "('".$id_LH."', '".$this->setSQLstringToCode($id_ord)."','".$typ."','".$rodzaj."','".$grupa."','".$this->setSQLstringToCode($trans)."',"
                     . "'".$this->setSQLstringToCode($infinitive)."','".$this->setSQLstringToCode($presens)."','".$this->setSQLstringToCode($past)."','".$this->setSQLstringToCode($supine)."','".$this->setSQLstringToCode($imperative)."','".$this->setSQLstringToCode($present_participle)."','".$this->setSQLstringToCode($past_participle)."',"
@@ -130,7 +201,7 @@ class Ord {
                     . "'".$this->setSQLstringToCode($S_indefinite)."','".$this->setSQLstringToCode($S_definite)."','".$this->setSQLstringToCode($P_indefinite)."','".$this->setSQLstringToCode($P_definite)."',"
                     . "'".$this->setSQLstringToCode($neuter)."','".$this->setSQLstringToCode($masculin)."','".$this->setSQLstringToCode($plural)."','".$this->setSQLstringToCode($st_rowny)."','".$this->setSQLstringToCode($st_wyzszy)."','".$this->setSQLstringToCode($st_najwyzszy)."',"
                     . "'".$this->setSQLstringToCode($glowny)."','".$this->setSQLstringToCode($porzadkowy)."','".$this->setSQLstringToCode($ulamek)."',"
-                    . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($kategoria)."','".$this->setSQLstringToCode($uwagi)."');");
+                    . "'".$this->setSQLstringToCode($wymowa)."','".$this->setSQLstringToCode($kategoria)."','".$this->setSQLstringToCode($uwagi)."','".$this->setSQLstringToCode($linki)."');");
 //                 echo "<br>INSERT: ".$SQL_PLLH;
                 if (mysql_query($SQL_PLLH)){
 //                    echo "<br>".t("WSADZONE do ordLH!!!");
@@ -184,6 +255,21 @@ class Ord {
             $res = mysql_fetch_row(mysql_query($SQL));
         
 //            echo '<br>'.$SQL;
+        
+            if (mysql_affected_rows()){
+//            echo "<br>res[0]:".$res[0];
+                return $res[0];
+            }else{
+//                echo "<br>ERROR";
+                return false;
+            }
+        } 
+        
+        public function getIdsByTrans($trans){
+            $SQL = sprintf("SELECT id FROM `".$this->table."` WHERE `trans` = \"".$trans."\";");            
+            $res = mysql_fetch_row(mysql_query($SQL));
+
+//            echo '<br>'.$SQL.'<br>';
         
             if (mysql_affected_rows()){
 //            echo "<br>res[0]:".$res[0];
@@ -259,7 +345,7 @@ class Ord {
                                     'S_indefinite', 'S_definite', 'P_indefinite', 'P_definite', 
                                     'neuter', 'masculin', 'plural' , 'st_rowny','st_wyzszy', 'st_najwyzszy', 
                                     'glowny', 'porzadkowy', 'ulamek',
-                                    'wymowa', 'kategoria', 'uwagi');
+                                    'wymowa', 'kategoria', 'uwagi', 'linki');
             
             return $tab;
         }

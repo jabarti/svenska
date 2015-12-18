@@ -14,7 +14,11 @@ $title = 'Svenska | '.t("Show/printer");
 include 'title.php';
 include 'header.php';
 include 'buttons.php';
-include 'divLog.php';
+include 'divLog.php'; 
+
+// Do pracy: search
+//include 'Search.php';
+//
 //echo "rola: ";var_dump($allowPages);
 //var_dump($_SESSION);
 if(isset($_SESSION['role']) && ($_SESSION['role']=='visitor' or $_SESSION['role']=='user')){
@@ -280,6 +284,7 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
 //     echo "<tr><td colspan=6>";var_dump($row);echo "</td></tr>";
        echo "<tr>";
        $attr = 0;
+       $ile_Liter = 8;
        foreach($row as $k => $v){
            if($attr < 6){
                if($attr == 0){
@@ -295,7 +300,7 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
            }else{
                 if($attr==6 && $v!=''){
                     if(!$flat)
-                        echo "<td id=szesc>".substr($k,0,6).": <span class=red>$v</span>,<br>";  // kolumna z info w trybie bez flat, pierwszy wiersz!!
+                        echo "<td id=szesc>".substr($k,0,$ile_Liter).": <span class=red>$v</span>,<br>";  // kolumna z info w trybie bez flat, pierwszy wiersz!!
                     else
                         echo "<td id=szesc>$v, ";   // kolumna z info Z FLATEM, 1-szy wyraz
                     }
@@ -309,8 +314,8 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                     if(!$flat){
                         if ( $k == "kategoria"){
                             
-                            echo substr($k,0,6).": ";
-                            $arrKat = split(';', $v);
+                            echo substr(t($k),0,$ile_Liter).": ";
+                            $arrKat = explode(';', $v);
                             foreach($arrKat as $kat){
                                 // wyświetla w SHOW, buttony kategorii do sortowania w kolumnie FORMY/FORMARNA
                                 echo "<button type='submit' class='btnKategory' name='SortKat' value='".$kat."'>".t($kat)."</button>";  
@@ -320,7 +325,7 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                             
                             continue;
                         }else{
-                            echo substr($k,0,6).": <span class=red>$v</span>,<br>";
+                            echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>$v</span>,<br>";
                         }
                     }else{
 //                        if($k == "uwagi" || $k == "kategoria" ){

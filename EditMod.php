@@ -10,7 +10,7 @@
  * ************************************************* */
 ob_start(); // żeby sie dało reloadeować
 
-require_once 'common.inc.php';
+require_once 'common.inc.php'; 
 include 'DB_Connection.php';
 $title = 'Svenska | Edit';
 include 'title.php';
@@ -69,10 +69,20 @@ if(isset($_POST)){
                     $sql_textErrINSPLLH .= "'".($v)."',";
                     break;
                 case 'uwagi':           // ostatni musi mieć zakończenie z ";"
-                    $sql_text .= "`".$k."`='".triTrim($v)."'";
-                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode(triTrim($v))."'";
+                    $sql_text .= "`".$k."`='".triTrim($v)."',";
+                    $sql_textPLLH .= "`".$k."`='".$Word->setSQLstringToCode(triTrim($v))."',";
+                    $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode(triTrim($v))."',";
+//                    $sql_textPLLH .= "`".$k."`='".($v)."'";
+//                    break;
+//              
+                    $v=$Word->MakeLinkToTextarea($v);
+                    ?><script>alert("<?php echo $v; ?>")</script><?php
+                    $sql_text .= "`linki`='".$v."'";
+                    $sql_textPLLH .= "`linki`='".$Word->setSQLstringToCode(triTrim($v))."'";
                     $sql_textErrINSPLLH .= "'".$Word->setSQLstringToCode(triTrim($v))."');";
 //                    $sql_textPLLH .= "`".$k."`='".($v)."'";
+                    break;
+                case 'linki':           
                     break;
                 default:
                     $sql_text .= "`".$k."`='".triTrim($v)."',";
@@ -98,7 +108,7 @@ if(isset($_POST)){
         echo '<br>line: '.__LINE__.'/ SQL: '.$sql_text;
         echo '<br>line: '.__LINE__.'/ SQL_PLLH: '.$sql_textPLLH;
         echo '<br>line: '.__LINE__.'/ $sql_textErrINSPLLH: '.$sql_textErrINSPLLH;
-        
+
         mysql_query($sql_text);
         
         if(mysql_affected_rows()){
