@@ -97,18 +97,19 @@ if($Word = new Ord()){
 //    echo "<br>link3b__: ".$link3b;
 //    echo "<br>====================================<br>";
     
-//    $string = "Ala ma kota => dristighet; => 	samtidigt => rower; <=> dupa; => härifrån;";
-//    echo "<br>BAZA: ".$string."<br><br>";
-//    $link4a = $Word->MakeLinkToTextarea($string);
-//    $link4b = $Word->MakeLinkToTextarea2($string);
-//    echo "<br>link4a__: ".$link4a;
-//    echo "<br>link4b__: ".$link4b;
-//    echo "<br>====================================<br>";
+    $string = "noggrant <=> slarvigt;";
+    echo "<br>BAZA: ".$string."<br><br>";
+    $link4a = $Word->MakeLinkToTextarea($string);
+    $link4b = $Word->MakeLinkToTextarea2($string);
+    echo "<br>link4a__: ".$link4a;
+    echo "<br>link4b__: ".$link4b;
+    echo "<br>====================================<br>";
     
     $string = "Ala ma kota => dristighet; => 	samtidigt => rower; <=> dupa; => härifrån;";
+    $string = "(petig == noggran == ordentlig) <=> (slarvig == oordentlig);";
     echo "<br>BAZA: ".$string."<br><br>";
     $link5a = $Word->MakeLinkToTextarea($string);
-//    $link5b = $Word->MakeLinkToTextarea2($string);
+    $link5b = $Word->MakeLinkToTextarea2($string);
     echo "<br>link5a__: ".$link5a;
     echo "<br>link5b__: ".$link5b;
     echo "<br>====================================<br>";
@@ -125,7 +126,7 @@ if($Word = new Ord()){
                 gå igenom  = przejść przez coś, poradzić sobie czymś, spenetrować;";
     echo "<br>BAZA: ".$string."<br><br>";
     $link6a = $Word->MakeLinkToTextarea($string);
-//    $link6b = $Word->MakeLinkToTextarea2($string);
+    $link6b = $Word->MakeLinkToTextarea2($string);
     echo "<br>link6a__: ".$link6a;
     echo "<br>link6b__: ".$link6b;
     echo "<br>====================================<br>";
@@ -138,10 +139,11 @@ if($Word = new Ord()){
 //    echo "<br>link7b__: ".$link7b;
 //        echo "<br>";
     
+    echo "<br>====================================<br>";    
     $string = "Ala ma kota => dristighet; => 	samtid?igt => rower; <=> dupa; => härifrån == brev;";    
     echo "<br>BAZA: ".$string."<br><br>";
     $link8a = $Word->MakeLinkToTextarea($string);
-//    $link8b = $Word->MakeLinkToTextarea2($string);
+    $link8b = $Word->MakeLinkToTextarea2($string);
     echo "<br>link8a__: ".$link8a;
     echo "<br>link8b__: ".$link8b;
         echo "<br>";    

@@ -129,21 +129,147 @@ class Ord {
         $preg4 = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
 //        $preg5 = "(\s)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
         $pregX = "($preg0*(\s)*)*(;|\s)";                               // słowo takie lub takie;
+        $arrIDofWordByTrans = array();
         
         preg_match_all("/$preg1|$preg2|$preg3|$preg4/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
  
         foreach($matches[0] as $value){
             preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
                 
-            foreach($word[0] as $val){
+            foreach($word[0] as $val){             
+                $pocz = strpos($val, "(");
+                $koni = strpos($val, ")");
+                $sred = strpos($val, ";");
+                
+               if($pocz !== false){
+                    $val = substr($val,$pocz+1);
+                }
+                
+                if($sred !== false){
+                    $val = substr($val,0,$sred);
+                }
+                
+                if($koni !== false){
+                    $val = substr($val,0,$koni);
+                }
+                
                 if(strlen($val)!=0){                                        // jeśli string ma zawartość
-                    $val_ord = trim(substr($val,0,-1));
+//                    $val_ord = trim(substr($val,0,-1));
+                    $val_ord = trim($val);
 
                     $IDofWordByTrans = $this->getIdsByTrans($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
                     
-                    if($IDofWordByTrans && !strpos($linki, $val_ord)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
+//                    if($IDofWordByTrans && !strpos($linki, $val_ord)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu    *daje błąd jeśli wystąpi podobny zbitek liter np.: ord, anchor, kyl i kylskåp*/         
+                    if($IDofWordByTrans && !in_array($IDofWordByTrans, $arrIDofWordByTrans)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
+                        array_push($arrIDofWordByTrans, $IDofWordByTrans);
                         $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
                     }else{ } //if($IDofWordByTrans){   
+                }else{} // if(strlen($val)!=0){   
+            }
+        }
+        return $linki;
+    } 
+    
+    /* FUNKCJA TESTOWA */
+    public function MakeLinkToTextarea2($uwagi){
+        
+//        $pregLink = "/<a href=\"([^\"]*)\">(.*)<\/a>/iU";
+//        $pregLink = "/<a\s[^>]*href=\"([^\"]*)\"[^>]*>(.*)<\/a>/siU";
+        
+        $sven   = "öäåÖÄÅ";
+        $pols   = "ąćęłńóśżźĆŁŚŹŻ";
+        $preg0  = "[a-zA-Z$sven$pol:,\(\)\\n]";
+
+//        $preg0a  = "[a-zA-Z$sven$pol\\n]";        
+//        $preg0b  = "([^\(\)]*(\s)*($preg0a)*(\s)*[^\(\)])";
+
+        $preg1  = "(=>)* ((\s)*($preg0)*(\s)*)*(;|\s)";                     // => słowo takie lub takie;
+        $preg2  = "(<=>)*((\s)*$preg0*(\s)*)*(;|\s)";                       // <=> słowo takie lub takie;
+        $preg3  = "(==)* ((\s)*$preg0*(\s)*)*(;|\s)";                       // == słowo takie lub takie;
+        $preg4  = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                         // == słowo takie lub takie;
+//        $preg5  = "(\s)*((\s)*$preg0*)(=>|<=>|==|;|\s|\n)";                      // == słowo takie lub takie;
+        $pregX  = "($preg0*(\s)*)*(;|\s)";                                  // słowo takie lub takie;
+        
+        $arrIDofWordByTrans = array();
+        
+        if(preg_match("/$preg1/",$uwagi)){echo "<br> preg1 [<span class=red>$preg1</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg1 [<span class=red>$preg1</span>] NOT matches";}
+        if(preg_match("/$preg2/",$uwagi)){echo "<br> preg2 [<span class=red>$preg2</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg2 [<span class=red>$preg2</span>] NOT matches";}
+        if(preg_match("/$preg3/",$uwagi)){echo "<br> preg3 [<span class=red>$preg3</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg3 [<span class=red>$preg3</span>] NOT matches";}
+        if(preg_match("/$preg4/",$uwagi)){echo "<br> preg4 [<span class=red>$preg4</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg4 [<span class=red>$preg4</span>] NOT matches";}
+//        if(preg_match("/$preg5/",$uwagi)){echo "<br> preg5 [<span class=red>$preg5</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg4 [<span class=red>$preg5</span>] NOT matches";}
+
+        
+        preg_match_all("/$preg1|$preg2|$preg3|$preg4/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+        echo "<br>";
+//        var_dump($matches);
+        echo "<br>";
+        foreach($matches[0] as $value){
+           
+            preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
+
+            foreach($word[0] as $val){
+                
+                echo "<br>VAL przed: $val";
+                
+                $pocz = strpos($val, "(");
+                $koni = strpos($val, ")");
+                $sred = strpos($val, ";");
+//                $leng = strlen($val);
+                
+                echo "<br>VAL przed: $val i pocz=$pocz, koni=$koni i leng=$leng";
+                
+                if($pocz !== false){
+                    
+                    echo "<br>PRZED POCZ=".$pocz." , $val";
+                    $val = substr($val,$pocz+1);
+                    echo "<br>PO POCZ=$pocz, $val";
+                }
+                
+                if($sred !== false){
+                    echo "<br>PRZED KONI=".$sred." , $val";
+                    $val = substr($val,0,$sred);
+                    echo "<br>PO KONI=".$sred." , $val";
+                }
+                
+                if($koni !== false){
+                    echo "<br>PRZED KONI=".$koni." , $val";
+                    $val = substr($val,0,$koni);
+                    echo "<br>PO KONI=".$koni." , $val";
+                }
+                
+                
+                echo "<br>VAL PO: $val";
+                
+//                preg_match("/$preg0b/", $val, $value1);
+//                echo "<br>===<br>";
+//                var_dump($value1);
+//                echo "<br>TRY VAL:".$value1[0];
+//                echo "<br>===<br>";               
+//                $val = $value1[0];
+//                echo "<br>$word[0] => $val";
+//                
+//                echo "<br>VAL PO: $val";
+                
+                if(strlen($val)!=0){                                        // jeśli string ma zawartość
+                    
+//                    $val_ord = trim(substr($val,0,-1));
+                    $val_ord = trim($val);
+                    
+//                    echo "<br>Znajdz numer $val_ord:";
+                    $IDofWordByTrans = $this->getIdsByTrans2($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
+//                    echo "<br>Numer $val_ord: $IDofWordByTrans";
+                    
+                    if($IDofWordByTrans && !in_array($IDofWordByTrans, $arrIDofWordByTrans)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
+//                        if(!in_array($IDofWordByTrans, $arrIDofWordByTrans)){ /*daje błąd jeśli wystąpi podobny zbitek liter np.: ord, anchor, kyl i kylskåp*/
+                            array_push($arrIDofWordByTrans, $IDofWordByTrans);
+                            $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+//                        }else{
+                            /*Taki numer występuje już w linku*/
+//                        }
+//                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+                    }else{ 
+//                        echo "<br>$val_ord NIE znaleziony";                    
+                    } //if($IDofWordByTrans){   
                 }else{} // if(strlen($val)!=0){   
             }
         }
@@ -268,8 +394,19 @@ class Ord {
         public function getIdsByTrans($trans){
             $SQL = sprintf("SELECT id FROM `".$this->table."` WHERE `trans` = \"".$trans."\";");            
             $res = mysql_fetch_row(mysql_query($SQL));
+            if (mysql_affected_rows()){
+                return $res[0];
+            }else{
+                return false;
+            }
+        } 
+        
+        /* TEST FUNKTION (COPY of PREVIOUS f-ion*/
+        public function getIdsByTrans2($trans){
+            $SQL = sprintf("SELECT id FROM `".$this->table."` WHERE `trans` = \"".$trans."\";");            
+            $res = mysql_fetch_row(mysql_query($SQL));
 
-//            echo '<br>'.$SQL.'<br>';
+            echo '<br>'.$SQL.'<br>';
         
             if (mysql_affected_rows()){
 //            echo "<br>res[0]:".$res[0];
