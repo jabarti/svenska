@@ -305,7 +305,7 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                         echo "<td id=szesc>$v, ";   // kolumna z info Z FLATEM, 1-szy wyraz
                     }
                 elseif($attr==6 && $v==''){
-                    echo "<td id=szesc>";   // puste albo 1szy wyraz
+                    echo "<td id=szesc>";           // puste albo 1szy wyraz
                 }
                 elseif($attr==(count($row))){
                     echo "</td>";
@@ -324,9 +324,28 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
 //                            echo ": <span class=blue>$v</span>,<br>";
                             
                             continue;
+                            
+                        }else if ($k == "linki"){
+//                            echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>$v</span>,<br>";
+                            $link = "";
+                            $matches = explode(",",$v);
+//                            print_r($matches);
+                            echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>";
+                            foreach($matches as $val1){
+                                if($val1 != ""){
+                                    $ordTrans = $word->getTransById($val1);
+                                    $link .= "<a href='#ordAnchor_".$val1."'>$ordTrans</a>, ";
+                                }
+                            }
+                            echo $link."</span>,<br>";
+                        
                         }else{
                             echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>$v</span>,<br>";
                         }
+                        
+//                        if ( $k = "linki"){
+//                            
+//                        }
                     }else{
 //                        if($k == "uwagi" || $k == "kategoria" ){
                         if($k == "uwagi" ){

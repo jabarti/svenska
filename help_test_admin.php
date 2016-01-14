@@ -61,6 +61,32 @@ echo "<br>Wygrywa: ".$win.' i siedzi przy oknie przy starcie<br><br>';
 
 echo "<br>===================================================";
 if($Word = new Ord()){
+    
+//    $ordTrans = $Word->getTransById(123);
+//    echo "<br>SŁOWO: ".$ordTrans;
+    // get host name from URL
+    preg_match('@^(?:http://)?([^/]+)@i',
+    "http://www.php.net/index.html", $matches);
+    $host = $matches[1];
+
+    // get last two segments of host name
+    echo "<br>";
+    preg_match('/[^.]+\.[^.]+$/', $host, $matches);
+    echo "<br>Host name is: $host";
+    echo "<br>domain name is: {$matches[0]}\n";
+    
+    
+    $val = "att kupa påAÅ: 123";
+    $prex = "/(?<!ett|en|att>)(\s)*[[:alnum:]]*/";
+    $prex = "/(?![ett|en|att])(\s)*[[:alnum:]åöä\s:]*/i";
+//    $prex = "/(?P<name>\w+): (?P<digit>\d+)/";
+    if(preg_match($prex, $val,$matches)){
+        print_r($matches);
+        echo "<br>OK VAL: '$val' / '".$matches[0]."'";
+    }else{
+        echo "<br>VAL: '$val' NI MA PATTERN!!";
+    }
+echo "<br>===================================================";    
     $IDofWordByTrans = $Word->getIdsByTrans("gå");
     echo "<br>ID=".$IDofWordByTrans."<br>";
     $empty_rec = $Word->findEmptyOrdId();
@@ -97,7 +123,7 @@ if($Word = new Ord()){
 //    echo "<br>link3b__: ".$link3b;
 //    echo "<br>====================================<br>";
     
-    $string = "noggrant <=> slarvigt;";
+    $string = "att fundera == ektt tänka == att tycka == att grubbla == att anse;";
     echo "<br>BAZA: ".$string."<br><br>";
     $link4a = $Word->MakeLinkToTextarea($string);
     $link4b = $Word->MakeLinkToTextarea2($string);

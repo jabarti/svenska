@@ -380,11 +380,20 @@ while($row = mysql_fetch_assoc($mq)){
         }
         elseif($k == 'linki'){
             echo "<tr>"; // UWAGA: tu będzie zamknięty ostatni ROW i musi być wyjśćie z pętli!!!!
-//                echo "<td>".g($k)."</td>";
+                echo "<td>".t($k)."</td>";
                 echo "<td colspan=7>";
-                    echo "<input type='hidden' name='linki'></input>";;
-//                    echo "<span id='linki_ta_".$curr_word_id."' class='linki_ta'  readonly>".$v."</span>";
-                echo "</td>";
+                
+                $matches = explode(",",$v);
+                
+                echo "<span class='linki_ta'  readonly>";
+                
+                foreach($matches as $value){
+                    if($value != ""){
+                        $ordTrans = $Word->getTransById($value);
+                        $link .= "<a href='Edit.php?urls=".$value."' value='link".$curr_word_id."'>$ordTrans</a>, ";
+                    }
+                }
+                echo $link."</span></td>";
             echo "</tr>";
             break;
         }

@@ -154,7 +154,13 @@ class Ord {
                 }
                 
                 if(strlen($val)!=0){                                        // jeśli string ma zawartość
-//                    $val_ord = trim(substr($val,0,-1));
+                    
+                    if(strpos($val, "att ")!==false || strpos($val, "ett ")!==false){       // obcięcie ETT ATT lub EN na początku
+                        $val = substr($val, 4);  
+                    }else if(strpos($val, "en ")!==false){
+                        $val = substr($val, 3);  
+                    }else{}
+                    
                     $val_ord = trim($val);
 
                     $IDofWordByTrans = $this->getIdsByTrans($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
@@ -162,7 +168,8 @@ class Ord {
 //                    if($IDofWordByTrans && !strpos($linki, $val_ord)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu    *daje błąd jeśli wystąpi podobny zbitek liter np.: ord, anchor, kyl i kylskåp*/         
                     if($IDofWordByTrans && !in_array($IDofWordByTrans, $arrIDofWordByTrans)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
                         array_push($arrIDofWordByTrans, $IDofWordByTrans);
-                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+//                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+                        $linki .= $IDofWordByTrans.",";                         // zapisuje tylko id slowa
                     }else{ } //if($IDofWordByTrans){   
                 }else{} // if(strlen($val)!=0){   
             }
@@ -240,18 +247,38 @@ class Ord {
                 
                 echo "<br>VAL PO: $val";
                 
-//                preg_match("/$preg0b/", $val, $value1);
-//                echo "<br>===<br>";
-//                var_dump($value1);
-//                echo "<br>TRY VAL:".$value1[0];
-//                echo "<br>===<br>";               
-//                $val = $value1[0];
-//                echo "<br>$word[0] => $val";
 //                
-//                echo "<br>VAL PO: $val";
-                
+                echo "<br>VAL PO: $val";
+                $matches2="";
                 if(strlen($val)!=0){                                        // jeśli string ma zawartość
                     
+                    $prex = "/(?![att|en|ett])(\s)*[[:alnum:]åöä\s]*/i";
+                    
+                    if(preg_match($prex, $val,$matches2)){
+                      print_r($matches2);
+                        echo "<br>PREX pasi: ".$matches2[0]."<br>";
+                    }else{
+                        echo "<br>PREX nie pasi<br>";
+                    }
+                    
+
+
+                    if(strpos($val, "att ")!==false || strpos($val, "ett ")!==false){
+                        
+                        $val = substr($val, 4);
+                        echo "<br>PREX2 att lub ett pasi<br>";
+                        
+                    }else if(strpos($val, "en ")!==false){
+                        $val = substr($val, 3);
+                        echo "<br>PREX2 'en' pasi<br>";
+                        
+                    }else{
+                        echo "<br>PREX2 NIE pasi<br>";
+                    }
+                    
+                    
+//                    print_r($matches2);
+                    echo "<br> PO PREX: $val";
 //                    $val_ord = trim(substr($val,0,-1));
                     $val_ord = trim($val);
                     
@@ -425,6 +452,14 @@ class Ord {
             $res = mysql_fetch_assoc($mq);
 //            print_r($res);
             return $res;
+        }
+        
+        public function getTransById($id){
+            $SQL = sprintf("SELECT `trans` FROM `".$this->table."` WHERE id = \"".$id."\";"); 
+//            echo "<br>SQL:".$SQL;
+            $mq = mysql_query($SQL);        
+            $res = mysql_fetch_assoc($mq);
+            return $res[trans];
         }
         
         public function getOrdNameById($id, $lang){
