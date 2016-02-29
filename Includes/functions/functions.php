@@ -171,6 +171,17 @@ function triTrim($text){
     return $text_fin;
 }
 
+function SortArrayInLanguage($array){
+
+    $len = count($array);
+    for($i=0;$i<$len;$i++){
+        $arr2D[$i][0]=t($array[$i]);
+        $arr2D[$i][1]=$array[$i];
+//        $arr2D[$i][1]=t($array[$i]);
+    }
+    sort($arr2D);
+    return $arr2D;
+}
 
 //function recursiveDelete($handle, $directory){   
 //    echo $handle;

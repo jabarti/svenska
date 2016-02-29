@@ -66,18 +66,18 @@ class Ord {
 //                                'noun_or','noun_ar','noun_er','noun__');
                                 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
                                 'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
-                                'mer/mest', 'nieodmienny','bez stopniowania');
+                                'mer/mest', 'nieodmienny','bez stopniowania','adj:nieregularny');
 
     private $group_verb =   array(  '',
                                 'verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx','verb:gr5_deponens',
                                 'verb:gr3_kort_r/dd,tt','verb:gr4_starka');
     
 //    private $category = array(  'brak', 'abstr.',
-    private $category = array(  'abstr.','mitologia',
+    private $category = array(  'abstr.','mitologia','sztuka','muzyka','literatura',
                                 'ludzie','rodzina','cialo','emocje','zdrowie','dom','jedzenie','zawody','praca','sport','wydarzenia', 
-                                'przyroda','wiara','nauka','technika','medycyna','geografia','matematyka','informatyka','polityka','prawo','sztuka',
-                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła','konie','filozofia','literatura',
-                                'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','muzyka','jezyki',
+                                'przyroda','religia','nauka','technika','medycyna','geografia','matematyka','informatyka_categ','polityka','prawo','sztuka',
+                                'ekonomia','miary','miejsca','czas','kosmos','kolory','szkoła','konie','filozofia','psychologia',
+                                'przedmioty','narzedzia','urządzenia','instrumenty','telefon','biuro','ubrania','jezyki',
                                 'gramatyka','pytajnik','idiom','przysłowie','zart','wulgarne','potoczne','uzupelnic');
     
     public function setDataFakeForTest($id_ord, $typ, $rodzaj, $grupa, $trans, 
@@ -116,32 +116,41 @@ class Ord {
 //  i przetworzenie na link postaci: <a href="#ordAnchor_4044">klä upp sig</a> (widoczne w show)  
     
     public function MakeLinkToTextarea($uwagi){
+      
+        $sven   = "öäåÖÄÅ";
+        $pols   = "ąćęłńóśżźĆŁŚŹŻ";
+        $preg0  = "[a-zA-Z$sven$pol\s]";
+
+        $pregcon = "($preg0)+";
+        $kon = "(;|\s|<|\n|\))";
         
-//        $pregLink = "/<a href=\"([^\"]*)\">(.*)<\/a>/iU";
-//        $pregLink = "/<a\s[^>]*href=\"([^\"]*)\"[^>]*>(.*)<\/a>/siU";
-        
-        $sven = "öäåÖÄÅ";
-        $pols = "ąćęłńóśżźĆŁŚŹŻ";
-        $preg0 = "[a-zA-Z$sven$pol:,\(\)\\n]";
-        $preg1 = "(=>)* ((\s)*($preg0)*(\s)*)*(;|\s)";                     // => słowo takie lub takie;
-        $preg2 = "(<=>)*((\s)*$preg0*(\s)*)*(;|\s)";                    // <=> słowo takie lub takie;
-        $preg3 = "(==)* ((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
-        $preg4 = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
-//        $preg5 = "(\s)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
-        $pregX = "($preg0*(\s)*)*(;|\s)";                               // słowo takie lub takie;
+        $preg1  = str_replace(" ","", "(=>|<==>|==|\()* $pregcon  $kon ");     // => słowo takie lub takie;    
+        $pregX  = "($preg0*(\s)*)*(;|\s|\))";                                  // słowo takie lub takie;
+       
         $arrIDofWordByTrans = array();
+        $temp = "";
         
-        preg_match_all("/$preg1|$preg2|$preg3|$preg4/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
- 
-        foreach($matches[0] as $value){
+        preg_match_all("/$preg1/", $uwagi,$matches); 
+        
+        foreach($matches as $k){
+            foreach($k as $v => $p){
+                if($p!="" && strlen($p)>1 && strpos($temp,$p)===false){
+                    $temp .= $p.",";
+                }
+            }
+        }
+
+        $matchesTEMP = explode(",",$temp);
+
+        foreach($matchesTEMP as $value){
             preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
-                
-            foreach($word[0] as $val){             
+            
+            foreach($word[0] as $val){
                 $pocz = strpos($val, "(");
                 $koni = strpos($val, ")");
                 $sred = strpos($val, ";");
-                
-               if($pocz !== false){
+
+                if($pocz !== false){
                     $val = substr($val,$pocz+1);
                 }
                 
@@ -152,30 +161,55 @@ class Ord {
                 if($koni !== false){
                     $val = substr($val,0,$koni);
                 }
-                
+
+                $matches2="";
                 if(strlen($val)!=0){                                        // jeśli string ma zawartość
                     
-                    if(strpos($val, "att ")!==false || strpos($val, "ett ")!==false){       // obcięcie ETT ATT lub EN na początku
-                        $val = substr($val, 4);  
+                    if(strpos($val, "att ")!==false || strpos($val, "ett ")!==false){
+                        $val = substr($val, 4);                       
                     }else if(strpos($val, "en ")!==false){
-                        $val = substr($val, 3);  
-                    }else{}
-                    
+                        $val = substr($val, 3);                        
+                    }
+
                     $val_ord = trim($val);
 
                     $IDofWordByTrans = $this->getIdsByTrans($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
-                    
-//                    if($IDofWordByTrans && !strpos($linki, $val_ord)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu    *daje błąd jeśli wystąpi podobny zbitek liter np.: ord, anchor, kyl i kylskåp*/         
+
                     if($IDofWordByTrans && !in_array($IDofWordByTrans, $arrIDofWordByTrans)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
                         array_push($arrIDofWordByTrans, $IDofWordByTrans);
-//                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
-                        $linki .= $IDofWordByTrans.",";                         // zapisuje tylko id slowa
-                    }else{ } //if($IDofWordByTrans){   
+                        $linki .= $IDofWordByTrans.",";  
+                    }// zapisuje tylko id slowa
+                    else{ 
+//                        echo "<br>$val_ord NIE znaleziony";                    
+                    } //if($IDofWordByTrans){   
                 }else{} // if(strlen($val)!=0){   
             }
         }
         return $linki;
-    } 
+    }  
+    
+    // FUNKCJA TWORZY ciąg linków (edit.php, show.php)
+    public function MakeLinks($linki, $destination){    //e.g. $linki = "123,122,125", $destination = "Edit.php?urls="
+        
+//        echo "<br>Linki:";
+//        print_r($linki);
+        $linki = explode(",",$linki);
+//        print_r($linki);
+        if($destination == ""){
+            $destination = "Edit.php?urls=";
+        }
+//        echo "<br>FILE:".__FILE__;  //"Edit.php?urls=
+        
+        $result =  "<span class='linki_ta'  readonly>";
+                foreach($linki as $value){
+                    if($value != ""){
+                        $ordTrans = $this->getTransById($value);
+                        $result .= "<a href='".$destination.$value."' value='link".$value."'>$ordTrans</a>, ";
+                    }
+                }
+        $result .= "</span></td>";
+        return $result;
+    }
     
     /* FUNKCJA TESTOWA */
     public function MakeLinkToTextarea2($uwagi){
@@ -185,116 +219,217 @@ class Ord {
         
         $sven   = "öäåÖÄÅ";
         $pols   = "ąćęłńóśżźĆŁŚŹŻ";
-        $preg0  = "[a-zA-Z$sven$pol:,\(\)\\n]";
+        $preg0  = "[a-zA-Z$sven$pol\s]";
 
-//        $preg0a  = "[a-zA-Z$sven$pol\\n]";        
-//        $preg0b  = "([^\(\)]*(\s)*($preg0a)*(\s)*[^\(\)])";
+        $pregcon = "($preg0)+";
+        $kon = "(;|\s|<|\n|\))(^=)";
+        
+        $preg1  = str_replace(" ","", "(=>|<==>|==|\()* $pregcon  $kon ");                     // => słowo takie lub takie;
+//        $preg2  = str_replace(" ","", "(<=>|\()+     $pregcon  $kon ");                       // <=> słowo takie lub takie;
+//        $preg3  = str_replace(" ","", "(==|\()+      $pregcon  $kon ");                       // == słowo takie lub takie;
+//        $preg4 = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                     // == słowo takie lub takie;
+//        $preg5  = str_replace(" ","", "(\()+      $pregcon  (=>|<=>|==|;|\s|\n)");                      // == słowo takie lub takie;
+        
+        $pregX  = "($preg0*(\s)*)*(;|\s|\))";                                  // słowo takie lub takie;
 
-        $preg1  = "(=>)* ((\s)*($preg0)*(\s)*)*(;|\s)";                     // => słowo takie lub takie;
-        $preg2  = "(<=>)*((\s)*$preg0*(\s)*)*(;|\s)";                       // <=> słowo takie lub takie;
-        $preg3  = "(==)* ((\s)*$preg0*(\s)*)*(;|\s)";                       // == słowo takie lub takie;
-        $preg4  = "(;)*((\s)*$preg0*(\s)*)*(;|\s)";                         // == słowo takie lub takie;
-//        $preg5  = "(\s)*((\s)*$preg0*)(=>|<=>|==|;|\s|\n)";                      // == słowo takie lub takie;
-        $pregX  = "($preg0*(\s)*)*(;|\s)";                                  // słowo takie lub takie;
+//        $pregADD = "((=>)|(<=>)|(==)|;|(\()).? ((\s)*($preg0)*(\s)*)*(;|\s|<)?";
         
         $arrIDofWordByTrans = array();
+//        $arrk = array();
+        $temp = "";
         
         if(preg_match("/$preg1/",$uwagi)){echo "<br> preg1 [<span class=red>$preg1</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg1 [<span class=red>$preg1</span>] NOT matches";}
-        if(preg_match("/$preg2/",$uwagi)){echo "<br> preg2 [<span class=red>$preg2</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg2 [<span class=red>$preg2</span>] NOT matches";}
-        if(preg_match("/$preg3/",$uwagi)){echo "<br> preg3 [<span class=red>$preg3</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg3 [<span class=red>$preg3</span>] NOT matches";}
-        if(preg_match("/$preg4/",$uwagi)){echo "<br> preg4 [<span class=red>$preg4</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg4 [<span class=red>$preg4</span>] NOT matches";}
-//        if(preg_match("/$preg5/",$uwagi)){echo "<br> preg5 [<span class=red>$preg5</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg4 [<span class=red>$preg5</span>] NOT matches";}
-
+//        if(preg_match("/$preg2/",$uwagi)){echo "<br> preg2 [<span class=red>$preg2</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg2 [<span class=red>$preg2</span>] NOT matches";}
+//        if(preg_match("/$preg3/",$uwagi)){echo "<br> preg3 [<span class=red>$preg3</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg3 [<span class=red>$preg3</span>] NOT matches";}
+//        if(preg_match("/$preg4/",$uwagi)){echo "<br> preg4 [<span class=red>$preg4</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg4 [<span class=red>$preg4</span>] NOT matches";}
+//        if(preg_match("/$preg5/",$uwagi)){echo "<br> preg5 [<span class=red>$preg5</span>] <span class=green>MATCHES</span>"; }else{echo "<br> preg5 [<span class=red>$preg5</span>] NOT matches";}
+//        if(preg_match("/$pregADD/",$uwagi)){echo "<br> pregADD [<span class=red>$pregADD</span>] <span class=green>MATCHES</span>"; }else{echo "<br> pregADD [<span class=red>$pregADD</span>] NOT matches";}
         
-        preg_match_all("/$preg1|$preg2|$preg3|$preg4/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
-        echo "<br>";
-//        var_dump($matches);
-        echo "<br>";
-        foreach($matches[0] as $value){
-           
-            preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
+        echo "<br>DOPASOWANIA preg1: ";
+        preg_match_all("/$preg1/", $uwagi,$macz); 
+        
+        foreach($macz as $k){
+            foreach($k as $v => $p){
+                echo "('$v' -> '$p');";
+                if($p!="" && strlen($p)>1 && strpos($temp,$p)===false){
+                    $temp .= $p.",";
+                }
+            }
+        }
+        
+//        echo "<br>DOPASOWANIA preg2: ";
+//        preg_match_all("/$preg2/", $uwagi,$macz); 
+////        array_push($arrk,$macz);
+////        echo "<br>";print_r($macz);echo "<br>";var_dump($macz);
+////        
+//        foreach($macz as $k){
+//            foreach($k as $v => $p){
+//                echo "('$v' -> '$p');";
+//                if($p!="" && strlen($p)>1 && strpos($temp,$p)===false){
+//                    $temp .= $p.",";
+//                }
+//            }
+//        }
+//        echo "<br>DOPASOWANIA preg3: ";
+//        preg_match_all("/$preg3/", $uwagi,$macz); 
+////        array_push($arrk,$macz);
+////        echo "<br>";print_r($macz);echo "<br>";var_dump($macz);
+//        
+//        foreach($macz as $k){
+//            foreach($k as $v => $p){
+//                echo "('$v' -> '$p');";
+//                if($p!="" && strlen($p)>1 && strpos($temp,$p)===false){
+//                    $temp .= $p.",";
+//                }
+//            }
+//        }
 
+//        echo "<br>DOPASOWANIA preg4: ";
+//        preg_match_all("/$preg4/", $uwagi,$macz); 
+////        array_push($arrk,$macz);
+////        echo "<br>";print_r($macz);echo "<br>";var_dump($macz);
+//        
+//        foreach($macz as $k){
+//            foreach($k as $v => $p){
+//                echo "('$v' -> '$p');";
+//                if($p!="" && strlen($p)>1 && strpos($temp,$p)===false){
+//                    $temp .= $p.",";
+//                }                
+//            }
+//        }
+
+//        echo "<br>DOPASOWANIA preg5: ";
+//        preg_match_all("/$preg5/", $uwagi,$macz); 
+////        array_push($arrk,$macz);
+////        echo "<br>";print_r($macz);echo "<br>";var_dump($macz);
+//        
+//        foreach($macz as $k){
+//            foreach($k as $v => $p){
+//                echo "('$v' -> '$p');";
+//                if($p!="" && strlen($p)>1 && strpos($temp,$p)===false){
+//                    $temp .= $p.",";
+//                }                
+//            }
+//        }
+//        echo "<br>DOPASOWANIA pregADD: ";
+//        preg_match_all("/$pregADD/", $uwagi,$macz); 
+//        echo "<br>";print_r($macz);echo "<br>";var_dump($macz);
+//        
+//        foreach($macz as $k){
+//            foreach($k as $v => $p){
+//                echo "('$v' -> '$p');";
+//            }
+//        }
+        
+//        preg_match_all("/$preg1|$preg2|$preg3|$preg4|$preg5/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+        preg_match_all("/$preg1/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+//        preg_match_all("/$pregADD/",$uwagi,$matches);               // do array $matches zapisane sa wyniki podziału stringa na fragmenty jak wyżej
+//        echo "<br>MATCHES:";
+//        var_dump($matches);
+//        echo "<br>ARRK";
+//        var_dump($arrk);
+//        foreach ($matches as $v => $k){
+//            foreach ($k as $t => $j){
+////                echo "{[$v][$k][$t][$j]},";
+//                if($j!=""){
+////                    $temp .= $j.",";
+//                }
+//            }
+//        }
+        echo "<br>TEMP:($temp)<br>";
+        $matchesTEMP = explode(",",$temp);
+        echo "<br>MATCHES TEMP:";var_dump($matchesTEMP);
+        echo "<br>MATCHES ZERO:";var_dump($matches[0]);
+        
+//        foreach($matches[0] as $value){
+        $licznik0 = 0;
+        foreach($matchesTEMP as $value){
+           
+            if(preg_match("/$pregX/",$value)){echo "<br> pregX [<span class=red>$pregX</span>] na [$value] <span class=green>MATCHES</span>"; }else{echo "<br> pregX [<span class=red>$pregX na [$value] </span>] NOT matches";}
+            preg_match_all("/$pregX/",$value,$word);                         // obcięcie z SubStringa '=>', '==' etc.
+            echo "<br>Po PREGX: '$value' => '".$word[0][$licznik0]."'";
             foreach($word[0] as $val){
                 
-                echo "<br>VAL przed: $val";
+//                echo "<br>VAL przed: $val";
                 
                 $pocz = strpos($val, "(");
                 $koni = strpos($val, ")");
                 $sred = strpos($val, ";");
 //                $leng = strlen($val);
                 
-                echo "<br>VAL przed: $val i pocz=$pocz, koni=$koni i leng=$leng";
+//                echo "<br>VAL przed: $val i pocz=$pocz, koni=$koni i leng=$leng";
                 
                 if($pocz !== false){
                     
-                    echo "<br>PRZED POCZ=".$pocz." , $val";
+//                    echo "<br>PRZED POCZ=".$pocz." , $val";
                     $val = substr($val,$pocz+1);
-                    echo "<br>PO POCZ=$pocz, $val";
+//                    echo "<br>PO POCZ=$pocz, $val";
                 }
                 
                 if($sred !== false){
-                    echo "<br>PRZED KONI=".$sred." , $val";
+//                    echo "<br>PRZED KONI=".$sred." , $val";
                     $val = substr($val,0,$sred);
-                    echo "<br>PO KONI=".$sred." , $val";
+//                    echo "<br>PO KONI=".$sred." , $val";
                 }
                 
                 if($koni !== false){
-                    echo "<br>PRZED KONI=".$koni." , $val";
+//                    echo "<br>PRZED KONI=".$koni." , $val";
                     $val = substr($val,0,$koni);
-                    echo "<br>PO KONI=".$koni." , $val";
+//                    echo "<br>PO KONI=".$koni." , $val";
                 }
-                
-                
-                echo "<br>VAL PO: $val";
-                
-//                
-                echo "<br>VAL PO: $val";
+
+//                echo "<br>VAL PO: $val";
                 $matches2="";
                 if(strlen($val)!=0){                                        // jeśli string ma zawartość
                     
                     $prex = "/(?![att|en|ett])(\s)*[[:alnum:]åöä\s]*/i";
                     
                     if(preg_match($prex, $val,$matches2)){
-                      print_r($matches2);
-                        echo "<br>PREX pasi: ".$matches2[0]."<br>";
+//                      print_r($matches2);
+//                        echo "<br>PREX pasi: ".$matches2[0]."<br>";
                     }else{
-                        echo "<br>PREX nie pasi<br>";
+//                        echo "<br>PREX nie pasi<br>";
                     }
-                    
-
 
                     if(strpos($val, "att ")!==false || strpos($val, "ett ")!==false){
-                        
+//                        echo "<br>PREX2 att lub ett pasi: ($val)";
                         $val = substr($val, 4);
-                        echo "<br>PREX2 att lub ett pasi<br>";
+//                        echo "PO: ($val)<br>";
                         
                     }else if(strpos($val, "en ")!==false){
                         $val = substr($val, 3);
-                        echo "<br>PREX2 'en' pasi<br>";
+//                        echo "<br>PREX2 'en' pasi<br>";
                         
                     }else{
-                        echo "<br>PREX2 NIE pasi<br>";
+//                        echo "<br>PREX2 'att' lub 'ett' lub'en' NIE pasi<br>";
                     }
-                    
-                    
+
 //                    print_r($matches2);
-                    echo "<br> PO PREX: $val";
+//                    echo "<br> PO PREX: $val";
 //                    $val_ord = trim(substr($val,0,-1));
                     $val_ord = trim($val);
-                    
+                    echo "<br>FINAL: '$val'";
 //                    echo "<br>Znajdz numer $val_ord:";
                     $IDofWordByTrans = $this->getIdsByTrans2($val_ord);      // funkcja znajduje numer rekordu w bazie jeśli jest lub false
 //                    echo "<br>Numer $val_ord: $IDofWordByTrans";
-                    
+                    // WERSJA 1
                     if($IDofWordByTrans && !in_array($IDofWordByTrans, $arrIDofWordByTrans)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
-//                        if(!in_array($IDofWordByTrans, $arrIDofWordByTrans)){ /*daje błąd jeśli wystąpi podobny zbitek liter np.: ord, anchor, kyl i kylskåp*/
-                            array_push($arrIDofWordByTrans, $IDofWordByTrans);
-                            $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
-//                        }else{
-                            /*Taki numer występuje już w linku*/
-//                        }
-//                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
-                    }else{ 
+                        array_push($arrIDofWordByTrans, $IDofWordByTrans);
+                        $linki .= $IDofWordByTrans.",";  
+                    }// zapisuje tylko id slowa
+                    
+                    // WERSJA 2
+//                    if($IDofWordByTrans && !in_array($IDofWordByTrans, $arrIDofWordByTrans)){      // sprawdzamy czy jest numer i czy nie ma w $linki już takiego wyrazu             
+////                        if(!in_array($IDofWordByTrans, $arrIDofWordByTrans)){ /*daje błąd jeśli wystąpi podobny zbitek liter np.: ord, anchor, kyl i kylskåp*/
+//                            array_push($arrIDofWordByTrans, $IDofWordByTrans);
+//                            $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>, ";
+////                        }else{
+//                            /*Taki numer występuje już w linku*/
+////                        }
+////                        $linki .= "<a href=#ordAnchor_".$IDofWordByTrans."\>".$val_ord."</a>; ";
+//                    }
+                    
+                    else{ 
 //                        echo "<br>$val_ord NIE znaleziony";                    
                     } //if($IDofWordByTrans){   
                 }else{} // if(strlen($val)!=0){   

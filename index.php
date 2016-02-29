@@ -296,10 +296,14 @@ if(!isset($_GET['copy_id'])){
                             echo "<option value='".$mfa['kategoria']."'>".t($mfa['kategoria'])."</option>";
                         }
                         $Word = new Ord();
-                        $OrdCat = $Word->getCategoriesOfOrd();
-
+                        
+                            $OrdCat = $Word->getCategoriesOfOrd();
+                        
+                            $OrdCat = SortArrayInLanguage($OrdCat);
+                       
                         foreach($OrdCat as $k){
-                            echo "<option value=$k>".t($k)."</option>";
+                            echo "<option value='$k[1]'>".$k[0]."</option>";
+//                            echo "<option value=$k>".t($k)."</option>";
                         }
                         ?>
                     </select>

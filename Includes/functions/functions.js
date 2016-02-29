@@ -66,7 +66,7 @@ setInterval(function() {
         document.getElementById('zegar_log').innerHTML = logTime();
     }
      
-}, 1000);
+     }, 1000);
 
 function addTimeScan(){
     tid2 = document.getElementById("add_time_after_click").innerHTML;
@@ -1559,7 +1559,7 @@ $(document).ready(function(){
                                 'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel','verb:gr5_deponens',
                                 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
                                 'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
-                                'mer/mest', 'nieodmienny','bez stopniowania'];
+                                'mer/mest', 'nieodmienny','bez stopniowania','adj:nieregularny'];
                             
         var grupNotAdjective    = ['verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
                                 'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel','verb:gr5_deponens',
@@ -1569,11 +1569,11 @@ $(document).ready(function(){
                             
         var grupNotVerb         = [ 'noun:gr1_or+na','noun:gr2_ar+na','noun:gr3_er/r+na',
                                     'noun:gr4_n+a','noun:gr5__+en/na','noun:b.lm.','noun:b.l.poj.','noun:nieregularny',
-                                    'mer/mest', 'nieodmienny','bez stopniowania'];
+                                    'mer/mest', 'nieodmienny','bez stopniowania','adj:nieregularny'];
 
         var grupNotNoun         = ['verb:gr1_ar','verb:gr2A_er/de','verb:gr2B_er/te_ptksx',
                                 'verb:gr3_kort_r/dd,tt','verb:gr4_starka','verb:gr4_oregel','verb:gr5_deponens',
-                                'mer/mest', 'nieodmienny','bez stopniowania']                     
+                                'mer/mest', 'nieodmienny','bez stopniowania','adj:nieregularny']                     
                                 
         var typ_val = $('#typ').val();
         console.log("TYP: "+typ_val);

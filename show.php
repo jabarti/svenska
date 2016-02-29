@@ -120,7 +120,7 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
             }else 
             if(isset($_GET['SortKat']) AND $_GET['SortKat'] !='' ){
 
-                        $DESC = "WHERE `kategoria` = '".$_GET['SortKat']."';";
+                        $DESC = "WHERE `kategoria` LIKE '%".$_GET['SortKat']."%';";
  
             }else{
                     ?><script> //alert ("<?php //echo "ERRR";?>") </script><?php
@@ -130,7 +130,8 @@ if (isset($_SESSION['irreg']) && $_SESSION['irreg'] == true){
 
     
             // Główny SQL dla SHOW!!!
-            $SQL = sprintf("SELECT * FROM `ord` $DESC;");
+//            $SQL = sprintf("SELECT * FROM `ord` $DESC;");
+            $SQL = "SELECT * FROM `ord` $DESC;";
 //            $SQL = sprintf("SELECT * FROM `ord` WHERE `id` BETWEEN 10 AND 19 $DESC LIMIT 0 , 30;");
             ?><script> //alert ("<?php //echo $SQL;?>") </script><?php
     //        $czek ='';
@@ -325,20 +326,9 @@ while ($row = mysql_fetch_array($mq, MYSQL_ASSOC)){
                             
                             continue;
                             
-                        }else if ($k == "linki"){
-//                            echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>$v</span>,<br>";
-                            $link = "";
-                            $matches = explode(",",$v);
-//                            print_r($matches);
+                        }else if ($k == "linki"){           // Tworzenie linków w uwagach;
                             echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>";
-                            foreach($matches as $val1){
-                                if($val1 != ""){
-                                    $ordTrans = $word->getTransById($val1);
-                                    $link .= "<a href='#ordAnchor_".$val1."'>$ordTrans</a>, ";
-                                }
-                            }
-                            echo $link."</span>,<br>";
-                        
+                            echo $word->MakeLinks($v, "#ordAnchor_");                       
                         }else{
                             echo substr(t($k."_ShKat"),0,$ile_Liter).": <span class=red>$v</span>,<br>";
                         }

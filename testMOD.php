@@ -44,13 +44,13 @@ if(isset($_POST['test'])){      // Wybrana pierwsza opcja (Button)
 //            echo "<br>Czy jest?:".strcmp($try, $try2);
 
             if(strcmp($try, $check) == 0){
-                echo "<br>Pasuje!";
+//                echo "<br>Pasuje!";
                 $wordInArr = true;
             }else{
                 if(strpos($patern, $str_uwagi)){
                     $wordInArrUwagi = true;     // tzn. ze odpowiedz jest w uwagach (czyli pewnie po == (czy też po <>????)
                 }
-                echo "<br>Nie pasuje!";       
+//                echo "<br>Nie pasuje!";       
             }
         }
 
@@ -124,9 +124,9 @@ if(isset($_POST['group_ord'])){
 //        echo "<br>typ_current:".$typ_current;
 
 if($Word = new Ord()){
-    echo "<br>OK: Object of Ord class is created!";
+//    echo "<br>OK: Object of Ord class is created!";
 }else{
-    echo "<br>NOT OK: Object of Ord class not created!";
+//    echo "<br>NOT OK: Object of Ord class not created!";
 }
 
 //if(isset($_POST['group_ord']) && $_POST['group_ord'] == false && $group_ord == false){
@@ -139,7 +139,7 @@ if($Word = new Ord()){
 
 switch($case){
     case '0':
-        echo "<br>".__LINE__."/ CASE: $case ()";
+//        echo "<br>".__LINE__."/ CASE: $case ()";
         break;
     case '1':
 //        echo "<br>".__LINE__."/ CASE: $case (OPRÓŻNIANIE)";
@@ -149,7 +149,7 @@ switch($case){
         echo "<script> window.location.replace('test.php') </script>" ;
         break;
     case '2':
-        echo "<br>".__LINE__."/ CASE: $case (PUSTE)";
+//        echo "<br>".__LINE__."/ CASE: $case (PUSTE)";
         break;
     case '3':
 //        echo "<br>".__LINE__."/ CASE: $case (TYP)";
@@ -167,14 +167,14 @@ switch($case){
         echo "<script> window.location.replace('test.php') </script>" ;
         break;
     case '5':
-        echo "<br>".__LINE__."/ CASE: $case (GRUPA i typ=verb)";
+//        echo "<br>".__LINE__."/ CASE: $case (GRUPA i typ=verb)";
         $_SESSION['typ_cz_mov'] = 'verb';
         $_SESSION['group_ord'] = $_POST['group_ord'];
-        echo "<br>".__LINE__."Set group_ord: $group_ord AND typ_current: $typ_current";
+//        echo "<br>".__LINE__."Set group_ord: $group_ord AND typ_current: $typ_current";
         echo "<script> window.location.replace('test.php') </script>" ;
         break;
     default:
-        echo "<br>".__LINE__."/ CASE: $case (????)";
+//        echo "<br>".__LINE__."/ CASE: $case (????)";
         break;
 }
 
@@ -187,14 +187,14 @@ $rand = $arr[$rand_index];
 $max = $Word->getLastId(false);
 
 $rand =  mt_rand(1, $max); // wybór słowa
-echo "<br>".__LINE__." / Słowo(Rand):".$rand;
+//echo "<br>".__LINE__." / Słowo(Rand):".$rand;
 //
 //$rand = 694;  // For test - fixed ID of word; 
 
 $testTab = $Word->getQuestAndAnswerById($rand);
 //$wordPL = $Word->getOrdPLById($rand);
 $wordPL = $Word->getOrdNameById($rand, 'pl');
-echo "<br>WordPL: ".$wordPL;
+//echo "<br>WordPL: ".$wordPL;
 
 ?>
 <!--<button onclick="window.location.href='try2.php'">WRÓĆ</button>-->

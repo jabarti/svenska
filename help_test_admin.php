@@ -62,6 +62,15 @@ echo "<br>Wygrywa: ".$win.' i siedzi przy oknie przy starcie<br><br>';
 echo "<br>===================================================";
 if($Word = new Ord()){
     
+//    $OrdCat = $Word->getCategoriesOfOrd();
+//                        
+//    $OrdCat = SortArrayInLanguage($OrdCat);
+////    var_dump($OrdCat);
+//    echo "<br>";
+//    foreach($OrdCat as $k){
+//        echo "option value=('$k[1]'=>".$k[0].") option</br>";
+//    }
+    
 //    $ordTrans = $Word->getTransById(123);
 //    echo "<br>SŁOWO: ".$ordTrans;
     // get host name from URL
@@ -91,43 +100,45 @@ echo "<br>===================================================";
     echo "<br>ID=".$IDofWordByTrans."<br>";
     $empty_rec = $Word->findEmptyOrdId();
     echo "<br>====================================<br>";
-//    $string = "Ala ma kota =>           leende; <=> dupa;";
-//    echo "<br>BAZA: ".$string."<br><br>";
-//    $link0a = $Word->MakeLinkToTextarea($string);  
-//    $link0b = $Word->MakeLinkToTextarea2($string);  
-//    echo "<br>link0a__: ".$link0a;
-//    echo "<br>link0b__: ".$link0b;
-//    echo "<br>====================================<br>";
+      
+    echo "<form>
+            <input type=text id=textDoRegex name=textDoRegex>
+            <button type=submit >Clik!</button>
+          </form>";
+
+
+    if(isset($_GET["textDoRegex"]) && $_GET["textDoRegex"]!=""){
+        $string = $_GET["textDoRegex"];
+        $_SESSION["textDoRegex"]=$_GET["textDoRegex"];
+    }else if(isset($_SESSION["textDoRegex"])){   
+        $string = $_SESSION["textDoRegex"];
+        unset($_GET["textDoRegex"]);
+        echo "session is set";
+    }else{
+        $string = "att fundera == ektt tänka == att tycka == att grubbla == att anse;";
+        $string = "=> ett graviditetstest - test ciążowy";
+        $string = "m (gångits); gå in <=> gå ut; ";
+    }
     
-//    $string = "=>           leende; <=> dupa;";
-//    echo "<br>BAZA: ".$string."<br><br>";
-//    $link1a = $Word->MakeLinkToTextarea($string);  
-//    $link1b = $Word->MakeLinkToTextarea2($string);  
-//    echo "<br>link1a__: ".$link1a;
-//    echo "<br>link1b__: ".$link1b;
-//    echo "<br>====================================<br>";
-    
-//    $string = "Ala ma kota =>        stam; <=> dupa;";
-//    echo "<br>BAZA: ".$string."<br><br>";
-//    $link2a = $Word->MakeLinkToTextarea($string);
-//    $link2b = $Word->MakeLinkToTextarea2($string);
-//    echo "<br>link2a__: ".$link2a;
-//    echo "<br>link2b__: ".$link2b;
-//    echo "<br>====================================<br>";
-//    
-//    $string = "Ala ma kota => dristighet; <=> dupa;";
-//    echo "<br>BAZA: ".$string."<br><br>";
-//    $link3a = $Word->MakeLinkToTextarea($string);
-//    $link3b = $Word->MakeLinkToTextarea2($string);
-//    echo "<br>link3a__: ".$link3a;
-//    echo "<br>link3b__: ".$link3b;
-//    echo "<br>====================================<br>";
-    
-    $string = "att fundera == ektt tänka == att tycka == att grubbla == att anse;";
     echo "<br>BAZA: ".$string."<br><br>";
     $link4a = $Word->MakeLinkToTextarea($string);
     $link4b = $Word->MakeLinkToTextarea2($string);
-    echo "<br>link4a__: ".$link4a;
+//    echo "<br>link4a__: ".$link4a;
+    echo "<br>link4a__: ".$Word->MakeLinks($link4a);
+    echo "<br>link4b__: ".$Word->MakeLinks($link4b);
+    echo "<br>link4b__: ".$link4b;
+    echo "<br>====================================<br>";
+    
+    $string = "att fundera == ektt tänka == att tycka == att grubbla == att anse;";
+    $string = "=> ett graviditetstest - test ciążowy";
+    $string = "m (gångits); gå in <=> gå ut; ";
+    
+    echo "<br>BAZA: ".$string."<br><br>";
+    $link4a = $Word->MakeLinkToTextarea($string);
+    $link4b = $Word->MakeLinkToTextarea2($string);
+//    echo "<br>link4a__: ".$link4a;
+    echo "<br>link4a__: ".$Word->MakeLinks($link4a);
+    echo "<br>link4b__: ".$Word->MakeLinks($link4b);
     echo "<br>link4b__: ".$link4b;
     echo "<br>====================================<br>";
     
@@ -136,7 +147,9 @@ echo "<br>===================================================";
     echo "<br>BAZA: ".$string."<br><br>";
     $link5a = $Word->MakeLinkToTextarea($string);
     $link5b = $Word->MakeLinkToTextarea2($string);
-    echo "<br>link5a__: ".$link5a;
+//    echo "<br>link5a__: ".$link5a;
+    echo "<br>link5a__: ".$Word->MakeLinks($link5a);
+    echo "<br>link5b__: ".$Word->MakeLinks($link5b);
     echo "<br>link5b__: ".$link5b;
     echo "<br>====================================<br>";
         
@@ -153,7 +166,9 @@ echo "<br>===================================================";
     echo "<br>BAZA: ".$string."<br><br>";
     $link6a = $Word->MakeLinkToTextarea($string);
     $link6b = $Word->MakeLinkToTextarea2($string);
-    echo "<br>link6a__: ".$link6a;
+//    echo "<br>link6a__: ".$link6a;
+    echo "<br>link6a__: ".$Word->MakeLinks($link6a);
+    echo "<br>link6b__: ".$Word->MakeLinks($link6b);
     echo "<br>link6b__: ".$link6b;
     echo "<br>====================================<br>";
     
@@ -170,7 +185,9 @@ echo "<br>===================================================";
     echo "<br>BAZA: ".$string."<br><br>";
     $link8a = $Word->MakeLinkToTextarea($string);
     $link8b = $Word->MakeLinkToTextarea2($string);
-    echo "<br>link8a__: ".$link8a;
+//    echo "<br>link8a__: ".$link8a;
+    echo "<br>link8a__: ".$Word->MakeLinks($link8a);
+    echo "<br>link8b__: ".$Word->MakeLinks($link8b);
     echo "<br>link8b__: ".$link8b;
         echo "<br>";    
     

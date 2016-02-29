@@ -362,8 +362,12 @@ while($row = mysql_fetch_assoc($mq)){
                 }
                         $Word = new Ord();
                         $OrdCat = $Word->getCategoriesOfOrd();
+                        
+                        $OrdCat = SortArrayInLanguage($OrdCat);
+                        
                         foreach($OrdCat as $k){
-                            echo "<option value=$k>".t($k)."</option>";
+//                            echo "<option value=$k>".t($k)."</option>";
+                            echo "<option value='$k[1]'>".$k[0]."</option>";
                         }
             echo "      </select>";
             echo "      <input type='hidden' id='kategoria_edit_val_".$curr_word_id."' name='kategoria'></input>";
@@ -383,17 +387,20 @@ while($row = mysql_fetch_assoc($mq)){
                 echo "<td>".t($k)."</td>";
                 echo "<td colspan=7>";
                 
-                $matches = explode(",",$v);
+//                $matches = explode(",",$v);
                 
-                echo "<span class='linki_ta'  readonly>";
+                echo $Word->MakeLinks($v, "Edit.php?urls=");        // tworzenie linków pod uwagami
                 
-                foreach($matches as $value){
-                    if($value != ""){
-                        $ordTrans = $Word->getTransById($value);
-                        $link .= "<a href='Edit.php?urls=".$value."' value='link".$curr_word_id."'>$ordTrans</a>, ";
-                    }
-                }
-                echo $link."</span></td>";
+//                echo "<span class='linki_ta'  readonly>";
+//                
+//                foreach($matches as $value){
+//                    if($value != ""){
+//                        $ordTrans = $Word->getTransById($value);
+//                        $link .= "<a href='Edit.php?urls=".$value."' value='link".$curr_word_id."'>$ordTrans</a>, ";
+//                    }
+//                }
+//                echo $link."</span>";
+                echo "</td>";
             echo "</tr>";
             break;
         }
